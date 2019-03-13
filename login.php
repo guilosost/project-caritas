@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (isset($_POST["usuario"])){
+    session_unset();
+    session_destroy();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -14,18 +24,26 @@
 <body background="background.png">
     <?php include("cabecera.php") ?>
 
+<?php 
+    if ($_POST){
+        
+        $usuario = $_POST["usuario"];
+        $contrasena = $_POST["contrasena"];
+
+    }
+    ?>
     <div class="form">
         <h2 class="form-h2">Iniciar sesión</h2>
 
         <form action="/action_page.php">
             <div>
                 <p class="form-text">Usuario:<p>
-                        <input type="text" name="user">
+                        <input type="text" name="usuario">
             </div>
 
             <div>
                 <p class="form-text">Contraseña:<p>
-                        <input type="text" name="password">
+                        <input type="password" name="contrasena">
             </div>
             <a class="button" type="submit">Iniciar sesión</a>
         </form>
