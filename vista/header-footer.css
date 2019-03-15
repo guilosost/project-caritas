@@ -1,0 +1,37 @@
+header {
+    margin-top: -65px;
+    margin-left: -8px;
+    margin-right: -8px;
+    background-color:#cc2118
+}
+
+.title {
+    text-align: -webkit-center;
+    font-size:65px;
+    color: white;
+    font-family: perpetua;
+}
+
+.logo-izq {
+    float: left;
+    vertical-align: top;
+}
+
+.logo-dch {
+    float: right;
+    vertical-align: top;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(204, 33, 24, 0.7);
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+}

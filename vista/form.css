@@ -1,0 +1,32 @@
+.form {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.01em 16px;
+    margin: 130px 500px;
+    box-shadow: 0px 2px 4px 0 black!important;
+}
+
+.form-text {
+    text-align: left;
+    margin-left: 190px;
+    margin-top: -10px;
+    margin-bottom: -15px;
+    font-family: perpetua;
+}
+
+.form-h2 {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 0, 0, 1)), color-stop(50%, rgba(170, 0, 0, 1)), color-stop(51%, rgba(170, 0, 0, 1)), color-stop(71%, rgba(170, 0, 0, 1)), color-stop(100%, rgba(255, 0, 0, 1)));
+    border: 2px solid black;
+    border-left: none;
+    text-align: left;
+    padding-left: 7px;
+    color: white;
+    margin-left: -9px;
+    text-shadow: 1px 1px 1px black;
+    font-size: 120%;
+    font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+    border-radius: 0px 15px 15px 0px;
+    margin-bottom: 20px;
+}

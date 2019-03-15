@@ -12,17 +12,19 @@ if (isset($_SESSION["usuario"])){
 <html lang="es">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="prueba.css">
+    <link rel="stylesheet" type="text/css" href="header-footer.css">
+    <link rel="stylesheet" type="text/css" href="button.css">
+    <link rel="stylesheet" type="text/css" href="form.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Proyecto Cáritas</title>
-    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="../img/favicon.png" />
 
 </head>
 
-<body background="background.png">
-    <?php include("cabecera.php") ?>
+<body background="../img/background.png">
+    <?php include("header.php") ?>
 
 <?php 
     if ($_POST){
