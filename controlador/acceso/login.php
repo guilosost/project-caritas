@@ -2,8 +2,7 @@
 session_start();
 
 if (isset($_SESSION["usuario"])){
-    session_unset();
-    session_destroy();
+    header("Location: login.php");
 }
 
 ?>
@@ -32,6 +31,7 @@ if (isset($_SESSION["usuario"])){
         $usuario = $_POST["usuario"];
         $contrasena = $_POST["contrasena"];
 
+        $conexion = crearConexionBD();
     }
     ?>
     <div class="form">
