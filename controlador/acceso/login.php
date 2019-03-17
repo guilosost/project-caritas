@@ -32,6 +32,8 @@ if (isset($_SESSION["usuario"])){
         $contrasena = $_POST["contrasena"];
 
         $conexion = crearConexionBD();
+        
+        cerrarConexionBD();
     }
     ?>
     <div class="form">
