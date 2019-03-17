@@ -27,6 +27,17 @@
 		
 		if($usuario["apellidos"]=="" || ctype_alpha($usuario["apellidos"])) {
 			$errores[] = "<p>Los apellidos no puede estar vacío o no ser alfabeticos</p>";
-        }
+		}
+
+		if($usuario["parentesco"]=="" || ctype_alpha($usuario["apellidos"])) {
+			$errores[] = "<p>Los apellidos no puede estar vacío o no ser alfabeticos</p>";
+		}
+
+		if($usuario["email"]==""){ 
+			$errores[] = "<p>El email no puede estar vacío</p>";
+		}else if(!filter_var($usuario["email"], FILTER_VALIDATE_EMAIL)){
+			$errores[] = "<p>El email es incorrecto: " . $usuario["email"]. "</p>";
+		}
+			
     }
 ?>
