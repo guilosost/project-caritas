@@ -6,10 +6,15 @@
 			$usuario['nombre'] = $_REQUEST["nombre"];
 			$usuario['apellidos'] = $_REQUEST["apellidos"];
 			$usuario['fechaNac'] = $_REQUEST["fechaNac"];
-			}
+			$_SESSION["formulario"] = $usuario;	
+		}
 	else{
         Header("Location: alta_usuario.php");
-    }
+	}
+	
+	$conexion = crearConexionBD(); 
+	$errores = validarDatosUsuario($conexion, $usuario);
+	cerrarConexionBD($conexion);
 
     function validarDatosUsuario($usuario){
 			

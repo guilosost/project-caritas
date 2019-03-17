@@ -17,7 +17,14 @@ if (!isset($_SESSION["formulario"])) {
     $formulario['estudios'] = "";
     $_SESSION["formulario"] = $formulario;
 }
+else{
+    $formulario = $_SESSION["formulario"];
+}
 
+if (isset($_SESSION["errores"])){
+    $errores = $_SESSION["errores"];
+    unset($_SESSION["errores"]);
+}
 
 $conexion = crearConexionBD();
 ?>
