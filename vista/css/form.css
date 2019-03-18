@@ -16,6 +16,17 @@
     font-family: perpetua;
 }
 
+.form-alta {
+    text-align: left;
+    margin-top: -10px;
+    margin-bottom: 50px;
+    font-family: perpetua;
+}
+
+.celda {
+    margin-bottom: 5px;
+}
+
 .form-h2 {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 0, 0, 1)), color-stop(50%, rgba(170, 0, 0, 1)), color-stop(51%, rgba(170, 0, 0, 1)), color-stop(71%, rgba(170, 0, 0, 1)), color-stop(100%, rgba(255, 0, 0, 1)));
     border: 2px solid black;

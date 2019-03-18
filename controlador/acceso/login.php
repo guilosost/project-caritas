@@ -11,19 +11,20 @@ if (isset($_SESSION["usuario"])){
 <html lang="es">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="header-footer.css">
-    <link rel="stylesheet" type="text/css" href="button.css">
-    <link rel="stylesheet" type="text/css" href="form.css">
+    <link rel="stylesheet" type="text/css" href="../../vista/css/header-footer.css">
+    <link rel="stylesheet" type="text/css" href="../../vista/css/button.css">
+    <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Proyecto Cáritas</title>
-    <link rel="shortcut icon" type="image/png" href="../img/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png"/>
 
 </head>
 
-<body background="../img/background.png">
-    <?php include("header.php") ?>
+<body background="../../vista/img/background.png">
+
+    <?php include("../../vista/header.php") ?>
 
 <?php 
     if ($_POST){
@@ -33,7 +34,7 @@ if (isset($_SESSION["usuario"])){
 
         $conexion = crearConexionBD();
         
-        cerrarConexionBD();
+        cerrarConexionBD($conexion);
     }
     ?>
     <div class="form">
@@ -54,7 +55,7 @@ if (isset($_SESSION["usuario"])){
     </div>
 
     
-    <?php include("footer.php") ?>
+    <?php include("../../vista/footer.php") ?>
 
 </body>
 

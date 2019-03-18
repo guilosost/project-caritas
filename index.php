@@ -1,3 +1,3 @@
 <?php
-    header("location: vista/login.php")
+    header("location: controlador/acceso/login.php")
 ?>
