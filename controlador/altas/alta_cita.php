@@ -73,7 +73,8 @@ $conexion = crearConexionBD();
                 <label for="nombrev">Nombre del voluntario: </label>
                 <input class="celda" name="observaciones" type="text" value=<?php echo "$_SESSION[usuario]"?>required /><br>
 
-                <input type="Submit" value="Dar de alta"> 
+                <a class="confirm" type="submit">Dar de alta</a>
+                <a class= "cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancel</a>
                 
             </form>
         </div>

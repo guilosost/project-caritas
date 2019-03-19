@@ -8,6 +8,7 @@ if (!isset($_SESSION["formulario"])) {
     $formulario['dni'] = "";
     $formulario['fechaNac'] = "";
     $formulario['email'] = "";
+    $formulario['telefono'] = "";
     $formulario['genero'] = "";
     $formulario['minusvalia'] = "";
     $formulario['sitlaboral'] = "";
@@ -60,13 +61,18 @@ $conexion = crearConexionBD();
                 <label for="dni">DNI:</label>
                 <input class="celda" name="dni" placeholder="12345678X" type="text" required />
 
-
                 <label for="fechaNac">Fecha de nacimiento:</label>
                 <input name="fechaNac" type="date" required /><br>
 
                 <label for="genero">Género: </label>
                 <input type="radio" name="genero" value="Hombre"> Hombre
                 <input type="radio" name="genero" value="Mujer"> Mujer<br>
+
+                <label for="email">Correo electrónico:</label>
+                <input class="celda" name="email" type="text" required /><br>
+
+                <label for="telefono">Teléfono:</label>
+                <input class="celda" name="telefono" type="text" required /><br>
 
                 <label for="estudios">Estudios: </label>
                 <select class="celda" name="estudios" size=1 required>
