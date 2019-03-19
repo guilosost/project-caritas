@@ -45,7 +45,17 @@ $conexion = crearConexionBD();
 
 <body background="../../vista/img/background.png">
     <?php
-    include("../../vista/header.php")
+    include("../../vista/header.php");
+    
+     //Mostramos los errores del formulario enviado previamente
+     if (isset($errores) && count($errores)>0) { 
+        //    echo "<div id=\"div_errores\" class=\"error\">";
+            echo "<h4> Errores en el formulario:</h4>";
+            foreach($errores as $error){
+                echo $error;
+            } 
+        //    echo "</div>";
+          }
     ?>
 
     <div class="form">
@@ -53,10 +63,10 @@ $conexion = crearConexionBD();
         <div class="form-alta">
             <form action="accion_usuario.php" method="POST">
                 <label for="nombre" required>Nombre:</label>
-                <input class="celda" name="nombre" type="text" required />
+                <input class="celda" name="nombre" type="text" maxlength="50" required />
 
                 <label for="apellidos" required>Apellidos:</label>
-                <input name="apellidos" type="text" required /><br>
+                <input name="apellidos" type="text" maxlength="50" required /><br>
 
                 <label for="dni">DNI:</label>
                 <input class="celda" name="dni" placeholder="12345678X" type="text" required />
@@ -65,14 +75,14 @@ $conexion = crearConexionBD();
                 <input name="fechaNac" type="date" required /><br>
 
                 <label for="genero">Género: </label>
-                <input type="radio" name="genero" value="Hombre"> Hombre
-                <input type="radio" name="genero" value="Mujer"> Mujer<br>
+                <input type="radio" name="genero" value="Masculino"> Hombre
+                <input type="radio" name="genero" value="Femenino"> Mujer<br>
 
                 <label for="email">Correo electrónico:</label>
                 <input class="celda" name="email" type="text" required /><br>
 
                 <label for="telefono">Teléfono:</label>
-                <input class="celda" name="telefono" type="text" required /><br>
+                <input class="celda" name="telefono" type="text" maxlength="10" required /><br>
 
                 <label for="estudios">Estudios: </label>
                 <select class="celda" name="estudios" size=1 required>
@@ -106,7 +116,7 @@ $conexion = crearConexionBD();
                 <input name='parentesco' type='text' /><br>
 
                 <label for="proteccionDatos">
-                    <input type="checkbox" name="proteccionDatos" value="Si" style="align:center">De acuerdo con la Ley de Protección de Datos
+                    <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center">De acuerdo con la Ley de Protección de Datos
                 </label>
                 <br>
 

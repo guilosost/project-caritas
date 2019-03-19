@@ -1,9 +1,13 @@
 <?php
 session_start();
 
-if (isset($_SESSION["usuario"])){
-    header("Location: login.php");
+if (isset($_SESSION["contrasena"])){
+    $_SESSION["contrasena"] = "";
+}else{
+    $_SESSION["nombrelogin"] = "";
+    $_SESSION["contrasena"] = "";
 }
+
 
 ?>
 
@@ -26,29 +30,19 @@ if (isset($_SESSION["usuario"])){
 
     <?php include("../../vista/header.php") ?>
 
-<?php 
-    if ($_POST){
-        
-        $usuario = $_POST["usuario"];
-        $contrasena = $_POST["contrasena"];
 
-        $conexion = crearConexionBD();
-        
-        cerrarConexionBD($conexion);
-    }
-    ?>
     <div class="form">
         <h2 class="form-h2">Iniciar sesión</h2>
 
-        <form action="/action_page.php">
+        <form action="/accion_login.php">
             <div>
                 <p class="form-text">Usuario:<p>
-                        <input type="text" name="usuario">
+                        <input type="text" name="nombrelogin" value="<?php $_SESSION["nombrelogin"]?>">
             </div>
 
             <div>
                 <p class="form-text">Contraseña:<p>
-                        <input type="password" name="contrasena">
+                        <input type="password" name="contrasena" minlength="6">
             </div>
             <a class="button" type="submit">Iniciar sesión</a>
         </form>
