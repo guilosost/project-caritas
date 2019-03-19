@@ -2,7 +2,7 @@
 session_start();
 require_once("/../../modelo/gestionBD.php");
 
-if (!isset($_SESSION["formulario"])) {
+if (!isset($_SESSION["formularioUsuario"])) {
     $formulario['nombre'] = "";
     $formulario['apellidos'] = "";
     $formulario['dni'] = "";
@@ -16,9 +16,9 @@ if (!isset($_SESSION["formulario"])) {
     $formulario['solicitante'] = "";
     $formulario['parentesco'] = "";
     $formulario['estudios'] = "";
-    $_SESSION["formulario"] = $formulario;
+    $_SESSION["formularioUsuario"] = $formulario;
 } else {
-    $formulario = $_SESSION["formulario"];
+    $formulario = $_SESSION["formularioUsuario"];
 }
 
 if (isset($_SESSION["errores"])) {
@@ -26,7 +26,6 @@ if (isset($_SESSION["errores"])) {
     unset($_SESSION["errores"]);
 }
 
-$conexion = crearConexionBD();
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +45,7 @@ $conexion = crearConexionBD();
 <body background="../../vista/img/background.png">
     <?php
     include("../../vista/header.php");
-    
+
      //Mostramos los errores del formulario enviado previamente
      if (isset($errores) && count($errores)>0) { 
         //    echo "<div id=\"div_errores\" class=\"error\">";
