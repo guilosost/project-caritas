@@ -60,8 +60,6 @@ $conexion = crearConexionBD();
                 <label for="dni">DNI:</label>
                 <input class="celda" name="dni" placeholder="12345678X" type="text" required />
 
-                <label for="email">Ingresos:</label>
-                <input class="celda" name="email" type="text" required /><br>
 
                 <label for="fechaNac">Fecha de nacimiento:</label>
                 <input name="fechaNac" type="date" required /><br>
@@ -70,15 +68,8 @@ $conexion = crearConexionBD();
                 <input type="radio" name="genero" value="Hombre"> Hombre
                 <input type="radio" name="genero" value="Mujer"> Mujer<br>
 
-                <label for="sitlaboral">Situación laboral: </label>
-                <select name="sitlaboral" size=1 required>
-                    <option value="NULL">No es relevante </option>
-                    <option value="En paro">Desempleado </option>
-                    <option value="Trabajando">Trabajando </option>
-                </select>
-                <br>
                 <label for="estudios">Estudios: </label>
-                <select name="estudios" size=1 required>
+                <select class="celda" name="estudios" size=1 required>
                     <option value="No es relevante">No es relevante </option>
                     <option value="Nada">Nada </option>
                     <option value="Educacion primaria">Educación primaria </option>
@@ -87,21 +78,34 @@ $conexion = crearConexionBD();
                     <option value="Título universitario">Título universitario </option>
                 </select>
                 <br>
-                <label for="proteccionDatos">De acuerdo con la ley de protección de datos vigente: </label>
-                <input type="radio" name="proteccionDatos" value="Sí"> Sí
-                <input type="radio" name="proteccionDatos" value="No"> No<br>
+                <label for="sitlaboral">Situación laboral: </label>
+                <select class="celda" name="sitlaboral" size=1 required>
+                    <option value="NULL">No es relevante </option>
+                    <option value="En paro">Desempleado </option>
+                    <option value="Trabajando">Trabajando </option>
+                </select>
+                <br>
+                <label for="email">Ingresos:</label>
+                <input name="email" type="text" required /><br>
 
                 <label for="minusvalia">¿El usuario tiene alguna discapacidad? </label>
-                <input type="radio" name="minusvalia" value="Si">Sí
+                <input type="radio" name="minusvalia" value="Sí">Sí
                 <input type="radio" name="minusvalia" value="No">No<br>
 
                 <label for="solicitante">¿Es el usuario solicitante? </label>
-                <input type="radio" name="solicitante" value="Si"> Sí
+                <input type="radio" name="solicitante" value="Sí"> Sí
                 <input type="radio" name="solicitante" value="No"> No<br>
 
                 <label for='parentesco'>Parentesco:</label>
                 <input name='parentesco' type='text' /><br>
-                
+
+                <label for="proteccionDatos">
+                    <input type="checkbox" name="proteccionDatos" value="Si" style="align:center">De acuerdo con la Ley de Protección de Datos
+                </label>
+                <br>
+
+                <a class="confirm" type="submit">Dar de alta</a>
+                <a class= "cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancel</a>
             </form>
         </div>
     </div>
@@ -109,6 +113,6 @@ $conexion = crearConexionBD();
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);
     ?>
- </body>
+</body>
 
-</html>
+</html> 

@@ -1,4 +1,4 @@
-button,html [type=button],[type=reset],[type=submit] {
+button,html [type=button],[type=reset],[type=submit],[type=cancel] {
     border-radius: 10px;
     color: black;
     font-weight: bold;
@@ -17,10 +17,29 @@ button,html [type=button],[type=reset],[type=submit] {
     text-decoration: none;
 }
 
-.button:hover {
+.confirm {
+    float:right;
+    margin-top: 10px;
+
+}
+
+.cancel {
+    background: transparent;
+    border: 1px solid black;
+    float:left;
+    margin-left: 320px;
+    margin-top: 10px;
+    padding: 6px 26px;
+}
+
+.button:hover,.confirm:hover {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24),0 5px 10px 0 rgba(0,0,0,0.19);
     text-decoration: underline;
     margin-left: 1px;
+}
+
+.cancel:hover {
+    text-decoration: underline;
 }
