@@ -114,8 +114,8 @@ if (isset($_SESSION["errores"])) {
                 <input type="radio" name="solicitante" value="Sí"> Sí
                 <input type="radio" name="solicitante" value="No"> No<br>
 
-                <label for='parentesco'>Parentesco con el solicitante ('NULL' si es solicitante):</label>
-                <input name='parentesco' type='text' placeholder="NULL" value="<?php $formulario['parentesco'] ?>" required/><br>
+                <label for='parentesco'>Parentesco con el solicitante ('null' si es solicitante):</label>
+                <input name='parentesco' type='text' placeholder="null" value="<?php $formulario['parentesco'] ?>" required/><br>
 
                 <label for="proteccionDatos">
                     <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center">De acuerdo con la Ley de Protección de Datos
