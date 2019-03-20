@@ -6,6 +6,15 @@ if (isset($_SESSION["formulario"])) {
 	$usuario['nombre'] = $_REQUEST["nombre"];
 	$usuario['apellidos'] = $_REQUEST["apellidos"];
 	$usuario['fechaNac'] = $_REQUEST["fechaNac"];
+	$usuario['parentesco'] = $_REQUEST["parentesco"];
+	$usuario['telefono'] = $_REQUEST["telefono"];
+	$usuario['genero'] = $_REQUEST["genero"];
+	$usuario['discapacidad'] = $_REQUEST["discapacidad"];
+	$usuario['solicitante'] = $_REQUEST["solicitante"];
+	$usuario['ingresos'] = $_REQUEST["ingresos"];
+	$usuario['estudios'] = $_REQUEST["estudios"];
+	$usuario['sitlaboral'] = $_REQUEST["sitlaboral"];
+	$usuario['proteccionDatos'] = $_REQUEST["proteccionDatos"];
 	$_SESSION["formulario"] = $usuario;
 } else {
 	Header("Location: ../../controlador/altas/alta_usuario.php");
@@ -50,13 +59,17 @@ function validarDatosUsuario($conexion, $usuario)
 
 	if($usuario["genero"]=="") {
 		$errores[] = "<p>El campo género no puede estar vacío.</p>";
+	}else if($usuario["genero"]!="Masculino" and $usuario["genero"]!="Femenino" ){
+		$errores[] = "<p>El campo género debe tomar los valores del formuario.</p>";
 	}
 
 	if($usuario["fechaNac"]=="") {
 		$errores[] = "<p>El campo fecha de nacimiento no puede estar vacío.</p>";
 	}
 
-	if(!preg_match("/^[0-9][.]$/", $usuario["ingresos"])) {
+	if($usuario["ingresos"]=="") {
+		$errores[] = "<p>El campo de ingresos no puede quedar vacío.</p>";
+	}else if(!preg_match("/^[0-9][.]$/", $usuario["ingresos"])) {
 		$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
 	}
 
@@ -68,8 +81,16 @@ function validarDatosUsuario($conexion, $usuario)
 		$errores[] = "<p>El campo solicitante no puede estar vacío.</p>";
 	}
 
-	if($usuario["leyPD"]=="") {
-		$errores[] = "<p>Tiene que aceptar la Ley de Protección de Datos.</p>";
+	if($usuario["proteccionDatos"]=="") {
+		$errores[] = "<p>el usuario tiene que aceptar la Ley de Protección de Datos.</p>";
+	}
+
+	if($usuario["estudios"]=="") {
+		$errores[] = "<p>El campo estudios no puede estar vacío.</p>";
+	}
+
+	if($usuario["sitlaboral"]=="") {
+		$errores[] = "<p>El campo de situación laboral no puede estar vacío.</p>";
 	}
 }
  

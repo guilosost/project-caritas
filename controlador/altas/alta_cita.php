@@ -68,7 +68,7 @@ $conexion = crearConexionBD();
                 <input class="celda" name="email" type="text" required /><br>
 
                 <label for="observaciones">Observaciones:</label>
-                <input class="celda" name="observaciones" type="text" required /><br>
+                <input class="celda" name="observaciones" type="text" rows="10" cols="30" required /><br>
 
                 <label for="nombrev">Nombre del voluntario: </label>
                 <input class="celda" name="observaciones" type="text" value=<?php echo "$_SESSION[usuario]"?>required /><br>

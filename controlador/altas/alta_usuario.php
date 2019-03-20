@@ -61,27 +61,29 @@ if (isset($_SESSION["errores"])) {
         <h2 class="form-h2">Alta de usuario</h2>
         <div class="form-alta">
             <form action="accion_usuario.php" method="POST">
+            <!--<fieldset> -->
+            <!--    <legend>Información básica del usuario</legend> -->
                 <label for="nombre" required>Nombre:</label>
-                <input class="celda" name="nombre" type="text" maxlength="50" required />
+                <input class="celda" name="nombre" type="text" maxlength="50" value="<?php $formulario['nombre'] ?>" required />
 
                 <label for="apellidos" required>Apellidos:</label>
-                <input name="apellidos" type="text" maxlength="50" required /><br>
+                <input name="apellidos" type="text" maxlength="50" value="<?php $formulario['apellidos'] ?>" required /><br>
 
                 <label for="dni">DNI:</label>
-                <input class="celda" name="dni" placeholder="12345678X" type="text" required />
+                <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php $formulario['dni'] ?>"required />
 
                 <label for="fechaNac">Fecha de nacimiento:</label>
-                <input name="fechaNac" type="date" required /><br>
+                <input name="fechaNac" type="date" value="<?php $formulario['fechaNac'] ?>" required /><br>
 
                 <label for="genero">Género: </label>
                 <input type="radio" name="genero" value="Masculino"> Hombre
                 <input type="radio" name="genero" value="Femenino"> Mujer<br>
 
                 <label for="email">Correo electrónico:</label>
-                <input class="celda" name="email" type="text" required /><br>
+                <input class="celda" name="email" type="text" value="<?php $formulario['email'] ?>" required /><br>
 
                 <label for="telefono">Teléfono:</label>
-                <input class="celda" name="telefono" type="text" maxlength="10" required /><br>
+                <input class="celda" name="telefono" type="text" maxlength="10" value="<?php $formulario['telefono'] ?>" required /><br>
 
                 <label for="estudios">Estudios: </label>
                 <select class="celda" name="estudios" size=1 required>
@@ -101,7 +103,7 @@ if (isset($_SESSION["errores"])) {
                 </select>
                 <br>
                 <label for="email">Ingresos:</label>
-                <input name="email" type="text" required /><br>
+                <input name="email" type="text" value="<?php $formulario['ingresos'] ?>" required /><br>
 
                 <label for="minusvalia">¿El usuario tiene alguna discapacidad? </label>
                 <input type="radio" name="minusvalia" value="Sí">Sí
@@ -111,12 +113,13 @@ if (isset($_SESSION["errores"])) {
                 <input type="radio" name="solicitante" value="Sí"> Sí
                 <input type="radio" name="solicitante" value="No"> No<br>
 
-                <label for='parentesco'>Parentesco:</label>
-                <input name='parentesco' type='text' /><br>
+                <label for='parentesco'>Parentesco con el solicitante ('NULL' si es solicitante):</label>
+                <input name='parentesco' type='text' placeholder="NULL" value="<?php $formulario['parentesco'] ?>" required/><br>
 
                 <label for="proteccionDatos">
                     <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center">De acuerdo con la Ley de Protección de Datos
                 </label>
+            <!-- </fieldset> -->
                 <br>
 
                 <a class="confirm" type="submit">Dar de alta</a>
