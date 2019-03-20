@@ -15,6 +15,10 @@ if (isset($_SESSION["formulario"])) {
 	$usuario['estudios'] = $_REQUEST["estudios"];
 	$usuario['sitlaboral'] = $_REQUEST["sitlaboral"];
 	$usuario['proteccionDatos'] = $_REQUEST["proteccionDatos"];
+	$usuario['poblacion'] = $_REQUEST["poblacion"];
+	$usuario['codigopostal'] = $_REQUEST["codigopostal"];
+	$usuario['domicilio'] = $_REQUEST["domicilio"];
+	$usuario['gastosfamiliares'] = $_REQUEST["gastosfamiliares"];
 	$_SESSION["formulario"] = $usuario;
 } else {
 	Header("Location: ../../controlador/altas/alta_usuario.php");
