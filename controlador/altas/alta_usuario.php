@@ -15,6 +15,7 @@ if (!isset($_SESSION["formularioUsuario"])) {
     $formulario['proteccionDatos'] = "";
     $formulario['solicitante'] = "";
     $formulario['parentesco'] = "";
+    $formulario['ingresos'] = "";
     $formulario['estudios'] = "";
     $_SESSION["formularioUsuario"] = $formulario;
 } else {
