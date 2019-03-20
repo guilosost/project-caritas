@@ -57,7 +57,7 @@ $conexion = crearConexionBD();
                 <label for="dni" required>DNI del solicitante:</label>
                 <input class="celda" name="dni" type="text" required />
 
-                <--! AQUI LA FECHACITA QUE SALGA DEBERÍA SER LA ACTUAL -->
+                <!-- AQUI LA FECHACITA QUE SALGA DEBERÍA SER LA ACTUAL -->
                     <label for="fechacita" required>FechaCita:</label>
                     <input name="fechacita" type="date" required /><br>
 

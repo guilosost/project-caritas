@@ -92,5 +92,24 @@ function validarDatosUsuario($conexion, $usuario)
 	if($usuario["sitlaboral"]=="") {
 		$errores[] = "<p>El campo de situación laboral no puede estar vacío.</p>";
 	}
+	
+	if($usuario["solicitante"]=="Sí"){
+
+		if($usuario["poblacion"]=="") {
+			$errores[] = "<p>El campo población no puede estar vacío.</p>";
+		}
+
+		if($usuario["domicilio"]=="") {
+			$errores[] = "<p>El campo domicilio no puede estar vacío.</p>";
+		}
+
+		if($usuario["gastosfamilia"]=="") {
+			$errores[] = "<p>El campo de gastos familiares no puede estar vacío.</p>";
+		}
+
+		if($usuario["codigopostal"]=="") {
+			$errores[] = "<p>El dódigo postal no puede estar vacío.</p>";
+		}
+	}
 }
  

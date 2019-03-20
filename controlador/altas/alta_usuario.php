@@ -17,6 +17,10 @@ if (!isset($_SESSION["formularioUsuario"])) {
     $formulario['parentesco'] = "";
     $formulario['ingresos'] = "";
     $formulario['estudios'] = "";
+    $formulario['poblacion'] = "";
+    $formulario['domicilio'] = "";
+    $formulario['gastosfamilia'] = "";
+    $formulario['codigopostal'] = "";
     $_SESSION["formularioUsuario"] = $formulario;
 } else {
     $formulario = $_SESSION["formularioUsuario"];
@@ -62,8 +66,9 @@ if (isset($_SESSION["errores"])) {
         <h2 class="form-h2">Alta de usuario</h2>
         <div class="form-alta">
             <form action="accion_usuario.php" method="POST">
-                <!--<fieldset> -->
-                <!--    <legend>Información básica del usuario</legend> -->
+                <fieldset> 
+                <legend>Información básica del usuario</legend>
+
                 <label for="nombre" required>Nombre:</label>
                 <input class="celda" name="nombre" type="text" maxlength="50" value="<?php $formulario['nombre'] ?>" required />
 
@@ -123,9 +128,27 @@ if (isset($_SESSION["errores"])) {
                 <label for="proteccionDatos">
                     <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center">De acuerdo con la Ley de Protección de Datos
                 </label>
-                <!-- </fieldset> -->
+
+                </fieldset> 
                 <br>
 
+                <fieldset> 
+                <legend>Información básica del solicitante</legend>
+
+            <label for="gastosfamilia" >Gastos de la familia:</label>
+            <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php $formulario['gastosfamilia'] ?>"  />
+
+            <label for="poblacion" >Población:</label>
+            <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php $formulario['poblacion'] ?>"  />   
+
+            <label for="domicilio" >Dirección del domicilio:</label>
+            <input class="celda" name="domicilio" type="text" maxlength="50" value="<?php $formulario['domicilio'] ?>"  />
+
+            <label for="codigopostal" >Código postal:</label>
+            <input class="celda" name="codigopostal" type="text" minlength ="5" maxlength="5" value="<?php $formulario['codigopostal'] ?>"  />          
+            
+            </fieldset>
+            
                 <a class="confirm" type="submit">Dar de alta</a>
                 <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancel</a>
             </form>
