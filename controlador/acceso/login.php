@@ -16,6 +16,7 @@ if (isset($_SESSION["contrasena"])) {
     <link rel="stylesheet" type="text/css" href="../../vista/css/header-footer.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/button.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
+    <link rel="stylesheet" type="text/css" href="../../vista/css/navbar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,7 +27,10 @@ if (isset($_SESSION["contrasena"])) {
 
 <body background="../../vista/img/background.png">
 
-    <?php include("../../vista/header.php") ?>
+    <?php
+    include("../../vista/header.php");
+    include("../../vista/navbar.php");
+    ?>
 
 
     <div class="form">
@@ -49,6 +53,4 @@ if (isset($_SESSION["contrasena"])) {
 
     <?php include("../../vista/footer.php") ?>
 
-</body>
-
-</html> 
+    < /body> </html> 

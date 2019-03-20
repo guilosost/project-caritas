@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("/../../modelo/gestionBD.php");
+$_SESSION["usuario"] = "Kiko";
 
 if (!isset($_SESSION["formulario"])) {
     $formulario['fechacita'] = "";
@@ -28,6 +29,7 @@ $conexion = crearConexionBD();
     <link rel="stylesheet" type="text/css" href="../../vista/css/header-footer.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/button.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
+    <link rel="stylesheet" type="text/css" href="../../vista/css/navbar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -38,6 +40,7 @@ $conexion = crearConexionBD();
 <body background="../../vista/img/background.png">
     <?php
     include("../../vista/header.php");
+    include("../../vista/navbar.php");
 
     //Mostramos los errores del formulario enviado previamente
     if (isset($errores) && count($errores) > 0) {
@@ -55,26 +58,23 @@ $conexion = crearConexionBD();
         <div class="form-alta">
             <form action="accion_cita.php" method="POST">
                 <label for="dni" required>DNI del solicitante:</label>
-                <input class="celda" name="dni" type="text" required />
+                <input class="celda" name="dni" type="text" required /><br>
+
+                <label for="nombrev">Nombre del voluntario: </label>
+                <input class="celda" name="nombrev" type="text" value="<?php echo "$_SESSION[usuario]" ?>" required /><br>
 
                 <!-- AQUI LA FECHACITA QUE SALGA DEBERÍA SER LA ACTUAL -->
-                    <label for="fechacita" required>FechaCita:</label>
-                    <input name="fechacita" type="date" required /><br>
+                <label for="fechacita" required>Fecha Cita:</label>
+                <input class="celda" name="fechacita" type="date" required /><br>
 
-                    <label for="objetivo">Objetivo de la cita:</label>
-                    <input class="celda" name="objetivo" type="text" required />
+                <label for="objetivo">Objetivo de la cita:</label>
+                <input class="celda" name="objetivo" type="text" required /><br>
 
-                    <label for="email">Ingresos:</label>
-                    <input class="celda" name="email" type="text" required /><br>
+                <label for="observaciones">Observaciones:</label><br>
+                <input class="fillable" name="observaciones" type="text" required /><br>
 
-                    <label for="observaciones">Observaciones:</label>
-                    <input class="celda" name="observaciones" type="text" rows="10" cols="30" required /><br>
-
-                    <label for="nombrev">Nombre del voluntario: </label>
-                    <input class="celda" name="observaciones" type="text" value=<?php echo "$_SESSION[usuario]" ?>required /><br>
-
-                    <a class="confirm" type="submit">Dar de alta</a>
-                    <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancel</a>
+                <a class="confirm" type="submit">Dar de alta</a>
+                <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancel</a>
 
             </form>
         </div>

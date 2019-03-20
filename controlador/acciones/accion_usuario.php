@@ -85,10 +85,6 @@ function validarDatosUsuario($conexion, $usuario)
 		$errores[] = "<p>El campo solicitante no puede estar vacío.</p>";
 	}
 
-	if($usuario["proteccionDatos"]=="") {
-		$errores[] = "<p>el usuario tiene que aceptar la Ley de Protección de Datos.</p>";
-	}
-
 	if($usuario["estudios"]=="") {
 		$errores[] = "<p>El campo estudios no puede estar vacío.</p>";
 	}
@@ -114,6 +110,10 @@ function validarDatosUsuario($conexion, $usuario)
 		if($usuario["codigopostal"]=="") {
 			$errores[] = "<p>El dódigo postal no puede estar vacío.</p>";
 		}
+
+		if($usuario["proteccionDatos"]=="") {
+			$errores[] = "<p>El usuario tiene que aceptar la Ley de Protección de Datos.</p>";
+	}
 	}
 }
  

@@ -32,6 +32,15 @@ button,html [type=button],[type=reset],[type=submit],[type=cancel] {
     padding: 6px 26px;
 }
 
+.cancel2 {
+    background: transparent;
+    border: 1px solid black;
+    float:left;
+    margin-left: 303px;
+    margin-top: 10px;
+    padding: 6px 26px;
+}
+
 .button:hover,.confirm:hover {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -40,6 +49,6 @@ button,html [type=button],[type=reset],[type=submit],[type=cancel] {
     margin-left: 1px;
 }
 
-.cancel:hover {
+.cancel:hover, .cancel2:hover {
     text-decoration: underline;
 }

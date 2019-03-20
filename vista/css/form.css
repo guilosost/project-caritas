@@ -27,6 +27,12 @@
     margin-bottom: 5px;
 }
 
+.fillable {
+    margin-bottom: 5px;
+    height: 75px;
+    width: 527px;
+}
+
 .form-h2 {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 0, 0, 1)), color-stop(50%, rgba(170, 0, 0, 1)), color-stop(51%, rgba(170, 0, 0, 1)), color-stop(71%, rgba(170, 0, 0, 1)), color-stop(100%, rgba(255, 0, 0, 1)));
     border: 2px solid black;
