@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-if (isset($_SESSION["contrasena"])){
+if (isset($_SESSION["contrasena"])) {
     $_SESSION["contrasena"] = "";
-}else{
+} else {
     $_SESSION["nombrelogin"] = "";
     $_SESSION["contrasena"] = "";
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +20,7 @@ if (isset($_SESSION["contrasena"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Proyecto Cáritas</title>
-    <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
 
 </head>
 
@@ -37,7 +35,7 @@ if (isset($_SESSION["contrasena"])){
         <form action="/accion_login.php">
             <div>
                 <p class="form-text">Usuario:<p>
-                        <input type="text" name="nombrelogin" value="<?php $_SESSION["nombrelogin"]?>">
+                        <input type="text" name="nombrelogin" value="<?php $_SESSION["nombrelogin"] ?>">
             </div>
 
             <div>
@@ -48,7 +46,7 @@ if (isset($_SESSION["contrasena"])){
         </form>
     </div>
 
-    
+
     <?php include("../../vista/footer.php") ?>
 
 </body>

@@ -40,14 +40,14 @@ $conexion = crearConexionBD();
     include("../../vista/header.php");
 
     //Mostramos los errores del formulario enviado previamente
-    if (isset($errores) && count($errores)>0) { 
-    //    echo "<div id=\"div_errores\" class=\"error\">";
+    if (isset($errores) && count($errores) > 0) {
+        //    echo "<div id=\"div_errores\" class=\"error\">";
         echo "<h4> Errores en el formulario:</h4>";
-        foreach($errores as $error){
+        foreach ($errores as $error) {
             echo $error;
-        } 
-    //    echo "</div>";
-      }
+        }
+        //    echo "</div>";
+    }
     ?>
 
     <div class="form">
@@ -56,26 +56,26 @@ $conexion = crearConexionBD();
             <form action="accion_cita.php" method="POST">
                 <label for="dni" required>DNI del solicitante:</label>
                 <input class="celda" name="dni" type="text" required />
-                
+
                 <--! AQUI LA FECHACITA QUE SALGA DEBERÍA SER LA ACTUAL -->
-                <label for="fechacita" required>FechaCita:</label>
-                <input name="fechacita" type="date" required /><br>
+                    <label for="fechacita" required>FechaCita:</label>
+                    <input name="fechacita" type="date" required /><br>
 
-                <label for="objetivo">Objetivo de la cita:</label>
-                <input class="celda" name="objetivo" type="text" required />
+                    <label for="objetivo">Objetivo de la cita:</label>
+                    <input class="celda" name="objetivo" type="text" required />
 
-                <label for="email">Ingresos:</label>
-                <input class="celda" name="email" type="text" required /><br>
+                    <label for="email">Ingresos:</label>
+                    <input class="celda" name="email" type="text" required /><br>
 
-                <label for="observaciones">Observaciones:</label>
-                <input class="celda" name="observaciones" type="text" rows="10" cols="30" required /><br>
+                    <label for="observaciones">Observaciones:</label>
+                    <input class="celda" name="observaciones" type="text" rows="10" cols="30" required /><br>
 
-                <label for="nombrev">Nombre del voluntario: </label>
-                <input class="celda" name="observaciones" type="text" value=<?php echo "$_SESSION[usuario]"?>required /><br>
+                    <label for="nombrev">Nombre del voluntario: </label>
+                    <input class="celda" name="observaciones" type="text" value=<?php echo "$_SESSION[usuario]" ?>required /><br>
 
-                <a class="confirm" type="submit">Dar de alta</a>
-                <a class= "cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancel</a>
-                
+                    <a class="confirm" type="submit">Dar de alta</a>
+                    <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancel</a>
+
             </form>
         </div>
     </div>
@@ -83,6 +83,6 @@ $conexion = crearConexionBD();
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);
     ?>
- </body>
+</body>
 
-</html>
+</html> 
