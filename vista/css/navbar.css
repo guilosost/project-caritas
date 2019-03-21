@@ -6,34 +6,60 @@
 }
 
 .bars {
+    background-color: #cc2118;
+    color: white;
+    font-size: 100%;
+    border: 1.5px solid black;
+    border-top: 1.5px solid #cc2118;
+    height: 2.5em;
+    width: 199px;
+    position: relative;
+    margin: 0 auto;
     min-width: 5em;
     margin-left: -7px;
     margin-top: -52px;
-    float: left;
-    border: 1.5px solid black;
-    border-top: 1.5px solid #cc2118;
-    height: 2.5em;
-    width: 199px;
     margin-bottom: 10px;
-    background-color: #cc2118;
-    color: white;
-    font-size: 100%;
+    float: left;
 }
 
+.bars:before {
+    border: 2px solid #fff;
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: 0px;
+    right: 6px;
+    bottom: 1px;
+  }
+
 .bars2 {
-    min-width: 5em;
-    margin-left: -4.5px;;
-    margin-top: -52px;
-    float: left;
+    background-color: #cc2118;
+    color: white;
+    font-size: 100%;
     border: 1.5px solid black;
     border-top: 1.5px solid #cc2118;
     height: 2.5em;
     width: 199px;
+    position: relative;
+    margin: 0 auto;
+    min-width: 5em;
+    margin-left: -4.5px;
+    margin-top: -52px;
     margin-bottom: 10px;
-    background-color: #cc2118;
-    color: white;
-    font-size: 100%;
+    float: left;
 }
+
+.bars2:before {
+    border: 2px solid #fff;
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: 0px;
+    right: 6px;
+    bottom: 1px;
+  }
 
 .navtext {
     margin-top: 10px;

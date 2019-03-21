@@ -13,7 +13,7 @@
     <div class="bars2"><p class="navtext"><img src='../../vista/img/user_icon.png' alt="icono de usuario">migyanari</p></div>
 </div>
 
- <?php } if($_SERVER['REQUEST_URI'] =='/IISSI2/project-caritas/controlador/acceso/login.php') {
+ <?php } else if($_SERVER['REQUEST_URI'] =='/IISSI2/project-caritas/controlador/acceso/login.php') {
 
 } else {?>
       
