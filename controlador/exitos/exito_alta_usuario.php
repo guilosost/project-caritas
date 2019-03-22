@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	
+	include(gestionar_usuarios.php); //ARREGLAR LINK
 		
 	
 	if (isset($_SESSION["formulario"])) {
@@ -25,13 +26,16 @@
 
 <body>
 		<?php include ("header.php"); //ARREGLAR LINK
-		 if(alta_usuario($conexion,$usuario)){
+			if ($usuario["solicitante"]=="Sí"){
+	 
+			 if(alta_solicitante($conexion,$usuario)){
 		?>	
             <p>Todo ha ido bien </p>
 			<?php 
 			} else{
-				echo "El usuario ya existe.";
-			}?>
+				echo "El solicitante ya existe.";
+			}
+		}?>
 		
 
 	</main>
