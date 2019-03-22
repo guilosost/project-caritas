@@ -74,7 +74,7 @@ $conexion = crearConexionBD();
                 <input class="fillable" name="observaciones" type="text" required /><br>
 
                 <a class="confirm" type="submit">Dar de alta</a>
-                <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancel</a>
+                <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
 
             </form>
         </div>
