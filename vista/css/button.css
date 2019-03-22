@@ -27,7 +27,7 @@ button,html [type=button],[type=reset],[type=submit],[type=cancel] {
     background: transparent;
     border: 1px solid black;
     float:left;
-    margin-left: 55%;
+    margin-left: 52%;
     margin-top: 10px;
     padding: 6px 26px;
 }
