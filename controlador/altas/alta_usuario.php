@@ -41,6 +41,7 @@ if (isset($_SESSION["errores"])) {
     <link rel="stylesheet" type="text/css" href="../../vista/css/button.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -150,7 +151,7 @@ if (isset($_SESSION["errores"])) {
                 </fieldset>
 
                 <a class="confirm" type="submit">Dar de alta</a>
-                <a class="cancel2" type="cancel" onclick="javascript:window.location='www.google.es';">Cancel</a>
+                <a class="cancel2" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
             </form>
         </div>
     </div>
