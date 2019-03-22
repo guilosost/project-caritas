@@ -28,8 +28,17 @@ $conexion = crearConexionBD();
 $errores = validarDatosUsuario($conexion, $usuario);
 cerrarConexionBD($conexion);
 
+if (count($errores)>0) {
+	// Guardo en la sesión los mensajes de error y volvemos al formulario
+	$_SESSION["errores"] = $errores;
+	Header('Location: alta_usuario.php');
+} else
+	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
+	Header('Location: exito_alta_usuario.php');
+
 function validarDatosUsuario($conexion, $usuario)
 {
+	$errores=array();
 
 	if ($usuario["dni"] == "") {
 		$errores[] = "<p>El DNI no puede estar vacío.</p>";

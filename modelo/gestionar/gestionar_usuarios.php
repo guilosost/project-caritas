@@ -1,5 +1,45 @@
 <?php
 
+function alta_solicitante($conexion,$usuario) {
+	$fechaNacimiento = date('d/m/Y', strtotime($usuario["fechaNac"]));
+
+	try {
+        $consulta = "CALL nuevo_solicitante(:w_dni,:w_nombre,:w_apellidos,:w_ingresos
+        ,:w_situacionlaboral,:w_estudios,:w_sexo,:w_telefono 
+        ,:w_poblacion,:w_domicilio,:w_codigopostal,:w_gastosfamilia,:w_estadocivil,
+        :w_fechanacimiento,:w_protecciondatos,:w_problematica,:w_tratamiento
+        ,:w_minusvalia,:w_valoracionminusvalia )";
+
+		$stmt=$conexion->prepare($consulta);
+		$stmt->bindParam(':w_dni',$usuario["dni"]);
+		$stmt->bindParam(':w_nombre',$usuario["nombre"]);
+		$stmt->bindParam(':w_apellidos',$usuario["apellidos"]);
+		$stmt->bindParam(':w_ingresos',$usuario["ingresos"]);
+		$stmt->bindParam(':w_situacionlaboral',$usuario["sitlaboral"]);
+		$stmt->bindParam(':w_estudios',$fechaNacimiento);
+		$stmt->bindParam(':w_sexo',$usuario["genero"]);
+		$stmt->bindParam(':w_telefono',$usuario["telefono"]);
+        $stmt->bindParam(':w_poblacion',$usuario["poblacion"]);
+        $stmt->bindParam(':w_domicilio',$usuario["domicilio"]);
+        $stmt->bindParam(':w_codigopostal',$usuario["codigopostal"]);
+        $stmt->bindParam(':w_gastosfamilia',$usuario["gastosfamilia"]);
+        $stmt->bindParam(':w_estadocivil',$usuario["estadocivil"]);
+        $stmt->bindParam(':w_fechanacimiento',$fechaNacimiento);
+        $stmt->bindParam(':w_protecciondatos',$usuario["protecciondatos"]);
+        $stmt->bindParam(':w_problematica',$usuario["problematica"]);
+        $stmt->bindParam(':w_tratamiento',"NULL");
+        $stmt->bindParam(':w_minusvalia',$usuario["minusvalia"]);
+        $stmt->bindParam(':w_valoracionminusvalia',"NULL");
+		
+		$stmt->execute();
+		
+		return true;
+	} catch(PDOException $e) {
+		return false;
+		// Si queremos visualizar la excepción durante la depuración: $e->getMessage();
+    }
+}
+
 function consultarUsuarios($conexion) {
     $consulta = "SELECT dni, nombre, apellidos, telefono, situacionlaboral, ingresos FROM usuarios";
     return $conexion->query($consulta);

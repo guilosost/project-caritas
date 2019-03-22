@@ -22,7 +22,8 @@ cerrarConexionBD($conexion);
 
 function validarDatosCita($conexion, $cita)
 {
-
+	$errores=array();
+	
 	if ($cita["fechacita"] == "") {
 		$errores[] = "<p>La fecha de la cita no puede estar vacía.</p>";
 	} else if (fechaAnteriorActual($cita["fechacita"] == 0)){
