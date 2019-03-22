@@ -9,4 +9,11 @@ function minchars($str, $min){
         return 0;
     }
 }
+
+function fechaAnteriorActual($fecha){
+    if(strtotime($fecha) > date()){
+        return 0;
+    }
+    return 1;
+}
 ?>

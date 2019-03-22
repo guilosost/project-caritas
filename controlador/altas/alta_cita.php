@@ -63,9 +63,8 @@ $conexion = crearConexionBD();
                 <label for="nombrev">Nombre del voluntario: </label>
                 <input class="celda" name="nombrev" type="text" value="<?php echo "$_SESSION[usuario]" ?>" required /><br>
 
-                <!-- AQUI LA FECHACITA QUE SALGA DEBERÍA SER LA ACTUAL -->
-                <label for="fechacita" required>Fecha Cita:</label>
-                <input class="celda" name="fechacita" type="date" required /><br>
+                <label for="fechacita" required>Fecha de la cita:</label>
+                <input class="celda" name="fechacita" type="date" value="<?php date("d/m/Y") ?>"required /><br>
 
                 <label for="objetivo">Objetivo de la cita:</label>
                 <input class="celda" name="objetivo" type="text" required /><br>

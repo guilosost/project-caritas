@@ -58,7 +58,7 @@ function validarDatosUsuario($conexion, $usuario)
 	if ($usuario["telefono"] == "") {
 		$errores[] = "<p>El telefono no puede estar vacío</p>";
 	} else if (!preg_match("/^[0-9]{9}$/", $usuario["telefono"])) {
-		$errores[] = "<p>El teléfono debe contener 9 dígitos: " . $usuario["telefono"] . ".</p>";
+		$errores[] = "<p>El teléfono debe contener 9 dígitos y ser numérico: " . $usuario["telefono"] . ".</p>";
 	}
 
 	if($usuario["genero"]=="") {
@@ -97,10 +97,16 @@ function validarDatosUsuario($conexion, $usuario)
 
 		if($usuario["poblacion"]=="") {
 			$errores[] = "<p>El campo población no puede estar vacío.</p>";
+		}else if ($usuario["poblacion"] !="San Juan de Aznalfarache"){
+			$errores[] = "<p>El solicitante debe de vivir en San Juan de Aznalfarache.</p>";
 		}
 
 		if($usuario["domicilio"]=="") {
 			$errores[] = "<p>El campo domicilio no puede estar vacío.</p>";
+		}
+
+		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))<18){
+			$errores[] = "<p>El solicitante debe de ser mayor de 18 años</p>";
 		}
 
 		if($usuario["gastosfamilia"]=="") {
@@ -109,6 +115,10 @@ function validarDatosUsuario($conexion, $usuario)
 
 		if($usuario["codigopostal"]=="") {
 			$errores[] = "<p>El dódigo postal no puede estar vacío.</p>";
+		}else if (!preg_match("/^[0-9]{5}$/", $usuario["codigopostal"])) {
+			$errores[] = "<p>El dódigo postal debe de constar 5 dígitos.</p>";
+		} else if ($usuario["codigopostal"] != "41920"){
+			$errores[] = "<p>El dódigo postal no es el de San Juan de Aznalfarache.</p>";
 		}
 
 		if($usuario["proteccionDatos"]=="") {
