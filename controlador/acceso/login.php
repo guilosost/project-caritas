@@ -53,4 +53,4 @@ if (isset($_SESSION["contrasena"])) {
 
     <?php include("../../vista/footer.php") ?>
 
-    < /body> </html> 
+    </body> </html> 

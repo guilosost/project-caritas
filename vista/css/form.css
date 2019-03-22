@@ -1,3 +1,8 @@
+
+body {
+    width: 99%;
+}
+
 .form {
     background-color: #f1f1f1;
     width: 34.8%;
@@ -31,7 +36,7 @@
 .fillable {
     margin-bottom: 5px;
     height: 75px;
-    width: 527px;
+    width: 100%;
 }
 
 .form-h2 {
