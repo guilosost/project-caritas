@@ -16,7 +16,7 @@ function alta_solicitante($conexion,$usuario) {
 		$stmt->bindParam(':w_apellidos',$usuario["apellidos"]);
 		$stmt->bindParam(':w_ingresos',$usuario["ingresos"]);
 		$stmt->bindParam(':w_situacionlaboral',$usuario["sitlaboral"]);
-		$stmt->bindParam(':w_estudios',$fechaNacimiento);
+		$stmt->bindParam(':w_estudios',$usuario["estudios"]);
 		$stmt->bindParam(':w_sexo',$usuario["genero"]);
 		$stmt->bindParam(':w_telefono',$usuario["telefono"]);
         $stmt->bindParam(':w_poblacion',$usuario["poblacion"]);
@@ -45,6 +45,10 @@ function consultarUsuarios($conexion) {
     return $conexion->query($consulta);
 }
 
+function modificarUsuario($conexion, $dni) {
+    
+}
+
 function eliminarUsuario($conexion, $dni) {
     try {   
     if($solicitante=='Sí') {
@@ -53,7 +57,7 @@ function eliminarUsuario($conexion, $dni) {
         $stmt->execute();
         return "";
     } else {
-        $stmt=$conexion->prepare('CALL familiar(:dni)');
+        $stmt=$conexion->prepare('CALL borrar_familiar(:dni)');
         $stmt->bindParam(':dni', $dni);
         $stmt->execute();
         return "";
@@ -63,6 +67,38 @@ function eliminarUsuario($conexion, $dni) {
     }
 }
 
-function modificarUsuario($conexion, $dni) {
-    
+// He metido esta función dentro de gestionar_usuarios porque en la función eliminarUsuario ya había metido borrar_familiar
+function nuevo_familiar($conexion, $usuario) {
+    $fechaNacimiento = date('d/m/Y', strtotime($usuario["fechaNac"]));
+
+    try {
+        $consulta = "CALL nuevo_familiar(:w_dni, :w_nombre, :w_apellidos, :w_ingresos, :w_situacionlaboral, :w_estudios,
+         :w_sexo, :w_telefono, :w_estadocivil, :w_fechanacimiento, :w_parentesco, :w_problematica, :w_tratamiento, :w_minusvalia,
+         :w_valoracionminusvalia, :w_dni_so)";
+
+         $stmt=$conexion->prepare($consulta);
+         $stmt->bindParam(':w_dni',$usuario["dni"]);
+		$stmt->bindParam(':w_nombre',$usuario["nombre"]);
+		$stmt->bindParam(':w_apellidos',$usuario["apellidos"]);
+		$stmt->bindParam(':w_ingresos',$usuario["ingresos"]);
+		$stmt->bindParam(':w_situacionlaboral',$usuario["sitlaboral"]);
+		$stmt->bindParam(':w_estudios',$usuario["estudios"]);
+		$stmt->bindParam(':w_sexo',$usuario["genero"]);
+		$stmt->bindParam(':w_telefono',$usuario["telefono"]);
+        $stmt->bindParam(':w_estadovicil',$usuario["estadocivil"]);
+        $stmt->bindParam(':fechanacimiento',$fechaNacimiento);
+        $stmt->bindParam(':w_parentesco',$usuario["parentesco"]);
+        $stmt->bindParam(':w_problematica',$usuario["problematica"]);
+        $stmt->bindParam(':w_tratamiento',"NULL");
+        $stmt->bindParam(':w_minusvalia',$usuario["minusvalia"]);
+        $stmt->bindParam(':w_valoracionminusvalia',"NULL");
+        // Falta poner el parámetro del DNI solicitante
+		
+		$stmt->execute();
+
+        return true;
+    } catch(PDOException $e) {
+        return $e->getMessage();
+    }
 }
+
