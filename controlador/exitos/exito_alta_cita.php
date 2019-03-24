@@ -28,7 +28,7 @@
 		<?php include ("header.php"); //ARREGLAR LINK
 			
 	 
-			 if(alta_cita($conexion,$usuario)){
+			 if(alta_cita($conexion,$cita)){
 		?>	
             <p>Todo ha ido bien </p>
 			<?php 
