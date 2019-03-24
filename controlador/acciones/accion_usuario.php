@@ -34,7 +34,7 @@ if (count($errores)>0) {
 	Header('Location: ../../controlador/altas/alta_usuario.php');
 } else
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
-	Header('Location: exito_alta_usuario.php');
+	Header('Location: ../../controlador/exitos/exito_alta_usuario.php');
 
 function validarDatosUsuario($conexion, $usuario)
 {

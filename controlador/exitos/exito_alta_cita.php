@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	
-	include(gestionar_usuarios.php); //ARREGLAR LINK
+	include("../../modelo/GestionBD.php"); 
 		
 	
 	if (isset($_SESSION["formulario"])) {
@@ -9,7 +9,7 @@
 		unset($_SESSION["formulario"]);
 		}
 		else{
-			Header("Location: alta_usuario.php"); //ARREGLAR LINK
+			Header("Location: ../../controlador/altas/alta_usuario.php");
 		}
 	
 		$conexion  = crearConexionBD();
@@ -25,7 +25,7 @@
 </head>
 
 <body>
-		<?php include ("header.php"); //ARREGLAR LINK
+		<?php include ("../../vista/header.php"); 
 			
 	 
 			 if(alta_cita($conexion,$cita)){
@@ -40,6 +40,6 @@
 
 	</main>
 	<?php cerrarConexionBD($conexion); ?>
-	<?php include ("footer.php"); //ARREGLAR LINK ?> 
+	<?php include ("../../vista/footer.php");  ?> 
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once("/../../modelo/gestionBD.php");
+//include(dirname(__DIR__).'/GestionBD.php');
+require_once("../../modelo/GestionBD.php");
 
 if (!isset($_SESSION["formularioUsuario"])) {
     $formulario['nombre'] = "";
@@ -30,7 +31,7 @@ if (isset($_SESSION["errores"])) {
     $errores = $_SESSION["errores"];
     unset($_SESSION["errores"]);
 }
-
+$conexion = crearConexionBD();
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +69,7 @@ if (isset($_SESSION["errores"])) {
     <div class="form">
         <h2 class="form-h2">Alta de usuario</h2>
         <div class="form-alta">
-            <form action="accion_usuario.php" method="POST">
+            <form action="../../controlador/acciones/accion_usuario.php" method="POST">
                 <fieldset>
                     <legend>Información básica del usuario</legend>
 
@@ -149,8 +150,9 @@ if (isset($_SESSION["errores"])) {
                         <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center">De acuerdo con la Ley de Protección de Datos
                     </label>
                 </fieldset>
-
-                <a class="confirm" type="submit">Dar de alta</a>
+                <!--ARREGLAR CSS DEL BOTÓN SUBMIT, EL OTRO NO FUNCIONABA-->
+                <input type="submit" value="Confirmar">
+                <!--<a class="confirm" type="submit">Dar de alta</a>-->
                 <a class="cancel2" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
             </form>
         </div>
