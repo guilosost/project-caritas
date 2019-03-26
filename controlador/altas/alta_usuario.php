@@ -3,7 +3,7 @@ session_start();
 //include(dirname(__DIR__).'/GestionBD.php');
 require_once("../../modelo/GestionBD.php");
 
-if (!isset($_SESSION["formularioUsuario"])) {
+if (!isset($_SESSION["formulario"])) {
     $formulario['nombre'] = "";
     $formulario['apellidos'] = "";
     $formulario['dni'] = "";
@@ -22,9 +22,9 @@ if (!isset($_SESSION["formularioUsuario"])) {
     $formulario['domicilio'] = "";
     $formulario['gastosfamilia'] = "";
     $formulario['codigopostal'] = "";
-    $_SESSION["formularioUsuario"] = $formulario;
+    $_SESSION["formulario"] = $formulario;
 } else {
-    $formulario = $_SESSION["formularioUsuario"];
+    $formulario = $_SESSION["formulario"];
 }
 
 if (isset($_SESSION["errores"])) {
