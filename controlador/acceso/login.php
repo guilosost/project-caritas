@@ -29,6 +29,8 @@ if (isset($_SESSION["contrasena"])) {
 
     <?php
     include("../../vista/header.php");
+    
+    //BORRAR NAVBAR EN LA VERSION FINAL 
     include("../../vista/navbar.php");
     ?>
 
