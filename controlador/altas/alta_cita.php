@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("/../../modelo/gestionBD.php");
+require_once("../../modelo/gestionBD.php");
 $_SESSION["usuario"] = "Kiko";
 
 if (!isset($_SESSION["formulario"])) {
