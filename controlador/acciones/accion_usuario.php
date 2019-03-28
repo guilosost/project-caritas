@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("../../modelo/GestionBD.php");
 
 if (isset($_SESSION["formulario"])) {
 	$usuario['DNI'] = $_REQUEST["dni"];
@@ -9,7 +10,7 @@ if (isset($_SESSION["formulario"])) {
 	$usuario['parentesco'] = $_REQUEST["parentesco"];
 	$usuario['telefono'] = $_REQUEST["telefono"];
 	$usuario['genero'] = $_REQUEST["genero"];
-	$usuario['discapacidad'] = $_REQUEST["discapacidad"];
+	$usuario['minusvalia'] = $_REQUEST["minusvalia"];
 	$usuario['solicitante'] = $_REQUEST["solicitante"];
 	$usuario['ingresos'] = $_REQUEST["ingresos"];
 	$usuario['estudios'] = $_REQUEST["estudios"];
@@ -18,7 +19,7 @@ if (isset($_SESSION["formulario"])) {
 	$usuario['poblacion'] = $_REQUEST["poblacion"];
 	$usuario['codigopostal'] = $_REQUEST["codigopostal"];
 	$usuario['domicilio'] = $_REQUEST["domicilio"];
-	$usuario['gastosfamiliares'] = $_REQUEST["gastosfamiliares"];
+	$usuario['gastosfamilia'] = $_REQUEST["gastosfamilia"];
 	$_SESSION["formulario"] = $usuario;
 } else {
 	Header("Location: ../../controlador/altas/alta_usuario.php");
@@ -86,8 +87,8 @@ function validarDatosUsuario($conexion, $usuario)
 		$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
 	}
 
-	if($usuario["discapacidad"]=="") {
-		$errores[] = "<p>El campo discapacidad no puede estar vacío.</p>";
+	if($usuario["minusvalia"]=="") {
+		$errores[] = "<p>El campo minusvalía no puede estar vacío.</p>";
 	}
 
 	if($usuario["solicitante"]=="") {

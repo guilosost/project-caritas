@@ -2,7 +2,7 @@
 	session_start();
 	
 	include("../../modelo/gestionar/gestionar_usuarios.php"); 
-		
+	require_once("../../modelo/GestionBD.php");	
 	
 	if (isset($_SESSION["formulario"])) {
 		$usuario = $_SESSION["formulario"];

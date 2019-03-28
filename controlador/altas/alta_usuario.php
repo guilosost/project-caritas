@@ -115,8 +115,8 @@ $conexion = crearConexionBD();
                     </select>
                     <br>
 
-                    <label for="email">Ingresos:</label>
-                    <input name="email" type="text" value="<?php $formulario['ingresos'] ?>" required /><br>
+                    <label for="ingresos">Ingresos:</label>
+                    <input name="ingresos" type="text" value="<?php $formulario['ingresos'] ?>" required /><br>
 
                     <label for="minusvalia">¿El usuario tiene alguna discapacidad? </label>
                     <input type="radio" name="minusvalia" value="Sí">Sí
@@ -147,7 +147,7 @@ $conexion = crearConexionBD();
                     <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php $formulario['codigopostal'] ?>" /><br>
 
                     <label for="proteccionDatos">
-                        <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center">De acuerdo con la Ley de Protección de Datos
+                    <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center">De acuerdo con la Ley de Protección de Datos
                     </label>
                 </fieldset>
                 <!--ARREGLAR CSS DEL BOTÓN SUBMIT, EL OTRO NO FUNCIONABA-->

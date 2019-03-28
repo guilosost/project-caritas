@@ -2,7 +2,7 @@
 
 function alta_solicitante($conexion,$usuario) {
 	$fechaNacimiento = date('d/m/Y', strtotime($usuario["fechaNac"]));
-
+    $null = "NULL";
 	try {
         $consulta = "CALL nuevo_solicitante(:w_dni,:w_nombre,:w_apellidos,:w_ingresos
         ,:w_situacionlaboral,:w_estudios,:w_sexo,:w_telefono 
@@ -27,9 +27,9 @@ function alta_solicitante($conexion,$usuario) {
         $stmt->bindParam(':w_fechanacimiento',$fechaNacimiento);
         $stmt->bindParam(':w_protecciondatos',$usuario["protecciondatos"]);
         $stmt->bindParam(':w_problematica',$usuario["problematica"]);
-        $stmt->bindParam(':w_tratamiento',"NULL");
+        $stmt->bindParam(':w_tratamiento',$null);
         $stmt->bindParam(':w_minusvalia',$usuario["minusvalia"]);
-        $stmt->bindParam(':w_valoracionminusvalia',"NULL");
+        $stmt->bindParam(':w_valoracionminusvalia',$null);
 		
 		$stmt->execute();
 		
