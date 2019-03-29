@@ -3,7 +3,7 @@ session_start();
 require_once("../../modelo/GestionBD.php");
 
 if (isset($_SESSION["formulario"])) {
-	$usuario['DNI'] = $_REQUEST["dni"];
+	$usuario['dni'] = $_REQUEST["dni"];
 	$usuario['nombre'] = $_REQUEST["nombre"];
 	$usuario['apellidos'] = $_REQUEST["apellidos"];
 	$usuario['fechaNac'] = $_REQUEST["fechaNac"];

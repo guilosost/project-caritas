@@ -110,8 +110,8 @@ $conexion = crearConexionBD();
                     <label for="sitlaboral">Situación laboral: </label>
                     <select class="celda" name="sitlaboral" size=1 required>
                         <option value="NULL">No es relevante </option>
-                        <option value="Desempleado">Desempleado </option>
-                        <option value="Empleado">Empleado </option>
+                        <option value="En paro">Desempleado </option>
+                        <option value="Trabajando">Trabajando </option>
                     </select>
                     <br>
 
