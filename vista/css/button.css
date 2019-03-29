@@ -17,7 +17,8 @@ button,html [type=button],[type=reset],[type=submit],[type=cancel] {
     text-decoration: none;
 }
 
-.confirm {
+[type=submit] {
+    border: none;
     float:right;
     margin-top: 10px;
 
@@ -41,7 +42,7 @@ button,html [type=button],[type=reset],[type=submit],[type=cancel] {
     padding: 6px 26px;
 }
 
-.button:hover,.confirm:hover {
+[type=submit]:hover,.confirm:hover {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24),0 5px 10px 0 rgba(0,0,0,0.19);

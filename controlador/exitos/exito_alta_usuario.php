@@ -35,16 +35,17 @@
 
 <body background="../../vista/img/background.png">
 		<?php include ("../../vista/header.php"); 
-			if ($usuario["solicitante"]=="Sí"){
-	 
-			 if(alta_solicitante($conexion,$usuario)){
+		#	if ($usuario["solicitante"]=="Sí"){
+			$d = alta_solicitante($conexion,$usuario);
+			echo $usuario["fechaNac"];
+	#		 if(alta_solicitante($conexion,$usuario) == true){
 		?>	
             <p>Todo ha ido bien </p>
 			<?php 
-			} else{
-				echo "Error.";
-			}
-		}?>
+		#	} else{
+		#		echo "Error.";
+		#	}
+		#}?>
 		
 
 	</main>

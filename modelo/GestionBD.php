@@ -14,7 +14,7 @@ function crearConexionBD()
 		return $conexion;
 	}catch(PDOException $e){
 		$_SESSION['excepcion'] = $e->GetMessage();
-		header("Location: ../../modelo/excepcionBD.php");
+		header("Location: ../../modelo/excepcionBD/excepcionBD.php");
 	}
 }
 

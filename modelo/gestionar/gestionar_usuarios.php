@@ -1,7 +1,10 @@
 <?php
 
 function alta_solicitante($conexion,$usuario) {
-	$fechaNacimiento = date('d/m/Y', strtotime($usuario["fechaNac"]));
+    $fecha = $usuario["fechaNac"];
+    list($mes, $dia, $año) = split('[/.-]', $fecha);
+    $fechaNacimiento = "$dia/$mes/$año";
+    #$fechaNacimiento = date('d/m/Y', strtotime($usuario["fechaNac"]));
     $null = "NULL";
     $no = "No";
 	try {
@@ -24,10 +27,10 @@ function alta_solicitante($conexion,$usuario) {
         $stmt->bindParam(':w_domicilio',$usuario["domicilio"]);
         $stmt->bindParam(':w_codigopostal',$usuario["codigopostal"]);
         $stmt->bindParam(':w_gastosfamilia',$usuario["gastosfamilia"]);
-        $stmt->bindParam(':w_estadocivil',$usuario["estadocivil"]);
+        $stmt->bindValue(':w_estadocivil','Casado', PDO::PARAM_STR);
         $stmt->bindParam(':w_fechanacimiento',$fechaNacimiento);
         $stmt->bindParam(':w_protecciondatos',$usuario["proteccionDatos"]);
-        $stmt->bindParam(':w_problematica',$null);
+        $stmt->bindValue(':w_problematica',null, PDO::PARAM_INT);
         $stmt->bindParam(':w_tratamiento',$no);
         $stmt->bindParam(':w_minusvalia',$usuario["minusvalia"]);
         $stmt->bindParam(':w_valoracionminusvalia',$no);
@@ -36,8 +39,7 @@ function alta_solicitante($conexion,$usuario) {
 		
 		return true;
 	} catch(PDOException $e) {
-		return false;
-		// Si queremos visualizar la excepción durante la depuración: $e->getMessage();
+		return $e->getMessage();
     }
 }
 
