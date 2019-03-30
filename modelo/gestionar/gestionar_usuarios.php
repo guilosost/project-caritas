@@ -6,10 +6,7 @@ function alta_solicitante($conexion,$usuario) {
     echo $fecha;
     list($año, $mes, $dia) = split('[/.-]', $fecha);
     $fechaNacimiento = "$dia/$mes/$año";
-    #$fechaNacimiento = "$año/$mes/$dia";
-    echo $fechaNacimiento;
-    $newdate = date('Y-m-d', strtotime($usuario["fechaNac"]));
-    $fechaNac = date('d/m/Y', strtotime($usuario["fechaNac"]));
+    
 
     $usuario["fechaNac"] = date("d/m/Y", strtotime($usuario["fechaNac"]));
     echo $usuario["fechaNac"];
