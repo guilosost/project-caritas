@@ -37,7 +37,8 @@
 		<?php include ("../../vista/header.php"); 
 		#	if ($usuario["solicitante"]=="Sí"){
 			$d = alta_solicitante($conexion,$usuario);
-			echo $usuario["fechaNac"];
+			echo $d;
+			echo $usuario['fechaNac'];
 	#		 if(alta_solicitante($conexion,$usuario) == true){
 		?>	
             <p>Todo ha ido bien </p>

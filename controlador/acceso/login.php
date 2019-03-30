@@ -48,7 +48,7 @@ if (isset($_SESSION["contrasena"])) {
                 <p class="form-text">Contraseña:<p>
                         <input type="password" name="contrasena" minlength="6">
             </div>
-            <a class="button" type="submit">Iniciar sesión</a>
+            <input type="submit" value="Iniciar sesión">
         </form>
     </div>
 

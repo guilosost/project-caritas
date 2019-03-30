@@ -1,10 +1,19 @@
 <?php
 
 function alta_solicitante($conexion,$usuario) {
+    date_default_timezone_set('UTC');
     $fecha = $usuario["fechaNac"];
-    list($mes, $dia, $año) = split('[/.-]', $fecha);
-    $fechaNacimiento = "$dia/$mes/$año";
-    #$fechaNacimiento = date('d/m/Y', strtotime($usuario["fechaNac"]));
+    echo $fecha;
+    list($año, $mes, $dia) = split('[/.-]', $fecha);
+    #$fechaNacimiento = "$dia/$mes/$año";
+    $fechaNacimiento = "$año/$mes/$dia";
+    echo $fechaNacimiento;
+    $newdate = date('Y-m-d', strtotime($usuario["fechaNac"]));
+    $fechaNac = date('d/m/Y', strtotime($usuario["fechaNac"]));
+
+    $usuario["fechaNac"] = date("d/m/Y", strtotime($usuario["fechaNac"]));
+    echo $usuario["fechaNac"];
+
     $null = "NULL";
     $no = "No";
 	try {
@@ -28,7 +37,7 @@ function alta_solicitante($conexion,$usuario) {
         $stmt->bindParam(':w_codigopostal',$usuario["codigopostal"]);
         $stmt->bindParam(':w_gastosfamilia',$usuario["gastosfamilia"]);
         $stmt->bindValue(':w_estadocivil','Casado', PDO::PARAM_STR);
-        $stmt->bindParam(':w_fechanacimiento',$fechaNacimiento);
+        $stmt->bindParam(':w_fechanacimiento',$fechaNac);
         $stmt->bindParam(':w_protecciondatos',$usuario["proteccionDatos"]);
         $stmt->bindValue(':w_problematica',null, PDO::PARAM_INT);
         $stmt->bindParam(':w_tratamiento',$no);

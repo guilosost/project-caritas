@@ -83,7 +83,7 @@ $conexion = crearConexionBD();
                     <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php $formulario['dni'] ?>" required /><br>
 
                     <label for="fechaNac">Fecha de nacimiento:</label>
-                    <input name="fechaNac" type="date" value="<?php $formulario['fechaNac'] ?>" required /><br>
+                    <input name="fechaNac" type="date" value="<?php date('d/m/Y', strtotime($formulario['fechaNac'])) ?>" required /><br>
 
                     <label for="genero">Género: </label>
                     <input type="radio" name="genero" value="Masculino"> Hombre

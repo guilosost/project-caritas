@@ -45,7 +45,7 @@ BEGIN
     FROM
         dual;
 
-    IF ( :new.solicitante = 'Sí' AND ( ( ( anyo - anyo2 ) < 18 ) OR ( ( anyo - anyo2 ) = 17 AND mes > mes2 ) OR ( ( anyo - anyo2
+    IF ( :new.solicitante = 'Sï¿½' AND ( ( ( anyo - anyo2 ) < 18 ) OR ( ( anyo - anyo2 ) = 17 AND mes > mes2 ) OR ( ( anyo - anyo2
 
     ) = 17 AND mes = mes2 AND dia > dia2 ) ) ) THEN
         raise_application_error(-20600, 'El solicitante con DNI '
@@ -61,7 +61,7 @@ CREATE OR REPLACE TRIGGER rest_poblacion_unidadfamiliar BEFORE
     FOR EACH ROW
 DECLARE BEGIN
     IF ( :new.poblacion != 'San Juan de Aznalfarache' ) THEN
-        raise_application_error(-20610, 'La unidad familiar debe residir en San Juan del Aznalfarache y reside en ' || :new.poblacion
+        raise_application_error(-20610, 'La unidad familiar debe residir en San Juan de Aznalfarache y reside en ' || :new.poblacion
         );
     END IF;
 END;
@@ -71,10 +71,10 @@ CREATE OR REPLACE TRIGGER proteccion_datos BEFORE
     INSERT ON usuarios
     FOR EACH ROW
 BEGIN
-    IF ( :new.solicitante = 'Sí' AND :new.protecciondatos = 'No' ) THEN
+    IF ( :new.solicitante = 'Sï¿½' AND :new.protecciondatos = 'No' ) THEN
         raise_application_error(-20610, 'El solicitante con DNI '
                                         || :new.dni
-                                        || ' no ha firmado la protección de datos');
+                                        || ' no ha firmado la protecciï¿½n de datos');
     END IF;
 END;
 /
@@ -86,7 +86,7 @@ BEGIN
     IF ( usuario_duplicado(:new.dni) ) THEN
         raise_application_error(-20615, 'El solicitante con DNI '
                                         || :new.dni
-                                        || ' está duplicado');
+                                        || ' estï¿½ duplicado');
     END IF;
 END;
 /
@@ -100,7 +100,7 @@ BEGIN
                                         || :new.dni
                                         || ' son '
                                         || :new.ingresos
-                                        || ' y no pueden sobrepasar los 1000 €');
+                                        || ' y no pueden sobrepasar los 1000 ï¿½');
 
     END IF;
 END;
@@ -125,7 +125,7 @@ BEGIN
                                         || unidadfamiliar_de_solicitante(cita.dni)
                                         || ' es de '
                                         || ingresosfamiliares_de_uf(unidadfamiliar_de_solicitante(cita.dni))
-                                        || ' y no puede sobrepasar los 1000 €');
+                                        || ' y no puede sobrepasar los 1000 ï¿½');
 
     END IF;
 
@@ -176,7 +176,7 @@ BEGIN
         dni = :new.dni;
 
     IF ( usuario > 0 ) THEN
-        raise_application_error(-20605, 'El DNI es único, este usuario está repetido');
+        raise_application_error(-20605, 'El DNI es ï¿½nico, este usuario estï¿½ repetido');
     END IF;
 END;
 /
