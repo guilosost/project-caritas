@@ -5,8 +5,8 @@ function alta_solicitante($conexion,$usuario) {
     $fecha = $usuario["fechaNac"];
     echo $fecha;
     list($año, $mes, $dia) = split('[/.-]', $fecha);
-    #$fechaNacimiento = "$dia/$mes/$año";
-    $fechaNacimiento = "$año/$mes/$dia";
+    $fechaNacimiento = "$dia/$mes/$año";
+    #$fechaNacimiento = "$año/$mes/$dia";
     echo $fechaNacimiento;
     $newdate = date('Y-m-d', strtotime($usuario["fechaNac"]));
     $fechaNac = date('d/m/Y', strtotime($usuario["fechaNac"]));
@@ -27,8 +27,12 @@ function alta_solicitante($conexion,$usuario) {
 		$stmt->bindParam(':w_dni',$usuario["dni"]);
 		$stmt->bindParam(':w_nombre',$usuario["nombre"]);
 		$stmt->bindParam(':w_apellidos',$usuario["apellidos"]);
-		$stmt->bindParam(':w_ingresos',$usuario["ingresos"]);
-		$stmt->bindParam(':w_situacionlaboral',$usuario["sitlaboral"]);
+        $stmt->bindParam(':w_ingresos',$usuario["ingresos"]);
+        if($usuario["sitlaboral"]=="NULL"){
+            $stmt->bindValue(':w_situacionlaboral',null, PDO::PARAM_INT);
+        }else{
+            $stmt->bindParam(':w_situacionlaboral',$usuario["sitlaboral"]);
+        }
 		$stmt->bindParam(':w_estudios',$usuario["estudios"]);
 		$stmt->bindParam(':w_sexo',$usuario["genero"]);
 		$stmt->bindParam(':w_telefono',$usuario["telefono"]);
@@ -36,8 +40,8 @@ function alta_solicitante($conexion,$usuario) {
         $stmt->bindParam(':w_domicilio',$usuario["domicilio"]);
         $stmt->bindParam(':w_codigopostal',$usuario["codigopostal"]);
         $stmt->bindParam(':w_gastosfamilia',$usuario["gastosfamilia"]);
-        $stmt->bindValue(':w_estadocivil','Casado', PDO::PARAM_STR);
-        $stmt->bindParam(':w_fechanacimiento',$fechaNac);
+        $stmt->bindValue(':w_estadocivil',null, PDO::PARAM_INT);
+        $stmt->bindParam(':w_fechanacimiento',$fechaNacimiento);
         $stmt->bindParam(':w_protecciondatos',$usuario["proteccionDatos"]);
         $stmt->bindValue(':w_problematica',null, PDO::PARAM_INT);
         $stmt->bindParam(':w_tratamiento',$no);
