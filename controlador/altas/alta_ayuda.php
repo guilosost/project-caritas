@@ -73,7 +73,7 @@ $conexion = crearConexionBD();
             <form action="../../controlador/acciones/accion_usuario.php" method="POST">
                 <fieldset>
                     <legend>Información básica de la ayuda</legend>
-                    
+
                     <label for="tipoayuda">Seleccion el tipo de ayuda: </label>
                     <select class="celda" name="tipoayuda" size=1 required>
                         <option value="bolsacomida">Bolsa de comida </option>
@@ -81,7 +81,7 @@ $conexion = crearConexionBD();
                         <option value="curso">Curso </option>
                         <option value="trabajo">Propuesta de trabajo </option>
                         <option value="Educacion secundaria">Educación secundaria </option>
-                        
+
                         <option value="Grado medio">Grado medio </option>
                         <option value="Grado superior">Grado superior </option>
                         <option value="Grado universitario">Grado universitario </option>
@@ -96,7 +96,7 @@ $conexion = crearConexionBD();
                     <input type="radio" name="concedida" value="Sí">Sí
                     <input type="radio" name="concedida" value="No">No<br>
 
-                    </fieldset>
+                </fieldset>
 
                 <fieldset>
                     <legend>Información de la bolsa de comida</legend>
@@ -112,7 +112,7 @@ $conexion = crearConexionBD();
                 <fieldset>
                     <legend>Información de la ayuda económica</legend>
                     <label for="cantidad">Cantidad(€): </label>
-                    <input class="celda" name="cantidad" type="text" value="<?php $formulario['cantidad'] ?>"  /><br>
+                    <input class="celda" name="cantidad" type="text" value="<?php $formulario['cantidad'] ?>" /><br>
 
                     <label for="motivo">Motivo:</label>
                     <input class="celda" name="motivo" type="text" value="<?php $formulario['motivo'] ?>" /><br>
@@ -125,22 +125,22 @@ $conexion = crearConexionBD();
                     <legend>Información del curso</legend>
                     <label for="profesor">Profesor: </label>
                     <input class="celda" name="profesor" type="text" maxlength="50" value="<?php $formulario['profesor'] ?>" /><br>
-                
+
                     <label for="materia">Materia del curso: </label>
                     <input class="celda" name="materia" type="text" maxlength="50" value="<?php $formulario['materia'] ?>" /><br>
                     </select>
-                    
+
                     <label for="fechacomienzo">Fecha comienzo:</label>
-                    <input name="fechacomienzo" type="date" value="<?php $formulario['fechacomienzo'] ?>"  /><br>
+                    <input name="fechacomienzo" type="date" value="<?php $formulario['fechacomienzo'] ?>" /><br>
 
                     <label for="fechafin">Fecha final:</label>
-                    <input name="fechafinal" type="date" value="<?php $formulario['fechafinal'] ?>"  /><br>
+                    <input name="fechafinal" type="date" value="<?php $formulario['fechafinal'] ?>" /><br>
 
                     <label for="numerosesiones">Número de sesiones: </label>
-                    <input name="fechafinal" type="number" value="<?php $formulario['numerosesiones'] ?>"  /><br>
+                    <input name="fechafinal" type="number" value="<?php $formulario['numerosesiones'] ?>" /><br>
 
                     <label for="numeroalumnosmaximo">Número de sesiones: </label>
-                    <input name="numeroalumnosmaximo" type="number" value="<?php $formulario['numeroalumnosmaximo'] ?>"  /><br>
+                    <input name="numeroalumnosmaximo" type="number" value="<?php $formulario['numeroalumnosmaximo'] ?>" /><br>
 
                 </fieldset>
                 <br>
