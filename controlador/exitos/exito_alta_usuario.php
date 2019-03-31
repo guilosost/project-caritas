@@ -39,12 +39,23 @@
 			$d = alta_solicitante($conexion,$usuario);
 			if(alta_solicitante($conexion,$usuario)){
 				echo $d;
-        echo"Todo ha ido bien";
+        	echo"Todo ha ido bien";
 			
 			} else{
 				echo "Error.";
 			}
-		}?>
+		}
+		
+		if ($usuario["solicitante"]=="No"){
+		
+			if(nuevo_familiar($conexion,$usuario)){
+        	echo"Todo ha ido bien";
+			
+			} else{
+				echo "Error.";
+			}
+		}
+		?>
 		
 	</main>
 	<?php cerrarConexionBD($conexion); ?>

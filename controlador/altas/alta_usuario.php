@@ -22,6 +22,7 @@ if (!isset($_SESSION["formulario"])) {
     $formulario['domicilio'] = "";
     $formulario['gastosfamilia'] = "";
     $formulario['codigopostal'] = "";
+    $formulario['dniSol'] = "";
     $_SESSION["formulario"] = $formulario;
 } else {
     $formulario = $_SESSION["formulario"];
@@ -126,8 +127,6 @@ $conexion = crearConexionBD();
                     <input type="radio" name="solicitante" value="Sí"> Sí
                     <input type="radio" name="solicitante" value="No"> No<br>
 
-                    <label for='parentesco'>Parentesco con el solicitante ('null' si es solicitante):</label>
-                    <input name='parentesco' type='text' placeholder="null" value="<?php $formulario['parentesco'] ?>" required /><br>
                 </fieldset>
                 <br>
 
@@ -149,6 +148,16 @@ $conexion = crearConexionBD();
                     <label for="proteccionDatos">
                     <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center">De acuerdo con la Ley de Protección de Datos
                     </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Información básica del familiar</legend>
+
+                    <label for="dniSol">DNI del solicitante:</label>
+                    <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php $formulario['dniSol'] ?>" /><br>
+
+                    <label for='parentesco'>Parentesco con el solicitante ('null' si es solicitante):</label>
+                    <input name='parentesco' type='text' placeholder="null" value="<?php $formulario['parentesco'] ?>" required /><br>
+
                 </fieldset>
                 <!--ARREGLAR CSS DEL BOTÓN SUBMIT, EL OTRO NO FUNCIONABA-->
                 <input type="submit" value="Confirmar">

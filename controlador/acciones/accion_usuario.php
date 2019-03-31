@@ -21,6 +21,7 @@ if (isset($_SESSION["formulario"])) {
 	$usuario['domicilio'] = $_REQUEST["domicilio"];
 	$usuario['gastosfamilia'] = $_REQUEST["gastosfamilia"];
 	$usuario['email'] = $_REQUEST["email"];
+	$usuario['dniSol'] = $_REQUEST["dniSol"];
 	$_SESSION["formulario"] = $usuario;
 } else {
 	Header("Location: ../../controlador/altas/alta_usuario.php");
@@ -57,9 +58,6 @@ function validarDatosUsuario($conexion, $usuario)
 		$errores[] = "<p>Los apellidos no pueden estar vacíos o contener caracteres numéricos.</p>";
 	}
 
-	if ($usuario["parentesco"] == "" || !ctype_alpha($usuario["parentesco"])) {
-		$errores[] = "<p>El parentesco no puede estar vacío o contener caracteres numéricos.</p>";
-	}
 
 	if ($usuario["email"] == "") {
 		$errores[] = "<p>El email no puede estar vacío</p>";
@@ -137,6 +135,18 @@ function validarDatosUsuario($conexion, $usuario)
 		if($usuario["proteccionDatos"]=="") {
 			$errores[] = "<p>El usuario tiene que aceptar la Ley de Protección de Datos.</p>";
 	}
+	}
+	if($usuario["solicitante"]=="No"){
+
+		if ($usuario["parentesco"] == "" || !ctype_alpha($usuario["parentesco"])) {
+			$errores[] = "<p>El parentesco no puede estar vacío o contener caracteres numéricos.</p>";
+		}
+
+		if ($usuario["dniSo"] == "") {
+			$errores[] = "<p>El DNI del solicitante no puede estar vacío.</p>";
+		} else if (!preg_match("/^[0-9]{8}[A-Z]$/", $usuario["dniSol"])) {
+			$errores[] = "<p>El DNI del solicitante debe contener 8 números y una letra mayúscula: " . $usuario["dniSol"] . ".</p>";
+		}
 	}
 	return $errores;
 }
