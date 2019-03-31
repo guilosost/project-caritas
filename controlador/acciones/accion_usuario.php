@@ -20,6 +20,7 @@ if (isset($_SESSION["formulario"])) {
 	$usuario['codigopostal'] = $_REQUEST["codigopostal"];
 	$usuario['domicilio'] = $_REQUEST["domicilio"];
 	$usuario['gastosfamilia'] = $_REQUEST["gastosfamilia"];
+	$usuario['email'] = $_REQUEST["email"];
 	$_SESSION["formulario"] = $usuario;
 } else {
 	Header("Location: ../../controlador/altas/alta_usuario.php");
@@ -33,9 +34,10 @@ if (count($errores)>0) {
 	// Guardo en la sesión los mensajes de error y volvemos al formulario
 	$_SESSION["errores"] = $errores;
 	Header('Location: ../../controlador/altas/alta_usuario.php');
-} else
+} else {
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
 	Header('Location: ../../controlador/exitos/exito_alta_usuario.php');
+}
 
 function validarDatosUsuario($conexion, $usuario)
 {
@@ -47,15 +49,15 @@ function validarDatosUsuario($conexion, $usuario)
 		$errores[] = "<p>El DNI debe contener 8 números y una letra mayúscula: " . $usuario["dni"] . ".</p>";
 	}
 
-	if ($usuario["nombre"] == "" || ctype_alpha($usuario["nombre"])) {
+	if ($usuario["nombre"] == "" || !ctype_alpha($usuario["nombre"])) {
 		$errores[] = "<p>El nombre no puede estar vacío o contener caracteres numéricos.</p>";
 	}
 
-	if ($usuario["apellidos"] == "" || ctype_alpha($usuario["apellidos"])) {
+	if ($usuario["apellidos"] == "" || !ctype_alpha($usuario["apellidos"])) {
 		$errores[] = "<p>Los apellidos no pueden estar vacíos o contener caracteres numéricos.</p>";
 	}
 
-	if ($usuario["parentesco"] == "" || ctype_alpha($usuario["parentesco"])) {
+	if ($usuario["parentesco"] == "" || !ctype_alpha($usuario["parentesco"])) {
 		$errores[] = "<p>El parentesco no puede estar vacío o contener caracteres numéricos.</p>";
 	}
 
@@ -83,9 +85,10 @@ function validarDatosUsuario($conexion, $usuario)
 
 	if($usuario["ingresos"]=="") {
 		$errores[] = "<p>El campo de ingresos no puede quedar vacío.</p>";
-	}else if(!preg_match("/^[0-9][.]$/", $usuario["ingresos"])) {
-		$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
 	}
+	//else if(!preg_match("/^[0-9][.]$/", $usuario["ingresos"])) {
+	//	$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
+	//}
 
 	if($usuario["minusvalia"]=="") {
 		$errores[] = "<p>El campo minusvalía no puede estar vacío.</p>";
@@ -135,5 +138,6 @@ function validarDatosUsuario($conexion, $usuario)
 			$errores[] = "<p>El usuario tiene que aceptar la Ley de Protección de Datos.</p>";
 	}
 	}
+	return $errores;
 }
  

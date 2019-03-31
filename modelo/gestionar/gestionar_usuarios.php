@@ -3,15 +3,13 @@
 function alta_solicitante($conexion,$usuario) {
     date_default_timezone_set('UTC');
     $fecha = $usuario["fechaNac"];
-    echo $fecha;
+
     list($año, $mes, $dia) = split('[/.-]', $fecha);
     $fechaNacimiento = "$dia/$mes/$año";
-    
 
     $usuario["fechaNac"] = date("d/m/Y", strtotime($usuario["fechaNac"]));
-    echo $usuario["fechaNac"];
 
-    $null = "NULL";
+    $vacio = " ";
     $no = "No";
 	try {
         $consulta = "CALL nuevo_solicitante(:w_dni,:w_nombre,:w_apellidos,:w_ingresos
@@ -37,7 +35,7 @@ function alta_solicitante($conexion,$usuario) {
         $stmt->bindParam(':w_domicilio',$usuario["domicilio"]);
         $stmt->bindParam(':w_codigopostal',$usuario["codigopostal"]);
         $stmt->bindParam(':w_gastosfamilia',$usuario["gastosfamilia"]);
-        $stmt->bindValue(':w_estadocivil',null, PDO::PARAM_INT);
+        $stmt->bindParam(':w_estadocivil',$vacio);
         $stmt->bindParam(':w_fechanacimiento',$fechaNacimiento);
         $stmt->bindParam(':w_protecciondatos',$usuario["proteccionDatos"]);
         $stmt->bindValue(':w_problematica',null, PDO::PARAM_INT);

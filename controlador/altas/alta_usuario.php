@@ -74,13 +74,13 @@ $conexion = crearConexionBD();
                     <legend>Información básica del usuario</legend>
 
                     <label for="nombre" required>Nombre:</label>
-                    <input class="celda" name="nombre" type="text" maxlength="50" value="<?php $formulario['nombre'] ?>" required />
+                    <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $formulario['nombre']; ?>" required />
 
                     <label for="apellidos" required>Apellidos:</label>
-                    <input name="apellidos" type="text" maxlength="50" value="<?php $formulario['apellidos'] ?>" required /><br>
+                    <input name="apellidos" type="text" maxlength="50" value="<?php echo $formulario['apellidos']; ?>" required /><br>
 
                     <label for="dni">DNI:</label>
-                    <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php $formulario['dni'] ?>" required /><br>
+                    <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $formulario['dni']; ?>" required /><br>
 
                     <label for="fechaNac">Fecha de nacimiento:</label>
                     <input name="fechaNac" type="date" value="<?php date('d/m/Y', strtotime($formulario['fechaNac'])) ?>" required /><br>
@@ -90,10 +90,10 @@ $conexion = crearConexionBD();
                     <input type="radio" name="genero" value="Femenino"> Mujer<br>
 
                     <label for="email">Correo electrónico:</label>
-                    <input class="celda" name="email" type="text" value="<?php $formulario['email'] ?>" required /><br>
+                    <input class="celda" name="email" type="text" value="<?php echo $formulario['email']; ?>" required /><br>
 
                     <label for="telefono">Teléfono:</label>
-                    <input class="celda" name="telefono" type="text" maxlength="10" value="<?php $formulario['telefono'] ?>" required /><br>
+                    <input class="celda" name="telefono" type="text" maxlength="10" value="<?php echo $formulario['telefono']; ?>" required /><br>
 
                     <label for="estudios">Estudios: </label>
                     <select class="celda" name="estudios" size=1 required>

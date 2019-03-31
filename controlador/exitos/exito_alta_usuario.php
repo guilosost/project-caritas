@@ -37,16 +37,15 @@
 		<?php include ("../../vista/header.php"); 
 			if ($usuario["solicitante"]=="Sí"){
 			$d = alta_solicitante($conexion,$usuario);
-			 if(alta_solicitante($conexion,$usuario)){
-		?>	
-            <p>Todo ha ido bien </p>
-			<?php 
+			if(alta_solicitante($conexion,$usuario)){
+				echo $d;
+        echo"Todo ha ido bien";
+			
 			} else{
 				echo "Error.";
 			}
 		}?>
 		
-
 	</main>
 	<?php cerrarConexionBD($conexion); ?>
 	<?php include ("../../vista/footer.php");  ?> 
