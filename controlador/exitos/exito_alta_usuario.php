@@ -47,9 +47,10 @@
 		}
 		
 		if ($usuario["solicitante"]=="No"){
-		
+		$d = nuevo_familiar($conexion,$usuario);
 			if(nuevo_familiar($conexion,$usuario)){
-        	echo"Todo ha ido bien";
+				echo $d;
+				echo"Todo ha ido bien";
 			
 			} else{
 				echo "Error.";

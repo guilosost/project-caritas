@@ -156,7 +156,7 @@ $conexion = crearConexionBD();
                     <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php $formulario['dniSol'] ?>" /><br>
 
                     <label for='parentesco'>Parentesco con el solicitante ('null' si es solicitante):</label>
-                    <input name='parentesco' type='text' placeholder="null" value="<?php $formulario['parentesco'] ?>" required /><br>
+                    <input name='parentesco' type='text' placeholder="null" value="<?php $formulario['parentesco'] ?>"  /><br>
 
                 </fieldset>
                 <!--ARREGLAR CSS DEL BOTÓN SUBMIT, EL OTRO NO FUNCIONABA-->

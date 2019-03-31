@@ -142,7 +142,7 @@ function validarDatosUsuario($conexion, $usuario)
 			$errores[] = "<p>El parentesco no puede estar vacío o contener caracteres numéricos.</p>";
 		}
 
-		if ($usuario["dniSo"] == "") {
+		if ($usuario["dniSol"] == "") {
 			$errores[] = "<p>El DNI del solicitante no puede estar vacío.</p>";
 		} else if (!preg_match("/^[0-9]{8}[A-Z]$/", $usuario["dniSol"])) {
 			$errores[] = "<p>El DNI del solicitante debe contener 8 números y una letra mayúscula: " . $usuario["dniSol"] . ".</p>";

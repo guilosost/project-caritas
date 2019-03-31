@@ -98,18 +98,22 @@ function nuevo_familiar($conexion, $usuario) {
 		$stmt->bindParam(':w_nombre',$usuario["nombre"]);
 		$stmt->bindParam(':w_apellidos',$usuario["apellidos"]);
 		$stmt->bindParam(':w_ingresos',$usuario["ingresos"]);
-		$stmt->bindParam(':w_situacionlaboral',$usuario["sitlaboral"]);
+        if($usuario["sitlaboral"]=="NULL"){
+            $stmt->bindValue(':w_situacionlaboral',null, PDO::PARAM_INT);
+        }else{
+            $stmt->bindParam(':w_situacionlaboral',$usuario["sitlaboral"]);
+        }
 		$stmt->bindParam(':w_estudios',$usuario["estudios"]);
 		$stmt->bindParam(':w_sexo',$usuario["genero"]);
 		$stmt->bindParam(':w_telefono',$usuario["telefono"]);
-        $stmt->bindParam(':w_estadovicil',$vacio);
-        $stmt->bindParam(':fechanacimiento',$fechaNacimiento);
+        $stmt->bindParam(':w_estadocivil',$vacio);
+        $stmt->bindParam(':w_fechanacimiento',$fechaNacimiento);
         $stmt->bindParam(':w_parentesco',$usuario["parentesco"]);
         $stmt->bindValue(':w_problematica',null, PDO::PARAM_INT);
         $stmt->bindParam(':w_tratamiento',$no);
         $stmt->bindParam(':w_minusvalia',$usuario["minusvalia"]);
         $stmt->bindParam(':w_valoracionminusvalia',$no);
-        // Falta poner el parámetro del DNI solicitante
+        $stmt->bindParam(':w_dni_so',$usuario["dniSol"]);
 		
 		$stmt->execute();
 
