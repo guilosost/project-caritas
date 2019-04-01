@@ -162,7 +162,7 @@ $conexion = crearConexionBD();
                 <!--ARREGLAR CSS DEL BOTÓN SUBMIT, EL OTRO NO FUNCIONABA-->
                 <input type="submit" value="Confirmar">
                 <!--<a class="confirm" type="submit">Dar de alta</a>-->
-                <a class="cancel2" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
+                <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
             </form>
         </div>
     </div>
