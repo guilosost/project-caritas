@@ -37,23 +37,28 @@
 		<?php include ("../../vista/header.php"); 
 			if ($usuario["solicitante"]=="Sí"){
 			$d = alta_solicitante($conexion,$usuario);
-			if(alta_solicitante($conexion,$usuario)){
+
+			if(consultarUsuario($usuario["dni"]) !=0 ){
+				echo"El usuario ya existe";
+			}
+			else if(alta_solicitante($conexion,$usuario)){
 				echo $d;
         	echo"Todo ha ido bien";
-			
 			} else{
-				echo "Error.";
+				echo "Error desconocido.";
 			}
 		}
 		
 		if ($usuario["solicitante"]=="No"){
 		$d = nuevo_familiar($conexion,$usuario);
-			if(nuevo_familiar($conexion,$usuario)){
+		if(consultarUsuario($usuario["dni"]) !=0 ){
+			echo"El usuario ya existe";
+		}
+		else if(nuevo_familiar($conexion,$usuario)){
 				echo $d;
 				echo"Todo ha ido bien";
-			
 			} else{
-				echo "Error.";
+				echo "Error desconocido.";
 			}
 		}
 		?>
