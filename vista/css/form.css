@@ -1,6 +1,7 @@
 body {
     width: 99%;
     background-attachment: fixed;
+    background-image: url("../../vista/img/background.png");
 }
 
 .form {

@@ -81,17 +81,15 @@ $conexion = crearConexionBD();
                         <option value="curso">Curso </option>
                         <option value="trabajo">Propuesta de trabajo </option>
                         <option value="Educacion secundaria">Educación secundaria </option>
-
-                        <option value="Grado medio">Grado medio </option>
-                        <option value="Grado superior">Grado superior </option>
-                        <option value="Grado universitario">Grado universitario </option>
                     </select>
+                    <br>
                     <label for="suministradapor" required>Suministrada por:</label>
                     <select class="celda" name="suministradapor" size=1 required>
                         <option value="Cáritas San Juan de Aznalfarache">Cáritas San Juan de Aznalfarache </option>
                         <option value="Diocesana Sevilla">Diocesana Sevilla </option>
                         <option value="Otro">Otro </option>
                     </select>
+                    <br>
                     <label for="concedida" required>¿Está la ayuda concedida?:</label>
                     <input type="radio" name="concedida" value="Sí">Sí
                     <input type="radio" name="concedida" value="No">No<br>
@@ -111,13 +109,13 @@ $conexion = crearConexionBD();
                 </fieldset>
                 <fieldset>
                     <legend>Información de la ayuda económica</legend>
-                    <label for="cantidad">Cantidad(€): </label>
+                    <label for="cantidad">Cantidad (€): </label>
                     <input class="celda" name="cantidad" type="text" value="<?php echo $formulario['cantidad']; ?>" /><br>
 
                     <label for="motivo">Motivo:</label>
                     <input class="celda" name="motivo" type="text" value="<?php echo $formulario['motivo']; ?>" /><br>
 
-                    <label for="prioridad">Esta ayuda necesita prioridad:</label>
+                    <label for="prioridad">¿Esta ayuda tiene prioridad?:</label>
                     <input type="radio" name="prioridad" value="Sí">Sí
                     <input type="radio" name="prioridad" value="No">No<br>
                 </fieldset>
@@ -143,7 +141,6 @@ $conexion = crearConexionBD();
                     <input name="numeroalumnosmaximo" type="number" value="<?php $formulario['numeroalumnosmaximo'] ?>" /><br>
 
                 </fieldset>
-                <br>
 
                 <fieldset>
                     <legend>Trabajo</legend>
@@ -155,7 +152,7 @@ $conexion = crearConexionBD();
                     <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $formulario['empresa']; ?>" /><br>
 
                     <label for="salarioaproximado">Salario aproximado:</label>
-                    <input class="celda" name="domicilio" type="text" maxlength="50" value="<?php echo $formulario['domicilio']; ?>" /><br>
+                    <input class="celda" name="salarioaproximado" type="text" maxlength="50" value="<?php echo $formulario['salarioaproximado']; ?>" /><br>
 
                     </label>
                 </fieldset>

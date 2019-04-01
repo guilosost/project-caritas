@@ -60,7 +60,8 @@ $conexion = crearConexionBD();
                 <input class="celda" name="dni" type="text" required /><br>
 
                 <label for="nombrev">Nombre del voluntario: </label>
-                <input class="celda" name="nombrev" type="text" value="<?php echo "$_SESSION[usuario]" ?>" required /><br>
+                <input class="celda" name="nombrev" type="text" value="<?php echo #"$_SESSION[nombrev]"
+                "" ?>" required /><br>
 
                 <label for="fechacita" required>Fecha de la cita:</label>
                 <input class="celda" name="fechacita" type="date" value="<?php date("d/m/Y") ?>" required /><br>
@@ -71,7 +72,7 @@ $conexion = crearConexionBD();
                 <label for="observaciones">Observaciones:</label><br>
                 <input class="fillable" name="observaciones" type="text" required /><br>
 
-                <a class="confirm" type="submit">Dar de alta</a>
+                <a class="confirm" type="submit">Confirmar cita</a>
                 <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
 
             </form>

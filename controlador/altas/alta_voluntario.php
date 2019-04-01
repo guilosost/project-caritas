@@ -4,14 +4,14 @@ session_start();
 require_once("../../modelo/GestionBD.php");
 
 if (!isset($_SESSION["formulario"])) {
-    $formulario['nombre'] = "";
+    $formulario['nombrev'] = "";
     $formulario['password'] = "";
     $formulario['permisos'] = "";
-  
+
     $_SESSION["formulario"] = $formulario;
 } else {
     $formulario = $_SESSION["formulario"];
-}   
+}
 
 if (isset($_SESSION["errores"])) {
     $errores = $_SESSION["errores"];
@@ -59,8 +59,8 @@ $conexion = crearConexionBD();
                 <fieldset>
                     <legend>Información básica del Voluntario</legend>
 
-                    <label for="nombre" required>Nombre:</label>
-                    <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $formulario['nombre']; ?>" required />
+                    <label for="nombrev" required>Nombre:</label>
+                    <input class="celda" name="nombrev" type="text" maxlength="50" value="<?php echo $formulario['nombrev']; ?>" required />
 
                     <label for="password" required>Contraseña:</label>
                     <input name="password" type="text" maxlength="50" value="<?php echo $formulario['password']; ?>" required /><br>
@@ -68,12 +68,7 @@ $conexion = crearConexionBD();
                     <label for="permisos">Permisos:</label>
                     <input type="radio" name="permisos" value="Administrador"> Administrador
                     <input type="radio" name="permisos" value="Voluntario"> Voluntario estándar<br>
-                    
-                    <br>
-                    
-
                 </fieldset>
-                <br>
                 <input type="submit" value="Confirmar">
                 <!--<a class="confirm" type="submit">Dar de alta</a>-->
                 <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
