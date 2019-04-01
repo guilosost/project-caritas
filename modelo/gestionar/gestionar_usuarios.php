@@ -7,8 +7,6 @@ function alta_solicitante($conexion,$usuario) {
     list($año, $mes, $dia) = split('[/.-]', $fecha);
     $fechaNacimiento = "$dia/$mes/$año";
 
-    $usuario["fechaNac"] = date("d/m/Y", strtotime($usuario["fechaNac"]));
-
     $vacio = " ";
     $no = "No";
 	try {
@@ -51,25 +49,28 @@ function alta_solicitante($conexion,$usuario) {
     }
 }
 
-function consultarUsuarios($conexion) {
-    $consulta = "SELECT dni, nombre, apellidos, telefono, situacionlaboral, ingresos FROM usuarios";
-    return $conexion->query($consulta);
+function consultarUsuario($conexion,$dni,$pass) {
+    $consulta = "SELECT COUNT(*) AS TOTAL FROM USUARIOS WHERE DNI=:dni";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':dni',$dni);
+   $stmt->execute();
+   return $stmt->fetchColumn();
 }
 
 function modificarUsuario($conexion, $dni) {
     
 }
 
-function eliminarUsuario($conexion, $dni) {
+function eliminarUsuario($conexion, $usuario) {
     try {   
-    if($solicitante=='Sí') {
+    if($usuario["solicitante"]=='Sí') {
         $stmt=$conexion->prepare('CALL borrar_solicitante(:dni)');
-        $stmt->bindParam(':dni', $dni);
+        $stmt->bindParam(':dni', $usuario["dni"]);
         $stmt->execute();
         return "";
     } else {
         $stmt=$conexion->prepare('CALL borrar_familiar(:dni)');
-        $stmt->bindParam(':dni', $dni);
+        $stmt->bindParam(':dni', $usuario["dni"]);
         $stmt->execute();
         return "";
         }
