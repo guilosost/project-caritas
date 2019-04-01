@@ -97,7 +97,7 @@ $conexion = crearConexionBD();
                     <input class="celda" name="telefono" type="text" maxlength="10" value="<?php echo $formulario['telefono']; ?>" required /><br>
 
                     <label for="estudios">Estudios: </label>
-                    <select class="celda" name="estudios" size=1 required>
+                    <select class="celda" name="estudios" size=1 required>  
                         <option value="No es relevante">No es relevante </option>
                         <option value="Sin estudios">Sin estudios </option>
                         <option value="Educacion primaria">Educación primaria </option>

@@ -62,18 +62,13 @@ $conexion = crearConexionBD();
                     <label for="nombre" required>Nombre:</label>
                     <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $formulario['nombre']; ?>" required />
 
-                    <label for="password" required>password:</label>
+                    <label for="password" required>Contraseña:</label>
                     <input name="password" type="text" maxlength="50" value="<?php echo $formulario['password']; ?>" required /><br>
 
-                    <label for="permisos">permisos:</label>
-                    <input class="celda" name="permisos"   value="<?php echo $formulario['password']; ?>" required /><br>
-                    <select>
-
-                  
-                        <option value="Administrador">Voluntario es admin del sistema </option>
-                        <option value="Voluntario">Permisos de voluntario </option>
-                        
-                    </select>
+                    <label for="permisos">Permisos:</label>
+                    <input type="radio" name="permisos" value="Administrador"> Permisos para ser administrador
+                    <input type="radio" name="genero" value="Voluntario"> Permisos de Voluntario estándar<br>
+                    
                     <br>
                     
 
