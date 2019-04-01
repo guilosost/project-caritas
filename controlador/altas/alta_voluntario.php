@@ -66,8 +66,8 @@ $conexion = crearConexionBD();
                     <input name="password" type="text" maxlength="50" value="<?php echo $formulario['password']; ?>" required /><br>
 
                     <label for="permisos">Permisos:</label>
-                    <input type="radio" name="permisos" value="Administrador"> Permisos para ser administrador
-                    <input type="radio" name="genero" value="Voluntario"> Permisos de Voluntario estándar<br>
+                    <input type="radio" name="permisos" value="Administrador"> Administrador
+                    <input type="radio" name="permisos" value="Voluntario"> Voluntario estándar<br>
                     
                     <br>
                     
