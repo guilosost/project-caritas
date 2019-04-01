@@ -1,4 +1,4 @@
-button,html [type=button],[type=reset],[type=submit],[type=cancel] {
+button, html [type=button], [type=reset], [type=submit], [type=cancel] {
     border-radius: 10px;
     color: black;
     font-size: 16px;
@@ -20,33 +20,38 @@ button,html [type=button],[type=reset],[type=submit],[type=cancel] {
 
 [type=submit] {
     border: none;
-    float:right;
+    float: right;
     margin-top: 10px;
+}
 
+.login {
+    margin-top: -10px;
+    float: none;
 }
 
 .cancel {
     background: transparent;
     border: 1px solid black;
-    float:left;
-    margin-left: 52%;
+    float: right;
     margin-top: 10px;
+    margin-right: 5px;
     padding: 6px 26px;
 }
 
 .cancel2 {
     background: transparent;
     border: 1px solid black;
-    float:left;
-    margin-left: 55%;;
+    float: right;
     margin-top: 10px;
+    margin-right: 5px;
     padding: 6px 26px;
 }
 
-[type=submit]:hover,.confirm:hover {
-    -webkit-transition-duration: 0.4s; /* Safari */
+[type=submit]:hover, .confirm:hover {
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
     transition-duration: 0.4s;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24),0 5px 10px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.24), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
     text-decoration: underline;
     margin-left: 1px;
 }
