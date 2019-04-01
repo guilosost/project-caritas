@@ -49,7 +49,7 @@ function alta_solicitante($conexion,$usuario) {
     }
 }
 
-function consultarUsuario($conexion,$dni,$pass) {
+function consultarUsuario($conexion,$dni) {
     $consulta = "SELECT COUNT(*) AS TOTAL FROM USUARIOS WHERE DNI=:dni";
    $stmt = $conexion->prepare($consulta);
    $stmt->bindParam(':dni',$dni);

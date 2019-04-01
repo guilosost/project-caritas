@@ -38,7 +38,7 @@
 			if ($usuario["solicitante"]=="Sí"){
 			$d = alta_solicitante($conexion,$usuario);
 
-			if(consultarUsuario($usuario["dni"]) !=0 ){
+			if(consultarUsuario($conexion, $usuario["dni"]) !=0 ){
 				echo"El usuario ya existe";
 			}
 			else if(alta_solicitante($conexion,$usuario)){
@@ -51,7 +51,7 @@
 		
 		if ($usuario["solicitante"]=="No"){
 		$d = nuevo_familiar($conexion,$usuario);
-		if(consultarUsuario($usuario["dni"]) !=0 ){
+		if(consultarUsuario($conexion, $usuario["dni"]) !=0 ){
 			echo"El usuario ya existe";
 		}
 		else if(nuevo_familiar($conexion,$usuario)){
