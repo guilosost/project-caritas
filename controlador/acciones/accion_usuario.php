@@ -84,9 +84,9 @@ function validarDatosUsuario($conexion, $usuario)
 	if($usuario["ingresos"]=="") {
 		$errores[] = "<p>El campo de ingresos no puede quedar vacío.</p>";
 	}
-	//else if(!preg_match("/^[0-9][.]$/", $usuario["ingresos"])) {
-	//	$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
-	//}
+	else if(!preg_match("/^[0-9]$/", $usuario["ingresos"])) {
+		$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
+	}
 
 	if($usuario["minusvalia"]=="") {
 		$errores[] = "<p>El campo minusvalía no puede estar vacío.</p>";

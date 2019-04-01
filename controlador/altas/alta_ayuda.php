@@ -112,10 +112,10 @@ $conexion = crearConexionBD();
                 <fieldset>
                     <legend>Información de la ayuda económica</legend>
                     <label for="cantidad">Cantidad(€): </label>
-                    <input class="celda" name="cantidad" type="text" value="<?php $formulario['cantidad'] ?>" /><br>
+                    <input class="celda" name="cantidad" type="text" value="<?php echo $formulario['cantidad']; ?>" /><br>
 
                     <label for="motivo">Motivo:</label>
-                    <input class="celda" name="motivo" type="text" value="<?php $formulario['motivo'] ?>" /><br>
+                    <input class="celda" name="motivo" type="text" value="<?php echo $formulario['motivo']; ?>" /><br>
 
                     <label for="prioridad">Esta ayuda necesita prioridad:</label>
                     <input type="radio" name="prioridad" value="Sí">Sí
@@ -124,10 +124,10 @@ $conexion = crearConexionBD();
                 <fieldset>
                     <legend>Información del curso</legend>
                     <label for="profesor">Profesor: </label>
-                    <input class="celda" name="profesor" type="text" maxlength="50" value="<?php $formulario['profesor'] ?>" /><br>
+                    <input class="celda" name="profesor" type="text" maxlength="50" value="<?php echo $formulario['profesor']; ?>" /><br>
 
                     <label for="materia">Materia del curso: </label>
-                    <input class="celda" name="materia" type="text" maxlength="50" value="<?php $formulario['materia'] ?>" /><br>
+                    <input class="celda" name="materia" type="text" maxlength="50" value="<?php echo $formulario['materia']; ?>" /><br>
                     </select>
 
                     <label for="fechacomienzo">Fecha comienzo:</label>
@@ -149,13 +149,13 @@ $conexion = crearConexionBD();
                     <legend>Trabajo</legend>
 
                     <label for="descripcion">Descripción del trabajo: </label>
-                    <input class="celda" name="descripcion" type="text" maxlength="50" value="<?php $formulario['descripcion'] ?>" /><br>
+                    <input class="celda" name="descripcion" type="text" maxlength="50" value="<?php echo $formulario['descripcion']; ?>" /><br>
 
                     <label for="empresa">Empresa o Persona que contrata:</label>
-                    <input class="celda" name="empresa" type="text" maxlength="30" value="<?php $formulario['empresa'] ?>" /><br>
+                    <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $formulario['empresa']; ?>" /><br>
 
                     <label for="salarioaproximado">Salario aproximado:</label>
-                    <input class="celda" name="domicilio" type="text" maxlength="50" value="<?php $formulario['domicilio'] ?>" /><br>
+                    <input class="celda" name="domicilio" type="text" maxlength="50" value="<?php echo $formulario['domicilio']; ?>" /><br>
 
                     </label>
                 </fieldset>
