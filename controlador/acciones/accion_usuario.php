@@ -50,11 +50,11 @@ function validarDatosUsuario($conexion, $usuario)
 		$errores[] = "<p>El DNI debe contener 8 números y una letra mayúscula: " . $usuario["dni"] . ".</p>";
 	}
 
-	if ($usuario["nombre"] == "" || !ctype_alpha($usuario["nombre"])) {
+	if ($usuario["nombre"] == "" ||!ctype_alpha(str_replace(' ', '', $usuario["nombre"]))) {
 		$errores[] = "<p>El nombre no puede estar vacío o contener caracteres numéricos.</p>";
 	}
 
-	if ($usuario["apellidos"] == "" || !ctype_alpha($usuario["apellidos"])) {
+	if ($usuario["apellidos"] == "" ||!ctype_alpha(str_replace(' ', '', $usuario["apellidos"]))) {
 		$errores[] = "<p>Los apellidos no pueden estar vacíos o contener caracteres numéricos.</p>";
 	}
 
@@ -116,7 +116,7 @@ function validarDatosUsuario($conexion, $usuario)
 			$errores[] = "<p>El campo domicilio no puede estar vacío.</p>";
 		}
 
-		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))<18){
+		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))>18){
 			$errores[] = "<p>El solicitante debe de ser mayor de 18 años</p>";
 		}
 
