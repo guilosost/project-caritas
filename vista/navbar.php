@@ -1,5 +1,6 @@
 <?php 
-if ($_SERVER['REQUEST_URI'] == '/project-caritas/controlador/acceso/login.php') {} else { ?>
+if ($_SERVER['REQUEST_URI'] == #'/project-caritas/controlador/acceso/login.php')
+ ''){} else { ?>
 
 <div class="topnav" id="myTopnav">
     <a href="#home"> Lista de usuarios</a>
