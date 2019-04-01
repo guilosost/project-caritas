@@ -84,7 +84,7 @@ function validarDatosUsuario($conexion, $usuario)
 	if($usuario["ingresos"]=="") {
 		$errores[] = "<p>El campo de ingresos no puede quedar vacío.</p>";
 	}
-	else if(!preg_match("/^[0-9]$/", $usuario["ingresos"])) {
+	else if(!preg_match("/[0-9]+/", $usuario["ingresos"])) {
 		$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
 	}
 
@@ -125,11 +125,11 @@ function validarDatosUsuario($conexion, $usuario)
 		}
 
 		if($usuario["codigopostal"]=="") {
-			$errores[] = "<p>El dódigo postal no puede estar vacío.</p>";
+			$errores[] = "<p>El código postal no puede estar vacío.</p>";
 		}else if (!preg_match("/^[0-9]{5}$/", $usuario["codigopostal"])) {
-			$errores[] = "<p>El dódigo postal debe de constar 5 dígitos.</p>";
+			$errores[] = "<p>El código postal debe de constar 5 dígitos.</p>";
 		} else if ($usuario["codigopostal"] != "41920"){
-			$errores[] = "<p>El dódigo postal no es el de San Juan de Aznalfarache.</p>";
+			$errores[] = "<p>El código postal no es el de San Juan de Aznalfarache.</p>";
 		}
 
 		if($usuario["proteccionDatos"]=="") {
