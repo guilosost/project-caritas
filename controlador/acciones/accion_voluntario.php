@@ -42,7 +42,7 @@ function validarDatosVoluntario($conexion, $voluntario)
 		$errores[] = "<p>Debes tener al menos un permiso seleccionado</p>";
 	}
 
-	}
+	
 
 	return $errores;
 }
