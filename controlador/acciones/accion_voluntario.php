@@ -32,17 +32,14 @@ function validarDatosVoluntario($conexion, $voluntario)
 	if ($voluntario["nombre"] == "") {
 		$errores[] = "<p>El nombre no puede estar vacío.</p>";
 	}
-	}
 
-	if ($voluntario["contraseña"] == "" || !preg_match("/^{6}$/", $voluntario["contraseña"])  {
+	if ($voluntario["contraseña"] == "" || !preg_match("/^{6}$/", $voluntario["contraseña"]))  {
 		$errores[] = "<p>La contraseña no puede estar vacía o contener menos de 6 caracteres.</p>";
 	}
 
 	if ($voluntario["permisos"] == "" ) {
 		$errores[] = "<p>Debes tener al menos un permiso seleccionado</p>";
 	}
-
-	
 
 	return $errores;
 }
