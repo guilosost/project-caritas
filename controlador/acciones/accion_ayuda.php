@@ -42,7 +42,7 @@ if (count($errores)>0) {
 	Header('Location: ../../controlador/altas/alta_ayuda.php');
 } else {
     // Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
-    Header('Location: ../../controlador/exitos/exito_alta_ayuda.php');
+    Header('Location: ../../controlador/resultados/resultado_alta_ayuda.php');
 }
 
 if ($ayuda["suministraPor"] == "") {

@@ -26,7 +26,7 @@ if (count($errores)>0) {
 	Header('Location:../../controlador/altas/alta_cita.phpp');
 } else
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
-	Header('Location: exito_alta_cita.php');
+	Header('Location: resultado_alta_cita.php');
 
 
 function validarDatosCita($conexion, $cita)
@@ -50,5 +50,6 @@ function validarDatosCita($conexion, $cita)
 	if ($cita["nombrev"] == "") {
 		$errores[] = "<p>El nombre del voluntario responsable de la cita no puede estar vacío.</p>";
 	}
+	return $errores;
 }
  
