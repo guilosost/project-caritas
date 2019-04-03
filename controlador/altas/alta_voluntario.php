@@ -60,14 +60,14 @@ $conexion = crearConexionBD();
                         <legend>Información básica del Voluntario</legend>
 
                         <label for="nombrev" required>Nombre:</label>
-                        <input class="celda" name="nombrev" type="text" maxlength="50" value="<?php echo $formulario['nombrev']; ?>" required />
+                        <input class="celda" name="nombrev" type="text" maxlength="50" required />
 
                         <label for="password" required>Contraseña:</label>
-                        <input name="password" type="text" maxlength="50" value="<?php echo $formulario['password']; ?>" required /><br>
+                        <input name="password" type="password" maxlength="50" required /><br>
 
                         <label for="permisos">Permisos:</label>
-                        <input type="radio" name="permisos" value="Administrador"> Administrador
-                        <input type="radio" name="permisos" value="Voluntario"> Voluntario estándar<br>
+                        <input type="radio" name="permisos" value="Sí"> Administrador
+                        <input type="radio" name="permisos" value="No"> Voluntario estándar<br>
                     </fieldset>
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>

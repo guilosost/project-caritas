@@ -3,8 +3,8 @@ session_start();
 require_once("../../modelo/GestionBD.php");
 
 if (isset($_SESSION["formulario"])) {
-	$voluntario['nombre'] = $_REQUEST["nombre"];
-	$voluntario['contraseña'] = $_REQUEST["contraseña"];
+	$voluntario['nombrev'] = $_REQUEST["nombrev"];
+	$voluntario['password'] = $_REQUEST["password"];
 	$voluntario['permisos'] = $_REQUEST["permisos"];
 	
 	$_SESSION["formulario"] = $voluntario;
@@ -29,11 +29,12 @@ function validarDatosVoluntario($conexion, $voluntario)
 {
 	$errores=array();
 
-	if ($voluntario["nombre"] == "") {
+	if ($voluntario["nombrev"] == "") {
 		$errores[] = "<p>El nombre no puede estar vacío.</p>";
 	}
 
-	if ($voluntario["contraseña"] == "" || !preg_match("/^{6}$/", $voluntario["contraseña"]))  {
+	if ($voluntario["password"] == ""# || !preg_match("/^{6}$/", $voluntario["password"])
+	)  {
 		$errores[] = "<p>La contraseña no puede estar vacía o contener menos de 6 caracteres.</p>";
 	}
 

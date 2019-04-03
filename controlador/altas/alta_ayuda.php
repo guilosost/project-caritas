@@ -114,10 +114,10 @@ $conexion = crearConexionBD();
                     <fieldset>
                         <legend>Información de la ayuda económica</legend>
                         <label for="cantidad">Cantidad (€): </label>
-                        <input class="celda" name="cantidad" type="text" value="<?php echo $formulario['cantidad']; ?>" /><br>
+                        <input class="celda" name="cantidad" type="text" /><br>
 
                         <label for="motivo">Motivo:</label>
-                        <input class="celda" name="motivo" type="text" value="<?php echo $formulario['motivo']; ?>" /><br>
+                        <input class="celda" name="motivo" type="text" /><br>
 
                         <label for="prioridad">¿Esta ayuda tiene prioridad?:</label>
                         <input type="radio" name="prioridad" value="Sí">Sí
@@ -127,10 +127,10 @@ $conexion = crearConexionBD();
                     <fieldset>
                         <legend>Información del curso</legend>
                         <label for="profesor">Profesor: </label>
-                        <input class="celda" name="profesor" type="text" maxlength="50" value="<?php echo $formulario['profesor']; ?>" /><br>
+                        <input class="celda" name="profesor" type="text" maxlength="50" /><br>
 
                         <label for="materia">Materia del curso: </label>
-                        <input class="celda" name="materia" type="text" maxlength="50" value="<?php echo $formulario['materia']; ?>" /><br>
+                        <input class="celda" name="materia" type="text" maxlength="50" /><br>
                         </select>
 
                         <label for="fechacomienzo">Fecha comienzo:</label>
@@ -151,16 +151,17 @@ $conexion = crearConexionBD();
                         <legend>Trabajo</legend>
 
                         <label for="descripcion">Descripción del trabajo: </label>
-                        <input class="fillable" name="descripcion" type="text" maxlength="50" value="<?php echo $formulario['descripcion']; ?>" /><br>
+                        <textarea class="fillable" name="descripcion" maxlength="50"></textarea><br>
 
                         <label for="empresa">Empresa/persona que contrata:</label>
-                        <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $formulario['empresa']; ?>" /><br>
+                        <input class="celda" name="empresa" type="text" maxlength="30" /><br>
 
                         <label for="salarioaproximado">Salario aproximado:</label>
-                        <input class="celda" name="salarioaproximado" type="text" maxlength="50" value="<?php echo $formulario['salarioaproximado']; ?>" /><br>
+                        <input class="celda" name="salarioaproximado" type="text" maxlength="50" /><br>
 
                         </label>
-                    </fieldset><div class="botones">
+                    </fieldset>
+                    <div class="botones">
                         <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
                         <input type="submit" value="Confirmar">
                     </div>

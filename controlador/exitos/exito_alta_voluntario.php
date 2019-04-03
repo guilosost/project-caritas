@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+include("../../modelo/gestionar/gestionar_voluntarios.php");
 include("../../modelo/GestionBD.php");
 
 
@@ -15,18 +16,19 @@ $conexion  = crearConexionBD();
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<link rel="stylesheet" type="text/css" href="../../vista/css/header-footer.css">
-  <link rel="stylesheet" type="text/css" href="../../vista/css/button.css">
-  <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
-  <link rel="stylesheet" type="text/css" href="../../vista/css/navbar.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Alta de Usuario</title>
-  <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
- 
+    <link rel="stylesheet" type="text/css" href="../../vista/css/header-footer.css">
+    <link rel="stylesheet" type="text/css" href="../../vista/css/button.css">
+    <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
+    <link rel="stylesheet" type="text/css" href="../../vista/css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Alta de Usuario</title>
+    <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
+
 </head>
 
 <head>
@@ -38,19 +40,17 @@ $conexion  = crearConexionBD();
     <?php include("../../vista/header.php");
 
 
-    if (alta_ayuda($conexion, $voluntario)) {
-        ?>
-    <p>Todo ha ido bien </p>
-    <?php 
-} else {
-    echo "El voluntario ya existe.";
-}
-?>
+    if (nuevo_voluntario($conexion, $voluntario)) {
+        echo "Todo ha ido bien.";
+    } else {
+        echo "El voluntario ya existe.";
+    }
+    ?>
 
 
     </main>
-    <?php cerrarConexionBD($conexion); ?>
-    <?php include("../../vista/footer.php");  ?>
+    <?php cerrarConexionBD($conexion);
+    include("../../vista/footer.php");  ?>
 </body>
 
 </html> 
