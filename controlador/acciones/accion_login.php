@@ -1,29 +1,28 @@
 <?php
 session_start();
 
-//YANES ARREGLA ESTA RUTA PORFA
-include_once("funciones.php");
+include_once("../../modelo/gestionBD.php");
+include_once("../../controlador/funciones.php");
+include_once("../../modelo/gestionar/gestionar_login.php");
 
-if(isset($_SESSION["contrasena"])){
-	$usuariologin["nombrelogin"] = $_SESSION["nombrelogin"];
-	$usuariologin["contrasena"] = $_SESSION["contrasena"];
-	
+if(isset($_SESSION["formulario"])){
+	$usuariologin["nombrelogin"] = $_REQUEST["nombrelogin"];
+	$usuariologin["contrasena"] = $_REQUEST["contrasena"];
+	$_SESSION["formulario"] = $usuariologin;
 }
 else{
     header("Location: ../../controlador/acceso/login.php");
 }
 
 $conexion = crearConexionBD(); 
-$errores = validarDatosUsuario($usuariologin,$conexion);
+$errores = validarDatosLogIn($usuariologin,$conexion);
 cerrarConexionBD($conexion);
 
 if (count($errores)>0) {
-	// Guardo en la sesión los mensajes de error y volvemos al formulario
 	$_SESSION["errores"] = $errores;
-	Header('Location: ../../controlador/altas/alta_voluntario.php');
+	Header('Location: ../../controlador/acceso/login.php"');
 } else {
-	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
-	Header('Location: ../../controlador/exitos/exito_alta_voluntario.php');
+	Header('Location: ../../controlador/resultados/resultado_login.php');
 }
 
 function validarDatosLogIn($usuariologin,$conexion){

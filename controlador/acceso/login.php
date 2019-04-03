@@ -1,13 +1,20 @@
 <?php
 session_start();
 
-if (isset($_SESSION["contrasena"])) {
-    $_SESSION["contrasena"] = "";
+if (!isset($_SESSION["formulario"])) {
+    $formulario["nombrelogin"] = "";
+    $formulario["contrasena"] = "";
+    $_SESSION["formulario"] = $formulario;
 } else {
-    $_SESSION["nombrelogin"] = "";
-    $_SESSION["contrasena"] = "";
+    $formulario = $_SESSION["formulario"];
+}
+
+if (isset($_SESSION["errores"])) {
+    $errores = $_SESSION["errores"];
+    unset($_SESSION["errores"]);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -38,10 +45,10 @@ if (isset($_SESSION["contrasena"])) {
     <div class="form">
         <h2 class="form-h2">Iniciar sesión</h2>
 
-        <form action="/accion_login.php">
+        <form action="../../controlador/acciones/accion_login.php" method="POST">
             <div>
                 <p class="form-text">Usuario:<p>
-                        <input type="text" name="nombrelogin" value="<?php $_SESSION["nombrelogin"] ?>">
+                        <input type="text" name="nombrelogin" value="<?php echo $_SESSION["nombrelogin"]; ?>">
             </div>
 
             <div>
