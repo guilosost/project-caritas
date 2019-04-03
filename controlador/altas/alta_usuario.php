@@ -130,6 +130,27 @@ $conexion = crearConexionBD();
 
                     </fieldset>
                     <br>
+                    <label for="sitlaboral">Situación laboral: </label>
+                    <select class="celda" name="sitlaboral" size=1 required>
+                        <option value="NULL">No es relevante </option>
+                        <option value="En paro">Desempleado </option>
+                        <option value="Trabajando">Trabajando </option>
+                    </select>
+                    <br>
+
+                    <label for="ingresos">Ingresos:</label>
+                    <input name="ingresos" type="text" value="<?php echo $formulario['ingresos']; ?>" required /><br>
+
+                    <label for="minusvalia">¿El usuario tiene alguna discapacidad? </label>
+                    <input type="radio" name="minusvalia" value="Sí" <?php if($formulario['minusvalia']=='Sí') echo ' checked ';?>>Sí
+                    <input type="radio" name="minusvalia" value="No"<?php if($formulario['minusvalia']=='No') echo ' checked ';?>>No<br>
+
+                    <label for="solicitante">¿El usuario es solicitante? </label>
+                    <input type="radio" name="solicitante" value="Sí" <?php if($formulario['solicitante']=='Sí') echo ' checked ';?>> Sí
+                    <input type="radio" name="solicitante" value="No" <?php if($formulario['solicitante']=='No') echo ' checked ';?>> No<br>
+
+                </fieldset>
+                <br>
 
                     <fieldset>
                         <legend>Información básica del solicitante</legend>
