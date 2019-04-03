@@ -74,8 +74,9 @@ $conexion = crearConexionBD();
                 <fieldset>
                     <legend>Información básica de la ayuda</legend>
 
-                    <label for="tipoayuda">Seleccion el tipo de ayuda: </label>
+                    <label for="tipoayuda">Selección del tipo de ayuda: </label>
                     <select class="celda" name="tipoayuda" size=1 required>
+                        <option value="">Seleccionar...</option>
                         <option value="bolsacomida">Bolsa de comida </option>
                         <option value="ayudaeconomica">Ayuda económica </option>
                         <option value="curso">Curso </option>
@@ -85,6 +86,7 @@ $conexion = crearConexionBD();
                     <br>
                     <label for="suministradapor" required>Suministrada por:</label>
                     <select class="celda" name="suministradapor" size=1 required>
+                        <option value="">Seleccionar...</option>
                         <option value="Cáritas San Juan de Aznalfarache">Cáritas San Juan de Aznalfarache </option>
                         <option value="Diocesana Sevilla">Diocesana Sevilla </option>
                         <option value="Otro">Otro </option>
@@ -95,7 +97,7 @@ $conexion = crearConexionBD();
                     <input type="radio" name="concedida" value="No">No<br>
 
                 </fieldset>
-
+                <br>
                 <fieldset>
                     <legend>Información de la bolsa de comida</legend>
 
@@ -107,6 +109,7 @@ $conexion = crearConexionBD();
                     <input type="radio" name="niño" value="Sí">Sí
                     <input type="radio" name="niño" value="No">No<br>
                 </fieldset>
+                <br>
                 <fieldset>
                     <legend>Información de la ayuda económica</legend>
                     <label for="cantidad">Cantidad (€): </label>
@@ -119,6 +122,7 @@ $conexion = crearConexionBD();
                     <input type="radio" name="prioridad" value="Sí">Sí
                     <input type="radio" name="prioridad" value="No">No<br>
                 </fieldset>
+                <br>
                 <fieldset>
                     <legend>Información del curso</legend>
                     <label for="profesor">Profesor: </label>
@@ -137,18 +141,18 @@ $conexion = crearConexionBD();
                     <label for="numerosesiones">Número de sesiones: </label>
                     <input name="fechafinal" type="number" value="<?php $formulario['numerosesiones'] ?>" /><br>
 
-                    <label for="numeroalumnosmaximo">Número de sesiones: </label>
+                    <label for="numeroalumnosmaximo">Número de alumnos: </label>
                     <input name="numeroalumnosmaximo" type="number" value="<?php $formulario['numeroalumnosmaximo'] ?>" /><br>
 
                 </fieldset>
-
+                <br>
                 <fieldset>
                     <legend>Trabajo</legend>
 
                     <label for="descripcion">Descripción del trabajo: </label>
-                    <input class="celda" name="descripcion" type="text" maxlength="50" value="<?php echo $formulario['descripcion']; ?>" /><br>
+                    <input class="fillable" name="descripcion" type="text" maxlength="50" value="<?php echo $formulario['descripcion']; ?>" /><br>
 
-                    <label for="empresa">Empresa o Persona que contrata:</label>
+                    <label for="empresa">Empresa/persona que contrata:</label>
                     <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $formulario['empresa']; ?>" /><br>
 
                     <label for="salarioaproximado">Salario aproximado:</label>
@@ -164,9 +168,9 @@ $conexion = crearConexionBD();
         </div>
     </div>
     <?php
-    include("../../vista/footer.php");
-    cerrarConexionBD($conexion);
-    ?>
+                                                                                                    include("../../vista/footer.php");
+                                                                                                    cerrarConexionBD($conexion);
+                                                                                                    ?>
 </body>
 
-</html> 
+</html>

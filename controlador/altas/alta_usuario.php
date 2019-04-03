@@ -123,7 +123,7 @@ $conexion = crearConexionBD();
                     <input type="radio" name="minusvalia" value="Sí" <?php if($formulario['minusvalia']=='Sí') echo ' checked ';?>>Sí
                     <input type="radio" name="minusvalia" value="No"<?php if($formulario['minusvalia']=='No') echo ' checked ';?>>No<br>
 
-                    <label for="solicitante">¿Es el usuario solicitante? </label>
+                    <label for="solicitante">¿El usuario es solicitante? </label>
                     <input type="radio" name="solicitante" value="Sí" <?php if($formulario['solicitante']=='Sí') echo ' checked ';?>> Sí
                     <input type="radio" name="solicitante" value="No" <?php if($formulario['solicitante']=='No') echo ' checked ';?>> No<br>
 
