@@ -1,3 +1,9 @@
+.botones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
 button, html [type=button], [type=reset], [type=submit], [type=cancel] {
     border-radius: 10px;
     color: black;

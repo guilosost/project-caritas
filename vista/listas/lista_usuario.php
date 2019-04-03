@@ -3,11 +3,51 @@ session_start();
 
 require_once("../../modelo/GestionBD.php");
 require_once("../../modelo/gestionar/gestionar_usuarios.php");
-require_once("../paginacion_consulta.php");
+$conexion = crearConexionBD();
+#require_once("../paginacion_consulta.php");
 
 #if (!isset($_SESSION['login']))
 #   Header("Location: login.php");
 #else {
+    function consulta_paginada( $conexion, $query, $pag_num, $pag_size )
+{
+	try {
+		$primera = ( $pag_num - 1 ) * $pag_size + 1;
+		$ultima  = $pag_num * $pag_size;
+		$consulta_paginada = 
+			 "SELECT * FROM ( "
+				."SELECT ROWNUM RNUM, AUX.* FROM ( $query ) AUX "
+				."WHERE ROWNUM <= :ultima"
+			.") "
+			."WHERE RNUM >= :primera";
+
+		$stmt = $conexion->prepare( $consulta_paginada );
+		$stmt->bindParam( ':primera', $primera );
+		$stmt->bindParam( ':ultima',  $ultima  );
+		$stmt->execute();
+		return $stmt;
+	}	
+	catch ( PDOException $e ) {
+		$_SESSION['excepcion'] = $e->GetMessage();
+		header("Location: ../../modelo/excepcionBD/excepcionBD.php");
+	}
+} 
+
+function total_consulta( $conexion, $query )
+{
+	try {
+		$total_consulta = "SELECT COUNT(*) AS TOTAL FROM ($query)";
+
+		$stmt = $conexion->query($total_consulta);
+		$result = $stmt->fetch();
+		$total = $result['TOTAL'];
+		return  $total;
+	}
+	catch ( PDOException $e ) {
+		$_SESSION['excepcion'] = $e->GetMessage();
+		header("Location: ../../modelo/excepcionBD/excepcionBD.php");
+	}
+} 
     if (isset($_SESSION["usuario"])) {
         $usuario = $_SESSION["usuario"];
         unset($_SESSION["usuario"]);
@@ -26,8 +66,6 @@ require_once("../paginacion_consulta.php");
 
     // Antes de seguir, borramos las variables de sección para no confundirnos más adelante
     unset($_SESSION["paginacion"]);
-
-    $conexion = crearConexionBD();
 
     // La consulta que ha de paginarse
     $query = 'SELECT USUARIOS.DNI, USUARIOS.APELLIDOS, USUARIOS.NOMBRE, '

@@ -51,28 +51,30 @@ $conexion = crearConexionBD();
         //    echo "</div>";
     }
     ?>
+    <div class="flex">
+        <div class="form">
+            <h2 class="form-h2">Alta de Voluntario</h2>
+            <div class="form-alta">
+                <form action="../../controlador/acciones/accion_voluntario.php" method="POST">
+                    <fieldset>
+                        <legend>Información básica del Voluntario</legend>
 
-    <div class="form">
-        <h2 class="form-h2">Alta de Voluntario</h2>
-        <div class="form-alta">
-            <form action="../../controlador/acciones/accion_voluntario.php" method="POST">
-                <fieldset>
-                    <legend>Información básica del Voluntario</legend>
+                        <label for="nombrev" required>Nombre:</label>
+                        <input class="celda" name="nombrev" type="text" maxlength="50" value="<?php echo $formulario['nombrev']; ?>" required />
 
-                    <label for="nombrev" required>Nombre:</label>
-                    <input class="celda" name="nombrev" type="text" maxlength="50" value="<?php echo $formulario['nombrev']; ?>" required />
+                        <label for="password" required>Contraseña:</label>
+                        <input name="password" type="text" maxlength="50" value="<?php echo $formulario['password']; ?>" required /><br>
 
-                    <label for="password" required>Contraseña:</label>
-                    <input name="password" type="text" maxlength="50" value="<?php echo $formulario['password']; ?>" required /><br>
-
-                    <label for="permisos">Permisos:</label>
-                    <input type="radio" name="permisos" value="Administrador"> Administrador
-                    <input type="radio" name="permisos" value="Voluntario"> Voluntario estándar<br>
-                </fieldset>
-                <input type="submit" value="Confirmar">
-                <!--<a class="confirm" type="submit">Dar de alta</a>-->
-                <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
-            </form>
+                        <label for="permisos">Permisos:</label>
+                        <input type="radio" name="permisos" value="Administrador"> Administrador
+                        <input type="radio" name="permisos" value="Voluntario"> Voluntario estándar<br>
+                    </fieldset>
+                    <div class="botones">
+                        <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
+                        <input type="submit" value="Dar de alta">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <?php
