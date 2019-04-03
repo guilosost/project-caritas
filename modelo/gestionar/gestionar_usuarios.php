@@ -124,3 +124,17 @@ function nuevo_familiar($conexion, $usuario) {
     }
 }
 
+function nueva_unidadfamiliar($conexion, $unidadesfamiliares) {
+    try{
+        $consulta = "CALL nueva_unidadfamiliar(:w_poblacion, :w_domicilio, :w_codigopostal, :w_gastosfamilia)";
+        $stmt =$conexion->prepare($consulta);
+        $stmt->bindParam(':w_poblacion', $unidadesfamiliares["poblacion"]);
+        $stmt->bindParam(':w_domicilio', $unidadesfamiliares["domicilio"]);
+        $stmt->bindParam(':w_codigopostal', $unidadesfamiliares["codigopostal"]);
+        $stmt->bindParam(':w_gastosfamilia', $unidadesfamiliares["gastosfamilia"]);
+        $stmt->execute();
+        return true;
+    } catch(PDOException $e) {
+        return $e->getMessage();
+    }
+}
