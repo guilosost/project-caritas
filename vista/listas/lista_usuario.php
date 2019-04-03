@@ -11,7 +11,7 @@ require_once("../paginacion_consulta.php");
     if (isset($_SESSION["usuario"])) {
         $usuario = $_SESSION["usuario"];
         unset($_SESSION["usuario"]);
-#    }
+    }
 
     // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
     // ¿Hay una sesión activa?
@@ -52,7 +52,7 @@ require_once("../paginacion_consulta.php");
     $filas = consulta_paginada($conexion, $query, $pagina_seleccionada, $pag_tam);
 
     cerrarConexionBD($conexion);
-}
+
 ?>
 
 

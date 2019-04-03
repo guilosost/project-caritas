@@ -1,5 +1,5 @@
 <?php
-function consulta_paginada( $conn, $query, $pag_num, $pag_size )
+function consulta_paginada( $conexion, $query, $pag_num, $pag_size )
 {
 	try {
 		$primera = ( $pag_num - 1 ) * $pag_size + 1;
@@ -11,7 +11,7 @@ function consulta_paginada( $conn, $query, $pag_num, $pag_size )
 			.") "
 			."WHERE RNUM >= :primera";
 
-		$stmt = $conn->prepare( $consulta_paginada );
+		$stmt = $conexion->prepare( $consulta_paginada );
 		$stmt->bindParam( ':primera', $primera );
 		$stmt->bindParam( ':ultima',  $ultima  );
 		$stmt->execute();
@@ -19,23 +19,23 @@ function consulta_paginada( $conn, $query, $pag_num, $pag_size )
 	}	
 	catch ( PDOException $e ) {
 		$_SESSION['excepcion'] = $e->GetMessage();
-		header("Location: ../modelo/excepcionBD/excepcionBD.php");
+		header("Location: ../../modelo/excepcionBD/excepcionBD.php");
 	}
 } 
 
-function total_consulta( $conn, $query )
+function total_consulta( $conexion, $query )
 {
 	try {
 		$total_consulta = "SELECT COUNT(*) AS TOTAL FROM ($query)";
 
-		$stmt = $conn->query($total_consulta);
+		$stmt = $conexion->query($total_consulta);
 		$result = $stmt->fetch();
 		$total = $result['TOTAL'];
 		return  $total;
 	}
 	catch ( PDOException $e ) {
 		$_SESSION['excepcion'] = $e->GetMessage();
-		header("Location: ../modelo/excepcionBD/excepcionBD.php");
+		header("Location: ../../modelo/excepcionBD/excepcionBD.php");
 	}
 } 
 ?>
