@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+if (isset($_SESSION["nombreusuario"])){
+    unset($_SESSION["nombreusuario"]);
+}
 if (!isset($_SESSION["formulario"])) {
     $formulario["nombrelogin"] = "";
     $formulario["contrasena"] = "";
@@ -56,7 +58,7 @@ if (isset($errores) && count($errores) > 0) {
         <form action="../../controlador/acciones/accion_login.php" method="POST">
             <div>
                 <p class="form-text">Usuario:<p>
-                        <input type="text" name="nombrelogin" value="<?php echo $formulario["nombrelogin"]; ?>">
+                        <input type="text" name="nombrelogin" >
             </div>
 
             <div>
