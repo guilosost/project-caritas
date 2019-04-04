@@ -1,11 +1,11 @@
 <?php
 	session_start();
 	
-	include("../../modelo/gestionar/gestionar_usuarios.php"); 
+	include("../../modelo/gestionar/gestionar_login.php"); 
 	require_once("../../modelo/GestionBD.php");	
 	
 	if (isset($_SESSION["formulario"])) {
-		$usuario = $_SESSION["formulario"];
+		$usuariologin = $_SESSION["formulario"];
 		unset($_SESSION["formulario"]);
 		}
 		else{
@@ -34,15 +34,11 @@
 
 <body background="../../vista/img/background.png">
 <?php include ("../../vista/header.php");
-			 
+			 $errores = array();
 				if(consultarVoluntarioRepetido($conexion, $usuariologin) == 1 ){
-                    Header("Location: ../../controlador/vista/home.php"); 
+					Header("Location: ../../vista/home.php"); 
 				}
-				else{
-                    header('refresh:5; url=../../controlador/acceso/login.php'); 
-        			echo"El usuario/contraseña es incorrecto";
-				} 
-		
+	
 		?>
 		
 	<?php cerrarConexionBD($conexion); 

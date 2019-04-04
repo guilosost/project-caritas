@@ -39,16 +39,24 @@ if (isset($_SESSION["errores"])) {
     
     //BORRAR NAVBAR EN LA VERSION FINAL 
     include("../../vista/navbar.php");
+    
+
+if (isset($errores) && count($errores) > 0) {
+        //    echo "<div id=\"div_errores\" class=\"error\">";
+        echo "<h4> Errores en el formulario:</h4>";
+        foreach ($errores as $error) {
+            echo $error;
+        }
+        //    echo "</div>";
+    }
     ?>
-
-
     <div class="form">
         <h2 class="form-h2">Iniciar sesión</h2>
 
         <form action="../../controlador/acciones/accion_login.php" method="POST">
             <div>
                 <p class="form-text">Usuario:<p>
-                        <input type="text" name="nombrelogin" value="<?php echo $_SESSION["nombrelogin"]; ?>">
+                        <input type="text" name="nombrelogin" value="<?php echo $formulario["nombrelogin"]; ?>">
             </div>
 
             <div>

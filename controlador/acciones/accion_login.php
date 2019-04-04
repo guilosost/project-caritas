@@ -20,7 +20,7 @@ cerrarConexionBD($conexion);
 
 if (count($errores)>0) {
 	$_SESSION["errores"] = $errores;
-	Header('Location: ../../controlador/acceso/login.php"');
+	Header('Location: ../../controlador/acceso/login.php');
 } else {
 	Header('Location: ../../controlador/resultados/resultado_login.php');
 }
@@ -29,17 +29,20 @@ function validarDatosLogIn($usuariologin,$conexion){
 
 	$errores = array();
 
-	if($usuariologin["nombrelogin"]=="" || ctype_alpha($usuariologin["nombrelogin"])) {
+	if($usuariologin["nombrelogin"]=="" || !ctype_alpha($usuariologin["nombrelogin"])) {
 	$errores[] = "<p>El nombre de usuario no puede estar vacío o contener caracteres numéricos.</p>";
-}
-
-if($usuariologin["contrasena"]=="") {
-	$errores[] = "<p>La contraseña no puede estar vacía.</p>";
-}
-else if(minchars($usuariologin["contrasena"],6)==1){
-	$errores[] = "<p>La contraseña debe contener al menos 6 caracteres .</p>";
 	}
 
+	if($usuariologin["contrasena"]=="") {
+	$errores[] = "<p>La contraseña no puede estar vacía.</p>";
+	}
+//	else if(minchars($usuariologin["contrasena"],6)==1){
+//	$errores[] = "<p>La contraseña debe contener al menos 6 caracteres .</p>";
+//	}
+
+	if(consultarVoluntarioRepetido($conexion, $usuariologin) == 0 ){
+		$errores[] = "<p>El usuario/contraseña es incorrecto</p>";
+	}
 	return $errores;
-}
+	}
 ?>
