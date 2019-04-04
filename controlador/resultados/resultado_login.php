@@ -36,7 +36,10 @@
 <?php include ("../../vista/header.php");
 			 $errores = array();
 				if(consultarVoluntarioRepetido($conexion, $usuariologin) == 1 ){
-					Header("Location: ../../vista/home.php"); 
+					
+					$_SESSION["nombreusuario"] = $usuariologin["nombrelogin"];
+					Header("Location: ../../controlador/altas/alta_usuario.php");
+					//Header("Location: ../../vista/home.php"); 
 				}
 	
 		?>

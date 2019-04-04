@@ -10,7 +10,14 @@ if ($_SERVER['REQUEST_URI'] == #'/project-caritas/controlador/acceso/login.php')
     <a href="../../controlador/altas/alta_cita.php">Añadir cita</a>
     <a href="../../controlador/altas/alta_ayuda.php">Añadir ayuda</a>
     <a href="../../controlador/altas/alta_voluntario.php">Añadir voluntario</a>
-    <a href="" style="float: right; font-weight: bold; border: 1.5px solid white; border-right: none; margin-bottom: -3px;"><img class="icono" src='../../vista/img/user_icon (16x16).png' alt="icono de usuario">migyanari</a>
+    <a href="" style="float: right; font-weight: bold; border: 1.5px solid white; border-right: none; margin-bottom: -3px;"><img class="icono" src='../../vista/img/user_icon (16x16).png' 
+    alt="icono de usuario"><?php if (isset($_SESSION["nombreusuario"])){
+        echo $_SESSION["nombreusuario"];
+    }else{
+        echo"Entre con su usuario";
+     } 
+     
+     ?></a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>
     </a>
@@ -26,6 +33,4 @@ if ($_SERVER['REQUEST_URI'] == #'/project-caritas/controlador/acceso/login.php')
         }
     }
 </script>
-
-<?php 
-} ?> 
+ <?php } ?>
