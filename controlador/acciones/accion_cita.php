@@ -4,13 +4,13 @@ session_start();
 //YANES ARREGLA ESTA RUTA PORFA
 include_once("funciones.php");
 
-if (isset($_SESSION["formulario"])) {
+if (isset($_SESSION["formulario_cita"])) {
 	$cita['fechacita'] = $_REQUEST["fechacita"];
 	$cita['objetivo'] = $_REQUEST["objetivo"];
 	$cita['nombrev'] = $_REQUEST["nombrev"];
 	$cita['observaciones'] = $_REQUEST["observaciones"];
 	$cita['dni'] = $_REQUEST["dni"];
-    $_SESSION["formulario"] = $cita;
+    $_SESSION["formulario_cita"] = $cita;
 
 } else {
 	Header("Location: ../../controlador/altas/alta_cita.php");

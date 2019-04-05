@@ -2,15 +2,15 @@
 session_start();
 require_once("../../modelo/gestionBD.php");
 
-if (!isset($_SESSION["formulario"])) {
+if (!isset($_SESSION["formulario_cita"])) {
     $formulario['fechacita'] = "";
     $formulario['objetivo'] = "";
     $formulario['nombrev'] = "";
     $formulario['observaciones'] = "";
     $formulario['dni'] = "";
-    $_SESSION["formulario"] = $formulario;
+    $_SESSION["formulario_cita"] = $formulario;
 } else {
-    $formulario = $_SESSION["formulario"];
+    $formulario = $_SESSION["formulario_cita"];
 }
 // Reseteamos los errores de $_SESSION
 if (isset($_SESSION["errores"])) {
@@ -67,10 +67,10 @@ $conexion = crearConexionBD();
                     <input class="celda" name="fechacita" type="date" value="<?php date("d/m/Y") ?>" required /><br>
 
                     <label for="objetivo">Objetivo de la cita:</label>
-                    <input class="celda" name="objetivo" type="text" required /><br>
+                    <input class="celda" name="objetivo" type="text" value="<?php echo $formulario['objetivo']; ?>" required /><br>
 
                     <label for="observaciones">Observaciones:</label><br>
-                    <textarea class="fillable" name="observaciones"></textarea>
+                    <textarea class="fillable" name="observaciones" value="<?php echo $formulario['observaciones']; ?>"></textarea>
 
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>

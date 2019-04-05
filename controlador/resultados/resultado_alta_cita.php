@@ -4,9 +4,9 @@ session_start();
 include("../../modelo/GestionBD.php");
 
 
-if (isset($_SESSION["formulario"])) {
-	$cita = $_SESSION["formulario"];
-	unset($_SESSION["formulario"]);
+if (isset($_SESSION["formulario_cita"])) {
+	$cita = $_SESSION["formulario_cita"];
+	unset($_SESSION["formulario_cita"]);
 } else {
 	Header("Location: ../../controlador/altas/alta_usuario.php");
 }

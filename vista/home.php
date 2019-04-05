@@ -1,4 +1,8 @@
 <?php
+session_start();
+include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
+require_once(MODELO."/gestionBD.php");
+$conexion = crearConexionBD();
 //ARREGLAR QUE NO SALEN LOS ICONOS BIEN Y QUE LOS LINKS DEL NAVBAR NO VAN
 ?>
 <!DOCTYPE html>
@@ -17,13 +21,13 @@
 </head>
 <body background="img/background.png">
 <?php
-    include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
-    include(VISTA."/header.php");
-    include(VISTA."/navbar.php");
+    include(VISTA."header.php");
+    include(VISTA."navbar.php");
 ?>
 
  <?php
     include(VISTA."/footer.php");
+    cerrarConexionBD($conexion);
 ?>
 </body>
 

@@ -4,9 +4,9 @@
 	include("../../modelo/gestionar/gestionar_usuarios.php"); 
 	require_once("../../modelo/GestionBD.php");	
 	
-	if (isset($_SESSION["formulario"])) {
-		$usuario = $_SESSION["formulario"];
-		unset($_SESSION["formulario"]);
+	if (isset($_SESSION["formulario_usuario"])) {
+		$usuario = $_SESSION["formulario_usuario"];
+		unset($_SESSION["formulario_usuario"]);
 		}
 		else{
 			Header("Location: ../../controlador/altas/alta_usuario.php"); 

@@ -29,7 +29,7 @@ $conexion = crearConexionBD();
 	}	
 	catch ( PDOException $e ) {
 		$_SESSION['excepcion'] = $e->GetMessage();
-		header("Location: ../../modelo/excepcionBD/excepcionBD.php");
+		return $_SESSION['excepcion'];
 	}
 } 
 
@@ -45,7 +45,7 @@ function total_consulta( $conexion, $query )
 	}
 	catch ( PDOException $e ) {
 		$_SESSION['excepcion'] = $e->GetMessage();
-		header("Location: ../../modelo/excepcionBD/excepcionBD.php");
+		return $_SESSION['excepcion'];
 	}
 } 
     if (isset($_SESSION["usuario"])) {
@@ -140,7 +140,7 @@ function total_consulta( $conexion, $query )
 
                 Mostrando
 
-                <input id="PAG_TAM" name="PAG_TAM" type="number" min="1" max="<?php echo $total_registros; ?>" value="<?php echo $pag_tam ?>" autofocus="autofocus" />
+                <input id="PAG_TAM" name="PAG_TAM" type="number" min="1" max="<?php echo $total_registros; ?>" value="<?php echo $pag_tam; ?>" autofocus="autofocus" />
 
                 entradas de <?php echo $total_registros ?>
 
@@ -168,12 +168,6 @@ function total_consulta( $conexion, $query )
 
                     <div class="datos_usuario">
 
-                        <input id="OID_LIBRO" name="OID_LIBRO" type="hidden" value="<?php echo $fila["OID_LIBRO"]; ?>" />
-
-                        <input id="OID_AUTOR" name="OID_AUTOR" type="hidden" value="<?php echo $fila["OID_AUTOR"]; ?>" />
-
-                        <input id="OID_AUTORIA" name="OID_AUTORIA" type="hidden" value="<?php echo $fila["OID_AUTORIA"]; ?>" />
-
                         <input id="NOMBRE" name="NOMBRE" type="hidden" value="<?php echo $fila["NOMBRE"]; ?>" />
 
                         <input id="APELLIDOS" name="APELLIDOS" type="hidden" value="<?php echo $fila["APELLIDOS"]; ?>" />
@@ -182,7 +176,7 @@ function total_consulta( $conexion, $query )
 
                         <?php
 
-                        if (isset($libro) and ($libro["OID_LIBRO"] == $fila["OID_LIBRO"])) { ?>
+                        if (isset($usuario) and ($usuario["dni"] == $fila["dni"])) { ?>
 
                         <!-- Editando título -->
 

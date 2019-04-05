@@ -11,15 +11,15 @@ function consulta_paginada( $conexion, $query, $pag_num, $pag_size )
 			.") "
 			."WHERE RNUM >= :primera";
 
-		$stmt = $conexion->prepare( $consulta_paginada );
-		$stmt->bindParam( ':primera', $primera );
-		$stmt->bindParam( ':ultima',  $ultima  );
+		$stmt = $conexion->prepare($consulta_paginada);
+		$stmt->bindParam(':primera', $primera);
+		$stmt->bindParam(':ultima',  $ultima);
 		$stmt->execute();
 		return $stmt;
 	}	
 	catch ( PDOException $e ) {
 		$_SESSION['excepcion'] = $e->GetMessage();
-		header("Location: ../../modelo/excepcionBD/excepcionBD.php");
+		return $_SESSION['excepcion'];
 	}
 } 
 
@@ -35,7 +35,6 @@ function total_consulta( $conexion, $query )
 	}
 	catch ( PDOException $e ) {
 		$_SESSION['excepcion'] = $e->GetMessage();
-		header("Location: ../../modelo/excepcionBD/excepcionBD.php");
+		return $_SESSION['excepcion'];
 	}
-} 
-?>
+}

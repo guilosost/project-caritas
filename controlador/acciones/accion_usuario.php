@@ -2,7 +2,7 @@
 session_start();
 require_once("../../modelo/GestionBD.php");
 
-if (isset($_SESSION["formulario"])) {
+if (isset($_SESSION["formulario_usuario"])) {
 	$usuario['dni'] = $_REQUEST["dni"];
 	$usuario['nombre'] = $_REQUEST["nombre"];
 	$usuario['apellidos'] = $_REQUEST["apellidos"];
@@ -22,7 +22,7 @@ if (isset($_SESSION["formulario"])) {
 	$usuario['gastosfamilia'] = $_REQUEST["gastosfamilia"];
 	$usuario['email'] = $_REQUEST["email"];
 	$usuario['dniSol'] = $_REQUEST["dniSol"];
-	$_SESSION["formulario"] = $usuario;
+	$_SESSION["formulario_usuario"] = $usuario;
 } else {
 	Header("Location: ../../controlador/altas/alta_usuario.php");
 }
