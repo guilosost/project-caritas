@@ -38,7 +38,7 @@
 				if(consultarVoluntarioRepetido($conexion, $usuariologin) == 1 ){
 					
 					$_SESSION["nombreusuario"] = $usuariologin["nombrelogin"];
-					Header("Location: ../../controlador/altas/alta_usuario.php");
+					Header("Location: ../../vista/home.php");
 					//Header("Location: ../../vista/home.php"); 
 				}
 	
