@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-include_once("funciones.php");
+include_once("../funciones.php");
 
 if(isset($_SESSION["formulario"])){
-    $ayuda['suministradaPor'] = $_REQUEST["suministradaPor"];
+    $ayuda['suministradapor'] = $_REQUEST["suministradapor"];
     $ayuda['concedida'] = $_REQUEST["concedida"];
     // Ayuda de comida
     $ayuda['bebe'] = $_REQUEST["bebe"];

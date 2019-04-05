@@ -23,7 +23,7 @@ if (!isset($_SESSION["formulario"])) {
     $formulario['descripcion'] = "";
     $formulario['empresa'] = "";
     $formulario['salarioaproximado'] = "";
-    $_SESSION["formularioUsuario"] = $formulario;
+    $_SESSION["formulario"] = $formulario;
 } else {
     $formulario = $_SESSION["formulario"];
 }
@@ -71,7 +71,7 @@ $conexion = crearConexionBD();
         <div class="form">
             <h2 class="form-h2">Alta de ayuda</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_usuario.php" method="POST">
+                <form action="../../controlador/acciones/accion_ayuda.php" method="POST">
                     <fieldset>
                         <legend>Información básica de la ayuda</legend>
 
