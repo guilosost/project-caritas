@@ -150,6 +150,7 @@ $conexion = crearConexionBD();
                             <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($formulario['proteccionDatos'] == 'Sí') echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
                         </label>
                     </fieldset>
+                    <br>
                     <fieldset>
                         <legend>Información básica del familiar</legend>
 

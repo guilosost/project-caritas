@@ -61,8 +61,7 @@ $conexion = crearConexionBD();
                     <input class="celda" name="dni" type="text" required /><br>
 
                     <label for="nombrev">Nombre del voluntario: </label>
-                    <input class="celda" name="nombrev" type="text" value="<?php echo #"$_SESSION[nombrev]"
-                                                                                "" ?>" required /><br>
+                    <input class="celda" name="nombrev" type="text" value="<?php echo $_SESSION['nombreusuario']?>" required /><br>
 
                     <label for="fechacita" required>Fecha de la cita:</label>
                     <input class="celda" name="fechacita" type="date" value="<?php date("d/m/Y") ?>" required /><br>
