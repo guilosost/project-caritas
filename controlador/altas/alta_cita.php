@@ -56,7 +56,7 @@ $conexion = crearConexionBD();
         <div class="form">
             <h2 class="form-h2">Alta de cita</h2>
             <div class="form-alta">
-                <form action="accion_cita.php" method="POST">
+                <form action="../../controlador/acciones/accion_cita.php" method="POST">
                     <label for="dni" required>DNI del solicitante:</label>
                     <input class="celda" name="dni" type="text" required /><br>
 

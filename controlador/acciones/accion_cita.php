@@ -2,7 +2,8 @@
 session_start();
 
 //YANES ARREGLA ESTA RUTA PORFA
-include_once("funciones.php");
+include_once("../funciones.php");
+require_once("../../modelo/GestionBD.php");
 
 if (isset($_SESSION["formulario_cita"])) {
 	$cita['fechacita'] = $_REQUEST["fechacita"];
@@ -23,7 +24,7 @@ cerrarConexionBD($conexion);
 if (count($errores)>0) {
 	// Guardo en la sesión los mensajes de error y volvemos al formulario
 	$_SESSION["errores"] = $errores;
-	Header('Location:../../controlador/altas/alta_cita.phpp');
+	Header('Location:../../controlador/altas/alta_cita.php');
 } else
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
 	Header('Location: resultado_alta_cita.php');
