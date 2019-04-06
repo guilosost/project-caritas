@@ -1,9 +1,10 @@
 <?php
 session_start();
-//include(dirname(__DIR__).'/GestionBD.php');
-require_once("../../modelo/GestionBD.php");
+include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
+require_once(MODELO."/GestionBD.php");
 
-if (!isset($_SESSION["formulario"])) {
+if (!isset($_SESSION["formulario_ayuda"])) {
+    $formulario['tipoayuda'] = "";
     $formulario['suministradapor'] = "";
     $formulario['concedida'] = "";
     $formulario['bebe'] = "";
@@ -16,16 +17,14 @@ if (!isset($_SESSION["formulario"])) {
     $formulario['fechacomienzo'] = "";
     $formulario['fechafin'] = "";
     $formulario['numerosesiones'] = "";
-    $formulario['horasporsesion'] = "";
     $formulario['numeroalumnosactuales'] = "";
     $formulario['numeroalumnosmaximo'] = "";
-    $formulario['lugar'] = "";
     $formulario['descripcion'] = "";
     $formulario['empresa'] = "";
     $formulario['salarioaproximado'] = "";
-    $_SESSION["formulario"] = $formulario;
+    $_SESSION["formulario_ayuda"] = $formulario;
 } else {
-    $formulario = $_SESSION["formulario"];
+    $formulario = $_SESSION["formulario_ayuda"];
 }
 
 if (isset($_SESSION["errores"])) {
@@ -137,10 +136,10 @@ $conexion = crearConexionBD();
                         <input name="fechacomienzo" type="date" value="<?php $formulario['fechacomienzo'] ?>" /><br>
 
                         <label for="fechafin">Fecha final:</label>
-                        <input name="fechafinal" type="date" value="<?php $formulario['fechafinal'] ?>" /><br>
+                        <input name="fechafin" type="date" value="<?php $formulario['fechafin'] ?>" /><br>
 
                         <label for="numerosesiones">Número de sesiones: </label>
-                        <input name="fechafinal" type="number" value="<?php $formulario['numerosesiones'] ?>" /><br>
+                        <input name="numerosesiones" type="number" value="<?php $formulario['numerosesiones'] ?>" /><br>
 
                         <label for="numeroalumnosmaximo">Número de alumnos: </label>
                         <input name="numeroalumnosmaximo" type="number" value="<?php $formulario['numeroalumnosmaximo'] ?>" /><br>

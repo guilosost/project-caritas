@@ -96,7 +96,7 @@ BEGIN
         w_estadocivil,
         TO_DATE(w_fechanacimiento, 'DD/MM/YYYY'),
         w_protecciondatos,
-        'Sí',
+        'Sï¿½',
         NULL,
         w_problematica,
         w_tratamiento,
@@ -245,7 +245,7 @@ CREATE OR REPLACE PROCEDURE nueva_ayuda_de_comida (
     w_suministradapor   IN                  ayudas.suministradapor%TYPE,
     w_concedida         IN                  ayudas.concedida%TYPE,
     w_bebe              IN                  comidas.bebe%TYPE,
-    w_niño              IN                  comidas.niño%TYPE,
+    w_niï¿½o              IN                  comidas.niï¿½o%TYPE,
     w_oid_c             IN                  citas.oid_c%TYPE
 ) IS
 BEGIN
@@ -264,12 +264,12 @@ BEGIN
     INSERT INTO comidas (
         oid_co,
         bebe,
-        niño,
+        niï¿½o,
         oid_a
     ) VALUES (
         0,
         w_bebe,
-        w_niño,
+        w_niï¿½o,
         sec_a.CURRVAL
     );
 
@@ -411,7 +411,7 @@ BEGIN
         dni
     ) VALUES (
         0,
-        w_fechacita,
+        TO_DATE(w_fechacita, 'DD/MM/RRRR'),
         w_objetivo,
         w_observaciones,
         w_nombrev,
@@ -424,17 +424,17 @@ END nueva_cita;
 
 CREATE OR REPLACE PROCEDURE nuevo_voluntario (
     w_nombrev      IN             voluntarios.nombrev%TYPE,
-    w_contraseña   IN             voluntarios.contraseña%TYPE,
+    w_contraseï¿½a   IN             voluntarios.contraseï¿½a%TYPE,
     w_permiso      IN             voluntarios.permiso%TYPE
 ) IS
 BEGIN
     INSERT INTO voluntarios (
         nombrev,
-        contraseña,
+        contraseï¿½a,
         permiso
     ) VALUES (
         w_nombrev,
-        w_contraseña,
+        w_contraseï¿½a,
         w_permiso
     );
 
@@ -534,24 +534,24 @@ BEGIN
 END interesado_en_curso;
 /
 
-CREATE OR REPLACE FUNCTION contraseñas (
-    w_contraseña   IN             voluntarios.contraseña%TYPE,
+CREATE OR REPLACE FUNCTION contraseï¿½as (
+    w_contraseï¿½a   IN             voluntarios.contraseï¿½a%TYPE,
     w_nombrev      IN             voluntarios.nombrev%TYPE
 ) RETURN BOOLEAN AS
     res   BOOLEAN := true;
-    aux   voluntarios.contraseña%TYPE;
+    aux   voluntarios.contraseï¿½a%TYPE;
 BEGIN
     SELECT
-        contraseña
+        contraseï¿½a
     INTO aux
     FROM
         voluntarios
     WHERE
         nombrev = w_nombrev;
 
-    IF ( aux <> w_contraseña ) THEN
+    IF ( aux <> w_contraseï¿½a ) THEN
         res := false;
     END IF;
     RETURN res;
-END contraseñas;
+END contraseï¿½as;
 /

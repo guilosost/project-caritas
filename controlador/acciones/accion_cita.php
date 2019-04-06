@@ -2,8 +2,8 @@
 session_start();
 
 //YANES ARREGLA ESTA RUTA PORFA
-include_once("../funciones.php");
-require_once("../../modelo/GestionBD.php");
+include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
+require_once(MODELO."/gestionBD.php");
 
 if (isset($_SESSION["formulario_cita"])) {
 	$cita['fechacita'] = $_REQUEST["fechacita"];
@@ -27,7 +27,7 @@ if (count($errores)>0) {
 	Header('Location:../../controlador/altas/alta_cita.php');
 } else
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
-	Header('Location: resultado_alta_cita.php');
+	Header('Location:../../controlador/resultados/resultado_alta_cita.php');
 
 
 function validarDatosCita($conexion, $cita)
@@ -36,8 +36,8 @@ function validarDatosCita($conexion, $cita)
 	
 	if ($cita["fechacita"] == "") {
 		$errores[] = "<p>La fecha de la cita no puede estar vacía.</p>";
-	} else if (fechaAnteriorActual($cita["fechacita"] == 0)){
-		$errores[] = "<p>La fecha de la cita no puede ser posterior a la fecha actual.</p>";
+//	} else if (fechaAnteriorActual($cita["fechacita"] == 0)){
+//		$errores[] = "<p>La fecha de la cita no puede ser posterior a la fecha actual.</p>";
 	} 
 
 	if ($cita["objetivo"] == "") {

@@ -1,6 +1,8 @@
 <?php
 session_start();
-require_once("../../modelo/gestionBD.php");
+include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
+require_once(MODELO."/GestionBD.php");
+
 
 if (!isset($_SESSION["formulario_cita"])) {
     $formulario['fechacita'] = "";

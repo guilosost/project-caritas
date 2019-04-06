@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-include("../../modelo/GestionBD.php");
-
+include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
+require_once(MODELO."/GestionBD.php");
+require_once(GESTIONAR."gestionar_citas.php");
 
 if (isset($_SESSION["formulario_cita"])) {
 	$cita = $_SESSION["formulario_cita"];
@@ -34,13 +35,13 @@ $conexion  = crearConexionBD();
 
 <body>
     <?php include("../../vista/header.php");
-
-
-		if (alta_cita($conexion, $cita)) {
-			?>
-    <p>Todo ha ido bien </p>
-    <?php 
+    
+		if (nueva_cita($conexion, $cita)) {
+		?>
+  <p>Todo ha ido bien </p> -->
+   <?php 
 	} else {
+
 		echo "La cita ya existe.";
 	}
 	?>

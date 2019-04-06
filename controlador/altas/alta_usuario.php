@@ -1,6 +1,6 @@
 <?php
 session_start();
-//include(dirname(__DIR__).'/GestionBD.php');
+
 require_once("../../modelo/GestionBD.php");
 
 if (!isset($_SESSION["formulario_usuario"])) {
@@ -157,7 +157,7 @@ $conexion = crearConexionBD();
                         <label for="dniSol">DNI del solicitante:</label>
                         <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php echo $formulario['dniSol']; ?>" /><br>
 
-                        <label for='parentesco'>Parentesco con el solicitante ('null' si es solicitante):</label>
+                        <label for='parentesco'>Parentesco con el solicitante:</label>
                         <input name='parentesco' type='text' placeholder="null" value="<?php echo $formulario['parentesco']; ?>" /><br>
 
                     </fieldset>
