@@ -2,7 +2,7 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/project-caritas/rutas.php');
 ?>
 <div class="topnav" id="myTopnav">
-    <a href="<?php echo VISTA.'listas/lista_usuario.php'?>"> Lista de usuarios</a>
+    <a href="http://localhost:81/project-caritas/vista/listas/lista_usuario.php"> Lista de usuarios</a>
     <a href="../../vista/listas/lista_cita.php">Lista de citas</a>
     <a href="../../vista/listas/lista_ayuda.php">Lista de ayudas</a>
     <a href="http://localhost:81/project-caritas/controlador/altas/alta_usuario.php">Añadir usuario</a>
