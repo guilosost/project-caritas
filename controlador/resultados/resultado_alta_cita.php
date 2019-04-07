@@ -37,7 +37,8 @@ $conexion  = crearConexionBD();
     <?php include("../../vista/header.php");
     
 		if (nueva_cita($conexion, $cita)) {
-		?>
+    $_SESSION['citaId'] = aux_IdentificaCita( $conexion, $cita );
+    ?> 
   <p>Todo ha ido bien </p> -->
    <?php 
 	} else {

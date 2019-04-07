@@ -24,3 +24,26 @@ function nueva_cita($conexion, $cita) {
         // Si queremos visualizar la excepción durante la depuración: $e->getMessage();
     }
 }
+function aux_IdentificaCita( $conexion, $cita ){
+{
+	try {
+		$total_consulta = " SELECT oid_c AS TOTAL FROM CITAS WHERE  FECHACITA=:w_fechacita AND OBJETIVO=:w_objetivo AND OBSERVACIONES=:w_observaciones AND NOMBREV=:w_nombrev
+         AND DNI=:w_dni";
+
+        $stmt->bindParam(':w_fechacita',$fechaCita);
+        $stmt->bindParam(':w_objetivo',$cita["objetivo"]);
+        $stmt->bindParam(':w_observaciones',$cita["observaciones"]);
+        $stmt->bindParam(':w_nombrev',$cita["nombrev"]);
+        $stmt->bindParam(':w_dni',$cita["dni"]);
+
+		$stmt = $conn->query($total_consulta);
+		$result = $stmt->fetch();
+		$total = $result['TOTAL'];
+		return  $total;
+	}
+	catch ( PDOException $e ) {
+		$_SESSION['excepcion'] = $e->GetMessage();
+		return  $e->GetMessage();
+	}
+}
+}
