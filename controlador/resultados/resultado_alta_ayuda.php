@@ -1,12 +1,13 @@
 <?php
 session_start();
 
-include("../../modelo/GestionBD.php");
+include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
+require_once(MODELO."/GestionBD.php");
+require_once(GESTIONAR."gestionar_ayudas.php");
 
-
-if (isset($_SESSION["formulario"])) {
-    $cita = $_SESSION["formulario"];
-    unset($_SESSION["formulario"]);
+if (isset($_SESSION["formulario_ayuda"])) {
+    $ayuda = $_SESSION["formulario_ayuda"];
+    unset($_SESSION["formulario_ayuda"]);
 } else {
     Header("Location: ../../controlador/altas/alta_ayuda.php");
 }
@@ -33,12 +34,14 @@ $conexion  = crearConexionBD();
 <body>
     <?php include("../../vista/header.php");
 
-
     if (alta_ayuda($conexion, $ayuda)) {
         ?>
+        
     <p>Todo ha ido bien </p>
     <?php 
 } else {
+    echo $d;
+    
     echo "La ayuda ya existe.";
 }
 ?>

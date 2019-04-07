@@ -3,7 +3,6 @@
 function nueva_cita($conexion, $cita) {
     date_default_timezone_set('UTC');
     $fecha = $cita["fechacita"];
-
     list($año, $mes, $dia) = split('[/.-]', $fecha);
     $fechaCita = "$dia/$mes/$año";
     try {
@@ -25,18 +24,22 @@ function nueva_cita($conexion, $cita) {
     }
 }
 function aux_IdentificaCita( $conexion, $cita ){
-{
+    date_default_timezone_set('UTC');
+    $fecha = $cita["fechacita"];
+
+    list($año, $mes, $dia) = split('[/.-]', $fecha);
+    $fechaCita = "$dia/$mes/$año";
 	try {
 		$total_consulta = " SELECT oid_c AS TOTAL FROM CITAS WHERE  FECHACITA=:w_fechacita AND OBJETIVO=:w_objetivo AND OBSERVACIONES=:w_observaciones AND NOMBREV=:w_nombrev
-         AND DNI=:w_dni";
-
+		 AND DNI=:w_dni";
+		$stmt=$conexion->prepare($total_consulta);
         $stmt->bindParam(':w_fechacita',$fechaCita);
         $stmt->bindParam(':w_objetivo',$cita["objetivo"]);
         $stmt->bindParam(':w_observaciones',$cita["observaciones"]);
         $stmt->bindParam(':w_nombrev',$cita["nombrev"]);
         $stmt->bindParam(':w_dni',$cita["dni"]);
 
-		$stmt = $conn->query($total_consulta);
+		$stmt->execute();
 		$result = $stmt->fetch();
 		$total = $result['TOTAL'];
 		return  $total;
@@ -45,5 +48,4 @@ function aux_IdentificaCita( $conexion, $cita ){
 		$_SESSION['excepcion'] = $e->GetMessage();
 		return  $e->GetMessage();
 	}
-}
 }
