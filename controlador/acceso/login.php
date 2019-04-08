@@ -52,7 +52,7 @@ if (isset($errores) && count($errores) > 0) {
         //    echo "</div>";
     }
     ?>
-    <div class="form">
+    <div class="form" style="margin: 10% 32%;">
         <h2 class="form-h2">Iniciar sesión</h2>
 
         <form action="../../controlador/acciones/accion_login.php" method="POST">
