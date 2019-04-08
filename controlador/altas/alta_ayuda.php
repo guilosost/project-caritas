@@ -3,6 +3,10 @@ session_start();
 include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
 require_once(MODELO."/GestionBD.php");
 
+if (isset($_SESSION["formulario_login"])) {   
+    Header("Location: ../../controlador/acceso/login.php");
+}
+
 if (!isset($_SESSION["formulario_ayuda"])) {
     $formulario['tipoayuda'] = "";
     $formulario['suministradapor'] = "";

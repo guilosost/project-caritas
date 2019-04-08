@@ -5,9 +5,9 @@ include("../../modelo/gestionar/gestionar_voluntarios.php");
 include("../../modelo/GestionBD.php");
 
 
-if (isset($_SESSION["formulario"])) {
-    $voluntario = $_SESSION["formulario"];
-    unset($_SESSION["formulario"]);
+if (isset($_SESSION["formulario_voluntario"])) {
+    $voluntario = $_SESSION["formulario_voluntario"];
+    unset($_SESSION["formulario_voluntario"]);
 } else {
     Header("Location: ../../controlador/altas/alta_voluntario.php");
 }
@@ -38,6 +38,7 @@ $conexion  = crearConexionBD();
 
 <body>
     <?php include("../../vista/header.php");
+    include("../../vista/navbar.php");
 
 
     if (nuevo_voluntario($conexion, $voluntario)) {

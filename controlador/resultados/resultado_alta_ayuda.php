@@ -33,6 +33,7 @@ $conexion  = crearConexionBD();
 
 <body>
     <?php include("../../vista/header.php");
+    include("../../vista/navbar.php");
 
     if (alta_ayuda($conexion, $ayuda)) {
         ?>

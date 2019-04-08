@@ -34,7 +34,9 @@
 </head>
 
 <body background="../../vista/img/background.png">
-		<?php include ("../../vista/header.php"); 
+		<?php 
+	 include("../../vista/header.php"); 
+   	 include("../../vista/navbar.php");
 			if ($usuario["solicitante"]=="Sí"){
 			 
 				if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){

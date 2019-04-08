@@ -3,12 +3,12 @@ session_start();
 if (isset($_SESSION["nombreusuario"])){
     unset($_SESSION["nombreusuario"]);
 }
-if (!isset($_SESSION["formulario"])) {
+if (!isset($_SESSION["formulario_login"])) {
     $formulario["nombrelogin"] = "";
     $formulario["contrasena"] = "";
-    $_SESSION["formulario"] = $formulario;
+    $_SESSION["formulario_login"] = $formulario;
 } else {
-    $formulario = $_SESSION["formulario"];
+    $formulario = $_SESSION["formulario_login"];
 }
 
 if (isset($_SESSION["errores"])) {

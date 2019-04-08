@@ -2,12 +2,12 @@
 session_start();
 require_once("../../modelo/GestionBD.php");
 
-if (isset($_SESSION["formulario"])) {
+if (isset($_SESSION["formulario_voluntario"])) {
 	$voluntario['nombrev'] = $_REQUEST["nombrev"];
 	$voluntario['password'] = $_REQUEST["password"];
 	$voluntario['permisos'] = $_REQUEST["permisos"];
 	
-	$_SESSION["formulario"] = $voluntario;
+	$_SESSION["formulario_voluntario"] = $voluntario;
 } else {
 	Header("Location: ../../controlador/altas/alta_voluntario.php");
 }

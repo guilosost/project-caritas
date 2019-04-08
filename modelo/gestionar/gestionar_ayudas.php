@@ -60,7 +60,7 @@ function alta_ayuda($conexion,$ayuda){
                 $stmt->bindParam(':w_suministradapor',$ayuda["suministradapor"]);
                 $stmt->bindParam(':w_concedida',$ayuda["concedida"]);
                 $stmt->bindParam(':w_descripcion',$ayuda["descripcion"]);
-                $stmt->bindParam(':w_empresa',$trabaayudajos["empresa"]);
+                $stmt->bindParam(':w_empresa',$ayuda["empresa"]);
                 $stmt->bindParam(':w_salarioaproximado', $ayuda["salarioaproximado"]);
                 $stmt->bindParam(':w_oid_c',$_SESSION["citaId"]);
                 $stmt->execute();

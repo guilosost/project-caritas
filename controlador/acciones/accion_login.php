@@ -5,10 +5,10 @@ include_once("../../modelo/gestionBD.php");
 include_once("../../controlador/funciones.php");
 include_once("../../modelo/gestionar/gestionar_login.php");
 
-if(isset($_SESSION["formulario"])){
+if(isset($_SESSION["formulario_login"])){
 	$usuariologin["nombrelogin"] = $_REQUEST["nombrelogin"];
 	$usuariologin["contrasena"] = $_REQUEST["contrasena"];
-	$_SESSION["formulario"] = $usuariologin;
+	$_SESSION["formulario_login"] = $usuariologin;
 }
 else{
     header("Location: ../../controlador/acceso/login.php");

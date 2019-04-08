@@ -4,9 +4,9 @@
 	include("../../modelo/gestionar/gestionar_login.php"); 
 	require_once("../../modelo/GestionBD.php");	
 	
-	if (isset($_SESSION["formulario"])) {
-		$usuariologin = $_SESSION["formulario"];
-		unset($_SESSION["formulario"]);
+	if (isset($_SESSION["formulario_login"])) {
+		$usuariologin = $_SESSION["formulario_login"];
+		unset($_SESSION["formulario_login"]);
 		}
 		else{
 			Header("Location: ../../controlador/acceso/login.php"); 
@@ -38,8 +38,8 @@
 				if(consultarVoluntarioRepetido($conexion, $usuariologin) == 1 ){
 					
 					$_SESSION["nombreusuario"] = $usuariologin["nombrelogin"];
+					$_SESSION["permiso"] = getPermisos($conexion, $usuariologin);
 					Header("Location: ../../vista/home.php");
-					//Header("Location: ../../vista/home.php"); 
 				}
 	
 		?>

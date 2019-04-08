@@ -3,14 +3,18 @@ session_start();
 //include(dirname(__DIR__).'/GestionBD.php');
 require_once("../../modelo/GestionBD.php");
 
-if (!isset($_SESSION["formulario"])) {
+if (isset($_SESSION["formulario_login"])) {   
+    Header("Location: ../../controlador/acceso/login.php");
+}
+
+if (!isset($_SESSION["formulario_voluntario"])) {
     $formulario['nombrev'] = "";
     $formulario['password'] = "";
     $formulario['permisos'] = "";
 
-    $_SESSION["formulario"] = $formulario;
+    $_SESSION["formulario_voluntario"] = $formulario;
 } else {
-    $formulario = $_SESSION["formulario"];
+    $formulario = $_SESSION["formulario_voluntario"];
 }
 
 if (isset($_SESSION["errores"])) {

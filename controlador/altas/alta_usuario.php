@@ -3,6 +3,10 @@ session_start();
 
 require_once("../../modelo/GestionBD.php");
 
+if (isset($_SESSION["formulario_login"])) {   
+    Header("Location: ../../controlador/acceso/login.php");
+}
+
 if (!isset($_SESSION["formulario_usuario"])) {
     $formulario['nombre'] = "";
     $formulario['apellidos'] = "";
