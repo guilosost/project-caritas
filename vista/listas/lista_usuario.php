@@ -1,102 +1,101 @@
 <?php
 session_start();
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
-require_once(MODELO."/GestionBD.php");
-require_once(GESTIONAR."gestionar_usuarios.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . '/project-caritas/rutas.php');
+require_once(MODELO . "/GestionBD.php");
+require_once(GESTIONAR . "gestionar_usuarios.php");
 
 $conexion = crearConexionBD();
 
-function consulta_paginada($conexion, $query, $pag_num, $pag_size){
-	try {
-		$primera = ($pag_num - 1) * $pag_size + 1;
-		$ultima  = $pag_num * $pag_size;
-		$consulta_paginada = 
-			 "SELECT * FROM (SELECT ROWNUM RNUM, AUX.* FROM ($query) AUX WHERE ROWNUM <= :ultima) WHERE RNUM >= :primera";
-
-		$stmt = $conexion->prepare($consulta_paginada);
-		$stmt->bindParam(':primera', $primera);
-		$stmt->bindParam(':ultima',  $ultima);
-		$stmt->execute();
-		return $stmt;
-	}	
-	catch (PDOException $e) {
-		$_SESSION['excepcion'] = $e->GetMessage();
-		return $_SESSION['excepcion'];
-	}
-} 
-function total_consulta( $conn, $query )
+function consulta_paginada($conexion, $query, $pag_num, $pag_size)
 {
-	try {
-		$total_consulta = "SELECT COUNT(*) AS TOTAL FROM ($query)";
-		$stmt = $conn->query($total_consulta);
-		$result = $stmt->fetch();
-		$total = $result['TOTAL'];
-		return  $total;
-	}
-	catch ( PDOException $e ) {
-		$_SESSION['excepcion'] = $e->GetMessage();
-		return $_SESSION['excepcion'] =$e->GetMessage();
-	}
-}
-function total_consulta( $conexion, $query )
-{
-	try {
-		$total_consulta = "SELECT COUNT(*) AS TOTAL FROM ($query)";
+    try {
+        $primera = ($pag_num - 1) * $pag_size + 1;
+        $ultima  = $pag_num * $pag_size;
+        $consulta_paginada =
+            "SELECT * FROM (SELECT ROWNUM RNUM, AUX.* FROM ($query) AUX WHERE ROWNUM <= :ultima) WHERE RNUM >= :primera";
 
-		$stmt = $conexion->query($total_consulta);
-		$result = $stmt->fetch();
-		$total = $result['TOTAL'];
-		return  $total;
-	}
-	catch ( PDOException $e ) {
-		$_SESSION['excepcion'] = $e->GetMessage();
-		return $_SESSION['excepcion'];
-	}
-}
-
-    if (isset($_SESSION["usuario"])) {
-        $usuario = $_SESSION["usuario"];
-        unset($_SESSION["usuario"]);
+        $stmt = $conexion->prepare($consulta_paginada);
+        $stmt->bindParam(':primera', $primera);
+        $stmt->bindParam(':ultima',  $ultima);
+        $stmt->execute();
+        return $stmt;
+    } catch (PDOException $e) {
+        $_SESSION['excepcion'] = $e->GetMessage();
+        return $_SESSION['excepcion'];
     }
+}
+//function total_consulta( $conn, $query )
+//{
+//	try {
+//		$total_consulta = "SELECT COUNT(*) AS TOTAL FROM ($query)";
+//		$stmt = $conn->query($total_consulta);
+//		$result = $stmt->fetch();
+//		$total = $result['TOTAL'];
+//		return  $total;
+//	}
+//	catch ( PDOException $e ) {
+//		$_SESSION['excepcion'] = $e->GetMessage();
+//		return $_SESSION['excepcion'] =$e->GetMessage();
+//	}
+//}
+function total_consulta($conexion, $query)
+{
+    try {
+        $total_consulta = "SELECT COUNT(*) AS TOTAL FROM ($query)";
 
-    // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
-    // ¿Hay una sesión activa?
-    if (isset($_SESSION["paginacion"]))
-        $paginacion = $_SESSION["paginacion"];
+        $stmt = $conexion->query($total_consulta);
+        $result = $stmt->fetch();
+        $total = $result['TOTAL'];
+        return  $total;
+    } catch (PDOException $e) {
+        $_SESSION['excepcion'] = $e->GetMessage();
+        return $_SESSION['excepcion'];
+    }
+}
 
-    $pagina_seleccionada = isset($_GET["PAG_NUM"]) ? (int)$_GET["PAG_NUM"] : (isset($paginacion) ? (int)$paginacion["PAG_NUM"] : 1);
-    $pag_tam = isset($_GET["PAG_TAM"]) ? (int)$_GET["PAG_TAM"] : (isset($paginacion) ? (int)$paginacion["PAG_TAM"] : 5);
+if (isset($_SESSION["usuario"])) {
+    $usuario = $_SESSION["usuario"];
+    unset($_SESSION["usuario"]);
+}
 
-    if ($pagina_seleccionada < 1)         $pagina_seleccionada = 1;
-    if ($pag_tam < 1)         $pag_tam = 5;
+// ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
+// ¿Hay una sesión activa?
+if (isset($_SESSION["paginacion"]))
+    $paginacion = $_SESSION["paginacion"];
 
-    // Antes de seguir, borramos las variables de sección para no confundirnos más adelante
-    unset($_SESSION["paginacion"]);
+$pagina_seleccionada = isset($_GET["PAG_NUM"]) ? (int)$_GET["PAG_NUM"] : (isset($paginacion) ? (int)$paginacion["PAG_NUM"] : 1);
+$pag_tam = isset($_GET["PAG_TAM"]) ? (int)$_GET["PAG_TAM"] : (isset($paginacion) ? (int)$paginacion["PAG_TAM"] : 5);
 
-    // La consulta que ha de paginarse
-    $query = 'SELECT USUARIOS.DNI, USUARIOS.APELLIDOS, USUARIOS.NOMBRE, '
-        . 'USUARIOS.TELEFONO, USUARIOS.INGRESOS, USUARIOS.SITUACIONLABORAL '
-        . 'FROM USUARIOS'
-        . 'ORDER BY APELLIDOS, NOMBRE, DNI';
+if ($pagina_seleccionada < 1)         $pagina_seleccionada = 1;
+if ($pag_tam < 1)         $pag_tam = 5;
 
-    // Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
-    // En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
-    $total_registros = total_consulta($conexion, $query);
-    $total_paginas = (int)($total_registros / $pag_tam);
+// Antes de seguir, borramos las variables de sección para no confundirnos más adelante
+unset($_SESSION["paginacion"]);
 
-    if ($total_registros % $pag_tam > 0)        $total_paginas++;
+// La consulta que ha de paginarse
+$query = 'SELECT USUARIOS.DNI, USUARIOS.APELLIDOS, USUARIOS.NOMBRE, '
+    . 'USUARIOS.TELEFONO, USUARIOS.INGRESOS, USUARIOS.SITUACIONLABORAL '
+    . 'FROM USUARIOS'
+    . 'ORDER BY APELLIDOS, NOMBRE, DNI';
 
-    if ($pagina_seleccionada > $total_paginas)        $pagina_seleccionada = $total_paginas;
+// Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
+// En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
+$total_registros = total_consulta($conexion, $query);
+$total_paginas = (int)($total_registros / $pag_tam);
 
-    // Generamos los valores de sesión para página e intervalo para volver a ella después de una operación
-    $paginacion["PAG_NUM"] = $pagina_seleccionada;
-    $paginacion["PAG_TAM"] = $pag_tam;
-    $_SESSION["paginacion"] = $paginacion;
+if ($total_registros % $pag_tam > 0)        $total_paginas++;
 
-    $filas = consulta_paginada($conexion, $query, $pagina_seleccionada, $pag_tam);
+if ($pagina_seleccionada > $total_paginas)        $pagina_seleccionada = $total_paginas;
 
-    cerrarConexionBD($conexion);
+// Generamos los valores de sesión para página e intervalo para volver a ella después de una operación
+$paginacion["PAG_NUM"] = $pagina_seleccionada;
+$paginacion["PAG_TAM"] = $pag_tam;
+$_SESSION["paginacion"] = $paginacion;
+
+$filas = consulta_paginada($conexion, $query, $pagina_seleccionada, $pag_tam);
+
+cerrarConexionBD($conexion);
 
 ?>
 
@@ -132,11 +131,11 @@ function total_consulta( $conexion, $query )
 
                     if ($pagina == $pagina_seleccionada) {     ?>
 
-                <span class="current"><?php echo $pagina; ?></span>
-                <?php 
+                    <span class="current"><?php echo $pagina; ?></span>
+                <?php
             } else { ?>
-                <a href="lista_usuario.php?PAG_NUM=<?php echo $pagina; ?>&PAG_TAM=<?php echo $pag_tam; ?>"><?php echo $pagina; ?></a>
-                <?php 
+                    <a href="lista_usuario.php?PAG_NUM=<?php echo $pagina; ?>&PAG_TAM=<?php echo $pag_tam; ?>"><?php echo $pagina; ?></a>
+                <?php
             } ?>
             </div>
 
@@ -168,80 +167,80 @@ function total_consulta( $conexion, $query )
 
 
 
-        <article class="usuario">
+            <article class="usuario">
 
-            <form method="post" action="controlador_libros.php">
+                <form method="post" action="accion_usuario.php">
 
-                <div class="fila_usuario">
+                    <div class="fila_usuario">
 
-                    <div class="datos_usuario">
+                        <div class="datos_usuario">
 
-                        <input id="NOMBRE" name="NOMBRE" type="hidden" value="<?php echo $fila["NOMBRE"]; ?>" />
+                            <input id="NOMBRE" name="NOMBRE" type="hidden" value="<?php echo $fila["NOMBRE"]; ?>" />
 
-                        <input id="APELLIDOS" name="APELLIDOS" type="hidden" value="<?php echo $fila["APELLIDOS"]; ?>" />
+                            <input id="APELLIDOS" name="APELLIDOS" type="hidden" value="<?php echo $fila["APELLIDOS"]; ?>" />
 
 
 
-                        <?php
+                            <?php
 
-                        if (isset($usuario) and ($usuario["dni"] == $fila["dni"])) { ?>
+                            if (isset($usuario) and ($usuario["dni"] == $fila["dni"])) { ?>
 
-                        <!-- Editando título -->
+                                <!-- Editando título -->
 
-                        <h3><input id="TITULO" name="TITULO" type="text" value="<?php echo $fila["TITULO"]; ?>" /> </h3>
+                                <h3><input id="TITULO" name="TITULO" type="text" value="<?php echo $fila["TITULO"]; ?>" /> </h3>
 
-                        <h4><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></h4>
+                                <h4><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></h4>
 
-                        <?php 
-                    } else { ?>
+                            <?php
+                        } else { ?>
 
-                        <!-- mostrando título -->
+                                <!-- mostrando título -->
 
-                        <input id="nombre" name="nombre" type="hidden" value="<?php echo $fila["nombre"]; ?>" />
+                                <input id="nombre" name="nombre" type="hidden" value="<?php echo $fila["nombre"]; ?>" />
 
-                        <div class="titulo"><b><?php echo $fila["TITULO"]; ?></b></div>
+                                <div class="titulo"><b><?php echo $fila["TITULO"]; ?></b></div>
 
-                        <div class="usuario">By <em><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></em></div>
+                                <div class="usuario">By <em><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></em></div>
 
-                        <?php 
-                    } ?>
+                            <?php
+                        } ?>
 
+                        </div>
+
+
+
+                        <div id="botones_fila">
+
+                            <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
+
+                                <button id="grabar" name="grabar" type="submit" class="editar_fila">
+
+                                    <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
+
+                                </button>
+
+                            <?php
+                        } else { ?>
+
+                                <button id="editar" name="editar" type="submit" class="editar_fila">
+
+                                    <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
+
+                                </button>
+
+                            <?php
+                        } ?>
+
+                            <button id="borrar" name="borrar" type="submit" class="editar_fila">
+
+                                <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar usuario">
+
+                            </button>
+                        </div>
                     </div>
-
-
-
-                    <div id="botones_fila">
-
-                        <?php if (isset($libro) and ($libro["OID_LIBRO"] == $fila["OID_LIBRO"])) { ?>
-
-                        <button id="grabar" name="grabar" type="submit" class="editar_fila">
-
-                            <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
-
-                        </button>
-
-                        <?php 
-                    } else { ?>
-
-                        <button id="editar" name="editar" type="submit" class="editar_fila">
-
-                            <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar libro">
-
-                        </button>
-
-                        <?php 
-                    } ?>
-
-                        <button id="borrar" name="borrar" type="submit" class="editar_fila">
-
-                            <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar libro">
-
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </article>
-        <?php 
+                </form>
+            </article>
+        <?php
     } ?>
     </main>
     <?php
@@ -250,4 +249,4 @@ function total_consulta( $conexion, $query )
 
 </body>
 
-</html> 
+</html>
