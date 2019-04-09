@@ -138,9 +138,9 @@ function validarDatosUsuario($conexion, $usuario)
 	}
 	if($usuario["solicitante"]=="No"){
 
-		if ($usuario["parentesco"] == "" || !ctype_alpha($usuario["parentesco"])) {
-			$errores[] = "<p>El parentesco no puede estar vacío o contener caracteres numéricos.</p>";
-		}
+		#if ($usuario["parentesco"] == "" || !ctype_alpha($usuario["parentesco"])) {
+		#	$errores[] = "<p>El parentesco no puede estar vacío o contener caracteres numéricos.</p>";
+		#}
 
 		if ($usuario["dniSol"] == "") {
 			$errores[] = "<p>El DNI del solicitante no puede estar vacío.</p>";

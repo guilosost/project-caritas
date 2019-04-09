@@ -103,7 +103,7 @@ $conexion = crearConexionBD();
 
                         <label for="estudios">Estudios: </label>
                         <select class="celda" name="estudios" size=1 required>
-                            <option value="No es relevante">No es relevante </option>
+                            <option value="NULL">No es relevante </option>
                             <option value="Sin estudios">Sin estudios </option>
                             <option value="Educacion primaria">Educación primaria </option>
                             <option value="Educacion secundaria">Educación secundaria </option>

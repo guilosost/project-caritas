@@ -21,12 +21,19 @@ function alta_solicitante($conexion,$usuario) {
 		$stmt->bindParam(':w_nombre',$usuario["nombre"]);
 		$stmt->bindParam(':w_apellidos',$usuario["apellidos"]);
         $stmt->bindParam(':w_ingresos',$usuario["ingresos"]);
+
         if($usuario["sitlaboral"]=="NULL"){
             $stmt->bindValue(':w_situacionlaboral',null, PDO::PARAM_INT);
         }else{
             $stmt->bindParam(':w_situacionlaboral',$usuario["sitlaboral"]);
         }
-		$stmt->bindParam(':w_estudios',$usuario["estudios"]);
+
+        if($usuario["estudios"]=="NULL"){
+            $stmt->bindValue(':w_estudios',null, PDO::PARAM_INT);
+        }else{
+            $stmt->bindParam(':w_estudios',$usuario["estudios"]);
+        }
+
 		$stmt->bindParam(':w_sexo',$usuario["genero"]);
 		$stmt->bindParam(':w_telefono',$usuario["telefono"]);
         $stmt->bindParam(':w_poblacion',$usuario["poblacion"]);
@@ -37,7 +44,7 @@ function alta_solicitante($conexion,$usuario) {
         $stmt->bindParam(':w_fechanacimiento',$fechaNacimiento);
         $stmt->bindParam(':w_protecciondatos',$usuario["proteccionDatos"]);
         $stmt->bindValue(':w_problematica',null, PDO::PARAM_INT);
-        $stmt->bindParam(':w_tratamiento',$no);
+        $stmt->bindParam(':w_tratamiento',null, PDO::PARAM_INT);
         $stmt->bindParam(':w_minusvalia',$usuario["minusvalia"]);
         $stmt->bindParam(':w_valoracionminusvalia',$no);
 		
