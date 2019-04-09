@@ -96,7 +96,7 @@ BEGIN
         w_estadocivil,
         TO_DATE(w_fechanacimiento, 'DD/MM/YYYY'),
         w_protecciondatos,
-        'S�',
+        'Sí',
         NULL,
         w_problematica,
         w_tratamiento,
@@ -245,7 +245,7 @@ CREATE OR REPLACE PROCEDURE nueva_ayuda_de_comida (
     w_suministradapor   IN                  ayudas.suministradapor%TYPE,
     w_concedida         IN                  ayudas.concedida%TYPE,
     w_bebe              IN                  comidas.bebe%TYPE,
-    w_ni�o              IN                  comidas.ni�o%TYPE,
+    w_niño              IN                  comidas.niño%TYPE,
     w_oid_c             IN                  citas.oid_c%TYPE
 ) IS
 BEGIN
@@ -264,12 +264,12 @@ BEGIN
     INSERT INTO comidas (
         oid_co,
         bebe,
-        ni�o,
+        niño,
         oid_a
     ) VALUES (
         0,
         w_bebe,
-        w_ni�o,
+        w_niño,
         sec_a.CURRVAL
     );
 
@@ -424,17 +424,17 @@ END nueva_cita;
 
 CREATE OR REPLACE PROCEDURE nuevo_voluntario (
     w_nombrev      IN             voluntarios.nombrev%TYPE,
-    w_contrase�a   IN             voluntarios.contrase�a%TYPE,
+    w_contraseña   IN             voluntarios.contraseña%TYPE,
     w_permiso      IN             voluntarios.permiso%TYPE
 ) IS
 BEGIN
     INSERT INTO voluntarios (
         nombrev,
-        contrase�a,
+        contraseña,
         permiso
     ) VALUES (
         w_nombrev,
-        w_contrase�a,
+        w_contraseña,
         w_permiso
     );
 
@@ -534,24 +534,24 @@ BEGIN
 END interesado_en_curso;
 /
 
-CREATE OR REPLACE FUNCTION contrase�as (
-    w_contrase�a   IN             voluntarios.contrase�a%TYPE,
+CREATE OR REPLACE FUNCTION contraseñas (
+    w_contraseña   IN             voluntarios.contraseña%TYPE,
     w_nombrev      IN             voluntarios.nombrev%TYPE
 ) RETURN BOOLEAN AS
     res   BOOLEAN := true;
-    aux   voluntarios.contrase�a%TYPE;
+    aux   voluntarios.contraseña%TYPE;
 BEGIN
     SELECT
-        contrase�a
+        contraseña
     INTO aux
     FROM
         voluntarios
     WHERE
         nombrev = w_nombrev;
 
-    IF ( aux <> w_contrase�a ) THEN
+    IF ( aux <> w_contraseña ) THEN
         res := false;
     END IF;
     RETURN res;
-END contrase�as;
+END contraseñas;
 /
