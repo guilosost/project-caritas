@@ -4,55 +4,9 @@ session_start();
 include_once($_SERVER['DOCUMENT_ROOT'] . '/project-caritas/rutas.php');
 require_once(MODELO . "/GestionBD.php");
 require_once(GESTIONAR . "gestionar_usuarios.php");
+require_once(VISTA . "/paginacion_consulta.php");
 
 $conexion = crearConexionBD();
-
-function consulta_paginada($conexion, $query, $pag_num, $pag_size)
-{
-    try {
-        $primera = ($pag_num - 1) * $pag_size + 1;
-        $ultima  = $pag_num * $pag_size;
-        $consulta_paginada =
-            "SELECT * FROM (SELECT ROWNUM RNUM, AUX.* FROM ($query) AUX WHERE ROWNUM <= :ultima) WHERE RNUM >= :primera";
-
-        $stmt = $conexion->prepare($consulta_paginada);
-        $stmt->bindParam(':primera', $primera);
-        $stmt->bindParam(':ultima',  $ultima);
-        $stmt->execute();
-        return $stmt;
-    } catch (PDOException $e) {
-        $_SESSION['excepcion'] = $e->GetMessage();
-        return $_SESSION['excepcion'];
-    }
-}
-//function total_consulta( $conn, $query )
-//{
-//	try {
-//		$total_consulta = "SELECT COUNT(*) AS TOTAL FROM ($query)";
-//		$stmt = $conn->query($total_consulta);
-//		$result = $stmt->fetch();
-//		$total = $result['TOTAL'];
-//		return  $total;
-//	}
-//	catch ( PDOException $e ) {
-//		$_SESSION['excepcion'] = $e->GetMessage();
-//		return $_SESSION['excepcion'] =$e->GetMessage();
-//	}
-//}
-function total_consulta($conexion, $query)
-{
-    try {
-        $total_consulta = "SELECT COUNT(*) AS TOTAL FROM ($query)";
-
-        $stmt = $conexion->query($total_consulta);
-        $result = $stmt->fetch();
-        $total = $result['TOTAL'];
-        return  $total;
-    } catch (PDOException $e) {
-        $_SESSION['excepcion'] = $e->GetMessage();
-        return $_SESSION['excepcion'];
-    }
-}
 
 if (isset($_SESSION["usuario"])) {
     $usuario = $_SESSION["usuario"];
@@ -74,10 +28,10 @@ if ($pag_tam < 1)         $pag_tam = 5;
 unset($_SESSION["paginacion"]);
 
 // La consulta que ha de paginarse
-$query = 'SELECT USUARIOS.DNI, USUARIOS.APELLIDOS, USUARIOS.NOMBRE, '
-    . 'USUARIOS.TELEFONO, USUARIOS.INGRESOS, USUARIOS.SITUACIONLABORAL '
-    . 'FROM USUARIOS'
-    . 'ORDER BY APELLIDOS, NOMBRE, DNI';
+$query = 'SELECT USUARIOS.DNI, USUARIOS.APELLIDOS, USUARIOS.NOMBRE '
+    #. 'USUARIOS.TELEFONO, USUARIOS.INGRESOS, USUARIOS.SITUACIONLABORAL '
+    . 'FROM USUARIOS';
+    #. 'ORDER BY APELLIDOS, NOMBRE, DNI';
 
 // Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
 // En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
@@ -121,7 +75,7 @@ cerrarConexionBD($conexion);
     <?php
     include_once("../header.php");
     include_once("../navbar.php");
-    echo $filas;
+    
     ?>
     <main>
         <nav>

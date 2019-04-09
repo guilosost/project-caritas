@@ -4,12 +4,7 @@ function consulta_paginada( $conexion, $query, $pag_num, $pag_size )
 	try {
 		$primera = ( $pag_num - 1 ) * $pag_size + 1;
 		$ultima  = $pag_num * $pag_size;
-		$consulta_paginada = 
-			 "SELECT * FROM ( "
-				."SELECT ROWNUM RNUM, AUX.* FROM ( $query ) AUX "
-				."WHERE ROWNUM <= :ultima"
-			.") "
-			."WHERE RNUM >= :primera";
+		$consulta_paginada = "SELECT * FROM ( " . "SELECT ROWNUM RNUM, AUX.* FROM ( $query ) AUX " . "WHERE ROWNUM <= :ultima" . ") " . "WHERE RNUM >= :primera";
 
 		$stmt = $conexion->prepare($consulta_paginada);
 		$stmt->bindParam(':primera', $primera);
