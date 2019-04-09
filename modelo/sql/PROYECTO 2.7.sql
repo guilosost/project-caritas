@@ -21,10 +21,10 @@ DROP TABLE voluntarios;
 
 CREATE TABLE voluntarios (
     nombrev      VARCHAR2(50) NOT NULL,
-    contraseña   VARCHAR2(20),
+    contraseÃ±a   VARCHAR2(20),
     permiso      CHAR(3)
         CONSTRAINT "BOOLEAN_CHK1" CHECK ( permiso IN (
-            'Sí',
+            'SÃ­',
             'No'
         ) ),
     PRIMARY KEY ( nombrev )
@@ -62,30 +62,30 @@ CREATE TABLE usuarios (
     fechanacimiento        DATE NOT NULL,
     protecciondatos        CHAR(3)
         CONSTRAINT "BOOLEAN_CHK2" CHECK ( protecciondatos IN (
-            'Sí',
+            'SÃ­',
             'No',
             NULL
         ) ),
     solicitante            CHAR(3)
         CONSTRAINT "BOOLEAN_CHK3" CHECK ( solicitante IN (
-            'Sí',
+            'SÃ­',
             'No'
         ) ),
     parentesco             VARCHAR(20),
     problematica           VARCHAR2(100),
     tratamiento            CHAR(3)
         CONSTRAINT "BOOLEAN_CHK4" CHECK ( tratamiento IN (
-            'Sí',
+            'SÃ­',
             'No'
         ) ),
     minusvalia             CHAR(3)
         CONSTRAINT "BOOLEAN_CHK5" CHECK ( minusvalia IN (
-            'Sí',
+            'SÃ­',
             'No'
         ) ),
     valoracionminusvalia   CHAR(20)
         CONSTRAINT "VALORACION_MINUSVALIA" CHECK ( valoracionminusvalia IN (
-            'Sí',
+            'SÃ­',
             'No',
             'En proceso'
         ) ),
@@ -120,7 +120,7 @@ CREATE TABLE ayudas (
     suministradapor   VARCHAR2(50),
     concedida         CHAR(3)
         CONSTRAINT "BOOLEAN_CHK7" CHECK ( concedida IN (
-            'Sí',
+            'SÃ­',
             'No'
         ) ),
     oid_c             INTEGER,
@@ -133,12 +133,12 @@ CREATE TABLE comidas (
     oid_co   INTEGER NOT NULL,
     bebe     CHAR(3)
         CONSTRAINT "BOOLEAN_CHK8" CHECK ( bebe IN (
-            'Sí',
+            'SÃ­',
             'No'
         ) ),
-    niño     CHAR(3)
-        CONSTRAINT "BOOLEAN_CHK9" CHECK ( niño IN (
-            'Sí',
+    niÃ±o     CHAR(3)
+        CONSTRAINT "BOOLEAN_CHK9" CHECK ( niÃ±o IN (
+            'SÃ­',
             'No'
         ) ),
     oid_a    INTEGER,
@@ -153,7 +153,7 @@ CREATE TABLE ayudaseconomicas (
     motivo      VARCHAR2(100),
     prioridad   CHAR(3)
         CONSTRAINT "BOOLEAN_CHK10" CHECK ( prioridad IN (
-            'Sí',
+            'SÃ­',
             'No'
         ) ),
     oid_a       INTEGER,
