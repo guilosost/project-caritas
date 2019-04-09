@@ -3,7 +3,7 @@ session_start();
 
 require_once("../../modelo/GestionBD.php");
 
-if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"] == "")) {   
+if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {   
     Header("Location: ../../controlador/acceso/login.php");
 }
 

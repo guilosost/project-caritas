@@ -3,7 +3,7 @@ session_start();
 include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
 require_once(MODELO."/GestionBD.php");
 
-if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"] == "")) {   
+if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {   
     Header("Location: ../../controlador/acceso/login.php");
 }
 
