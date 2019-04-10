@@ -3,7 +3,7 @@ session_start();
 
 require_once("../../modelo/GestionBD.php");
 
-if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {   
+if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
@@ -48,11 +48,32 @@ $conexion = crearConexionBD();
     <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Alta de Usuario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
+
+    <script>
+        <!--
+        function showHide(elm) {
+            var solicitante = document.getElementById("esSolicitante");
+            var familiar = document.getElementById("esFamiliar")
+            if (elm.id == 'solicitar') {
+                solicitante.classList.remove('hide');
+                familiar.classList.add('hide');
+            } else if (elm.id == 'familiar'){
+                solicitante.classList.add('hide');
+                familiar.classList.remove('hide');
+            }
+        }
+
+        //solicitante[0].checked() {
+        //$("esSolicitante").show();
+        //});
+        //-->
+    </script>
 </head>
 
 <body background="../../vista/img/background.png">
@@ -129,42 +150,46 @@ $conexion = crearConexionBD();
                         <input type="radio" name="minusvalia" value="No" <?php if ($formulario['minusvalia'] == 'No') echo ' checked '; ?>>No<br>
 
                         <label for="solicitante">¿El usuario es solicitante? </label>
-                        <input type="radio" name="solicitante" value="Sí" <?php if ($formulario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
-                        <input type="radio" name="solicitante" value="No" <?php if ($formulario['solicitante'] == 'No') echo ' checked '; ?>> No<br>
+                        <input type="radio" id="solicitar" name="solicitante"  onclick="showHide(this)" value="Sí" <?php if ($formulario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
+                        <input type="radio" id="familiar" name="solicitante"  onclick="showHide(this)" value="No" <?php if ($formulario['solicitante'] == 'No') echo ' checked '; ?>> No<br>
 
                     </fieldset>
-                    <br>
+                    <div  id="esSolicitante" class="hide">
+                        <br>
+                        <fieldset>
+                            <legend>Información básica del solicitante</legend>
 
-                    <fieldset>
-                        <legend>Información básica del solicitante</legend>
+                            <label for="gastosfamilia">Gastos de la familia:</label>
+                            <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php echo $formulario['gastosfamilia']; ?>" /><br>
 
-                        <label for="gastosfamilia">Gastos de la familia:</label>
-                        <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php echo $formulario['gastosfamilia']; ?>" /><br>
+                            <label for="poblacion">Población:</label>
+                            <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php echo $formulario['poblacion']; ?>" /><br>
 
-                        <label for="poblacion">Población:</label>
-                        <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php echo $formulario['poblacion']; ?>" /><br>
+                            <label for="domicilio">Dirección del domicilio:</label>
+                            <input class="celda" name="domicilio" type="text" maxlength="50" value="<?php echo $formulario['domicilio']; ?>" /><br>
 
-                        <label for="domicilio">Dirección del domicilio:</label>
-                        <input class="celda" name="domicilio" type="text" maxlength="50" value="<?php echo $formulario['domicilio']; ?>" /><br>
+                            <label for="codigopostal">Código postal:</label>
+                            <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $formulario['codigopostal']; ?>" /><br>
 
-                        <label for="codigopostal">Código postal:</label>
-                        <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $formulario['codigopostal']; ?>" /><br>
+                            <label for="proteccionDatos">
+                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($formulario['proteccionDatos'] == 'Sí') echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
+                            </label>
+                        </fieldset>
+                    </div>
 
-                        <label for="proteccionDatos">
-                            <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($formulario['proteccionDatos'] == 'Sí') echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
-                        </label>
-                    </fieldset>
-                    <br>
-                    <fieldset>
-                        <legend>Información básica del familiar</legend>
+                    <div id="esFamiliar" class="hide">
+                        <br>
+                        <fieldset>
+                            <legend>Información básica del familiar</legend>
 
-                        <label for="dniSol">DNI del solicitante:</label>
-                        <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php echo $formulario['dniSol']; ?>" /><br>
+                            <label for="dniSol">DNI del solicitante:</label>
+                            <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php echo $formulario['dniSol']; ?>" /><br>
 
-                        <label for='parentesco'>Parentesco con el solicitante:</label>
-                        <input name='parentesco' type='text' placeholder="null" value="<?php echo $formulario['parentesco']; ?>" /><br>
+                            <label for='parentesco'>Parentesco con el solicitante:</label>
+                            <input name='parentesco' type='text' value="<?php echo $formulario['parentesco']; ?>" /><br>
+                        </fieldset>
+                    </div>
 
-                    </fieldset>
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
                         <input type="submit" value="Dar de alta">
@@ -179,4 +204,4 @@ $conexion = crearConexionBD();
     ?>
 </body>
 
-</html> 
+</html>

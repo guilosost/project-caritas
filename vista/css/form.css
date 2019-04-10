@@ -1,6 +1,11 @@
 .flex {
     display: flex;
 }
+
+.hide {
+    display:none;
+}
+
 body {
     width: 99%;
     background-attachment: fixed;
