@@ -59,7 +59,8 @@ $conexion = crearConexionBD();
         <!--
         function showHide(elm) {
             var solicitante = document.getElementById("esSolicitante");
-            var familiar = document.getElementById("esFamiliar")
+            var familiar = document.getElementById("esFamiliar");
+            
             if (elm.id == 'solicitar') {
                 solicitante.classList.remove('hide');
                 familiar.classList.add('hide');
@@ -68,10 +69,6 @@ $conexion = crearConexionBD();
                 familiar.classList.remove('hide');
             }
         }
-
-        //solicitante[0].checked() {
-        //$("esSolicitante").show();
-        //});
         //-->
     </script>
 </head>
