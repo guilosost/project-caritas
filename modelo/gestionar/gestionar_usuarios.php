@@ -44,7 +44,7 @@ function alta_solicitante($conexion,$usuario) {
         $stmt->bindParam(':w_fechanacimiento',$fechaNacimiento);
         $stmt->bindParam(':w_protecciondatos',$usuario["proteccionDatos"]);
         $stmt->bindValue(':w_problematica',null, PDO::PARAM_INT);
-        $stmt->bindParam(':w_tratamiento',null, PDO::PARAM_INT);
+        $stmt->bindValue(':w_tratamiento',null, PDO::PARAM_INT);
         $stmt->bindParam(':w_minusvalia',$usuario["minusvalia"]);
         $stmt->bindParam(':w_valoracionminusvalia',$no);
 		

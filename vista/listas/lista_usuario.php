@@ -28,10 +28,10 @@ if ($pag_tam < 1)         $pag_tam = 5;
 unset($_SESSION["paginacion"]);
 
 // La consulta que ha de paginarse
-$query = 'SELECT USUARIOS.DNI, USUARIOS.APELLIDOS, USUARIOS.NOMBRE '
-    #. 'USUARIOS.TELEFONO, USUARIOS.INGRESOS, USUARIOS.SITUACIONLABORAL '
-    . 'FROM USUARIOS';
-#. 'ORDER BY APELLIDOS, NOMBRE, DNI';
+$query = 'SELECT USUARIOS.DNI, USUARIOS.APELLIDOS, USUARIOS.NOMBRE, '
+    . 'USUARIOS.TELEFONO, USUARIOS.INGRESOS, USUARIOS.SITUACIONLABORAL '
+    . 'FROM USUARIOS '
+    . 'ORDER BY APELLIDOS, NOMBRE, DNI ASC';
 
 // Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
 // En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
@@ -128,74 +128,79 @@ cerrarConexionBD($conexion);
 
                         <div class="datos_usuario">
 
-                            <input id="DNI" name="DNI" type="hidden" value="<?php echo $fila["DNI"]; ?>" />
+                            <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" />
 
-                            <input id="APELLIDOS" name="APELLIDOS" type="hidden" value="<?php echo $fila["APELLIDOS"]; ?>" />
+                            <input id="APELLIDOS" name="APELLIDOS" value="<?php echo $fila["APELLIDOS"]; ?>" />
 
-                            <input id="NOMBRE" name="NOMBRE" type="hidden" value="<?php echo $fila["NOMBRE"]; ?>" />
+                            <input id="NOMBRE" name="NOMBRE" value="<?php echo $fila["NOMBRE"]; ?>" />
 
-                            <input id="TELEFONO" name="TELEFONO" type="hidden" value="<?php echo $fila["TELEFONO"]; ?>" />
+                            <input id="TELEFONO" name="TELEFONO" value="<?php echo $fila["TELEFONO"]; ?>" />
 
-                            <input id="INGRESOS" name="INGRESOS" type="hidden" value="<?php echo $fila["INGRESOS"]; ?>" />
+                            <input id="INGRESOS" name="INGRESOS" value="<?php echo $fila["INGRESOS"]; ?>" />
 
-                            <input id="SITUACIONLABORAL" name="SITUACIONLABORAL" type="hidden" value="<?php echo $fila["SITUACIONLABORAL"]; ?>" />
+                            <input id="SITUACIONLABORAL" name="SITUACIONLABORAL" value="<?php echo $fila["SITUACIONLABORAL"]; ?>" />
+
+                            <?php
+
+                            # Todo este bloque está comentado porque no le he encontrado utilidad xd
+                            # Si veis que sirve para algo comentadlo
+
+                            ?>
+
+                            <!-- Editando nombre -->
+
+                            <!--    <h3><input id="NOMBRE" name="NOMBRE" type="text" value="<?php echo $fila["NOMBRE"]; ?>" /> </h3>-->
+
+                            <!--  <h4><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></h4>-->
 
                             <?php
 
-                            if (isset($usuario) and ($usuario["dni"] == $fila["dni"])) { ?>
+                            ?>
 
-                                <!-- Editando título -->
+                            <!-- Mostrando nombre -->
 
-                                <h3><input id="NOMBRE" name="NOMBRE" type="text" value="<?php echo $fila["NOMBRE"]; ?>" /> </h3>
+                            <!--  <input id="nombre" name="nombre" type="hidden" value="<?php echo $fila["nombre"]; ?>" />-->
 
-                                <h4><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></h4>
+                            <!--<div class="nombre"><b><?php echo $fila["NOMBRE"]; ?></b></div>-->
 
-                            <?php
-                        } else { ?>
-
-                                <!-- mostrando título -->
-
-                                <input id="nombre" name="nombre" type="hidden" value="<?php echo $fila["nombre"]; ?>" />
-
-                                <div class="nombre"><b><?php echo $fila["NOMBRE"]; ?></b></div>
-
-                                <div class="usuario">By <em><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></em></div>
+                            <!-- <div class="usuario">By <em><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></em></div> -->
 
                             <?php
-                        } ?>
+
+                            ?>
 
                         </div>
 
 
+                        <!-- Los botones están comentados por estética hasta que los arregle Yanes y no deformen la tabla -->
+                        <!-- <div id="botones_fila">
 
-                        <div id="botones_fila">
+                                    <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
 
-                            <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
+                                                <button id="grabar" name="grabar" type="submit" class="editar_fila">
 
-                                <button id="grabar" name="grabar" type="submit" class="editar_fila">
+                                                    <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
 
-                                    <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
+                                                </button>
 
-                                </button>
+                                    <?php
+                                } else { ?>
 
-                            <?php
-                        } else { ?>
+                                                <button id="editar" name="editar" type="submit" class="editar_fila">
 
-                                <button id="editar" name="editar" type="submit" class="editar_fila">
+                                                    <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
 
-                                    <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
+                                                </button>
 
-                                </button>
+                                    <?php
+                                } ?>
 
-                            <?php
-                        } ?>
+                                    <button id="borrar" name="borrar" type="submit" class="editar_fila">
 
-                            <button id="borrar" name="borrar" type="submit" class="editar_fila">
+                                        <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar usuario">
 
-                                <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar usuario">
-
-                            </button>
-                        </div>
+                                    </button>
+                                </div> -->
                     </div>
                 </form>
             </article>

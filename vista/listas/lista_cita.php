@@ -1,56 +1,57 @@
 <?php
 session_start();
 
-require_once("../../modelo/GestionBD.php");
-require_once("../../modelo/gestionar/gestionar_citas.php");
-require_once("../paginacion_consulta.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . '/project-caritas/rutas.php');
+require_once(MODELO . "/GestionBD.php");
+require_once(GESTIONAR . "gestionar_citas.php");
+require_once(VISTA . "/paginacion_consulta.php");
 
-#if (!isset($_SESSION['login']))
-#   Header("Location: login.php");
-#else {
-    if (isset($_SESSION["usuario"])) {
-        $usuario = $_SESSION["usuario"];
-        unset($_SESSION["usuario"]);
-    }
+$conexion = crearConexionBD();
 
-    // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
-    // ¿Hay una sesión activa?
-    if (isset($_SESSION["paginacion"]))
-        $paginacion = $_SESSION["paginacion"];
 
-    $pagina_seleccionada = isset($_GET["PAG_NUM"]) ? (int)$_GET["PAG_NUM"] : (isset($paginacion) ? (int)$paginacion["PAG_NUM"] : 1);
-    $pag_tam = isset($_GET["PAG_TAM"]) ? (int)$_GET["PAG_TAM"] : (isset($paginacion) ? (int)$paginacion["PAG_TAM"] : 5);
+if (isset($_SESSION["usuario"])) {
+    $usuario = $_SESSION["usuario"];
+    unset($_SESSION["usuario"]);
+}
 
-    if ($pagina_seleccionada < 1)         $pagina_seleccionada = 1;
-    if ($pag_tam < 1)         $pag_tam = 5;
+// ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
+// ¿Hay una sesión activa?
+if (isset($_SESSION["paginacion"]))
+    $paginacion = $_SESSION["paginacion"];
 
-    // Antes de seguir, borramos las variables de sección para no confundirnos más adelante
-    unset($_SESSION["paginacion"]);
+$pagina_seleccionada = isset($_GET["PAG_NUM"]) ? (int)$_GET["PAG_NUM"] : (isset($paginacion) ? (int)$paginacion["PAG_NUM"] : 1);
+$pag_tam = isset($_GET["PAG_TAM"]) ? (int)$_GET["PAG_TAM"] : (isset($paginacion) ? (int)$paginacion["PAG_TAM"] : 5);
 
-    $conexion = crearConexionBD();
+if ($pagina_seleccionada < 1)         $pagina_seleccionada = 1;
+if ($pag_tam < 1)         $pag_tam = 5;
 
-    // La consulta que ha de paginarse
-    $query = 'SELECT CITAS.DNI, CITAS.NOMBREV, CITAS.FECHACITA '
-        . 'FROM CITAS'
-        . 'ORDER BY FECHACITA, DNI, NOMBRE';
+// Antes de seguir, borramos las variables de sección para no confundirnos más adelante
+unset($_SESSION["paginacion"]);
 
-    // Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
-    // En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
-    $total_registros = total_consulta($conexion, $query);
-    $total_paginas = (int)($total_registros / $pag_tam);
+$conexion = crearConexionBD();
 
-    if ($total_registros % $pag_tam > 0)        $total_paginas++;
+// La consulta que ha de paginarse
+$query = 'SELECT CITAS.DNI, CITAS.NOMBREV, CITAS.FECHACITA '
+    . 'FROM CITAS '
+    . 'ORDER BY FECHACITA, DNI, NOMBREV ASC';
 
-    if ($pagina_seleccionada > $total_paginas)        $pagina_seleccionada = $total_paginas;
+// Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
+// En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
+$total_registros = total_consulta($conexion, $query);
+$total_paginas = (int)($total_registros / $pag_tam);
 
-    // Generamos los valores de sesión para página e intervalo para volver a ella después de una operación
-    $paginacion["PAG_NUM"] = $pagina_seleccionada;
-    $paginacion["PAG_TAM"] = $pag_tam;
-    $_SESSION["paginacion"] = $paginacion;
+if ($total_registros % $pag_tam > 0)        $total_paginas++;
 
-    $filas = consulta_paginada($conexion, $query, $pagina_seleccionada, $pag_tam);
+if ($pagina_seleccionada > $total_paginas)        $pagina_seleccionada = $total_paginas;
 
-    cerrarConexionBD($conexion);
+// Generamos los valores de sesión para página e intervalo para volver a ella después de una operación
+$paginacion["PAG_NUM"] = $pagina_seleccionada;
+$paginacion["PAG_TAM"] = $pag_tam;
+$_SESSION["paginacion"] = $paginacion;
+
+$filas = consulta_paginada($conexion, $query, $pagina_seleccionada, $pag_tam);
+
+cerrarConexionBD($conexion);
 
 ?>
 
@@ -85,11 +86,11 @@ require_once("../paginacion_consulta.php");
 
                     if ($pagina == $pagina_seleccionada) {     ?>
 
-                <span class="current"><?php echo $pagina; ?></span>
-                <?php 
+                    <span class="current"><?php echo $pagina; ?></span>
+                <?php
             } else { ?>
-                <a href="lista_cita.php?PAG_NUM=<?php echo $pagina; ?>&PAG_TAM=<?php echo $pag_tam; ?>"><?php echo $pagina; ?></a>
-                <?php 
+                    <a href="lista_cita.php?PAG_NUM=<?php echo $pagina; ?>&PAG_TAM=<?php echo $pag_tam; ?>"><?php echo $pagina; ?></a>
+                <?php
             } ?>
             </div>
 
@@ -121,86 +122,86 @@ require_once("../paginacion_consulta.php");
 
 
 
-        <article class="usuario">
+            <article class="cita">
 
-            <form method="post" action="gestionar_citas.php">
+                <form method="post" action="accion_cita.php">
 
-                <div class="fila_cita">
+                    <div class="fila_cita">
 
-                    <div class="datos_cita">
+                        <div class="datos_cita">
+                            
 
-                        <input id="OID_LIBRO" name="OID_LIBRO" type="hidden" value="<?php echo $fila["OID_LIBRO"]; ?>" />
+                            <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" />
 
-                        <input id="OID_AUTOR" name="OID_AUTOR" type="hidden" value="<?php echo $fila["OID_AUTOR"]; ?>" />
+                            <input id="NOMBREV" name="NOMBREV" value="<?php echo $fila["NOMBREV"]; ?>" />
 
-                        <input id="OID_AUTORIA" name="OID_AUTORIA" type="hidden" value="<?php echo $fila["OID_AUTORIA"]; ?>" />
+                            <input id="FECHACITA" name="FECHACITA" value="<?php echo $fila["FECHACITA"]; ?>" />
 
-                        <input id="NOMBRE" name="NOMBRE" type="hidden" value="<?php echo $fila["NOMBRE"]; ?>" />
+                            <?php
 
-                        <input id="APELLIDOS" name="APELLIDOS" type="hidden" value="<?php echo $fila["APELLIDOS"]; ?>" />
+                            # Todo este bloque está comentado porque no le he encontrado utilidad xd
+                            # Si veis que sirve para algo comentadlo
+
+                            ?>
+
+                            <!-- Editando nombre -->
+
+                            <!--    <h3><input id="NOMBRE" name="NOMBRE" type="text" value="<?php echo $fila["NOMBRE"]; ?>" /> </h3>-->
+
+                            <!--  <h4><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></h4>-->
+
+                            <?php
+
+                            ?>
+
+                            <!-- Mostrando nombre -->
+
+                            <!--  <input id="nombre" name="nombre" type="hidden" value="<?php echo $fila["nombre"]; ?>" />-->
+
+                            <!--<div class="nombre"><b><?php echo $fila["NOMBRE"]; ?></b></div>-->
+
+                            <!-- <div class="usuario">By <em><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></em></div> -->
+
+                            <?php
+
+                            ?>
+
+                        </div>
 
 
+                        <!-- Los botones están comentados por estética hasta que los arregle Yanes y no deformen la tabla -->
+                        <!-- <div id="botones_fila">
 
-                        <?php
+            <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
 
-                        if (isset($libro) and ($libro["OID_LIBRO"] == $fila["OID_LIBRO"])) { ?>
+                            <button id="grabar" name="grabar" type="submit" class="editar_fila">
 
-                        <!-- Editando título -->
+                                <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
 
-                        <h3><input id="TITULO" name="TITULO" type="text" value="<?php echo $fila["TITULO"]; ?>" /> </h3>
+                            </button>
 
-                        <h4><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></h4>
+            <?php
+        } else { ?>
 
-                        <?php 
-                    } else { ?>
+                            <button id="editar" name="editar" type="submit" class="editar_fila">
 
-                        <!-- mostrando título -->
+                                <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
 
-                        <input id="nombre" name="nombre" type="hidden" value="<?php echo $fila["nombre"]; ?>" />
+                            </button>
 
-                        <div class="titulo"><b><?php echo $fila["TITULO"]; ?></b></div>
+            <?php
+        } ?>
 
-                        <div class="usuario">By <em><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></em></div>
+            <button id="borrar" name="borrar" type="submit" class="editar_fila">
 
-                        <?php 
-                    } ?>
+                <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar usuario">
 
+            </button>
+        </div> -->
                     </div>
-
-
-
-                    <div id="botones_fila">
-
-                        <?php if (isset($libro) and ($libro["OID_LIBRO"] == $fila["OID_LIBRO"])) { ?>
-
-                        <button id="grabar" name="grabar" type="submit" class="editar_fila">
-
-                            <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
-
-                        </button>
-
-                        <?php 
-                    } else { ?>
-
-                        <button id="editar" name="editar" type="submit" class="editar_fila">
-
-                            <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar libro">
-
-                        </button>
-
-                        <?php 
-                    } ?>
-
-                        <button id="borrar" name="borrar" type="submit" class="editar_fila">
-
-                            <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar libro">
-
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </article>
-        <?php 
+                </form>
+            </article>
+        <?php
     } ?>
     </main>
     <?php
@@ -209,4 +210,4 @@ require_once("../paginacion_consulta.php");
 
 </body>
 
-</html> 
+</html>
