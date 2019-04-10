@@ -54,6 +54,7 @@ $conexion = crearConexionBD();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Alta de Usuario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
+    <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
 
     <script>
         <!--
