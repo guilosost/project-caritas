@@ -40,9 +40,21 @@ $conexion = crearConexionBD();
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
+    <script type = "text/javascript" src = "../../vista/js/validacion_voluntario.js" ></script>
 </head>
 
 <body background="../../vista/img/background.png">
+    <script>
+    		$(document).ready(function() {
+			$("#altaVoluntario").on("submit", function() {
+				return validateForm();
+            });
+            $("#pass").on("keyup", function() {
+				// Calculo el color
+				passwordColor();
+			});
+        });
+    </script>
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
@@ -61,15 +73,18 @@ $conexion = crearConexionBD();
         <div class="form">
             <h2 class="form-h2">Alta de Voluntario</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_voluntario.php" method="POST">
+                <form id="AltaVoluntario"action="../../controlador/acciones/accion_voluntario.php" method="POST">
                     <fieldset>
                         <legend>Información básica del Voluntario</legend>
 
                         <label for="nombrev" required>Nombre:</label>
                         <input class="celda" name="nombrev" type="text" maxlength="50" required />
-
+                        
                         <label for="password" required>Contraseña:</label>
-                        <input name="password" type="password" maxlength="50" required /><br>
+                        <input id="pass" name="password" type="password" maxlength="50" oninput="passwordValidation();" required /><br>
+
+                        <label for="password2" required>Repita la contraseña:</label>
+                        <input id="confirmpass" name="password2" type="password" maxlength="50" oninput="passwordConfirmation();" required /><br>
 
                         <label for="permisos">Permisos:</label>
                         <input type="radio" name="permisos" value="Sí"> Administrador

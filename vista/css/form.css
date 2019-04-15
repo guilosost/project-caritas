@@ -61,6 +61,21 @@ body {
     border-radius: 0px 15px 15px 0px;
     margin-bottom: 20px;
 }
+.strongpass {
+	background-color: green
+}
+
+.middlepass {
+	background-color: yellow
+}
+
+.weakpass {
+	background-color: red
+}
+
+.nanpass {
+	background-color: lightyellow
+}
 
 .rrssb-buttons {
     box-sizing: border-box;
