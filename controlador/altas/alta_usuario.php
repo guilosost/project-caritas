@@ -55,6 +55,7 @@ $conexion = crearConexionBD();
     <title>Alta de Usuario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
+<!--    <script type = "text/javascript" src = "../../vista/js/validacion_usuario.js" ></script> -->
 
     <script>
         <!--
@@ -70,6 +71,14 @@ $conexion = crearConexionBD();
                 familiar.classList.remove('hide');
             }
         }
+        </script>
+        <script>
+//    	$(document).ready(function() {
+//		$("#altaUsuario").on("submit", function() {
+//            validarCalle();
+//        });
+//    });
+    
         //-->
     </script>
 </head>
@@ -94,7 +103,7 @@ $conexion = crearConexionBD();
         <div class="form">
             <h2 class="form-h2">Alta de usuario</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_usuario.php" method="POST">
+                <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST">
                     <fieldset>
                         <legend>Información básica del usuario</legend>
 
@@ -108,7 +117,7 @@ $conexion = crearConexionBD();
                         <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $formulario['dni']; ?>" required /><br>
 
                         <label for="fechaNac">Fecha de nacimiento:</label>
-                        <input name="fechaNac" type="date" value="<?php  ?>" required /><br>
+                        <input name="fechaNac" type="date" value="<?php echo $formulario['fechaNac']; ?>" required /><br>
 
                         <label for="genero">Género: </label>
                         <input type="radio" name="genero" value="Masculino" <?php if ($formulario['genero'] == 'Masculino') echo ' checked '; ?>> Hombre
@@ -164,7 +173,7 @@ $conexion = crearConexionBD();
                             <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php echo $formulario['poblacion']; ?>" /><br>
 
                             <label for="domicilio">Dirección del domicilio:</label>
-                            <input class="celda" name="domicilio" type="text" maxlength="50" value="<?php echo $formulario['domicilio']; ?>" /><br>
+                            <input class="celda" name="domicilio" id="direccion" type="text" maxlength="50" value="<?php echo $formulario['domicilio']; ?>" /><br>
 
                             <label for="codigopostal">Código postal:</label>
                             <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $formulario['codigopostal']; ?>" /><br>

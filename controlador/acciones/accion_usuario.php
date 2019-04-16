@@ -111,12 +111,29 @@ function validarDatosUsuario($conexion, $usuario)
 		}else if ($usuario["poblacion"] !="San Juan de Aznalfarache"){
 			$errores[] = "<p>El solicitante debe de vivir en San Juan de Aznalfarache.</p>";
 		}
-
 		if($usuario["domicilio"]=="") {
 			$errores[] = "<p>El campo domicilio no puede estar vacío.</p>";
+		}else{
+
+		$calles=fopen("../../vista/js/ficheros/callejero.txt",'r');
+		$res=false;
+		while(!feof($calles)){
+			
+			if(fgets($calles) == $usuario["domicilio"] ){
+				$res=true;
+			}
+			if(strcasecmp(str_replace(' ', '', fgets($calles)),str_replace(' ', '',  $usuario["domicilio"]))==0){
+				$res=true;
+			}
+		}
+			fclose($calles);
+			if($res == false){
+				$errores[] = "<p>La calle bla bla bla.</p>";
+			}
+			
 		}
 
-		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))>18){
+		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))<18){
 			$errores[] = "<p>El solicitante debe de ser mayor de 18 años</p>";
 		}
 
@@ -150,4 +167,5 @@ function validarDatosUsuario($conexion, $usuario)
 	}
 	return $errores;
 }
+?>
  
