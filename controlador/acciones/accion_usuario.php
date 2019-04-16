@@ -118,11 +118,12 @@ function validarDatosUsuario($conexion, $usuario)
 		$calles=fopen("../../vista/js/ficheros/callejero.txt",'r');
 		$res=false;
 		while(!feof($calles)){
-			
-			if(fgets($calles) == $usuario["domicilio"] ){
+			$aux=fgets($calles);
+			$aux = str_replace(array("\r", "\n"," "), '',$aux);
+			if($aux == $usuario["domicilio"] ){
 				$res=true;
 			}
-			if(strcasecmp(str_replace(' ', '', fgets($calles)),str_replace(' ', '',  $usuario["domicilio"]))==0){
+			if(strcasecmp($aux,str_replace(' ', '',  $usuario["domicilio"]))==0){
 				$res=true;
 			}
 		}
