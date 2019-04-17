@@ -45,6 +45,7 @@ $conexion = crearConexionBD();
 
 <body background="../../vista/img/background.png">
     <script>
+        
     		$(document).ready(function() {
 			$("#altaVoluntario").on("submit", function() {
 				return validateForm();

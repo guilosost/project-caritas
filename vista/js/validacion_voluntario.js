@@ -80,15 +80,20 @@ var passField = document.getElementById("pass");
 var strength = passwordStrength(passField.value);
 
 if(!isNaN(strength)){
+    passField.css("background-color",red);
     var type = "weakpass";
     if(passwordValidation()!=""){
+        $("#pass").css("background-color",orange);   
         type = "weakpass";
     }else if(strength > 0.7){
+        $("#pass").css("background-color",red);
         type = "strongpass";
     }else if(strength > 0.4){
+        $("#pass").css("background-color",yellow);
         type = "middlepass";
     }
 }else{
+    passField.css("background-color",red);
     type = "nanpass";
 }
 passField.className = type;
