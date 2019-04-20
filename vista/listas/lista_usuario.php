@@ -71,7 +71,19 @@ cerrarConexionBD($conexion);
 </head>
 
 <body>
-
+<script>
+//    	$(document).ready(function() {
+//		$("#altaUsuario").on("submit", function() {
+//            validarCalle();
+//        });
+//    });
+$(document).ready(function() {
+    $("#mostrar").on("onclick", function() {
+            <?php $_SESSION["usuario"]=$fila["DNI"]; ?>
+        });
+}
+});
+</script>
     <?php
     include_once("../header.php");
     include_once("../navbar.php");
@@ -173,19 +185,19 @@ cerrarConexionBD($conexion);
 
 
                         <!-- Los botones están comentados por estética hasta que los arregle Yanes y no deformen la tabla -->
-                        <!-- <div id="botones_fila">
+                        <!-- <div id="botones_fila">-->
 
                                     <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
 
-                                                <button id="grabar" name="grabar" type="submit" class="editar_fila">
+                                                <button id="mostrar" name="mostrar" type="submit" >
 
-                                                    <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
+                                                    <img  alt="Guardar modificación">
 
                                                 </button>
 
                                     <?php
                                 } else { ?>
-
+                                            <!--
                                                 <button id="editar" name="editar" type="submit" class="editar_fila">
 
                                                     <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
