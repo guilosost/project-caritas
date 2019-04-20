@@ -145,3 +145,23 @@ function nueva_unidadfamiliar($conexion, $unidadesfamiliares) {
         return $e->getMessage();
     }
 }
+function eliminar_solicitante($conexion,$usuario) {
+	try {
+		$stmt=$conexion->prepare('CALL borrar_solicitante(:dni)');
+		$stmt->bindParam(':dni',$usuario["dni"]);
+		$stmt->execute();
+		return "";
+	} catch(PDOException $e) {
+		return $e->getMessage();
+    }
+}
+function eliminar_familiar($conexion,$usuario) {
+	try {
+		$stmt=$conexion->prepare('CALL borrar_familiar(:dni)');
+		$stmt->bindParam(':dni',$usuario["dni"]);
+		$stmt->execute();
+		return "";
+	} catch(PDOException $e) {
+		return $e->getMessage();
+    }
+}
