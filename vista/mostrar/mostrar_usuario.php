@@ -11,7 +11,6 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
 $conexion = crearConexionBD();
 if(isset($_SESSION["usuario"])){
     $usuario = $_SESSION["usuario"];
-    unset($_SESSION["usuario"]);
 }else{
     Header("Location: ../listas/lista_usuario.php");
 }
@@ -47,7 +46,7 @@ if(isset($_SESSION["usuario"])){
         <div class="form">
             <h2 class="form-h2">Información del usuario</h2>
             <div class="form-alta">
-               
+               <form action="../../controlador/eliminaciones/elimina_usuario.php" method="POST">
                     <fieldset>
                         <legend>Información básica del usuario</legend>
                         
@@ -82,12 +81,13 @@ if(isset($_SESSION["usuario"])){
                         <input name="ingresos" type="text" value="<?php echo $usuario['ingresos']; ?>" required readonly/><br>
 
                         <label for="minusvalia">¿El usuario tiene alguna discapacidad? </label>
+                    
                         <input type="radio" name="minusvalia" value="Sí" <?php if ($usuario["minusvalia"] == "Sí") echo ' checked '; ?>readonly>Sí
-                        <input type="radio" name="minusvalia" value="No" <?php if ($usuario["minusvalia"] == "No") echo ' checked '; ?>readonly>No<br>
-
+                        <input type="radio" name="minusvalia" value="No" <?php if ($usuario["minusvalia"] == "No ") echo ' checked '; ?>readonly>No<br>
+                        
                         <label for="solicitante">¿El usuario es solicitante? </label>
                         <input type="radio"  name="solicitante"   value="Sí" <?php if ($usuario['solicitante'] == "Sí") echo ' checked '; ?>readonly> Sí
-                        <input type="radio"  name="solicitante"  value="No" <?php if ($usuario['solicitante'] == "No") echo ' checked '; ?>readonly> No<br>
+                        <input type="radio"  name="solicitante"  value="No" <?php if ($usuario['solicitante'] == "No ") echo ' checked '; ?>readonly> No<br>
 
                     </fieldset>
                     <?php if ($usuario["solicitante"] == "Sí"){ ?>
@@ -129,9 +129,10 @@ if(isset($_SESSION["usuario"])){
                    <?php } ?>
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
-                        <input type="submit" value="Dar de alta">
+                        <input type="submit" value="Eliminar" >
+
                     </div>
-                
+                </form>
             </div>
         </div>
     </div>

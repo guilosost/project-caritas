@@ -138,17 +138,17 @@ $("#mostrar").onclick = muestra() {
 
                         <div class="datos_usuario">
 
-                            <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" />
+                            <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" readonly/>
 
-                            <input id="APELLIDOS" name="APELLIDOS" value="<?php echo $fila["APELLIDOS"]; ?>" />
+                            <input id="APELLIDOS" name="APELLIDOS" value="<?php echo $fila["APELLIDOS"]; ?>" readonly/>
 
-                            <input id="NOMBRE" name="NOMBRE" value="<?php echo $fila["NOMBRE"]; ?>" />
+                            <input id="NOMBRE" name="NOMBRE" value="<?php echo $fila["NOMBRE"]; ?>" readonly/>
 
-                            <input id="TELEFONO" name="TELEFONO" value="<?php echo $fila["TELEFONO"]; ?>" />
+                            <input id="TELEFONO" name="TELEFONO" value="<?php echo $fila["TELEFONO"]; ?>" readonly/>
 
-                            <input id="INGRESOS" name="INGRESOS" value="<?php echo $fila["INGRESOS"]; ?>" />
+                            <input id="INGRESOS" name="INGRESOS" value="<?php echo $fila["INGRESOS"]; ?>" readonly/>
 
-                            <input id="SITUACIONLABORAL" name="SITUACIONLABORAL" value="<?php echo $fila["SITUACIONLABORAL"]; ?>" />
+                            <input id="SITUACIONLABORAL" name="SITUACIONLABORAL" value="<?php echo $fila["SITUACIONLABORAL"]; ?>" readonly/>
                             
                             <input id="ESTUDIOS" name="ESTUDIOS" value="<?php echo $fila["ESTUDIOS"]; ?>" type="hidden" />
 
