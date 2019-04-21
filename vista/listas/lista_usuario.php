@@ -219,7 +219,7 @@ $("#mostrar").onclick = muestra() {
                                     </button>
                                 </div> -->
                     </div>
-                
+                </form>
             </article>
         <?php
     } ?>
