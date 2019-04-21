@@ -165,3 +165,18 @@ function eliminar_familiar($conexion,$usuario) {
 		return $e->getMessage();
     }
 }
+function carga_usuario($conexion,$dni) {
+    try {
+   $consulta = "SELECT * FROM USUARIOS WHERE DNI=:dni";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':dni',$dni);
+   $stmt->execute();
+   $result = $stmt->fetch();
+   return  $result;
+}
+catch ( PDOException $e ) {
+    $_SESSION['excepcion'] = $e->GetMessage();
+    return  $e->GetMessage();
+    }
+}
+

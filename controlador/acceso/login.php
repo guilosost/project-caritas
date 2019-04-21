@@ -39,8 +39,6 @@ if (isset($_SESSION["errores"])) {
     <?php
     include("../../vista/header.php");
     
-    //BORRAR NAVBAR EN LA VERSION FINAL 
-    include("../../vista/navbar.php");
     
 
 if (isset($errores) && count($errores) > 0) {

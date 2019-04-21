@@ -63,11 +63,18 @@ cerrarConexionBD($conexion);
     <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/navbar.css">
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="./js/boton.js"></script>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
-    <title>Gestión de Cáritas: Lista de Usuarios</title>
+    <title>Lista de Usuarios</title>
+    <script>
+    function muestra() {
+            $_SESSION["usuario"] = $fila["DNI"];
+            Header("Location: ../mostrar/mostrar_usuario.php"); 
+        }
+    </script>
 </head>
 
 <body>
@@ -77,12 +84,11 @@ cerrarConexionBD($conexion);
 //            validarCalle();
 //        });
 //    });
-$(document).ready(function() {
-    $("#mostrar").on("onclick", function() {
-            <?php $_SESSION["usuario"]=$fila["DNI"]; ?>
-        });
-}
-});
+$("#mostrar").onclick = muestra() {
+            $_SESSION["usuario"] = $fila["DNI"];
+            Header("Location: ../mostrar/mostrar_usuario.php"); 
+        };
+
 </script>
     <?php
     include_once("../header.php");
@@ -134,7 +140,7 @@ $(document).ready(function() {
 
             <article class="usuario">
 
-                <form method="post" action="accion_usuario.php">
+                
 
                     <div class="fila_usuario">
 
@@ -187,16 +193,9 @@ $(document).ready(function() {
                         <!-- Los botones están comentados por estética hasta que los arregle Yanes y no deformen la tabla -->
                         <!-- <div id="botones_fila">-->
 
-                                    <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
-
-                                                <button id="mostrar" name="mostrar" type="submit" >
-
-                                                    <img  alt="Guardar modificación">
-
-                                                </button>
-
-                                    <?php
-                                } else { ?>
+    
+                        <button onclick="window.location.href='../mostrar/mostrar_usuario.php'">mostrar</button>
+                                              <!--  <input id="mostrar" name="mostrar" type=button  onclick="muestra()" value="mostrar">    -->                                
                                             <!--
                                                 <button id="editar" name="editar" type="submit" class="editar_fila">
 
@@ -204,8 +203,7 @@ $(document).ready(function() {
 
                                                 </button>
 
-                                    <?php
-                                } ?>
+                                   
 
                                     <button id="borrar" name="borrar" type="submit" class="editar_fila">
 
@@ -214,7 +212,7 @@ $(document).ready(function() {
                                     </button>
                                 </div> -->
                     </div>
-                </form>
+                
             </article>
         <?php
     } ?>
