@@ -28,10 +28,8 @@ if ($pag_tam < 1)         $pag_tam = 5;
 unset($_SESSION["paginacion"]);
 
 // La consulta que ha de paginarse
-$query = 'SELECT USUARIOS.DNI, USUARIOS.APELLIDOS, USUARIOS.NOMBRE, '
-    . 'USUARIOS.TELEFONO, USUARIOS.INGRESOS, USUARIOS.SITUACIONLABORAL '
-    . 'FROM USUARIOS '
-    . 'ORDER BY APELLIDOS, NOMBRE, DNI ASC';
+$query = 'SELECT *'
+    . 'FROM USUARIOS ';
 
 // Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
 // En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
@@ -136,7 +134,7 @@ $("#mostrar").onclick = muestra() {
 
             ?>
 
-
+            <form method="post" action="../../controlador/cargas/carga_usuario.php">
 
             <article class="usuario">
 
@@ -157,7 +155,16 @@ $("#mostrar").onclick = muestra() {
                             <input id="INGRESOS" name="INGRESOS" value="<?php echo $fila["INGRESOS"]; ?>" />
 
                             <input id="SITUACIONLABORAL" name="SITUACIONLABORAL" value="<?php echo $fila["SITUACIONLABORAL"]; ?>" />
+                            
+                            <input id="ESTUDIOS" name="ESTUDIOS" value="<?php echo $fila["ESTUDIOS"]; ?>" type="hidden" />
 
+                            <input id="GENERO" name="GENERO" value="<?php echo $fila["SEXO"]; ?>" type="hidden"/>
+
+                            <input id="FECHANAC" name="FECHANAC" value="<?php echo $fila["FECHANACIMIENTO"]; ?>"type="hidden" />
+                            
+                            <input id="PROTECCIONDATOS" name="PROTECCIONDATOS" value="<?php echo $fila["PROTECCIONDATOS"]; ?>"type="hidden" />
+
+                            <input id="SOLICITANTE" name="SOLICITANTE" value="<?php echo $fila["SOLICITANTE"]; ?>" type="hidden"/>
                             <?php
 
                             # Todo este bloque está comentado porque no le he encontrado utilidad xd
@@ -194,7 +201,7 @@ $("#mostrar").onclick = muestra() {
                         <!-- <div id="botones_fila">-->
 
     
-                        <button onclick="window.location.href='../mostrar/mostrar_usuario.php'">mostrar</button>
+                        <button type="submit">mostrar</button>
                                               <!--  <input id="mostrar" name="mostrar" type=button  onclick="muestra()" value="mostrar">    -->                                
                                             <!--
                                                 <button id="editar" name="editar" type="submit" class="editar_fila">

@@ -8,8 +8,8 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 $conexion = crearConexionBD();
-$usuario=carga_usuario($conexion,$_SESSION["usuario"]);
-
+$usuario = $_SESSION["usuario"];
+unset($_SESSION["usuario"]);
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $usuario=carga_usuario($conexion,$_SESSION["usuario"]);
     include("../../vista/header.php");
     include("../../vista/navbar.php");
     ?>
-<?php echo $_SESSION["usuario"];?>
+
     <div class="flex">
         <div class="form">
             <h2 class="form-h2">Información del usuario</h2>
