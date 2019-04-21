@@ -165,6 +165,12 @@ $("#mostrar").onclick = muestra() {
                             <input id="PROTECCIONDATOS" name="PROTECCIONDATOS" value="<?php echo $fila["PROTECCIONDATOS"]; ?>"type="hidden" />
 
                             <input id="SOLICITANTE" name="SOLICITANTE" value="<?php echo $fila["SOLICITANTE"]; ?>" type="hidden"/>
+                            
+                            <input id="PARENTESCO" name="PARENTESCO" value="<?php echo $fila["PARENTESCO"]; ?>"type="hidden" />
+                            
+                            <input id="MINUSVALIA" name="MINUSVALIA" value="<?php echo $fila["MINUSVALIA"]; ?>"type="hidden" />
+                            
+                            <input id="DNI_SO" name="DNI_SO" value="<?php echo $fila["DNI_SO"]; ?>"type="hidden" />
                             <?php
 
                             # Todo este bloque está comentado porque no le he encontrado utilidad xd

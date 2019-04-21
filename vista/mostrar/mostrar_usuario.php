@@ -46,93 +46,78 @@ unset($_SESSION["usuario"]);
                         <legend>Información básica del usuario</legend>
                         
                         <label for="nombre" required>Nombre:</label>
-                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $usuario['nombre']; ?>" required />
+                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $usuario['nombre']; ?>" required readonly />
 
                         <label for="apellidos" required>Apellidos:</label>
-                        <input name="apellidos" type="text" maxlength="50" value="<?php echo $usuario['apellidos']; ?>" required /><br>
+                        <input name="apellidos" type="text" maxlength="50" value="<?php echo $usuario['apellidos']; ?>" required readonly/><br>
 
                         <label for="dni">DNI:</label>
-                        <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $usuario['dni']; ?>" required /><br>
+                        <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $usuario['dni']; ?>" required readonly/><br>
 
                         <label for="fechaNac">Fecha de nacimiento:</label>
-                        <input name="fechaNac" type="date" value="<?php echo $usuario['fechaNac']; ?>" required /><br>
+                        <input name="fechaNac" type="date" value="<?php echo $usuario['fechaNac']; ?>" required readonly/><br>
 
                         <label for="genero">Género: </label>
-                        <input type="radio" name="genero" value="Masculino" <?php if ($usuario['genero'] == 'Masculino') echo ' checked '; ?>> Hombre
-                        <input type="radio" name="genero" value="Femenino" <?php if ($usuario['genero'] == 'Femenino') echo ' checked '; ?>> Mujer<br>
-
-                        <label for="email">Correo electrónico:</label>
-                        <input class="celda" name="email" type="text" value="<?php echo $usuario['email']; ?>" required /><br>
+                        <input type="radio" name="genero" value="Masculino" <?php if ($usuario['genero'] == 'Masculino') echo ' checked '; ?>readonly> Hombre
+                        <input type="radio" name="genero" value="Femenino" <?php if ($usuario['genero'] == 'Femenino') echo ' checked '; ?>readonly> Mujer<br>
 
                         <label for="telefono">Teléfono:</label>
-                        <input class="celda" name="telefono" type="text" maxlength="10" value="<?php echo $usuario['telefono']; ?>" required /><br>
+                        <input class="celda" name="telefono" type="text" maxlength="10" value="<?php echo $usuario['telefono']; ?>" required readonly/><br>
 
                         <label for="estudios">Estudios: </label>
-                        <select class="celda" name="estudios" size=1 required>
-                            <option value="NULL">No es relevante </option>
-                            <option value="Sin estudios">Sin estudios </option>
-                            <option value="Educacion primaria">Educación primaria </option>
-                            <option value="Educacion secundaria">Educación secundaria </option>
-                            <option value="Bachillerato">Bachillerato </option>
-                            <option value="Grado medio">Grado medio </option>
-                            <option value="Grado superior">Grado superior </option>
-                            <option value="Grado universitario">Grado universitario </option>
+                        <input class="celda" name="estudios" type="text" maxlength="13" value="<?php echo $usuario['estudios']; ?>" readonly/><br>
                         </select>
-                        <br>
+                      
                         <label for="sitlaboral">Situación laboral: </label>
-                        <select class="celda" name="sitlaboral" size=1 required>
-                            <option value="NULL">No es relevante </option>
-                            <option value="En paro">Desempleado </option>
-                            <option value="Trabajando">Trabajando </option>
+                        <input class="celda" name="sitlaboral" type="text" maxlength="13" value="<?php echo $usuario['sitlaboral']; ?>" readonly/><br>
                         </select>
-                        <br>
-
+                      
                         <label for="ingresos">Ingresos:</label>
-                        <input name="ingresos" type="text" value="<?php echo $usuario['ingresos']; ?>" required /><br>
+                        <input name="ingresos" type="text" value="<?php echo $usuario['ingresos']; ?>" required readonly/><br>
 
                         <label for="minusvalia">¿El usuario tiene alguna discapacidad? </label>
-                        <input type="radio" name="minusvalia" value="Sí" <?php if ($usuario['minusvalia'] == 'Sí') echo ' checked '; ?>>Sí
-                        <input type="radio" name="minusvalia" value="No" <?php if ($usuario['minusvalia'] == 'No') echo ' checked '; ?>>No<br>
+                        <input type="radio" name="minusvalia" value="Sí" <?php if ($usuario["minusvalia"] == "Sí") echo ' checked '; ?>readonly>Sí
+                        <input type="radio" name="minusvalia" value="No" <?php if ($usuario["minusvalia"] == "No") echo ' checked '; ?>readonly>No<br>
 
                         <label for="solicitante">¿El usuario es solicitante? </label>
-                        <input type="radio" id="solicitar" name="solicitante"  onclick="showHide(this)" value="Sí" <?php if ($formulario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
-                        <input type="radio" id="familiar" name="solicitante"  onclick="showHide(this)" value="No" <?php if ($formulario['solicitante'] == 'No') echo ' checked '; ?>> No<br>
+                        <input type="radio"  name="solicitante"   value="Sí" <?php if ($usuario['solicitante'] == "Sí") echo ' checked '; ?>readonly> Sí
+                        <input type="radio"  name="solicitante"  value="No" <?php if ($usuario['solicitante'] == "No") echo ' checked '; ?>readonly> No<br>
 
                     </fieldset>
                     <?php if ($usuario["solicitante"] == "Sí"){ ?>
-                    <div  id="esSolicitante" class="hide"> 
+                    <div  id="esSolicitante" > 
                         <br>
                         <fieldset>
                             <legend>Información básica del solicitante</legend>
                             
                             <label for="gastosfamilia">Gastos de la familia:</label>
-                            <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php echo $usuario['gastosfamilia']; ?>" /><br>
+                            <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php echo $usuario['gastosfamilia']; ?>" readonly/><br>
 
                             <label for="poblacion">Población:</label>
-                            <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php echo $usuario['poblacion']; ?>" /><br>
+                            <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php echo $usuario['poblacion']; ?>" readonly/><br>
 
                             <label for="domicilio">Dirección del domicilio:</label>
-                            <input class="celda" name="domicilio" id="direccion" type="text" maxlength="50" value="<?php echo $usuario['domicilio']; ?>" /><br>
+                            <input class="celda" name="domicilio" id="direccion" type="text" maxlength="50" value="<?php echo $usuario['domicilio']; ?>" readonly/><br>
                             
                             <label for="codigopostal">Código postal:</label>
-                            <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $usuario['codigopostal']; ?>" /><br>
+                            <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $usuario['codigopostal']; ?>" readonly/><br>
                             
                             <label for="proteccionDatos">
-                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario['proteccionDatos'] == 'Sí') echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
+                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario['proteccionDatos'] == 'Sí') echo ' checked '; ?>readonly>De acuerdo con la Ley de Protección de Datos
                             </label>
                         </fieldset>
                     </div>
                     <?php }else{ ?>
-                    <div id="esFamiliar" class="hide">
+                    <div id="esFamiliar" >
                         <br>
                         <fieldset>
                             <legend>Información básica del familiar</legend>
 
                             <label for="dniSol">DNI del solicitante:</label>
-                            <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php echo $usuario['dniSol']; ?>" /><br>
+                            <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php echo $usuario['dni_so']; ?>"readonly /><br>
 
                             <label for='parentesco'>Parentesco con el solicitante:</label>
-                            <input name='parentesco' type='text' value="<?php echo $usuario['parentesco']; ?>" /><br>
+                            <input name='parentesco' type='text' value="<?php echo $usuario['parentesco']; ?>" readonly/><br>
                         </fieldset>
                     </div>
                    <?php } ?>
