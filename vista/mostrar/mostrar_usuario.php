@@ -7,9 +7,15 @@ require_once(GESTIONAR . "gestionar_usuarios.php");
 if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
+
 $conexion = crearConexionBD();
-$usuario = $_SESSION["usuario"];
-unset($_SESSION["usuario"]);
+if(isset($_SESSION["usuario"])){
+    $usuario = $_SESSION["usuario"];
+    unset($_SESSION["usuario"]);
+}else{
+    Header("Location: ../listas/lista_usuario.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +109,7 @@ unset($_SESSION["usuario"]);
                             <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $usuario['codigopostal']; ?>" readonly/><br>
                             
                             <label for="proteccionDatos">
-                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario['proteccionDatos'] == 'Sí') echo ' checked '; ?>readonly>De acuerdo con la Ley de Protección de Datos
+                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario['protecciondatos'] == 'Sí') echo ' checked '; ?>readonly>De acuerdo con la Ley de Protección de Datos
                             </label>
                         </fieldset>
                     </div>

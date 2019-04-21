@@ -67,12 +67,6 @@ cerrarConexionBD($conexion);
     <script type="text/javascript" src="./js/boton.js"></script>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <title>Lista de Usuarios</title>
-    <script>
-    function muestra() {
-            $_SESSION["usuario"] = $fila["DNI"];
-            Header("Location: ../mostrar/mostrar_usuario.php"); 
-        }
-    </script>
 </head>
 
 <body>
@@ -171,12 +165,15 @@ $("#mostrar").onclick = muestra() {
                             <input id="MINUSVALIA" name="MINUSVALIA" value="<?php echo $fila["MINUSVALIA"]; ?>"type="hidden" />
                             
                             <input id="DNI_SO" name="DNI_SO" value="<?php echo $fila["DNI_SO"]; ?>"type="hidden" />
+
                             <?php
+                             $uf = unidadfamiliar_solicitante($conexion,$fila["OID_UF"]); ?>
 
-                            # Todo este bloque está comentado porque no le he encontrado utilidad xd
-                            # Si veis que sirve para algo comentadlo
-
-                            ?>
+                             <input id="poblacion" name="poblacion" value="<?php echo $uf["POBLACION"]; ?>"type="hidden" />
+                             <input id="domicilio" name="domicilio" value="<?php echo $uf["DOMICILIO"]; ?>"type="hidden" />
+                             <input id="codigopostal" name="codigopostal" value="<?php echo $uf["CODIGOPOSTAL"]; ?>"type="hidden" />
+                             <input id="gastosfamilia" name="gastosfamilia" value="<?php echo $uf["GASTOSFAMILIA"]; ?>"type="hidden" />
+                            
 
                             <!-- Editando nombre -->
 

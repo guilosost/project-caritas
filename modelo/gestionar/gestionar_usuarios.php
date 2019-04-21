@@ -165,3 +165,10 @@ function eliminar_familiar($conexion,$usuario) {
 		return $e->getMessage();
     }
 }
+function unidadfamiliar_solicitante($conexion,$dni) {
+    $consulta = "SELECT *  FROM UNIDADESFAMILIARES WHERE OID_UF=:oid_uf";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_uf',$dni);
+   $stmt->execute();
+   return $stmt->fetch();
+}

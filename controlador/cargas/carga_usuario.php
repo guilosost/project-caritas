@@ -16,6 +16,10 @@
 		$usuario["parentesco"] = $_REQUEST["PARENTESCO"];
 		$usuario["minusvalia"] = $_REQUEST["MINUSVALIA"];
 		$usuario["dni_so"] = $_REQUEST["DNI_SO"];
+		$usuario["poblacion"] = $_REQUEST["poblacion"];
+		$usuario["domicilio"] = $_REQUEST["domicilio"];
+		$usuario["codigopostal"] = $_REQUEST["codigopostal"];
+		$usuario["gastosfamilia"] = $_REQUEST["gastosfamilia"];
 		$_SESSION["usuario"] = $usuario;
 			
 	Header("Location: ../../vista/mostrar/mostrar_usuario.php"); 
