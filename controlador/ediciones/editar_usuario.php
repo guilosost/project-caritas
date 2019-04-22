@@ -136,7 +136,7 @@ $conexion = crearConexionBD();
                             <legend>Información básica del solicitante</legend>
 
                             <label for="gastosfamilia">Gastos de la familia:</label>
-                            <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?phpif ($usuario["solicitante"] == "Sí") echo $usuario['gastosfamilia']; ?>" /><br>
+                            <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['gastosfamilia']; ?>" /><br>
 
                             <label for="poblacion">Población:</label>
                             <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['poblacion']; ?>" /><br>
@@ -148,7 +148,7 @@ $conexion = crearConexionBD();
                             <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['codigopostal']; ?>" /><br>
 
                             <label for="proteccionDatos">
-                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario['proteccionDatos'] == 'Sí' and ($usuario["solicitante"] == "Sí")) echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
+                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario["solicitante"] == "Sí") echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
                             </label>
                         </fieldset>
                     </div>

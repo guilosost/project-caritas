@@ -23,8 +23,30 @@ if (isset($_SESSION["formulario_usuario"])) {
 	$usuario['email'] = $_REQUEST["email"];
 	$usuario['dniSol'] = $_REQUEST["dniSol"];
 	$_SESSION["formulario_usuario"] = $usuario;
-} else {
-	Header("Location: ../../controlador/altas/alta_usuario.php");
+
+ } else if (isset($_SESSION["usuario"])) {
+	$usuario['dni'] = $_REQUEST["dni"];
+	$usuario['nombre'] = $_REQUEST["nombre"];
+	$usuario['apellidos'] = $_REQUEST["apellidos"];
+	$usuario['fechaNac'] = $_REQUEST["fechaNac"];
+	$usuario['parentesco'] = $_REQUEST["parentesco"];
+	$usuario['telefono'] = $_REQUEST["telefono"];
+	$usuario['genero'] = $_REQUEST["genero"];
+	$usuario['minusvalia'] = $_REQUEST["minusvalia"];
+	$usuario['solicitante'] = $_REQUEST["solicitante"];
+	$usuario['ingresos'] = $_REQUEST["ingresos"];
+	$usuario['estudios'] = $_REQUEST["estudios"];
+	$usuario['sitlaboral'] = $_REQUEST["sitlaboral"];
+	$usuario['proteccionDatos'] = $_REQUEST["proteccionDatos"];
+	$usuario['poblacion'] = $_REQUEST["poblacion"];
+	$usuario['codigopostal'] = $_REQUEST["codigopostal"];
+	$usuario['domicilio'] = $_REQUEST["domicilio"];
+	$usuario['gastosfamilia'] = $_REQUEST["gastosfamilia"];
+	$usuario['email'] = $_REQUEST["email"];
+	$usuario['dniSol'] = $_REQUEST["dniSol"];
+	$_SESSION["usuario"] = $usuario;
+ }else{
+	Header("Location: ../../vista/listas/lista_usuario.php");
 }
 
 $conexion = crearConexionBD();
@@ -34,7 +56,11 @@ cerrarConexionBD($conexion);
 if (count($errores)>0) {
 	// Guardo en la sesión los mensajes de error y volvemos al formulario
 	$_SESSION["errores"] = $errores;
-	Header('Location: ../../controlador/altas/alta_usuario.php');
+	if(isset($_SESSION["usuario"])){
+		Header('Location: ../../controlador/ediciones/editar_usuario.php');
+	}else{
+		Header('Location: ../../controlador/altas/alta_usuario.php');
+	}
 } else {
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
 	Header('Location: ../../controlador/resultados/resultado_alta_usuario.php');
@@ -58,13 +84,13 @@ function validarDatosUsuario($conexion, $usuario)
 		$errores[] = "<p>Los apellidos no pueden estar vacíos o contener caracteres numéricos.</p>";
 	}
 
-
-	if ($usuario["email"] == "") {
-		$errores[] = "<p>El email no puede estar vacío</p>";
-	} else if (!filter_var($usuario["email"], FILTER_VALIDATE_EMAIL)) {
-		$errores[] = "<p>El email es incorrecto: " . $usuario["email"] . ".</p>";
+	if(!isset($_SESSION["usuario"])){
+		if ($usuario["email"] == "") {
+			$errores[] = "<p>El email no puede estar vacío</p>";
+		} else if (!filter_var($usuario["email"], FILTER_VALIDATE_EMAIL)) {
+			$errores[] = "<p>El email es incorrecto: " . $usuario["email"] . ".</p>";
+		}
 	}
-
 	if ($usuario["telefono"] == "") {
 		$errores[] = "<p>El telefono no puede estar vacío</p>";
 	} else if (!preg_match("/^[0-9]{9}$/", $usuario["telefono"])) {
