@@ -70,11 +70,11 @@ if(isset($_SESSION["usuario"])){
                         <input class="celda" name="telefono" type="text" maxlength="10" value="<?php echo $usuario['telefono']; ?>" required readonly/><br>
 
                         <label for="estudios">Estudios: </label>
-                        <input class="celda" name="estudios" type="text" maxlength="13" value="<?php echo $usuario['estudios']; ?>" readonly/><br>
+                        <input class="celda" name="estudios" type="text" maxlength="40" value="<?php echo $usuario['estudios']; ?>" readonly/><br>
                         </select>
                       
                         <label for="sitlaboral">Situación laboral: </label>
-                        <input class="celda" name="sitlaboral" type="text" maxlength="13" value="<?php echo $usuario['sitlaboral']; ?>" readonly/><br>
+                        <input class="celda" name="sitlaboral" type="text" maxlength="40" value="<?php echo $usuario['sitlaboral']; ?>" readonly/><br>
                         </select>
                       
                         <label for="ingresos">Ingresos:</label>
@@ -130,7 +130,7 @@ if(isset($_SESSION["usuario"])){
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
                         <input type="submit" value="Eliminar" >
-
+                        <input type="button" onclick="location.href='../../controlador/ediciones/editar_usuario.php'" value="Editar" />
                     </div>
                 </form>
             </div>

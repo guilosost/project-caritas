@@ -11,6 +11,13 @@
 		else{
 			Header("Location: ../../controlador/altas/alta_usuario.php"); 
 		}
+		if (isset($_SESSION["usuario"])) {
+			$usuario = $_SESSION["usuario"];
+			unset($_SESSION["usuario"]);
+			}
+			else{
+				Header("Location: ../../vista/listas/lista_usuario.php"); 
+			}
 	
 		$conexion  = crearConexionBD();
         
