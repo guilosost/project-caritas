@@ -6,16 +6,12 @@
 	
 	if (isset($_SESSION["formulario_usuario"])) {
 		$usuario = $_SESSION["formulario_usuario"];
-		unset($_SESSION["formulario_usuario"]);
+		
 		}
-		else{
-			Header("Location: ../../controlador/altas/alta_usuario.php"); 
-		}
-		if (isset($_SESSION["usuario"])) {
+	else if (isset($_SESSION["usuario"])) {
 			$usuario = $_SESSION["usuario"];
-			unset($_SESSION["usuario"]);
-			}
-			else{
+			
+	}else{
 				Header("Location: ../../vista/listas/lista_usuario.php"); 
 			}
 	
@@ -43,7 +39,9 @@
 <body background="../../vista/img/background.png">
 		<?php 
 	 include("../../vista/header.php"); 
-   	 include("../../vista/navbar.php");
+	 include("../../vista/navbar.php");
+		if (isset($_SESSION["formulario_usuario"])) {
+			unset($_SESSION["formulario_usuario"]);
 			if ($usuario["solicitante"]=="Sí"){
 			 
 				if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
@@ -70,6 +68,22 @@
 			} else{
 				echo "Error desconocido.";
 			}
+		}
+	}
+		if (isset($_SESSION["usuario"])) {
+			unset($_SESSION["usuario"]);
+			if ($usuario["solicitante"]=="Sí"){
+			 
+				if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
+					echo editar_usuario($conexion,$usuario);
+				} else{
+					echo "Error desconocido.";
+			}
+		}
+		
+		if ($usuario["solicitante"]=="No"){
+
+		}
 		}
 		?>
 		
