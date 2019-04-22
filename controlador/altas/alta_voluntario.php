@@ -92,7 +92,7 @@ $conexion = crearConexionBD();
                         <input type="radio" name="permisos" value="No"> Voluntario estándar<br>
                     </fieldset>
                     <div class="botones">
-                        <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
+                        <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_voluntario.php'">Cancelar</a>
                         <input type="submit" value="Dar de alta">
                     </div>
                 </form>
