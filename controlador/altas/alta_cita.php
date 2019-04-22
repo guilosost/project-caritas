@@ -80,7 +80,7 @@ $conexion = crearConexionBD();
                     <textarea class="fillable" name="observaciones" value="<?php echo $formulario['observaciones']; ?>"></textarea>
 
                     <div class="botones">
-                        <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
+                        <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_cita.php'">Cancelar</a>
                         <input type="submit" value="Confirmar cita">
                     </div>
                 </form>

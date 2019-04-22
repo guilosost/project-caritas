@@ -4,7 +4,7 @@
     justify-content: flex-end;
 }
 
-button, html [type=button], [type=reset], [type=submit], [type=cancel] {
+button, [type=button], [type=reset], [type=submit], [type=cancel] {
     border-radius: 10px;
     color: black;
     font-size: 16px;
@@ -24,7 +24,7 @@ button, html [type=button], [type=reset], [type=submit], [type=cancel] {
     text-decoration: none;
 }
 
-[type=submit] {
+[type=button], [type=submit] {
     border: none;
     float: right;
     margin-top: 10px;
@@ -45,7 +45,7 @@ button, html [type=button], [type=reset], [type=submit], [type=cancel] {
 }
 
 
-[type=submit]:hover, .confirm:hover {
+[type=button]:hover,[type=submit]:hover, .confirm:hover {
     -webkit-transition-duration: 0.4s;
     /* Safari */
     transition-duration: 0.4s;
