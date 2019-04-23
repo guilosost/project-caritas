@@ -173,16 +173,19 @@ function unidadfamiliar_solicitante($conexion,$dni) {
    return $stmt->fetch();
 }
 
-function editar_usuario($conexion,$usuario) {
-    $true=true;
+function editar_solicitante($conexion,$usuario) {
+    $true="true";
     date_default_timezone_set('UTC');
     $fecha = $usuario["fechaNac"];
-
+    $no = "No";
+    $vacio=" ";
     list($año, $mes, $dia) = split('[/.-]', $fecha);
     $fechaNacimiento = "$dia/$mes/$año";
     try {
-   $stmt=$conexion->prepare('CALL actualizar_usuario(:dni,:solicitante,:nombre,:apellidos,:ingresos,:situacionlaboral,:estudios,:sexo,:telefono,:estadocivil,:fechanac,
-   :protecciondatos,:parentesco,:problematica,:tratamiento,:minusvalia,:valoracionminusvalia,:dni_so,:salidaesperada);');
+   $stmt=$conexion->prepare("CALL editar_solicitante(:dni,:nombre,:apellidos,:ingresos,:situacionlaboral,:estudios,:sexo,:telefono,
+   :poblacion,:domicilio,:codigopostal,:gastosfamilia,:estadocivil, TO_DATE(:fechanac, 'DD/MM/RRRR'),
+   :protecciondatos,:problematica,:tratamiento,:minusvalia,:valoracionminusvalia,:oid_uf,:solicitante)");
+    
     $stmt->bindParam(':dni',$usuario["dni"]);
     $stmt->bindParam(':solicitante',$usuario["solicitante"]);
 	$stmt->bindParam(':nombre',$usuario["nombre"]);
@@ -199,22 +202,17 @@ function editar_usuario($conexion,$usuario) {
     $stmt->bindParam(':estadocivil',$vacio);
     $stmt->bindParam(':fechanac',$fechaNacimiento);
     $stmt->bindParam(':protecciondatos',$usuario["protecciondatos"]);
-    $stmt->bindParam(':parentesco',$usuario["parentesco"]);
     $stmt->bindValue(':problematica',null, PDO::PARAM_INT);
     $stmt->bindParam(':tratamiento',$no);
     $stmt->bindParam(':minusvalia',$usuario["minusvalia"]);
     $stmt->bindParam(':valoracionminusvalia',$no);
-    $stmt->bindParam(':dni_so',$usuario["dni_so"]);
-    $stmt->bindParam(':salidaesperada',$true);
+    $stmt->bindParam(':poblacion', $usuario["poblacion"]);
+    $stmt->bindParam(':domicilio', $usuario["domicilio"]);
+    $stmt->bindParam(':codigopostal', $usuario["codigopostal"]);
+    $stmt->bindParam(':gastosfamilia', $usuario["gastosfamilia"]);
+    $stmt->bindParam(':oid_uf', $usuario["oid_uf"]);
    $stmt->execute();
 
-   $stmt=$conexion->prepare('UPDATE unidadesfamiliares SET poblacion=w_poblacion,domicilio=w_domicilio, codigopostal=w_codigopostal, gastosfamilia=w_gastosfamilia WHERE oid_uf=w_oid_uf');
-   $stmt->bindParam(':w_poblacion', $usuario["poblacion"]);
-   $stmt->bindParam(':w_domicilio', $usuario["domicilio"]);
-   $stmt->bindParam(':w_codigopostal', $usuario["codigopostal"]);
-   $stmt->bindParam(':w_gastosfamilia', $usuario["gastosfamilia"]);
-   $stmt->bindParam(':w_oid_uf', $usuario["oid_uf"]);
-   $stmt->execute();
 } catch(PDOException $e) {
     return $e->getMessage();
 }

@@ -75,7 +75,7 @@
 			if ($usuario["solicitante"]=="Sí"){
 			 
 				if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
-					echo editar_usuario($conexion,$usuario);
+					echo editar_solicitante($conexion,$usuario);
 				} else{
 					echo "Error desconocido.";
 			}

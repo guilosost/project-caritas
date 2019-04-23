@@ -555,3 +555,34 @@ BEGIN
     RETURN res;
 END contraseñas;
 /
+CREATE OR REPLACE PROCEDURE editar_solicitante (
+    w_dni                    IN                       usuarios.dni%TYPE,
+    w_nombre                 IN                       usuarios.nombre%TYPE,
+    w_apellidos              IN                       usuarios.apellidos%TYPE,
+    w_ingresos               IN                       usuarios.ingresos%TYPE,
+    w_situacionlaboral       IN                       usuarios.situacionlaboral%TYPE,
+    w_estudios               IN                       usuarios.estudios%TYPE,
+    w_sexo                   IN                       usuarios.sexo%TYPE,
+    w_telefono               IN                       usuarios.telefono%TYPE,
+    w_poblacion              IN                       unidadesfamiliares.poblacion%TYPE,
+    w_domicilio              IN                       unidadesfamiliares.domicilio%TYPE,
+    w_codigopostal           IN                       unidadesfamiliares.codigopostal%TYPE,
+    w_gastosfamilia          IN                       unidadesfamiliares.gastosfamilia%TYPE,
+    w_estadocivil            IN                       usuarios.estadocivil%TYPE,
+    w_fechanacimiento        IN                       usuarios.fechanacimiento%TYPE,
+    w_protecciondatos        IN                       usuarios.protecciondatos%TYPE,
+    w_problematica           IN                       usuarios.problematica%TYPE,
+    w_tratamiento            IN                       usuarios.tratamiento%TYPE,
+    w_minusvalia             IN                       usuarios.minusvalia%TYPE,
+    w_valoracionminusvalia   IN                       usuarios.valoracionminusvalia%TYPE,
+    w_oid_uf    IN          unidadesfamiliares.oid_uf%TYPE,
+    w_solicitante   IN  usuarios.solicitante%TYPE
+) IS
+BEGIN
+    UPDATE unidadesfamiliares SET poblacion=w_poblacion, domicilio=w_domicilio, codigopostal=w_codigopostal, gastosfamilia=w_gastosfamilia WHERE oid_uf = w_oid_uf;
+    UPDATE usuarios SET nombre=w_nombre,apellidos=w_apellidos, ingresos=w_ingresos, situacionlaboral=w_situacionlaboral, estudios=w_estudios, sexo=w_sexo, telefono=w_telefono, estadocivil=w_estadocivil,
+    fechanacimiento=w_fechanacimiento, protecciondatos=w_protecciondatos, problematica=w_problematica, tratamiento=w_tratamiento, minusvalia=w_minusvalia, valoracionminusvalia=w_valoracionminusvalia,
+    solicitante=w_solicitante WHERE dni=w_dni;
+
+END editar_solicitante;
+/
