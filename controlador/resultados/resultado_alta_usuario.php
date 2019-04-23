@@ -79,12 +79,14 @@
 				} else{
 					echo "Error desconocido.";
 			}
+		}else if ($usuario["solicitante"]=="No"){
+			if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
+				echo editar_familiar($conexion,$usuario);
+			} else{
+				echo "Error desconocido.";
 		}
-		
-		if ($usuario["solicitante"]=="No"){
-
 		}
-		}
+	}
 		?>
 		
 	</main>
