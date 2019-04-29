@@ -44,6 +44,8 @@ if (isset($_SESSION["formulario_usuario"])) {
 	$usuario['gastosfamilia'] = $_REQUEST["gastosfamilia"];
 	$usuario['email'] = $_REQUEST["email"];
 	$usuario['dniSol'] = $_REQUEST["dniSol"];
+	$usuario_aux = $_SESSION["usuario"];
+	$usuario["oid_uf"] = $usuario_aux["oid_uf"]; 
 	$_SESSION["usuario"] = $usuario;
  }else{
 	Header("Location: ../../vista/listas/lista_usuario.php");

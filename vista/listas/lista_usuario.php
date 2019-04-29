@@ -168,7 +168,8 @@ $("#mostrar").onclick = muestra() {
 
                             <?php
                              $uf = unidadfamiliar_solicitante($conexion,$fila["OID_UF"]); ?>
-
+                             
+                             <input id="oid_uf" name="oid_uf" value="<?php echo $fila["OID_UF"]; ?>"type="hidden" />
                              <input id="poblacion" name="poblacion" value="<?php echo $uf["POBLACION"]; ?>"type="hidden" />
                              <input id="domicilio" name="domicilio" value="<?php echo $uf["DOMICILIO"]; ?>"type="hidden" />
                              <input id="codigopostal" name="codigopostal" value="<?php echo $uf["CODIGOPOSTAL"]; ?>"type="hidden" />

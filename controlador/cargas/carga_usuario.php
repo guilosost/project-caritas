@@ -20,6 +20,7 @@
 		$usuario["domicilio"] = $_REQUEST["domicilio"];
 		$usuario["codigopostal"] = $_REQUEST["codigopostal"];
 		$usuario["gastosfamilia"] = $_REQUEST["gastosfamilia"];
+		$usuario["oid_uf"] = $_REQUEST["oid_uf"];
 		$_SESSION["usuario"] = $usuario;
 			
 	Header("Location: ../../vista/mostrar/mostrar_usuario.php"); 

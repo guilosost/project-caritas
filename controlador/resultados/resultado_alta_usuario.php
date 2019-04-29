@@ -72,21 +72,24 @@
 	}
 		if (isset($_SESSION["usuario"])) {
 			unset($_SESSION["usuario"]);
-			if ($usuario["solicitante"]=="Sí"){
-			 
-				if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
-					echo editar_solicitante($conexion,$usuario);
-				} else{
-					echo "Error desconocido.";
-			}
-		}else if ($usuario["solicitante"]=="No"){
+			
+		if ($usuario["solicitante"]=="No"){
 			if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
 				echo editar_familiar($conexion,$usuario);
 			} else{
 				echo "Error desconocido.";
 		}
+	}
+		else {
+			 
+			if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
+				echo editar_solicitante($conexion,$usuario);
+			} else{
+				echo "Error desconocido.";
 		}
 	}
+}
+	
 		?>
 		
 	</main>
