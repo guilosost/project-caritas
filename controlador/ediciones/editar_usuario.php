@@ -36,6 +36,7 @@ $conexion = crearConexionBD();
     <title>Editar Usuario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
+    <script type = "text/javascript" src = "../../vista/js/validacion_usuario.js" ></script>
 <!--    <script type = "text/javascript" src = "../../vista/js/validacion_usuario.js" ></script> -->
 <script>
         
@@ -52,6 +53,7 @@ $conexion = crearConexionBD();
             }
         }
         </script>
+        <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 
 <body background="../../vista/img/background.png">
@@ -69,20 +71,21 @@ $conexion = crearConexionBD();
         //    echo "</div>";
     }
     ?>
+   
 
     <div class="flex">
         <div class="form">
             <h2 class="form-h2">Alta de usuario</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST">
+                <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST" name="altaUsuario" onsubmit="return validateForm()" >
                     <fieldset>
                         <legend>Información básica del usuario</legend>
 
                         <label for="nombre" required>Nombre:</label>
-                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $usuario['nombre']; ?>" required />
+                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $usuario['nombre']; ?>"  />
 
                         <label for="apellidos" required>Apellidos:</label>
-                        <input name="apellidos" type="text" maxlength="50" value="<?php echo $usuario['apellidos']; ?>" required /><br>
+                        <input name="apellidos" type="text" maxlength="50" value="<?php echo $usuario['apellidos']; ?>" /><br>
 
                         <label for="dni">DNI:</label>
                         <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $usuario['dni']; ?>" required /><br>
@@ -174,6 +177,27 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
+    <script  type="text/javascript">
+    var frmvalidator = new Validator("altaUsuario");
+    frmvalidator.addValidation("nombre","req","Introduzca el nombre");
+    frmvalidator.addValidation("apellidos","req","Introduzca los apellidos");
+    frmvalidator.addValidation("dni","req","Introduzca el dni");
+    frmvalidator.addValidation("fechaNac","req","Please enter your First Name");
+    frmvalidator.addValidation("genero","req","Introduzca el género");
+    frmvalidator.addValidation("telefono","req","Introduzca el teléfono");
+    frmvalidator.addValidation("estudios","req","Introduzca el nivel de estudios");
+    frmvalidator.addValidation("sitlaboral","req","Introduzca la situación laboral del usuario");
+    frmvalidator.addValidation("ingresos","req","Introduzca los ingresos");
+    frmvalidator.addValidation("minusvalia","req","Introduzca si posee alguna minusvalia");
+    frmvalidator.addValidation("solicitante","req","Introduzca si el usuario es solicitante");
+    frmvalidator.addValidation("nombre","req","Please enter your First Name");
+    frmvalidator.addValidation("nombre","req","Please enter your First Name");
+    frmvalidator.addValidation("nombre","req","Please enter your First Name");
+    frmvalidator.addValidation("nombre","req","Please enter your First Name");
+    frmvalidator.addValidation("nombre","req","Please enter your First Name");
+
+ 
+</script>
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);

@@ -81,6 +81,7 @@ $conexion = crearConexionBD();
     
         //-->
     </script>
+     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 
 <body background="../../vista/img/background.png">
@@ -108,7 +109,7 @@ $conexion = crearConexionBD();
                         <legend>Información básica del usuario</legend>
 
                         <label for="nombre" required>Nombre:</label>
-                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $formulario['nombre']; ?>" required />
+                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $formulario['nombre']; ?>"  />
 
                         <label for="apellidos" required>Apellidos:</label>
                         <input name="apellidos" type="text" maxlength="50" value="<?php echo $formulario['apellidos']; ?>" required /><br>
@@ -130,7 +131,7 @@ $conexion = crearConexionBD();
                         <input class="celda" name="telefono" type="text" maxlength="10" value="<?php echo $formulario['telefono']; ?>" required /><br>
 
                         <label for="estudios">Estudios: </label>
-                        <select class="celda" name="estudios" size=1 required>
+                        <select class="celda" value="000" name="estudios" size=1 required>
                             <option value="No es relevante">No es relevante </option>
                             <option value="Sin estudios">Sin estudios </option>
                             <option value="Educacion primaria">Educación primaria </option>
@@ -142,7 +143,7 @@ $conexion = crearConexionBD();
                         </select>
                         <br>
                         <label for="sitlaboral">Situación laboral: </label>
-                        <select class="celda" name="sitlaboral" size=1 required>
+                        <select class="celda" value="000"name="sitlaboral" size=1 required>
                             <option value="No es relevante">No es relevante </option>
                             <option value="En paro">Desempleado </option>
                             <option value="Trabajando">Trabajando </option>
@@ -205,6 +206,33 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
+    <script  type="text/javascript">
+    var frmvalidator = new Validator("altaUsuario");
+    var solicitante = document.forms["altaUsuario"]["solicitante"].value;
+    frmvalidator.addValidation("nombre","req","Introduzca el nombre");
+    frmvalidator.addValidation("apellidos","req","Introduzca los apellidos");
+    frmvalidator.addValidation("dni","req","Introduzca el dni");
+    frmvalidator.addValidation("fechaNac","req","Introduzca la fecha de nacimiento");
+    frmvalidator.addValidation("genero","req","Introduzca el género");
+    frmvalidator.addValidation("telefono","req","Introduzca el teléfono");
+    frmvalidator.addValidation("estudios","dontselect=000","Introduzca el nivel de estudios");
+    frmvalidator.addValidation("sitlaboral","dontselect=000","Introduzca la situación laboral del usuario");
+    frmvalidator.addValidation("ingresos","req","Introduzca los ingresos");
+    frmvalidator.addValidation("minusvalia","selone_radio","Introduzca si posee alguna minusvalia");
+    frmvalidator.addValidation("solicitante","selone_radio","Introduzca si el usuario es solicitante");
+    
+    if(solicitante =="Sí"){
+        frmvalidator.addValidation("gastosfamilia","req","Introduzca los gastos de la familia");
+        frmvalidator.addValidation("poblacion","req","Introduzca la población");
+        frmvalidator.addValidation("domicilio","req","Introduzca el domicilio");
+        frmvalidator.addValidation("codigopostal","req","Introduzca el código postal");
+        frmvalidator.addValidation("proteccionDatos","shouldselchk=on","El solicitante debe de aceptar la Ley de Protección de Datos");
+
+    }else{
+        frmvalidator.addValidation("dniSol","req","Introduzca el dni del solicitante");
+        frmvalidator.addValidation("parentesco","req","Introduzca el aprentesco co el solicitante");
+    }
+    </script>
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);
