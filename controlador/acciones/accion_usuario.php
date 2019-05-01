@@ -112,7 +112,7 @@ function validarDatosUsuario($conexion, $usuario)
 	if($usuario["ingresos"]=="") {
 		$errores[] = "<p>El campo de ingresos no puede quedar vacío.</p>";
 	}
-	else if(!preg_match("/[0-9]+/", $usuario["ingresos"])) {
+	else if(!preg_match("/^[0-9]+$/", $usuario["ingresos"])) {
 		$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
 	}
 
@@ -157,17 +157,19 @@ function validarDatosUsuario($conexion, $usuario)
 		}
 			fclose($calles);
 			if($res == false){
-				$errores[] = "<p>La calle bla bla bla.</p>";
+				$errores[] = "<p>La calle no se encuentra en San Juan de Aznalfarache.</p>";
 			}
 			
 		}
 
-		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))<18){
+		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))>18){
 			$errores[] = "<p>El solicitante debe de ser mayor de 18 años</p>";
 		}
 
 		if($usuario["gastosfamilia"]=="") {
 			$errores[] = "<p>El campo de gastos familiares no puede estar vacío.</p>";
+		}	else if(!preg_match("/^[0-9]+$/", $usuario["gastosfamilia"])) {
+			$errores[] = "<p>En gastos familia se espera un valor numérico.</p>";
 		}
 
 		if($usuario["codigopostal"]=="") {

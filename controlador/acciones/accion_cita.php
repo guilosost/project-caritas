@@ -36,8 +36,8 @@ function validarDatosCita($conexion, $cita)
 	
 	if ($cita["fechacita"] == "") {
 		$errores[] = "<p>La fecha de la cita no puede estar vacía.</p>";
-//	} else if (fechaAnteriorActual($cita["fechacita"] == 0)){
-//		$errores[] = "<p>La fecha de la cita no puede ser posterior a la fecha actual.</p>";
+	} else if (fechaAnteriorActual($cita["fechacita"]) == 0){
+		$errores[] = "<p>La fecha de la cita no puede ser posterior a la fecha actual.</p>";
 	} 
 
 	if ($cita["objetivo"] == "") {
@@ -50,6 +50,8 @@ function validarDatosCita($conexion, $cita)
 
 	if ($cita["nombrev"] == "") {
 		$errores[] = "<p>El nombre del voluntario responsable de la cita no puede estar vacío.</p>";
+	}else if(consultarVoluntarioRepetido($conexion,$voluntario["nombrev"])!=1){
+		$errores[] = "<p>Ese voluntario no existe</p>";
 	}
 	return $errores;
 }

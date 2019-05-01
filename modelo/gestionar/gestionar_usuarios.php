@@ -64,10 +64,6 @@ function consultarUsuarioRepetido($conexion,$dni) {
    return $stmt->fetchColumn();
 }
 
-function modificarUsuario($conexion, $dni) {
-    
-}
-
 function eliminarUsuario($conexion, $usuario) {
     try {   
     if($usuario["solicitante"]=='Sí') {

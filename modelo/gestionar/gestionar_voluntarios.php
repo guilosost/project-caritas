@@ -19,3 +19,10 @@ function nuevo_voluntario($conexion, $cita) {
         // Si queremos visualizar la excepción durante la depuración: $e->getMessage();
     }
 }
+function consultarVoluntarioRepetido($conexion,$nombrev) {
+    $consulta = "SELECT COUNT(*) AS TOTAL FROM VOLUNTARIOS WHERE NOMBREV =:nombrev";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':nombrev',$nombrev);
+   $stmt->execute();
+   return $stmt->fetchColumn();
+}

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("../../modelo/GestionBD.php");
+require_once("../../modelo/gestionar/gestionar_voluntarios.php");
 
 if (isset($_SESSION["formulario_voluntario"])) {
 	$voluntario['nombrev'] = $_REQUEST["nombrev"];
@@ -31,6 +32,8 @@ function validarDatosVoluntario($conexion, $voluntario)
 
 	if ($voluntario["nombrev"] == "") {
 		$errores[] = "<p>El nombre no puede estar vacío.</p>";
+	}else if(consultarVoluntarioRepetido($conexion,$voluntario["nombrev"])!=0){
+		$errores[] = "<p>Ese nombre de voluntario ya existe</p>";
 	}
 
 	if ($voluntario["password"] == ""# || !preg_match("/^{6}$/", $voluntario["password"])
@@ -40,7 +43,7 @@ function validarDatosVoluntario($conexion, $voluntario)
 
 	if ($voluntario["permisos"] == "" ) {
 		$errores[] = "<p>Debes tener al menos un permiso seleccionado</p>";
-	}
+	} 
 
 	return $errores;
 }
