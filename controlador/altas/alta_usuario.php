@@ -209,26 +209,57 @@ $conexion = crearConexionBD();
     <script  type="text/javascript">
     var frmvalidator = new Validator("altaUsuario");
     var solicitante = document.forms["altaUsuario"]["solicitante"].value;
+    var poblacion = document.forms["altaUsuario"]["poblacion"].value;
+
+    frmvalidator.EnableMsgsTogether();
+
     frmvalidator.addValidation("nombre","req","Introduzca el nombre");
+    frmvalidator.addValidation("nombre","alphabetic_space","El nombre debe de constar de letras y espacios");
+
     frmvalidator.addValidation("apellidos","req","Introduzca los apellidos");
+    frmvalidator.addValidation("apellidos","alphabetic_space","Los apellidos deben de constar de letras y espacios");
+
     frmvalidator.addValidation("dni","req","Introduzca el dni");
+    frmvalidator.addValidation("dni","regexp=^[0-9]{8}[A-Z]$","Introduzca un dni de la forma 12345678A");
+
     frmvalidator.addValidation("fechaNac","req","Introduzca la fecha de nacimiento");
-    frmvalidator.addValidation("genero","req","Introduzca el género");
+
+    frmvalidator.addValidation("genero","selone_radio","Introduzca el género");
+
+    frmvalidator.addValidation("email","req","Introduzca el email");
+    frmvalidator.addValidation("email","email","Introduca un email válido");
+
     frmvalidator.addValidation("telefono","req","Introduzca el teléfono");
+    frmvalidator.addValidation("telefono","regexp=^[0-9]{9}$","Introduzca un número de teléfono válido");
+
     frmvalidator.addValidation("estudios","dontselect=000","Introduzca el nivel de estudios");
+
     frmvalidator.addValidation("sitlaboral","dontselect=000","Introduzca la situación laboral del usuario");
+
     frmvalidator.addValidation("ingresos","req","Introduzca los ingresos");
+    frmvalidator.addValidation("ingresos","num","Introduzca un valor numérico en los ingresos");
+    frmvalidator.addValidation("ingresos","lt=1000","Los ingresos no deben de superar los 1000 euros");
+
     frmvalidator.addValidation("minusvalia","selone_radio","Introduzca si posee alguna minusvalia");
+
     frmvalidator.addValidation("solicitante","selone_radio","Introduzca si el usuario es solicitante");
     
     if(solicitante =="Sí"){
         frmvalidator.addValidation("gastosfamilia","req","Introduzca los gastos de la familia");
+        frmvalidator.addValidation("gastosfamilia","num","Introduzca un valor numérico en los gastos familiares");
+
         frmvalidator.addValidation("poblacion","req","Introduzca la población");
+        frmvalidator.addValidation("poblacion","alphabetic_space","La población debe de constar de letras y espacios");
+
         frmvalidator.addValidation("domicilio","req","Introduzca el domicilio");
+        
+
         frmvalidator.addValidation("codigopostal","req","Introduzca el código postal");
+        frmvalidator.addValidation("codigopostal","regexp=^[0-9]{5}$","Introduzca un código postal válido");
+
         frmvalidator.addValidation("proteccionDatos","shouldselchk=on","El solicitante debe de aceptar la Ley de Protección de Datos");
 
-    }else{
+    }else if(solicitante =="No"){
         frmvalidator.addValidation("dniSol","req","Introduzca el dni del solicitante");
         frmvalidator.addValidation("parentesco","req","Introduzca el aprentesco co el solicitante");
     }
