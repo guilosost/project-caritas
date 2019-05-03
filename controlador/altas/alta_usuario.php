@@ -55,7 +55,7 @@ $conexion = crearConexionBD();
     <title>Alta de Usuario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
-<!--    <script type = "text/javascript" src = "../../vista/js/validacion_usuario.js" ></script> -->
+    <script type = "text/javascript" src = "../../vista/js/validacion_usuario.js" ></script> 
 
     <script>
         <!--
@@ -104,7 +104,7 @@ $conexion = crearConexionBD();
         <div class="form">
             <h2 class="form-h2">Alta de usuario</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST">
+                <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST" >
                     <fieldset>
                         <legend>Información básica del usuario</legend>
 
@@ -118,7 +118,7 @@ $conexion = crearConexionBD();
                         <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $formulario['dni']; ?>" required /><br>
 
                         <label for="fechaNac">Fecha de nacimiento:</label>
-                        <input name="fechaNac" type="date" value="<?php echo $formulario['fechaNac']; ?>" required /><br>
+                        <input name="fechaNac" type="date" value="<?php echo $formulario['fechaNac']; ?>" onchange="return validateDate();" required /><br>
 
                         <label for="genero">Género: </label>
                         <input type="radio" name="genero" value="Masculino" <?php if ($formulario['genero'] == 'Masculino') echo ' checked '; ?>> Hombre
@@ -180,7 +180,7 @@ $conexion = crearConexionBD();
                             <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $formulario['codigopostal']; ?>" /><br>
 
                             <label for="proteccionDatos">
-                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($formulario['proteccionDatos'] == 'Sí') echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
+                            <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($formulario['proteccionDatos'] == 'Sí') echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
                             </label>
                         </fieldset>
                     </div>
@@ -200,7 +200,7 @@ $conexion = crearConexionBD();
 
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_usuario.php'">Cancelar</a>
-                        <input type="submit" value="Dar de alta">
+                        <input type="submit" value="Dar de alta" >
                     </div>
                 </form>
             </div>
@@ -210,7 +210,7 @@ $conexion = crearConexionBD();
     var frmvalidator = new Validator("altaUsuario");
     var solicitante = document.forms["altaUsuario"]["solicitante"].value;
     var poblacion = document.forms["altaUsuario"]["poblacion"].value;
-
+    
     frmvalidator.EnableMsgsTogether();
 
     frmvalidator.addValidation("nombre","req","Introduzca el nombre");
@@ -252,7 +252,6 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("poblacion","alphabetic_space","La población debe de constar de letras y espacios");
 
         frmvalidator.addValidation("domicilio","req","Introduzca el domicilio");
-        
 
         frmvalidator.addValidation("codigopostal","req","Introduzca el código postal");
         frmvalidator.addValidation("codigopostal","regexp=^[0-9]{5}$","Introduzca un código postal válido");
