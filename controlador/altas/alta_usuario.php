@@ -118,7 +118,7 @@ $conexion = crearConexionBD();
                         <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $formulario['dni']; ?>" required /><br>
 
                         <label for="fechaNac">Fecha de nacimiento:</label>
-                        <input name="fechaNac" type="date" value="<?php echo $formulario['fechaNac']; ?>" onchange="return validateDate();" required /><br>
+                        <input name="fechaNac" type="date" value="<?php echo $formulario['fechaNac']; ?>"  required /><br>
 
                         <label for="genero">Género: </label>
                         <input type="radio" name="genero" value="Masculino" <?php if ($formulario['genero'] == 'Masculino') echo ' checked '; ?>> Hombre
@@ -158,7 +158,7 @@ $conexion = crearConexionBD();
                         <input type="radio" name="minusvalia" value="No" <?php if ($formulario['minusvalia'] == 'No') echo ' checked '; ?>>No<br>
 
                         <label for="solicitante">¿El usuario es solicitante? </label>
-                        <input type="radio" id="solicitar" name="solicitante"  onclick="showHide(this)" value="Sí" <?php if ($formulario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
+                        <input type="radio" id="solicitar" name="solicitante"  onclick="showHide(this)" onchange="return validateDate();" value="Sí" <?php if ($formulario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
                         <input type="radio" id="familiar" name="solicitante"  onclick="showHide(this)" value="No" <?php if ($formulario['solicitante'] == 'No') echo ' checked '; ?>> No<br>
 
                     </fieldset>
@@ -239,6 +239,12 @@ $conexion = crearConexionBD();
     frmvalidator.addValidation("ingresos","req","Introduzca los ingresos");
     frmvalidator.addValidation("ingresos","num","Introduzca un valor numérico en los ingresos");
     frmvalidator.addValidation("ingresos","lt=1000","Los ingresos no deben de superar los 1000 euros");
+    frmvalidator.addValidation("ingresos","lt=672","Los ingresos son mayores de lo estimado por estar desempleado",
+        "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'En paro')");
+    frmvalidator.addValidation("ingresos","lt=1","Los ingresos son mayores de lo estimado",
+        "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'No es relevante')");
+    frmvalidator.addValidation("ingresos","gt=0","Los ingresos son mayores de lo estimado por tener alguna discapacidad",
+        "VWZ_IsChecked(document.forms['altaUsuario'].elements['minusvalia'],'Sí')");
 
     frmvalidator.addValidation("minusvalia","selone_radio","Introduzca si posee alguna minusvalia");
 
@@ -260,7 +266,10 @@ $conexion = crearConexionBD();
 
     }else if(solicitante =="No"){
         frmvalidator.addValidation("dniSol","req","Introduzca el dni del solicitante");
+        frmvalidator.addValidation("dniSol","regexp=^[0-9]{8}[A-Z]$","Introduzca un dni de la forma 12345678A");
+
         frmvalidator.addValidation("parentesco","req","Introduzca el aprentesco co el solicitante");
+        frmvalidator.addValidation("parentesco","alpha","El nombre debe de constar de letras");
     }
     </script>
     <?php

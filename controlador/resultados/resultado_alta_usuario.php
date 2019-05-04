@@ -48,8 +48,8 @@
 					echo"El solicitante ya existe";
 				}
 				else if(alta_solicitante($conexion,$usuario)){
-					//$d = alta_solicitante($conexion,$usuario);	
-					//echo $d;
+					$d = alta_solicitante($conexion,$usuario);	
+					echo $d;
         			echo"Todo ha ido bien";
 				} else{
 					echo "Error desconocido.";
@@ -57,7 +57,7 @@
 		}
 		
 		if ($usuario["solicitante"]=="No"){
-			//$d = nuevo_familiar($conexion,$usuario);
+			$d = nuevo_familiar($conexion,$usuario);
 		if(consultarUsuarioRepetido($conexion, $usuario["dni"]) !=0 ){
 			echo"El usuario ya existe";
 		}

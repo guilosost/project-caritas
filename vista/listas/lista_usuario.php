@@ -126,13 +126,13 @@ $("#mostrar").onclick = muestra() {
 
         foreach ($filas as $fila) {
 
+
             ?>
 
             <form method="post" action="../../controlador/cargas/carga_usuario.php">
 
             <article class="usuario">
 
-                
 
                     <div class="fila_usuario">
 
@@ -154,7 +154,7 @@ $("#mostrar").onclick = muestra() {
 
                             <input id="GENERO" name="GENERO" value="<?php echo $fila["SEXO"]; ?>" type="hidden"/>
 
-                            <input id="FECHANAC" name="FECHANAC" value="<?php echo $fila["FECHANACIMIENTO"]; ?>"type="hidden" />
+                            <input id="FECHANAC" name="FECHANAC" value="<?php echo $fila["FECHANACIMIENTO"]; ?>" />
                             
                             <input id="PROTECCIONDATOS" name="PROTECCIONDATOS" value="<?php echo $fila["PROTECCIONDATOS"]; ?>"type="hidden" />
 

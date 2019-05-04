@@ -6,7 +6,7 @@ function alta_solicitante($conexion,$usuario) {
 
     list($año, $mes, $dia) = split('[/.-]', $fecha);
     $fechaNacimiento = "$dia/$mes/$año";
-
+    echo $fechaNacimiento;
     $vacio = " ";
     $no = "No";
 	try {
@@ -89,7 +89,7 @@ function nuevo_familiar($conexion, $usuario) {
 
     list($año, $mes, $dia) = split('[/.-]', $fecha);
     $fechaNacimiento = "$dia/$mes/$año";
-
+    
     $vacio = " ";
     $no = "No";
     try {
