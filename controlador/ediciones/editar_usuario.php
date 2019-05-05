@@ -60,6 +60,9 @@ $conexion = crearConexionBD();
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
+    
+    list($dia,$mes,$anyo) = split("/",$usuario['fechaNac']);
+    $fechaDef = "$anyo-$mes-$dia";
 
     //Mostramos los errores del formulario enviado previamente
     if (isset($errores) && count($errores) > 0) {
@@ -91,7 +94,7 @@ $conexion = crearConexionBD();
                         <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $usuario['dni']; ?>" required /><br>
 
                         <label for="fechaNac">Fecha de nacimiento:</label>
-                        <input name="fechaNac" type="date" value="<?php echo $usuario['fechaNac']; ?>" required /><br>
+                        <input name="fechaNac" type="date" value="<?php  echo $fechaDef; ?>" required /><br>
 
                         <label for="genero">Género: </label>
                         <input type="radio" name="genero" value="Masculino" <?php if ($usuario['genero'] == 'Masculino') echo ' checked '; ?>> Hombre

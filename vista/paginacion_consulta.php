@@ -33,3 +33,19 @@ function total_consulta( $conexion, $query )
 		return $_SESSION['excepcion'];
 	}
 }
+
+function fechasUsuario($conexion,$dni){
+	try {
+		$total_consulta = "SELECT to_char(FECHANACIMIENTO, 'dd/mm/yyyy')  FROM USUARIOS WHERE DNI=:dni";
+
+		$stmt = $conexion->prepare($total_consulta);
+		$stmt->bindParam(':dni', $dni);
+		$stmt->execute();
+		$result = $stmt->fetch();
+		return  $result;
+	}
+	catch ( PDOException $e ) {
+		$_SESSION['excepcion'] = $e->GetMessage();
+		return $_SESSION['excepcion'];
+	}
+}

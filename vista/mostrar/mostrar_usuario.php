@@ -60,7 +60,7 @@ if(isset($_SESSION["usuario"])){
                         <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $usuario['dni']; ?>" required readonly/><br>
 
                         <label for="fechaNac">Fecha de nacimiento:</label>
-                        <input name="fechaNac" type="date" value="<?php echo $usuario['fechaNac']; ?>" required readonly/><br>
+                        <input name="fechaNac" type="text" value="<?php echo $usuario['fechaNac']; ?>" required readonly/><br>
 
                         <label for="genero">Género: </label>
                         <input type="radio" name="genero" value="Masculino" <?php if ($usuario['genero'] == 'Masculino') echo ' checked '; ?>readonly> Hombre

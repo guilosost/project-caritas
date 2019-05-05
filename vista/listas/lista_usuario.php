@@ -126,6 +126,10 @@ $("#mostrar").onclick = muestra() {
 
         foreach ($filas as $fila) {
 
+           $f = fechasUsuario($conexion, $fila["DNI"]);
+           $f2 = implode("|",$f);
+           $arrayFecha=explode("|",$f2);
+
 
             ?>
 
@@ -154,7 +158,7 @@ $("#mostrar").onclick = muestra() {
 
                             <input id="GENERO" name="GENERO" value="<?php echo $fila["SEXO"]; ?>" type="hidden"/>
 
-                            <input id="FECHANAC" name="FECHANAC" value="<?php echo $fila["FECHANACIMIENTO"]; ?>" />
+                            <input id="FECHANAC" name="FECHANAC" value="<?php echo $arrayFecha[0]; ?>" />
                             
                             <input id="PROTECCIONDATOS" name="PROTECCIONDATOS" value="<?php echo $fila["PROTECCIONDATOS"]; ?>"type="hidden" />
 
