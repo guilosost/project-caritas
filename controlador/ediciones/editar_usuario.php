@@ -80,7 +80,7 @@ $conexion = crearConexionBD();
         <div class="form">
             <h2 class="form-h2">Alta de usuario</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST" name="altaUsuario" onsubmit="return validateForm()" >
+                <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST" name="altaUsuario"  >
                     <fieldset>
                         <legend>Información básica del usuario</legend>
 
@@ -131,7 +131,7 @@ $conexion = crearConexionBD();
                         <input type="radio" name="minusvalia" value="No" <?php if ($usuario['minusvalia'] == 'No ') echo ' checked '; ?>>No<br>
 
                         <label for="solicitante">¿El usuario es solicitante? </label>
-                        <input type="radio" id="solicitar" name="solicitante"  onclick="showHide(this)" value="Sí" <?php if ($usuario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
+                        <input type="radio" id="solicitar" name="solicitante"  onclick="showHide(this)"  onchange="return validateDate();" value="Sí" <?php if ($usuario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
                         <input type="radio" id="familiar" name="solicitante"  onclick="showHide(this)" value="No" <?php if ($usuario['solicitante'] == 'No ') echo ' checked '; ?>> No<br>
 
                     </fieldset>

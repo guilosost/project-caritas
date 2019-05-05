@@ -42,6 +42,7 @@ $conexion = crearConexionBD();
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
+    <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 
 <body background="../../vista/img/background.png">
@@ -58,12 +59,15 @@ $conexion = crearConexionBD();
         }
         //    echo "</div>";
     }
+    date_default_timezone_set('UTC');
+    $date = date('Y-m-d', time());
+
     ?>
     <div class="flex">
         <div class="form">
             <h2 class="form-h2">Alta de cita</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_cita.php" method="POST">
+                <form action="../../controlador/acciones/accion_cita.php" id="altaCita" method="POST">
                     <label for="dni" required>DNI del solicitante:</label>
                     <input class="celda" name="dni" type="text" required /><br>
 
@@ -71,7 +75,7 @@ $conexion = crearConexionBD();
                     <input class="celda" name="nombrev" type="text" value="<?php echo $_SESSION['nombreusuario']?>" required /><br>
 
                     <label for="fechacita" required>Fecha de la cita:</label>
-                    <input class="celda" name="fechacita" type="date" value="<?php date("d/m/Y") ?>" required /><br>
+                    <input class="celda" name="fechacita" type="date" value="<?php echo $date; ?>" required /><br>
 
                     <label for="objetivo">Objetivo de la cita:</label>
                     <input class="celda" name="objetivo" type="text" value="<?php echo $formulario['objetivo']; ?>" required /><br>
@@ -87,6 +91,25 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
+    <script  type="text/javascript">
+    var frmvalidator = new Validator("altaCita");
+    var solicitante = document.forms["altaUsuario"]["solicitante"].value;
+    var poblacion = document.forms["altaUsuario"]["poblacion"].value;
+    
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("dni","req","Introduzca el dni");
+    frmvalidator.addValidation("dni","regexp=^[0-9]{8}[A-Z]$","Introduzca un dni de la forma 12345678A");
+
+    frmvalidator.addValidation("nombrev","req","Introduzca el nombre");
+    frmvalidator.addValidation("nombrev","alpha","El nombre debe de constar de letras");
+
+    frmvalidator.addValidation("observaciones","req","Introduzca el objetivo de la cita");
+
+    frmvalidator.addValidation("observaciones","req","Introduzca alguna observacion");
+
+    
+    </script>
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);

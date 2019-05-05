@@ -49,3 +49,18 @@ function fechasUsuario($conexion,$dni){
 		return $_SESSION['excepcion'];
 	}
 }
+function fechasCita($conexion,$oid_c){
+	try {
+		$total_consulta = "SELECT to_char(FECHACITA, 'dd/mm/yyyy')  FROM CITAS WHERE OID_C=:oid_c";
+
+		$stmt = $conexion->prepare($total_consulta);
+		$stmt->bindParam(':oid_c', $oid_c);
+		$stmt->execute();
+		$result = $stmt->fetch();
+		return  $result;
+	}
+	catch ( PDOException $e ) {
+		$_SESSION['excepcion'] = $e->GetMessage();
+		return $_SESSION['excepcion'];
+	}
+}
