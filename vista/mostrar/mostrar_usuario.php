@@ -127,9 +127,9 @@ if(isset($_SESSION["usuario"])){
                         </fieldset>
                     </div>
                    <?php } ?>
+                        <input style="float:left" type="submit" value="Eliminar" >
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_usuario.php'">Cancelar</a>
-                        <input type="submit" value="Eliminar" >
                         <input type="button" onclick="location.href='../../controlador/ediciones/editar_usuario.php'" value="Editar" />
                     </div>
                 </form>

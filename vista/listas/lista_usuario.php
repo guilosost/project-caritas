@@ -60,35 +60,126 @@ cerrarConexionBD($conexion);
     <link rel="stylesheet" type="text/css" href="../../vista/css/button.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
     <link rel="stylesheet" type="text/css" href="../../vista/css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" src="./js/boton.js"></script>
+    <!-- <script type="text/javascript" src="./js/boton.js"></script> -->
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <title>Lista de Usuarios</title>
+    <script>
+        function mandar(elm) {
+
+            if (elm.id == 'mostrar') {
+                document.getElementById["formulario"].submit();
+            } else if (elm.id == 'editar') {
+                document.getElementById["formulario"].submit();
+            }
+    </script>
 </head>
 
 <body>
-<script>
-//    	$(document).ready(function() {
-//		$("#altaUsuario").on("submit", function() {
-//            validarCalle();
-//        });
-//    });
-$("#mostrar").onclick = muestra() {
-            $_SESSION["usuario"] = $fila["DNI"];
-            Header("Location: ../mostrar/mostrar_usuario.php"); 
-        };
-
-</script>
     <?php
     include_once("../header.php");
     include_once("../navbar.php");
     ?>
     <main>
+
+        <div style=" margin-left: -0.6%; margin-right: -0.6%;">
+            <table style="width:100%">
+                <caption>Lista de Usuarios</caption>
+                <tr>
+                    <th>DNI</th>
+                    <th>Apellidos</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Ingresos</th>
+                    <th>Situación laboral</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Solicitante</th>
+                    <th>Opciones</th>
+                </tr>
+
+                <?php
+
+                foreach ($filas as $fila) {
+
+                    $f = fechasUsuario($conexion, $fila["DNI"]);
+                    $f2 = implode("|", $f);
+                    $arrayFecha = explode("|", $f2);
+
+
+                    ?>
+
+                    <form id="formulario" method="post" action="../../controlador/cargas/carga_usuario.php">
+                        <article class="usuario">
+
+                            <div class="fila_usuario">
+
+                                <div class="datos_usuario">
+
+                                    <tr>
+                                        <td><?php echo $fila["DNI"]; ?></td>
+                                        <td><?php echo $fila["APELLIDOS"]; ?></td>
+                                        <td><?php echo $fila["NOMBRE"]; ?></td>
+                                        <td><?php echo $fila["TELEFONO"]; ?></td>
+                                        <td><?php echo $fila["INGRESOS"]; ?></td>
+                                        <td><?php echo $fila["SITUACIONLABORAL"]; ?></td>
+                                        <td><?php echo $arrayFecha[0]; ?></td>
+                                        <td><?php echo $fila["SOLICITANTE"]; ?></td>
+                                        <td><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
+                                            <button id="editar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></button>
+                                        </td>
+                                    </tr>
+
+                                    <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" type="hidden" />
+
+                                    <input id="APELLIDOS" name="APELLIDOS" value="<?php echo $fila["APELLIDOS"]; ?>" type="hidden" />
+
+                                    <input id="NOMBRE" name="NOMBRE" value="<?php echo $fila["NOMBRE"]; ?>" type="hidden" />
+
+                                    <input id="TELEFONO" name="TELEFONO" value="<?php echo $fila["TELEFONO"]; ?>" type="hidden" />
+
+                                    <input id="INGRESOS" name="INGRESOS" value="<?php echo $fila["INGRESOS"]; ?>" type="hidden" />
+
+                                    <input id="SITUACIONLABORAL" name="SITUACIONLABORAL" value="<?php echo $fila["SITUACIONLABORAL"]; ?>" type="hidden" />
+
+                                    <input id="ESTUDIOS" name="ESTUDIOS" value="<?php echo $fila["ESTUDIOS"]; ?>" type="hidden" />
+
+                                    <input id="GENERO" name="GENERO" value="<?php echo $fila["SEXO"]; ?>" type="hidden" />
+
+                                    <input id="FECHANAC" name="FECHANAC" value="<?php echo $arrayFecha[0]; ?>" type="hidden" />
+
+                                    <input id="PROTECCIONDATOS" name="PROTECCIONDATOS" value="<?php echo $fila["PROTECCIONDATOS"]; ?>" type="hidden" />
+
+                                    <input id="SOLICITANTE" name="SOLICITANTE" value="<?php echo $fila["SOLICITANTE"]; ?>" type="hidden" />
+
+                                    <input id="PARENTESCO" name="PARENTESCO" value="<?php echo $fila["PARENTESCO"]; ?>" type="hidden" />
+
+                                    <input id="MINUSVALIA" name="MINUSVALIA" value="<?php echo $fila["MINUSVALIA"]; ?>" type="hidden" />
+
+                                    <input id="DNI_SO" name="DNI_SO" value="<?php echo $fila["DNI_SO"]; ?>" type="hidden" />
+
+                                    <?php
+                                    $uf = unidadfamiliar_solicitante($conexion, $fila["OID_UF"]); ?>
+
+                                    <input id="oid_uf" name="oid_uf" value="<?php echo $fila["OID_UF"]; ?>" type="hidden" />
+                                    <input id="poblacion" name="poblacion" value="<?php echo $uf["POBLACION"]; ?>" type="hidden" />
+                                    <input id="domicilio" name="domicilio" value="<?php echo $uf["DOMICILIO"]; ?>" type="hidden" />
+                                    <input id="codigopostal" name="codigopostal" value="<?php echo $uf["CODIGOPOSTAL"]; ?>" type="hidden" />
+                                    <input id="gastosfamilia" name="gastosfamilia" value="<?php echo $uf["GASTOSFAMILIA"]; ?>" type="hidden" />
+
+                                </div>
+                    </form>
+                    </article>
+        <?php
+    } ?>
+
+        </table>
+        </div>
         <nav>
-            <div id="enlaces">
+            <div class="enlaces">
                 <?php
                 for ($pagina = 1; $pagina <= $total_paginas; $pagina++)
 
@@ -102,135 +193,22 @@ $("#mostrar").onclick = muestra() {
             } ?>
             </div>
 
+            <div class="mostrando">
+                <form method="get" action="lista_usuario.php">
 
+                    <input id="PAG_NUM" name="PAG_NUM" type="hidden" value="<?php echo $pagina_seleccionada ?>" />
 
-            <form method="get" action="lista_usuario.php">
+                    Mostrando
 
-                <input id="PAG_NUM" name="PAG_NUM" type="hidden" value="<?php echo $pagina_seleccionada ?>" />
+                    <input id="PAG_TAM" name="PAG_TAM" type="number" min="1" max="<?php echo $total_registros; ?>" value="<?php echo $pag_tam; ?>" autofocus="autofocus" />
 
-                Mostrando
+                    entradas de <?php echo $total_registros ?>
 
-                <input id="PAG_TAM" name="PAG_TAM" type="number" min="1" max="<?php echo $total_registros; ?>" value="<?php echo $pag_tam; ?>" autofocus="autofocus" />
+                    <input type="submit" style="float: none" value="Cambiar">
 
-                entradas de <?php echo $total_registros ?>
-
-                <input type="submit" value="Cambiar">
-
-            </form>
-
-        </nav>
-
-
-
-        <?php
-
-        foreach ($filas as $fila) {
-
-           $f = fechasUsuario($conexion, $fila["DNI"]);
-           $f2 = implode("|",$f);
-           $arrayFecha=explode("|",$f2);
-
-
-            ?>
-
-            <form method="post" action="../../controlador/cargas/carga_usuario.php">
-
-            <article class="usuario">
-
-
-                    <div class="fila_usuario">
-
-                        <div class="datos_usuario">
-
-                            <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" readonly/>
-
-                            <input id="APELLIDOS" name="APELLIDOS" value="<?php echo $fila["APELLIDOS"]; ?>" readonly/>
-
-                            <input id="NOMBRE" name="NOMBRE" value="<?php echo $fila["NOMBRE"]; ?>" readonly/>
-
-                            <input id="TELEFONO" name="TELEFONO" value="<?php echo $fila["TELEFONO"]; ?>" readonly/>
-
-                            <input id="INGRESOS" name="INGRESOS" value="<?php echo $fila["INGRESOS"]; ?>" readonly/>
-
-                            <input id="SITUACIONLABORAL" name="SITUACIONLABORAL" value="<?php echo $fila["SITUACIONLABORAL"]; ?>" readonly/>
-                            
-                            <input id="ESTUDIOS" name="ESTUDIOS" value="<?php echo $fila["ESTUDIOS"]; ?>" type="hidden" />
-
-                            <input id="GENERO" name="GENERO" value="<?php echo $fila["SEXO"]; ?>" type="hidden"/>
-
-                            <input id="FECHANAC" name="FECHANAC" value="<?php echo $arrayFecha[0]; ?>" />
-                            
-                            <input id="PROTECCIONDATOS" name="PROTECCIONDATOS" value="<?php echo $fila["PROTECCIONDATOS"]; ?>"type="hidden" />
-
-                            <input id="SOLICITANTE" name="SOLICITANTE" value="<?php echo $fila["SOLICITANTE"]; ?>" type="hidden"/>
-                            
-                            <input id="PARENTESCO" name="PARENTESCO" value="<?php echo $fila["PARENTESCO"]; ?>"type="hidden" />
-                            
-                            <input id="MINUSVALIA" name="MINUSVALIA" value="<?php echo $fila["MINUSVALIA"]; ?>"type="hidden" />
-                            
-                            <input id="DNI_SO" name="DNI_SO" value="<?php echo $fila["DNI_SO"]; ?>"type="hidden" />
-
-                            <?php
-                             $uf = unidadfamiliar_solicitante($conexion,$fila["OID_UF"]); ?>
-                             
-                             <input id="oid_uf" name="oid_uf" value="<?php echo $fila["OID_UF"]; ?>"type="hidden" />
-                             <input id="poblacion" name="poblacion" value="<?php echo $uf["POBLACION"]; ?>"type="hidden" />
-                             <input id="domicilio" name="domicilio" value="<?php echo $uf["DOMICILIO"]; ?>"type="hidden" />
-                             <input id="codigopostal" name="codigopostal" value="<?php echo $uf["CODIGOPOSTAL"]; ?>"type="hidden" />
-                             <input id="gastosfamilia" name="gastosfamilia" value="<?php echo $uf["GASTOSFAMILIA"]; ?>"type="hidden" />
-                            
-
-                            <!-- Editando nombre -->
-
-                            <!--    <h3><input id="NOMBRE" name="NOMBRE" type="text" value="<?php echo $fila["NOMBRE"]; ?>" /> </h3>-->
-
-                            <!--  <h4><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></h4>-->
-
-                            <?php
-
-                            ?>
-
-                            <!-- Mostrando nombre -->
-
-                            <!--  <input id="nombre" name="nombre" type="hidden" value="<?php echo $fila["nombre"]; ?>" />-->
-
-                            <!--<div class="nombre"><b><?php echo $fila["NOMBRE"]; ?></b></div>-->
-
-                            <!-- <div class="usuario">By <em><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></em></div> -->
-
-                            <?php
-
-                            ?>
-
-                        </div>
-
-
-                        <!-- Los botones están comentados por estética hasta que los arregle Yanes y no deformen la tabla -->
-                        <!-- <div id="botones_fila">-->
-
-    
-                        <button type="submit">mostrar</button>
-                                              <!--  <input id="mostrar" name="mostrar" type=button  onclick="muestra()" value="mostrar">    -->                                
-                                            <!--
-                                                <button id="editar" name="editar" type="submit" class="editar_fila">
-
-                                                    <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
-
-                                                </button>
-
-                                   
-
-                                    <button id="borrar" name="borrar" type="submit" class="editar_fila">
-
-                                        <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar usuario">
-
-                                    </button>
-                                </div> -->
-                    </div>
                 </form>
-            </article>
-        <?php
-    } ?>
+            </div>
+        </nav>
     </main>
     <?php
     include_once("../footer.php");

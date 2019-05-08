@@ -30,6 +30,14 @@ button, [type=button], [type=reset], [type=submit], [type=cancel] {
     margin-top: 10px;
 }
 
+.botonTabla {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 2px 26px;
+    float: none;
+    border: none;
+}
+
 .login {
     margin-top: -10px;
     float: none;

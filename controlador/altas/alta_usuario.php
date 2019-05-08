@@ -134,8 +134,8 @@ $conexion = crearConexionBD();
                         <select class="celda" value="000" name="estudios" size=1 required>
                             <option value="No es relevante">No es relevante </option>
                             <option value="Sin estudios">Sin estudios </option>
-                            <option value="Educacion primaria">Educación primaria </option>
-                            <option value="Educacion secundaria">Educación secundaria </option>
+                            <option value="Educación primaria">Educación primaria </option>
+                            <option value="Educación secundaria">Educación secundaria </option>
                             <option value="Bachillerato">Bachillerato </option>
                             <option value="Grado medio">Grado medio </option>
                             <option value="Grado superior">Grado superior </option>

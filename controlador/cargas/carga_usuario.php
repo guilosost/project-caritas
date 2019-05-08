@@ -22,9 +22,11 @@
 		$usuario["gastosfamilia"] = $_REQUEST["gastosfamilia"];
 		$usuario["oid_uf"] = $_REQUEST["oid_uf"];
 		$_SESSION["usuario"] = $usuario;
+
+
+	Header("Location: ../../vista/mostrar/mostrar_usuario.php");
 			
-	Header("Location: ../../vista/mostrar/mostrar_usuario.php"); 
 	}
 	else 
-		Header("Location: consulta_libros.php");
+		Header("Location: ../../vista/listas/lista_usuario.php");
 ?>

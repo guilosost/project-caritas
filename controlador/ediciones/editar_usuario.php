@@ -35,33 +35,32 @@ $conexion = crearConexionBD();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Editar Usuario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
-    <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
-    <script type = "text/javascript" src = "../../vista/js/validacion_usuario.js" ></script>
-    <script type = "text/javascript" src = "../../vista/js/validacion_usuario.js" ></script> 
-<script>
-        
+    <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
+    <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script>
+    <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script>
+    <script>
         function showHide(elm) {
             var solicitante = document.getElementById("esSolicitante");
             var familiar = document.getElementById("esFamiliar");
-            
+
             if (elm.id == 'solicitar') {
                 solicitante.classList.remove('hide');
                 familiar.classList.add('hide');
-            } else if (elm.id == 'familiar'){
+            } else if (elm.id == 'familiar') {
                 solicitante.classList.add('hide');
                 familiar.classList.remove('hide');
             }
         }
-        </script>
-        <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
+    </script>
+    <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 
 <body background="../../vista/img/background.png">
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
-    
-    list($dia,$mes,$anyo) = split("/",$usuario['fechaNac']);
+
+    list($dia, $mes, $anyo) = split("/", $usuario['fechaNac']);
     $fechaDef = "$anyo-$mes-$dia";
 
     //Mostramos los errores del formulario enviado previamente
@@ -74,18 +73,18 @@ $conexion = crearConexionBD();
         //    echo "</div>";
     }
     ?>
-   
+
 
     <div class="flex">
         <div class="form">
             <h2 class="form-h2">Alta de usuario</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST" name="altaUsuario"  >
+                <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST" name="altaUsuario">
                     <fieldset>
                         <legend>Información básica del usuario</legend>
 
                         <label for="nombre" required>Nombre:</label>
-                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $usuario['nombre']; ?>"  />
+                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $usuario['nombre']; ?>" />
 
                         <label for="apellidos" required>Apellidos:</label>
                         <input name="apellidos" type="text" maxlength="50" value="<?php echo $usuario['apellidos']; ?>" /><br>
@@ -94,7 +93,7 @@ $conexion = crearConexionBD();
                         <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $usuario['dni']; ?>" required /><br>
 
                         <label for="fechaNac">Fecha de nacimiento:</label>
-                        <input name="fechaNac" type="date" value="<?php  echo $fechaDef; ?>" required /><br>
+                        <input name="fechaNac" type="date" value="<?php echo $fechaDef; ?>" required /><br>
 
                         <label for="genero">Género: </label>
                         <input type="radio" name="genero" value="Masculino" <?php if ($usuario['genero'] == 'Masculino') echo ' checked '; ?>> Hombre
@@ -107,8 +106,8 @@ $conexion = crearConexionBD();
                         <select class="celda" name="estudios" size=1 required>
                             <option value="No es relevante">No es relevante </option>
                             <option value="Sin estudios">Sin estudios </option>
-                            <option value="Educacion primaria">Educación primaria </option>
-                            <option value="Educacion secundaria">Educación secundaria </option>
+                            <option value="Educación primaria">Educación primaria </option>
+                            <option value="Educación secundaria">Educación secundaria </option>
                             <option value="Bachillerato">Bachillerato </option>
                             <option value="Grado medio">Grado medio </option>
                             <option value="Grado superior">Grado superior </option>
@@ -131,117 +130,128 @@ $conexion = crearConexionBD();
                         <input type="radio" name="minusvalia" value="No" <?php if ($usuario['minusvalia'] == 'No ') echo ' checked '; ?>>No<br>
 
                         <label for="solicitante">¿El usuario es solicitante? </label>
-                        <input type="radio" id="solicitar" name="solicitante"  onclick="showHide(this)"  onchange="return validateDate();" value="Sí" <?php if ($usuario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
-                        <input type="radio" id="familiar" name="solicitante"  onclick="showHide(this)" value="No" <?php if ($usuario['solicitante'] == 'No ') echo ' checked '; ?>> No<br>
+                        <input type="radio" id="solicitar" name="solicitante" onclick="showHide(this)" onchange="return validateDate();" value="Sí" <?php if ($usuario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
+                        <input type="radio" id="familiar" name="solicitante" onclick="showHide(this)" value="No" <?php if ($usuario['solicitante'] == 'No ') echo ' checked '; ?>> No<br>
 
                     </fieldset>
-                    
-                    <div  id="esSolicitante" class="hide">
-                        <br>
-                        <fieldset>
-                            <legend>Información básica del solicitante</legend>
 
-                            <label for="gastosfamilia">Gastos de la familia:</label>
-                            <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['gastosfamilia']; ?>" /><br>
+                    <?php
+                    if ($usuario['solicitante'] == 'Sí') {
+                        echo '<div id="esSolicitante">';
+                    } else {
+                        echo '<div id="esSolicitante" class="hide">';
+                    }
+                    ?>
+                    <br>
+                    <fieldset>
+                        <legend>Información básica del solicitante</legend>
 
-                            <label for="poblacion">Población:</label>
-                            <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['poblacion']; ?>" /><br>
+                        <label for="gastosfamilia">Gastos de la familia:</label>
+                        <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['gastosfamilia']; ?>" /><br>
 
-                            <label for="domicilio">Dirección del domicilio:</label>
-                            <input class="celda" name="domicilio" id="direccion" type="text" maxlength="50" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['domicilio']; ?>" /><br>
+                        <label for="poblacion">Población:</label>
+                        <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['poblacion']; ?>" /><br>
 
-                            <label for="codigopostal">Código postal:</label>
-                            <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['codigopostal']; ?>" /><br>
+                        <label for="domicilio">Dirección del domicilio:</label>
+                        <input class="celda" name="domicilio" id="direccion" type="text" maxlength="50" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['domicilio']; ?>" /><br>
 
-                            <label for="proteccionDatos">
-                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario["solicitante"] == "Sí") echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
-                            </label>
-                        </fieldset>
-                    </div>
-                   
-                    <div id="esFamiliar"  class="hide" >
-                        <br>
-                        <fieldset>
-                            <legend>Información básica del familiar</legend>
+                        <label for="codigopostal">Código postal:</label>
+                        <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php if ($usuario["solicitante"] == "Sí") echo $usuario['codigopostal']; ?>" /><br>
 
-                            <label for="dniSol">DNI del solicitante:</label>
-                            <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php if($usuario["solicitante"] == "No ") echo $usuario['dni_so']; ?>" /><br>
-
-                            <label for='parentesco'>Parentesco con el solicitante:</label>
-                            <input name='parentesco' type='text' value="<?php if($usuario["solicitante"] == "No ") echo $usuario['parentesco']; ?>" /><br>
-                        </fieldset>
-                    </div>
-                   
-                    <div class="botones">
-                        <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
-                        <input type="submit" value="Editar">
-                    </div>
-                </form>
+                        <label for="proteccionDatos">
+                            <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario["solicitante"] == "Sí") echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
+                        </label>
+                    </fieldset>
             </div>
+            <?php
+                    if ($usuario['solicitante'] == 'No ') {
+                        echo '<div id="esFamiliar">';
+                    } else {
+                        echo '<div id="esFamiliar" class="hide">';
+                    }
+                    ?>
+                <br>
+                <fieldset>
+                    <legend>Información básica del familiar</legend>
+
+                    <label for="dniSol">DNI del solicitante:</label>
+                    <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['dni_so']; ?>" /><br>
+
+                    <label for='parentesco'>Parentesco con el solicitante:</label>
+                    <input name='parentesco' type='text' value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['parentesco']; ?>" /><br>
+                </fieldset>
+            </div>
+
+            <div class="botones">
+                <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
+                <input type="submit" value="Editar">
+            </div>
+            </form>
         </div>
     </div>
-    <script  type="text/javascript">
-    var frmvalidator = new Validator("altaUsuario");
-    var solicitante = document.forms["altaUsuario"]["solicitante"].value;
-    var poblacion = document.forms["altaUsuario"]["poblacion"].value;
-    
-    frmvalidator.EnableMsgsTogether();
+    </div>
+    <script type="text/javascript">
+        var frmvalidator = new Validator("altaUsuario");
+        var solicitante = document.forms["altaUsuario"]["solicitante"].value;
+        var poblacion = document.forms["altaUsuario"]["poblacion"].value;
 
-    frmvalidator.addValidation("nombre","req","Introduzca el nombre");
-    frmvalidator.addValidation("nombre","alphabetic_space","El nombre debe de constar de letras y espacios");
+        frmvalidator.EnableMsgsTogether();
 
-    frmvalidator.addValidation("apellidos","req","Introduzca los apellidos");
-    frmvalidator.addValidation("apellidos","alphabetic_space","Los apellidos deben de constar de letras y espacios");
+        frmvalidator.addValidation("nombre", "req", "Introduzca el nombre");
+        frmvalidator.addValidation("nombre", "alphabetic_space", "El nombre debe de constar de letras y espacios");
 
-    frmvalidator.addValidation("dni","req","Introduzca el dni");
-    frmvalidator.addValidation("dni","regexp=^[0-9]{8}[A-Z]$","Introduzca un dni de la forma 12345678A");
+        frmvalidator.addValidation("apellidos", "req", "Introduzca los apellidos");
+        frmvalidator.addValidation("apellidos", "alphabetic_space", "Los apellidos deben de constar de letras y espacios");
 
-    frmvalidator.addValidation("fechaNac","req","Introduzca la fecha de nacimiento");
+        frmvalidator.addValidation("dni", "req", "Introduzca el dni");
+        frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un dni de la forma 12345678A");
 
-    frmvalidator.addValidation("genero","selone_radio","Introduzca el género");
+        frmvalidator.addValidation("fechaNac", "req", "Introduzca la fecha de nacimiento");
 
-    frmvalidator.addValidation("telefono","req","Introduzca el teléfono");
-    frmvalidator.addValidation("telefono","regexp=^[0-9]{9}$","Introduzca un número de teléfono válido");
+        frmvalidator.addValidation("genero", "selone_radio", "Introduzca el género");
 
-    frmvalidator.addValidation("estudios","dontselect=000","Introduzca el nivel de estudios");
+        frmvalidator.addValidation("telefono", "req", "Introduzca el teléfono");
+        frmvalidator.addValidation("telefono", "regexp=^[0-9]{9}$", "Introduzca un número de teléfono válido");
 
-    frmvalidator.addValidation("sitlaboral","dontselect=000","Introduzca la situación laboral del usuario");
+        frmvalidator.addValidation("estudios", "dontselect=000", "Introduzca el nivel de estudios");
 
-    frmvalidator.addValidation("ingresos","req","Introduzca los ingresos");
-    frmvalidator.addValidation("ingresos","num","Introduzca un valor numérico en los ingresos");
-    frmvalidator.addValidation("ingresos","lt=1000","Los ingresos no deben de superar los 1000 euros");
-    frmvalidator.addValidation("ingresos","lt=672","Los ingresos son mayores de lo estimado por estar desempleado",
-        "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'En paro')");
-    frmvalidator.addValidation("ingresos","lt=1","Los ingresos son mayores de lo estimado",
-        "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'No es relevante')");
-    frmvalidator.addValidation("ingresos","gt=0","Los ingresos son mayores de lo estimado por tener alguna discapacidad",
-        "VWZ_IsChecked(document.forms['altaUsuario'].elements['minusvalia'],'Sí')");
+        frmvalidator.addValidation("sitlaboral", "dontselect=000", "Introduzca la situación laboral del usuario");
 
-    frmvalidator.addValidation("minusvalia","selone_radio","Introduzca si posee alguna minusvalia");
+        frmvalidator.addValidation("ingresos", "req", "Introduzca los ingresos");
+        frmvalidator.addValidation("ingresos", "num", "Introduzca un valor numérico en los ingresos");
+        frmvalidator.addValidation("ingresos", "lt=1000", "Los ingresos no deben de superar los 1000 euros");
+        frmvalidator.addValidation("ingresos", "lt=672", "Los ingresos son mayores de lo estimado por estar desempleado",
+            "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'En paro')");
+        frmvalidator.addValidation("ingresos", "lt=1", "Los ingresos son mayores de lo estimado",
+            "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'No es relevante')");
+        frmvalidator.addValidation("ingresos", "gt=0", "Los ingresos son mayores de lo estimado por tener alguna discapacidad",
+            "VWZ_IsChecked(document.forms['altaUsuario'].elements['minusvalia'],'Sí')");
 
-    frmvalidator.addValidation("solicitante","selone_radio","Introduzca si el usuario es solicitante");
-    
-    if(solicitante =="Sí"){
-        frmvalidator.addValidation("gastosfamilia","req","Introduzca los gastos de la familia");
-        frmvalidator.addValidation("gastosfamilia","num","Introduzca un valor numérico en los gastos familiares");
+        frmvalidator.addValidation("minusvalia", "selone_radio", "Introduzca si posee alguna minusvalia");
 
-        frmvalidator.addValidation("poblacion","req","Introduzca la población");
-        frmvalidator.addValidation("poblacion","alphabetic_space","La población debe de constar de letras y espacios");
+        frmvalidator.addValidation("solicitante", "selone_radio", "Introduzca si el usuario es solicitante");
 
-        frmvalidator.addValidation("domicilio","req","Introduzca el domicilio");
+        if (solicitante == "Sí") {
+            frmvalidator.addValidation("gastosfamilia", "req", "Introduzca los gastos de la familia");
+            frmvalidator.addValidation("gastosfamilia", "num", "Introduzca un valor numérico en los gastos familiares");
 
-        frmvalidator.addValidation("codigopostal","req","Introduzca el código postal");
-        frmvalidator.addValidation("codigopostal","regexp=^[0-9]{5}$","Introduzca un código postal válido");
+            frmvalidator.addValidation("poblacion", "req", "Introduzca la población");
+            frmvalidator.addValidation("poblacion", "alphabetic_space", "La población debe de constar de letras y espacios");
 
-        frmvalidator.addValidation("proteccionDatos","shouldselchk=on","El solicitante debe de aceptar la Ley de Protección de Datos");
+            frmvalidator.addValidation("domicilio", "req", "Introduzca el domicilio");
 
-    }else if(solicitante =="No"){
-        frmvalidator.addValidation("dniSol","req","Introduzca el dni del solicitante");
-        frmvalidator.addValidation("dniSol","regexp=^[0-9]{8}[A-Z]$","Introduzca un dni de la forma 12345678A");
+            frmvalidator.addValidation("codigopostal", "req", "Introduzca el código postal");
+            frmvalidator.addValidation("codigopostal", "regexp=^[0-9]{5}$", "Introduzca un código postal válido");
 
-        frmvalidator.addValidation("parentesco","req","Introduzca el aprentesco co el solicitante");
-        frmvalidator.addValidation("parentesco","alpha","El nombre debe de constar de letras");
-    }
+            frmvalidator.addValidation("proteccionDatos", "shouldselchk=on", "El solicitante debe de aceptar la Ley de Protección de Datos");
+
+        } else if (solicitante == "No") {
+            frmvalidator.addValidation("dniSol", "req", "Introduzca el dni del solicitante");
+            frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un dni de la forma 12345678A");
+
+            frmvalidator.addValidation("parentesco", "req", "Introduzca el aprentesco co el solicitante");
+            frmvalidator.addValidation("parentesco", "alpha", "El nombre debe de constar de letras");
+        }
     </script>
     <?php
     include("../../vista/footer.php");

@@ -1,16 +1,16 @@
 
     A-8058
     Antigua Calle de Nacarino
-    Av Clara Campoamor
-    Av Cuesta De Cross
-    Av De Europa
-    Av de la Concordia
-    Av de los Palomares
-    Av de Mairena
-    Av del 28 de Febrero
-    Av del Manchón
-    Av las Erillas
-    Av Palomares del Rio
+    Avenida Clara Campoamor
+    Avenida Cuesta De Cross
+    Avenida De Europa
+    Avenida de la Concordia
+    Avenida de los Palomares
+    Avenida de Mairena
+    Avenida del 28 de Febrero
+    Avenida del Manchón
+    Avenida las Erillas
+    Avenida Palomares del Rio
     Avenida 28 Febrero
     Avenida Canal Sur
     Avenida Clara Campoamor
@@ -25,10 +25,10 @@
     Avenida Francisco Manuel Martín González "Paloyo"
     Avenida Mairena
     Avenida Palomares
-    C/ Juan Ramón Jiménez
-    C/ Salvador Madrigal Rasero
-    C/ VEINTIOCHO DE FEBRERO
-    C/ Veintiocho de Febrero
+    Calle Juan Ramón Jiménez
+    Calle Salvador Madrigal Rasero
+    Calle VEINTIOCHO DE FEBRERO
+    Calle Veintiocho de Febrero
     Calle 28 de Febrero
     Calle Agoncillo
     Calle Albacete
