@@ -70,4 +70,37 @@ function alta_ayuda($conexion,$ayuda){
                 return $e->getMessage();
             }
     }
+   
+}
+
+function getComida($conexion,$oid_a) {
+    $consulta = "SELECT *  FROM COMIDAS WHERE OID_a=:oid_a";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_a',$oid_a);
+   $stmt->execute();
+   return $stmt->fetch();
+}
+
+function getAyudaEconomica($conexion,$oid_a) {
+    $consulta = "SELECT *  FROM AYUDASECONOMICAS WHERE OID_a=:oid_a";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_a',$oid_a);
+   $stmt->execute();
+   return $stmt->fetch();
+}
+
+function getCurso($conexion,$oid_a) {
+    $consulta = "SELECT *  FROM CURSOS WHERE OID_a=:oid_a";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_a',$oid_a);
+   $stmt->execute();
+   return $stmt->fetch();
+}
+
+function getTrabajo($conexion,$oid_a) {
+    $consulta = "SELECT *  FROM TRABAJOS WHERE OID_a=:oid_a";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_a',$oid_a);
+   $stmt->execute();
+   return $stmt->fetch();
 }
