@@ -31,9 +31,12 @@ unset($_SESSION["paginacion"]);
 $conexion = crearConexionBD();
 
 // La consulta que ha de paginarse
-$query = 'SELECT CONCEDIDA.AYUDAS, SUMINISTRADAPOR.AYUDAS '
-    . 'FROM AYUDAS '
-    . 'ORDER BY  ASC';
+// , COMIDAS.BEBE, COMIDAS.NIÑO, AYUDASECONOMICAS.CANTIDAD, AYUDASECONOMICAS.PRIORIDAD, CURSOS.MATERIA, TRABAJOS.EMPRESA, TRABAJOS.SALARIOAPROXIMADO
+// , COMIDAS, AYUDASECONOMICAS, CURSOS, TRABAJOS
+// , PRIORIDAD, MATERIA, SALARIOAPROXIMADO
+$query = 'SELECT AYUDAS.CONCEDIDA, AYUDAS.SUMINISTRADAPOR, COMIDAS.BEBE, COMIDAS.NIÑO '
+    . 'FROM AYUDAS, COMIDAS '
+    . 'ORDER BY CONCEDIDA ASC';
 
 // Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
 // En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
@@ -90,7 +93,7 @@ cerrarConexionBD($conexion);
                     <span class="current"><?php echo $pagina; ?></span>
                 <?php
             } else { ?>
-                    <a href="lista_cita.php?PAG_NUM=<?php echo $pagina; ?>&PAG_TAM=<?php echo $pag_tam; ?>"><?php echo $pagina; ?></a>
+                    <a href="lista_ayuda.php?PAG_NUM=<?php echo $pagina; ?>&PAG_TAM=<?php echo $pag_tam; ?>"><?php echo $pagina; ?></a>
                 <?php
             } ?>
             </div>
@@ -123,7 +126,7 @@ cerrarConexionBD($conexion);
 
 
 
-            <article class="ayuda">
+            <article class="cita">
 
                 <form method="post" action="accion_ayuda.php">
 
@@ -132,11 +135,13 @@ cerrarConexionBD($conexion);
                         <div class="datos_ayuda">
 
 
-                            <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" />
+                            <input id="CONCEDIDA" name="CONCEDIDA" value="<?php echo $fila["CONCEDIDA"]; ?>" />
 
-                            <input id="NOMBREV" name="NOMBREV" value="<?php echo $fila["NOMBREV"]; ?>" />
+                            <input id="SUMINISTRADAPOR" name="SUMINISTRADAPOR" value="<?php echo $fila["SUMINISTRADAPOR"]; ?>" />
 
-                            <input id="FECHACITA" name="FECHACITA" value="<?php echo $fila["FECHACITA"]; ?>" />
+                            <input id="BEBE" name="BEBE" value="<?php echo $fila["BEBE"]; ?>" />
+
+                            <input id="NIÑO" name="NIÑO" value="<?php echo $fila["NIÑO"]; ?>" />
 
                             <?php
 
@@ -173,32 +178,32 @@ cerrarConexionBD($conexion);
                         <!-- Los botones están comentados por estética hasta que los arregle Yanes y no deformen la tabla -->
                         <!-- <div id="botones_fila">
 
-                <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
+                    <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
 
-                                    <button id="grabar" name="grabar" type="submit" class="editar_fila">
+                                            <button id="grabar" name="grabar" type="submit" class="editar_fila">
 
-                                        <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
+                                                <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
 
-                                    </button>
+                                            </button>
 
-                <?php
-            } else { ?>
+                    <?php
+                } else { ?>
 
-                                    <button id="editar" name="editar" type="submit" class="editar_fila">
+                                            <button id="editar" name="editar" type="submit" class="editar_fila">
 
-                                        <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
+                                                <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
 
-                                    </button>
+                                            </button>
 
-                <?php
-            } ?>
+                    <?php
+                } ?>
 
-                <button id="borrar" name="borrar" type="submit" class="editar_fila">
+                    <button id="borrar" name="borrar" type="submit" class="editar_fila">
 
-                    <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar usuario">
+                        <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar usuario">
 
-                </button>
-            </div> -->
+                    </button>
+                </div> -->
                     </div>
                 </form>
             </article>
