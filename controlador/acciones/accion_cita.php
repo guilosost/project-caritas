@@ -4,6 +4,8 @@ session_start();
 //YANES ARREGLA ESTA RUTA PORFA
 include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
 require_once(MODELO."/gestionBD.php");
+require_once(MODELO."/gestionar/gestionar_citas.php");
+require_once(MODELO."/gestionar/gestionar_voluntarios.php");
 
 if (isset($_SESSION["formulario_cita"])) {
 	$cita['fechacita'] = $_REQUEST["fechacita"];
@@ -36,8 +38,6 @@ function validarDatosCita($conexion, $cita)
 	
 	if ($cita["fechacita"] == "") {
 		$errores[] = "<p>La fecha de la cita no puede estar vacía.</p>";
-	} else if (fechaAnteriorActual($cita["fechacita"]) == 0){
-		$errores[] = "<p>La fecha de la cita no puede ser posterior a la fecha actual.</p>";
 	} 
 
 	if ($cita["objetivo"] == "") {
@@ -50,7 +50,7 @@ function validarDatosCita($conexion, $cita)
 
 	if ($cita["nombrev"] == "") {
 		$errores[] = "<p>El nombre del voluntario responsable de la cita no puede estar vacío.</p>";
-	}else if(consultarVoluntarioRepetido($conexion,$voluntario["nombrev"])!=1){
+	}else if(consultarVoluntarioRepetido($conexion,$cita["nombrev"])==0){
 		$errores[] = "<p>Ese voluntario no existe</p>";
 	}
 	return $errores;
