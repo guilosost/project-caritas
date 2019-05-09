@@ -34,9 +34,9 @@ $conexion = crearConexionBD();
 // , COMIDAS.BEBE, COMIDAS.NIÑO, AYUDASECONOMICAS.CANTIDAD, AYUDASECONOMICAS.PRIORIDAD, CURSOS.MATERIA, TRABAJOS.EMPRESA, TRABAJOS.SALARIOAPROXIMADO
 // , COMIDAS, AYUDASECONOMICAS, CURSOS, TRABAJOS
 // , PRIORIDAD, MATERIA, SALARIOAPROXIMADO
-$query = 'SELECT USUARIOS.DNI, AYUDAS.CONCEDIDA, AYUDAS.SUMINISTRADAPOR, COMIDAS.BEBE, COMIDAS.NIÑO '
-    . 'FROM USUARIOS, AYUDAS, COMIDAS '
-    . 'ORDER BY DNI, CONCEDIDA ASC';
+$query = 'SELECT * '
+    . 'FROM AYUDAS '
+    . 'ORDER BY CONCEDIDA ASC';
 
 // Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
 // En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
@@ -134,16 +134,17 @@ cerrarConexionBD($conexion);
 
                         <div class="datos_ayuda">
 
-                        <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" />
+                        <!-- <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" /> -->
 
                             <input id="CONCEDIDA" name="CONCEDIDA" value="<?php echo $fila["CONCEDIDA"]; ?>" />
 
                             <input id="SUMINISTRADAPOR" name="SUMINISTRADAPOR" value="<?php echo $fila["SUMINISTRADAPOR"]; ?>" />
 
-                            <input id="BEBE" name="BEBE" type="hidden" value="<?php echo $fila["BEBE"]; ?>" />
+                            <input id="BEBE" name="BEBE" type="hidden" value="<?php echo $fila["BEBE"];?>" type="hidden" />
 
-                            <input id="NIÑO" name="NIÑO" type="hidden" value="<?php echo $fila["NIÑO"]; ?>" />
+                            <input id="NIÑO" name="NIÑO" type="hidden" value="<?php echo $fila["NIÑO"]; ?>" type="hidden"/>
 
+                            <input type="submit" value="mostrar">
                             <?php
 
                             # Todo este bloque está comentado porque no le he encontrado utilidad xd
