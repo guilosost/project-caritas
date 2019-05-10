@@ -8,6 +8,10 @@ require_once(VISTA . "/paginacion_consulta.php");
 
 $conexion = crearConexionBD();
 
+if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
+    Header("Location: ../../controlador/acceso/login.php");
+}
+
 if (isset($_SESSION["usuario"])) {
     $usuario = $_SESSION["usuario"];
     unset($_SESSION["usuario"]);

@@ -130,9 +130,9 @@ cerrarConexionBD($conexion);
             ?>
 
             
-            <article class="cita">
+            <article class="ayuda">
 
-                <form method="post" action="accion_ayuda.php" action="../../controlador/cargas/carga_usuario.php">
+                <form method="post" action="../../controlador/cargas/carga_ayuda.php">
 
                     <div class="fila_ayuda">
 
@@ -144,16 +144,16 @@ cerrarConexionBD($conexion);
 
                             <input id="SUMINISTRADAPOR" name="SUMINISTRADAPOR" value="<?php echo $fila["SUMINISTRADAPOR"]; ?>" />
 
-                            <input id="BEBE" name="BEBE" value="<?php echo $fila["BEBE"];?>" type="hidden"/>
-                            <input id="NIÑO" name="NIÑO" value="<?php echo $fila["NIÑO"]; ?>" type="hidden"/>
+                            <input id="BEBE" name="BEBE" value="<?php echo $comida["BEBE"];?>" type="hidden" />
+                            <input id="NIÑO" name="NIÑO" value="<?php echo $comida["NIÑO"]; ?>" type="hidden" />
 
-                            <input id="CANTIDAD" name="CANTIDAD" value="<?php echo $fila["CANTIDAD"]; ?>" type="hidden"/>
-                            <input id="PRIORIDAD" name="MOTIVO" value="<?php echo $fila["MOTIVO"]; ?>" type="hidden"/>
-                            <input id="MOTIVO" name="PRIORIDAD" value="<?php echo $fila["PRIORIDAD"]; ?>" type="hidden"/>
+                            <input id="CANTIDAD" name="CANTIDAD" value="<?php echo $ayuda_economica["CANTIDAD"]; ?>" type="hidden"/>
+                            <input id="PRIORIDAD" name="MOTIVO" value="<?php echo $ayuda_economica["MOTIVO"]; ?>" type="hidden"/>
+                            <input id="MOTIVO" name="PRIORIDAD" value="<?php echo $ayuda_economica["PRIORIDAD"]; ?>" type="hidden"/>
 
-                            <input id="DESCRIPCION" name="DESCRIPCION" value="<?php echo $fila["DESCRIPCION"]; ?>" type="hidden"/>
-                            <input id="EMPRESA" name="EMPRESA" value="<?php echo $fila["EMPRESA"]; ?>" type="hidden"/>
-                            <input id="SALARIOAPROXIMADO" name="SALARIOAPROXIMADO" value="<?php echo $fila["SALARIOAPROXIMADO"]; ?>" type="hidden"/>
+                            <input id="DESCRIPCION" name="DESCRIPCION" value="<?php echo $trabajo["DESCRIPCION"]; ?>" type="hidden"/>
+                            <input id="EMPRESA" name="EMPRESA" value="<?php echo $trabajo["EMPRESA"]; ?>" type="hidden"/>
+                            <input id="SALARIOAPROXIMADO" name="SALARIOAPROXIMADO" value="<?php echo $trabajo["SALARIOAPROXIMADO"]; ?>" type="hidden"/>
 
                             <input type="submit" value="mostrar">
                             <?php

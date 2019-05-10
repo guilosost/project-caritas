@@ -15,9 +15,9 @@
 		$_SESSION["ayuda"] = $ayuda;
 
 
-	Header("Location: ../../vista/mostrar/mostrar_usuario.php");
+	Header("Location: ../../vista/mostrar/mostrar_ayuda.php");
 			
 	}
 	else 
-		Header("Location: ../../vista/listas/lista_usuario.php");
+		Header("Location: ../../vista/listas/lista_ayuda.php");
 ?>
