@@ -119,8 +119,8 @@ $conexion = crearConexionBD();
                         
                         <br>
                         <label for="concedida" required>¿Está la ayuda concedida?:</label>
-                        <input type="radio" name="concedida" value="Sí"  <?php if ($ayuda['concedida'] == 'Sí') echo ' checked '; ?>>Sí
-                        <input type="radio" name="concedida" value="No"  <?php if ($ayuda['concedida'] == 'No ') echo ' checked '; ?>>No<br>
+                        <input type="radio" name="concedida" value="Sí"  <?php if ($ayuda['concedida'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;">Sí
+                        <input type="radio" name="concedida" value="No"  <?php if ($ayuda['concedida'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;">No<br>
 
                     </fieldset>
 
@@ -130,12 +130,12 @@ $conexion = crearConexionBD();
                             <legend>Información de la bolsa de comida</legend>
 
                             <label for="bebe">¿Debe contener productos para bebé?:</label>
-                            <input type="radio" name="bebe" value="Sí"  <?php if ($ayuda['bebe'] == 'Sí') echo ' checked '; ?>>Sí
-                            <input type="radio" name="bebe" value="No" <?php if ($ayuda['bebe'] == 'No ') echo ' checked '; ?>>No  <br>
+                            <input type="radio" name="bebe" value="Sí"  <?php if ($ayuda['bebe'] == 'Sí') echo ' checked '; ?>onclick="javascript: return false;" >Sí
+                            <input type="radio" name="bebe" value="No" <?php if ($ayuda['bebe'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" >No  <br>
 
                             <label for="niño">¿Debe contener productos para niños?:</label>
-                            <input type="radio" name="niño" value="Sí"  <?php if ($ayuda['nino'] == 'Sí') echo ' checked '; ?>>Sí 
-                            <input type="radio" name="niño" value="No" <?php if ($ayuda['nino'] == 'No ') echo ' checked '; ?>>No<br>
+                            <input type="radio" name="niño" value="Sí"  <?php if ($ayuda['nino'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;" >Sí 
+                            <input type="radio" name="niño" value="No" <?php if ($ayuda['nino'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" >No<br>
                         </fieldset>
                     </div>
 
@@ -150,8 +150,8 @@ $conexion = crearConexionBD();
                             <input class="celda" name="motivo" type="text" value="<?php echo $ayuda['motivo']; ?>"/><br>
 
                             <label for="prioridad">¿Esta ayuda tiene prioridad?:</label>
-                            <input type="radio" name="prioridad" value="Sí"  <?php if ($ayuda['prioridad'] == 'Sí') echo ' checked '; ?>>Sí
-                            <input type="radio" name="prioridad" value="No"  <?php if ($ayuda['prioridad'] == 'No ') echo ' checked '; ?>>No<br>
+                            <input type="radio" name="prioridad" value="Sí"  <?php if ($ayuda['prioridad'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;" >Sí
+                            <input type="radio" name="prioridad" value="No"  <?php if ($ayuda['prioridad'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" >No<br>
                         </fieldset>
                     </div>
 

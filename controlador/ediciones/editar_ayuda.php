@@ -115,7 +115,7 @@ $conexion = crearConexionBD();
                         <br>
 
                         <label for="suministradapor" required>Suministrada por:</label>
-                        <input class="celda" name="suministradapor" type="text" maxlength="40" value="<?php echo $ayuda['suministradapor']; ?>" readonly/><br>
+                        <input class="celda" name="suministradapor" type="text" maxlength="40" value="<?php echo $ayuda['suministradapor']; ?>" /><br>
                         
                         <br>
                         <label for="concedida" required>¿Está la ayuda concedida?:</label>
@@ -200,7 +200,7 @@ $conexion = crearConexionBD();
 
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_ayuda.php'">Cancelar</a>
-                        
+                        <input  type="submit" value="Eliminar" >
                     </div>
                 </form>
             </div>

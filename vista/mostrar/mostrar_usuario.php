@@ -63,8 +63,8 @@ if(isset($_SESSION["usuario"])){
                         <input name="fechaNac" type="text" value="<?php echo $usuario['fechaNac']; ?>" required readonly/><br>
 
                         <label for="genero">Género: </label>
-                        <input type="radio" name="genero" value="Masculino" <?php if ($usuario['genero'] == 'Masculino') echo ' checked '; ?>readonly> Hombre
-                        <input type="radio" name="genero" value="Femenino" <?php if ($usuario['genero'] == 'Femenino') echo ' checked '; ?>readonly> Mujer<br>
+                        <input type="radio" name="genero" value="Masculino" <?php if ($usuario['genero'] == 'Masculino') echo ' checked '; ?> onclick="javascript: return false;" readonly> Hombre
+                        <input type="radio" name="genero" value="Femenino" <?php if ($usuario['genero'] == 'Femenino') echo ' checked '; ?> onclick="javascript: return false;" readonly> Mujer<br>
 
                         <label for="telefono">Teléfono:</label>
                         <input class="celda" name="telefono" type="text" maxlength="10" value="<?php echo $usuario['telefono']; ?>" required readonly/><br>
@@ -82,12 +82,12 @@ if(isset($_SESSION["usuario"])){
 
                         <label for="minusvalia">¿El usuario tiene alguna discapacidad? </label>
                     
-                        <input type="radio" name="minusvalia" value="Sí" <?php if ($usuario["minusvalia"] == "Sí") echo ' checked '; ?>readonly>Sí
-                        <input type="radio" name="minusvalia" value="No" <?php if ($usuario["minusvalia"] == "No ") echo ' checked '; ?>readonly>No<br>
+                        <input type="radio" name="minusvalia" value="Sí" <?php if ($usuario["minusvalia"] == "Sí") echo ' checked '; ?> onclick="javascript: return false;" readonly>Sí
+                        <input type="radio" name="minusvalia" value="No" <?php if ($usuario["minusvalia"] == "No ") echo ' checked '; ?> onclick="javascript: return false;" readonly>No<br>
                         
                         <label for="solicitante">¿El usuario es solicitante? </label>
-                        <input type="radio"  name="solicitante"   value="Sí" <?php if ($usuario['solicitante'] == "Sí") echo ' checked '; ?>readonly> Sí
-                        <input type="radio"  name="solicitante"  value="No" <?php if ($usuario['solicitante'] == "No ") echo ' checked '; ?>readonly> No<br>
+                        <input type="radio"  name="solicitante"   value="Sí" <?php if ($usuario['solicitante'] == "Sí") echo ' checked '; ?> onclick="javascript: return false;" readonly> Sí
+                        <input type="radio"  name="solicitante"  value="No" <?php if ($usuario['solicitante'] == "No ") echo ' checked '; ?> onclick="javascript: return false;" readonly> No<br>
 
                     </fieldset>
                     <?php if ($usuario["solicitante"] == "Sí"){ ?>
