@@ -138,7 +138,7 @@ cerrarConexionBD($conexion);
 
                         <div class="datos_ayuda">
 
-                        <!-- <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" /> -->
+                            <input id="oid_a" name="oid_a" value="<?php echo $fila["OID_A"]; ?>" type="hidden"/> 
 
                             <input id="CONCEDIDA" name="CONCEDIDA" value="<?php echo $fila["CONCEDIDA"]; ?>" />
 

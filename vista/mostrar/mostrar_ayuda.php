@@ -98,7 +98,7 @@ $conexion = crearConexionBD();
         <div class="form">
             <h2 class="form-h2">Información de la ayuda</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_ayuda.php" method="POST">
+                <form action="../../controlador/eliminaciones/elimina_ayuda.php" method="POST" >
                     <fieldset>
                         <legend>Información básica de la ayuda</legend>
 
@@ -197,10 +197,10 @@ $conexion = crearConexionBD();
                             </label>
                         </fieldset>
                     </div>
-
+                    <input style="float:left" type="submit" value="Eliminar" >
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_ayuda.php'">Cancelar</a>
-                        
+                        <input type="button" onclick="location.href='../../controlador/ediciones/editar_ayuda.php'" value="Editar" />
                     </div>
                 </form>
             </div>

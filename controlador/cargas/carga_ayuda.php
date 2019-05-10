@@ -12,6 +12,7 @@
         $ayuda["empresa"] = $_REQUEST["EMPRESA"];
         $ayuda["salarioaproximado"] = $_REQUEST["SALARIOAPROXIMADO"];
         $ayuda["prioridad"] = $_REQUEST["PRIORIDAD"];
+        $ayuda["oid_a"] = $_REQUEST["oid_a"];
 		$_SESSION["ayuda"] = $ayuda;
 
 

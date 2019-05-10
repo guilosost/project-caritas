@@ -104,3 +104,33 @@ function getTrabajo($conexion,$oid_a) {
    $stmt->execute();
    return $stmt->fetch();
 }
+
+function borrar_ayuda($conexion,$oid_a) {
+    $consulta = "DELETE FROM AYUDAS WHERE OID_A=:oid_a";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_a',$oid_a);
+   $stmt->execute();
+   return "";
+}
+
+function borrar_comida($conexion,$oid_a) {
+    $consulta = "DELETE FROM COMIDAS WHERE OID_A=:oid_a";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_a',$oid_a);
+   $stmt->execute();
+   return "";
+}
+function borrar_ayudaeconomica($conexion,$oid_a) {
+    $consulta = "DELETE FROM AYUDASECONOMICAS WHERE OID_A=:oid_a";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_a',$oid_a);
+   $stmt->execute();
+   return "";
+}
+function borrar_trabajo($conexion,$oid_a) {
+    $consulta = "DELETE FROM TRABAJOS WHERE OID_A=:oid_a";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_a',$oid_a);
+   $stmt->execute();
+   return "";
+}
