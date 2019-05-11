@@ -570,3 +570,25 @@ BEGIN
 
 END editar_familiar;
 /
+CREATE OR REPLACE PROCEDURE editar_ayuda (
+    w_oid_a                    IN                     ayudas.oid_a%TYPE,
+    w_bebe                 IN                       comidas.bebe%TYPE,
+    w_niño              IN                       comidas.niño%TYPE,
+    w_cantidad              IN                       ayudaseconomicas.cantidad%TYPE,
+    w_motivo       IN                       ayudaseconomicas.motivo%TYPE,
+    w_prioridad               IN                       ayudaseconomicas.prioridad%TYPE,
+    w_descripcion                  IN                       trabajos.descripcion%TYPE,
+    w_empresa              IN                       trabajos.empresa%TYPE,
+    w_salarioaproximado            IN                       trabajos.salarioaproximado%TYPE,
+    w_concedida        IN                       ayudas.concedida%TYPE,
+    w_suministradapor       IN                       ayudas.suministradapor%TYPE
+   
+) IS
+BEGIN
+    UPDATE  COMIDAS SET bebe=w_bebe, niño=w_niño WHERE OID_A=w_oid_a;
+    UPDATE AYUDASECONOMICAS SET cantidad=w_cantidad, motivo=w_motivo, prioridad=w_prioridad WHERE OID_A=w_oid_a;
+    UPDATE TRABAJOS SET descripcion=w_descripcion, salarioaproximado=w_salarioaproximado, empresa=w_empresa WHERE OID_A=w_oid_a;
+    UPDATE  AYUDAS SET concedida=w_concedida, suministradapor=w_suministradapor WHERE OID_A=w_oid_a;
+    
+END editar_ayuda;
+/

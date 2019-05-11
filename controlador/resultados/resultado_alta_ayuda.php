@@ -7,10 +7,15 @@ require_once(GESTIONAR."gestionar_ayudas.php");
 
 if (isset($_SESSION["formulario_ayuda"])) {
     $ayuda = $_SESSION["formulario_ayuda"];
-    unset($_SESSION["formulario_ayuda"]);
-} else {
-    Header("Location: ../../controlador/altas/alta_ayuda.php");
-}
+    
+    }
+else if (isset($_SESSION["ayuda"])) {
+        $ayuda = $_SESSION["ayuda"];
+        
+}else{
+            Header("Location: ../../vista/listas/lista_ayuda.php"); 
+        }
+
 
 $conexion  = crearConexionBD();
 ?>
@@ -34,20 +39,31 @@ $conexion  = crearConexionBD();
 <body>
     <?php include("../../vista/header.php");
     include("../../vista/navbar.php");
-
+if(isset($_SESSION["formulario_ayuda"])){
+    unset($_SESSION["formulario_ayuda"]);
     if (alta_ayuda($conexion, $ayuda)) {
         ?>
-        
-    <p>Todo ha ido bien </p>
+    <p>Todo ha ido bienn </p>
     <?php 
-} else {
-    echo $d;
+    } else {
+        
+        echo "La ayuda ya existe.";
+    }
+} if (isset($_SESSION["ayuda"])){
+    unset($_SESSION["ayuda"]);
+    if(editar_ayuda($conexion,$ayuda)){
+        $d=editar_ayuda($conexion,$ayuda);
+        echo $d;
+        ?>
+        
+        <p>Todo ha ido bien </p>
+        <?php 
+        } else {
+            echo "error";
+    }
     
-    echo "La ayuda ya existe.";
 }
 ?>
-
-
     </main>
     <?php cerrarConexionBD($conexion); ?>
     <?php include("../../vista/footer.php");  ?>

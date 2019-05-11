@@ -4,7 +4,7 @@
 	if (isset($_REQUEST["CONCEDIDA"])){
         $ayuda["concedida"] = $_REQUEST["CONCEDIDA"];
         $ayuda["suministradapor"] = $_REQUEST["SUMINISTRADAPOR"];
-        $ayuda["nino"] = $_REQUEST["NIÑO"];
+        $ayuda["niño"] = $_REQUEST["NIÑO"];
         $ayuda["cantidad"] = $_REQUEST["CANTIDAD"];
         $ayuda["motivo"] = $_REQUEST["MOTIVO"];
         $ayuda["descripcion"] = $_REQUEST["DESCRIPCION"];

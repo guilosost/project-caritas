@@ -134,8 +134,8 @@ $conexion = crearConexionBD();
                             <input type="radio" name="bebe" value="No" <?php if ($ayuda['bebe'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" >No  <br>
 
                             <label for="niño">¿Debe contener productos para niños?:</label>
-                            <input type="radio" name="niño" value="Sí"  <?php if ($ayuda['nino'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;" >Sí 
-                            <input type="radio" name="niño" value="No" <?php if ($ayuda['nino'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" >No<br>
+                            <input type="radio" name="niño" value="Sí"  <?php if ($ayuda['niño'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;" >Sí 
+                            <input type="radio" name="niño" value="No" <?php if ($ayuda['niño'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" >No<br>
                         </fieldset>
                     </div>
 

@@ -134,8 +134,8 @@ $conexion = crearConexionBD();
                             <input type="radio" name="bebe" value="No" <?php if ($ayuda['bebe'] == 'No ') echo ' checked '; ?>>No  <br>
 
                             <label for="niño">¿Debe contener productos para niños?:</label>
-                            <input type="radio" name="niño" value="Sí"  <?php if ($ayuda['nino'] == 'Sí') echo ' checked '; ?>>Sí 
-                            <input type="radio" name="niño" value="No" <?php if ($ayuda['nino'] == 'No ') echo ' checked '; ?>>No<br>
+                            <input type="radio" name="niño" value="Sí"  <?php if ($ayuda['niño'] == 'Sí') echo ' checked '; ?>>Sí 
+                            <input type="radio" name="niño" value="No" <?php if ($ayuda['niño'] == 'No ') echo ' checked '; ?>>No<br>
                         </fieldset>
                     </div>
 
@@ -200,7 +200,7 @@ $conexion = crearConexionBD();
 
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_ayuda.php'">Cancelar</a>
-                        <input  type="submit" value="Eliminar" >
+                        <input  type="submit" value="Editar" >
                     </div>
                 </form>
             </div>

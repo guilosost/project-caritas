@@ -134,3 +134,28 @@ function borrar_trabajo($conexion,$oid_a) {
    $stmt->execute();
    return "";
 }
+
+
+function editar_ayuda($conexion,$ayuda) {
+    try {
+   $stmt=$conexion->prepare("CALL editar_ayuda(:oid_a,:bebe,:niño,:cantidad,:motivo,:prioridad,:descripcion,:salarioaproximado,
+   :empresa,:concedida,
+   :suministradapor)");
+   $stmt->bindParam(':oid_a',$ayuda["oid_a"]);
+   $stmt->bindParam(':bebe',$ayuda["bebe"]);
+   $stmt->bindParam(':niño',$ayuda["niño"]);
+   $stmt->bindParam(':cantidad',$ayuda["cantidad"]);
+   $stmt->bindParam(':motivo',$ayuda["motivo"]);
+   $stmt->bindParam(':prioridad',$ayuda["prioridad"]);
+   $stmt->bindParam(':oid_a',$ayuda["oid_a"]);
+   $stmt->bindParam(':descripcion',$ayuda["descripcion"]);
+   $stmt->bindParam(':salarioaproximado',$ayuda["salarioaproximado"]);
+   $stmt->bindParam(':empresa',$ayuda["empresa"]);
+   $stmt->bindParam(':concedida',$ayuda["concedida"]);
+   $stmt->bindParam(':suministradapor',$ayuda["suministradapor"]);
+   $stmt->execute();
+    return true;
+} catch(PDOException $e) {
+    return $e->getMessage();
+}
+}
