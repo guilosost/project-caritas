@@ -104,11 +104,20 @@ $conexion = crearConexionBD();
 
                         <label for="tipoayuda">Selección del tipo de ayuda: </label>
                         <input class="celda" name="tipoayuda" type="text" maxlength="40" value="<?php if ($ayuda["bebe"]=="Sí" or  $ayuda["bebe"]=="No "){
-                            echo 'comida';
+                            echo 'bolsacomida';
+                            $ayuda = $_SESSION["ayuda"]; 
+                            $ayuda["tipoayuda"] = "bolsacomida";
+                            $_SESSION["ayuda"] = $ayuda; 
                         }else if ($ayuda["prioridad"]=="Sí" or $ayuda["prioridad"]=="No "){
                             echo 'ayudaeconomica';
+                            $ayuda = $_SESSION["ayuda"]; 
+                            $ayuda["tipoayuda"] = "ayudaeconomica";
+                            $_SESSION["ayuda"] = $ayuda; 
                         } else {
                             echo 'trabajo';
+                            $ayuda = $_SESSION["ayuda"]; 
+                            $ayuda["tipoayuda"] = "trabajo";
+                            $_SESSION["ayuda"] = $ayuda; 
                         }
                           ?>" readonly/><br>
                         </select>

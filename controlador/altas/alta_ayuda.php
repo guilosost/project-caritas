@@ -54,6 +54,7 @@ $conexion = crearConexionBD();
     <title>Alta de Ayuda</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
+    <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
     <script>
         <!--
         function showHide(elm) {
@@ -92,6 +93,7 @@ $conexion = crearConexionBD();
         }
         //-->
     </script>
+
 </head>
 
 <body background="../../vista/img/background.png">
@@ -114,7 +116,7 @@ $conexion = crearConexionBD();
         <div class="form">
             <h2 class="form-h2">Alta de ayuda</h2>
             <div class="form-alta">
-                <form action="../../controlador/acciones/accion_ayuda.php" method="POST">
+                <form action="../../controlador/acciones/accion_ayuda.php" method="POST" id=altaAyuda name=altaAyuda>
                     <fieldset>
                         <legend>Información básica de la ayuda</legend>
 
@@ -223,6 +225,45 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        var frmvalidator = new Validator("altaAyuda");
+
+        frmvalidator.EnableMsgsTogether();
+        var tipo = document.forms["altaAyuda"]["tipoayuda"].value;
+        
+        frmvalidator.addValidation("tipoayuda", "req", "Introduzca el tipo de ayuda");
+
+        frmvalidator.addValidation("suministradapor", "req", "Introduzca el proveedor de la ayuda");
+        //frmvalidator.addValidation("suministradapor", "alphabetic_space", "el proveedor de la ayuda debe de constar de letras y espacios");
+
+        frmvalidator.addValidation("concedida", "selone_radio", "Introduzca si la ayuda está concedida");
+
+        if (tipo == "bolsacomida") {
+        frmvalidator.addValidation("bebe", "selone_radio", "Introduzca si el solicitante tiene a un bebé");
+
+        frmvalidator.addValidation("nino", "selone_radio", "Introduzca si el solicitante tiene niños");
+
+        }else if (tipo == "ayudaeconomica"){
+        frmvalidator.addValidation("cantidad", "req", "Introduzca la cantidad");
+        frmvalidator.addValidation("cantidad", "num", "La cantidad debe de ser numérica");
+
+        frmvalidator.addValidation("prioridad", "selone_radio", "Introduzca si posee prioridad");
+
+        frmvalidator.addValidation("motivo", "req", "Introduzca el motivo de la ayuda");
+        frmvalidator.addValidation("motivo", "alphabetic_space", "Introduzca el motivo de la ayuda");
+
+        }else if (tipo == "trabajo"){
+        frmvalidator.addValidation("salarioaproximado", "req", "Introduzca un salario");
+        frmvalidator.addValidation("salarioaproximado", "num", "Introduzca un número como salario");
+
+        frmvalidator.addValidation("descripcion", "req", "Introduzca la descripción del trabajo");
+        frmvalidator.addValidation("descripcion", "alphabetic_space", "Introduzca la descripción del trabajo");
+
+        frmvalidator.addValidation("empresa", "req", "Introduzca la empresa");
+        frmvalidator.addValidation("empresa", "alphabetic_space", "Introduzca la empresa");
+
+        }
+    </script> 
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);

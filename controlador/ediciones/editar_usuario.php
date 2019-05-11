@@ -104,21 +104,21 @@ $conexion = crearConexionBD();
 
                         <label for="estudios">Estudios: </label>
                         <select class="celda" name="estudios" size=1 required>
-                            <option value="No es relevante">No es relevante </option>
-                            <option value="Sin estudios">Sin estudios </option>
-                            <option value="Educación primaria">Educación primaria </option>
-                            <option value="Educación secundaria">Educación secundaria </option>
-                            <option value="Bachillerato">Bachillerato </option>
-                            <option value="Grado medio">Grado medio </option>
-                            <option value="Grado superior">Grado superior </option>
-                            <option value="Grado universitario">Grado universitario </option>
+                            <option value="No es relevante" <?php if ($usuario['estudios'] == 'No es relevante') echo ' selected '; ?>>No es relevante </option>
+                            <option value="Sin estudios" <?php if ($usuario['estudios'] == 'Sin estudios') echo ' selected '; ?>>Sin estudios </option>
+                            <option value="Educación primaria" <?php if ($usuario['estudios'] == 'Educación primaria') echo ' selected '; ?>>Educación primaria </option>
+                            <option value="Educación secundaria" <?php if ($usuario['estudios'] == 'Educación secundaria') echo ' selected '; ?>>Educación secundaria </option>
+                            <option value="Bachillerato" <?php if ($usuario['estudios'] == 'Bachillerato') echo ' selected '; ?>>Bachillerato </option>
+                            <option value="Grado medio" <?php if ($usuario['estudios'] == 'Grado medio') echo ' selected '; ?>>Grado medio </option>
+                            <option value="Grado superior" <?php if ($usuario['estudios'] == 'Grado superior') echo ' selected '; ?>>Grado superior </option>
+                            <option value="Grado universitario" <?php if ($usuario['estudios'] == 'Grado universitario') echo ' selected '; ?>>Grado universitario </option>
                         </select>
                         <br>
                         <label for="sitlaboral">Situación laboral: </label>
                         <select class="celda" name="sitlaboral" size=1 required>
-                            <option value="No es relevante">No es relevante </option>
-                            <option value="En paro">Desempleado </option>
-                            <option value="Trabajando">Trabajando </option>
+                        <option value="No es relevante" <?php if ($usuario['sitlaboral'] == 'No es relevante') echo ' selected '; ?>>No es relevante </option>
+                            <option value="En paro" <?php if ($usuario['sitlaboral'] == 'En paro') echo ' selected '; ?>>Desempleado </option>
+                            <option value="Trabajando" <?php if ($usuario['sitlaboral'] == 'Trabajando') echo ' selected '; ?>>Trabajando </option>
                         </select>
                         <br>
 
