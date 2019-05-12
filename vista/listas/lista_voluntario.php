@@ -34,7 +34,7 @@ $conexion = crearConexionBD();
 // , COMIDAS.BEBE, COMIDAS.NIÑO, AYUDASECONOMICAS.CANTIDAD, AYUDASECONOMICAS.PRIORIDAD, CURSOS.MATERIA, TRABAJOS.EMPRESA, TRABAJOS.SALARIOAPROXIMADO
 // , COMIDAS, AYUDASECONOMICAS, CURSOS, TRABAJOS
 // , PRIORIDAD, MATERIA, SALARIOAPROXIMADO
-$query = 'SELECT NOMBREV, PERMISO '
+$query = 'SELECT * '
     . 'FROM VOLUNTARIOS '
     . 'ORDER BY NOMBREV ASC';
 
@@ -128,79 +128,19 @@ cerrarConexionBD($conexion);
 
             <article class="voluntario">
 
-                <form method="post" action="accion_voluntario.php">
+                <form method="post" action="../mostrar/mostrar_voluntario.php">
 
                     <div class="fila_voluntario">
 
                         <div class="datos_voluntario">
 
-
                             <input id="NOMBREV" name="NOMBREV" value="<?php echo $fila["NOMBREV"]; ?>" />
 
                             <input id="PERMISO" name="PERMISO" value="<?php echo $fila["PERMISO"]; ?>" />
 
-
-                            <?php
-
-                            # Todo este bloque está comentado porque no le he encontrado utilidad xd
-                            # Si veis que sirve para algo comentadlo
-
-                            ?>
-
-                            <!-- Editando nombre -->
-
-                            <!--    <h3><input id="NOMBRE" name="NOMBRE" type="text" value="<?php echo $fila["NOMBRE"]; ?>" /> </h3>-->
-
-                            <!--  <h4><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></h4>-->
-
-                            <?php
-
-                            ?>
-
-                            <!-- Mostrando nombre -->
-
-                            <!--  <input id="nombre" name="nombre" type="hidden" value="<?php echo $fila["nombre"]; ?>" />-->
-
-                            <!--<div class="nombre"><b><?php echo $fila["NOMBRE"]; ?></b></div>-->
-
-                            <!-- <div class="usuario">By <em><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></em></div> -->
-
-                            <?php
-
-                            ?>
-
-                        </div>
-
-
-                        <!-- Los botones están comentados por estética hasta que los arregle Yanes y no deformen la tabla -->
-                        <!-- <div id="botones_fila">
-
-                            <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
-
-                                                            <button id="grabar" name="grabar" type="submit" class="editar_fila">
-
-                                                                <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
-
-                                                            </button>
-
-                            <?php
-                        } else { ?>
-
-                                                            <button id="editar" name="editar" type="submit" class="editar_fila">
-
-                                                                <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
-
-                                                            </button>
-
-                            <?php
-                        } ?>
-
-                            <button id="borrar" name="borrar" type="submit" class="editar_fila">
-
-                                <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar usuario">
-
-                            </button>
-                        </div> -->
+                            <input id="CONTRASENA" name="CONTRASENA" value="<?php echo $fila["CONTRASEÑA"]; ?>" type="hidden"/>
+                            
+                            <input type="submit" value="mostrar">
                     </div>
                 </form>
             </article>

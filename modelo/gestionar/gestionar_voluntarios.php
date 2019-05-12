@@ -26,3 +26,11 @@ function consultarVoluntarioRepetido($conexion,$nombrev) {
    $stmt->execute();
    return $stmt->fetchColumn();
 }
+
+function borrar_voluntario($conexion,$nombrev) {
+    $consulta = "DELETE FROM VOLUNTARIOS WHERE NOMBREV =:nombrev";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':nombrev',$nombrev);
+   $stmt->execute();
+   return "";
+}
