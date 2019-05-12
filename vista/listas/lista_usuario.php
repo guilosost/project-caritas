@@ -116,7 +116,7 @@ cerrarConexionBD($conexion);
 
                     ?>
 
-                    <form id="formulario" method="post" action="../../controlador/cargas/carga_usuario.php">
+                    <form id="formulario" method="post" action="../../vista/mostrar/mostrar_usuario.php">
                         <article class="usuario">
 
                             <div class="fila_usuario">

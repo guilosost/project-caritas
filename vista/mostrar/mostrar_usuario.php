@@ -9,8 +9,29 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
 }
 
 $conexion = crearConexionBD();
-if(isset($_SESSION["usuario"])){
-    $usuario = $_SESSION["usuario"];
+$referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
+
+if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/listas/lista_usuario.php") {
+        $usuario["dni"] = $_REQUEST["DNI"];
+		$usuario["apellidos"] = $_REQUEST["APELLIDOS"];
+		$usuario["nombre"] = $_REQUEST["NOMBRE"];
+		$usuario["telefono"] = $_REQUEST["TELEFONO"];
+		$usuario["ingresos"] = $_REQUEST["INGRESOS"];
+		$usuario["sitlaboral"] = $_REQUEST["SITUACIONLABORAL"];
+		$usuario["estudios"] = $_REQUEST["ESTUDIOS"];
+		$usuario["genero"] = $_REQUEST["GENERO"];
+		$usuario["fechaNac"] = $_REQUEST["FECHANAC"];
+		$usuario["protecciondatos"] = $_REQUEST["PROTECCIONDATOS"];
+		$usuario["solicitante"] = $_REQUEST["SOLICITANTE"];
+		$usuario["parentesco"] = $_REQUEST["PARENTESCO"];
+		$usuario["minusvalia"] = $_REQUEST["MINUSVALIA"];
+		$usuario["dni_so"] = $_REQUEST["DNI_SO"];
+		$usuario["poblacion"] = $_REQUEST["poblacion"];
+		$usuario["domicilio"] = $_REQUEST["domicilio"];
+		$usuario["codigopostal"] = $_REQUEST["codigopostal"];
+		$usuario["gastosfamilia"] = $_REQUEST["gastosfamilia"];
+		$usuario["oid_uf"] = $_REQUEST["oid_uf"];
+		$_SESSION["usuario"] = $usuario;
 }else{
     Header("Location: ../listas/lista_usuario.php");
 }

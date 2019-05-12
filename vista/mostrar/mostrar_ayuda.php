@@ -7,16 +7,25 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
-if (isset($_SESSION["ayuda"])) {
-    $ayuda = $_SESSION["ayuda"];
+$referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
+
+if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/listas/lista_ayuda.php") {
+    $ayuda["concedida"] = $_REQUEST["CONCEDIDA"];
+    $ayuda["suministradapor"] = $_REQUEST["SUMINISTRADAPOR"];
+    $ayuda["niño"] = $_REQUEST["NIÑO"];
+    $ayuda["cantidad"] = $_REQUEST["CANTIDAD"];
+    $ayuda["motivo"] = $_REQUEST["MOTIVO"];
+    $ayuda["descripcion"] = $_REQUEST["DESCRIPCION"];
+    $ayuda["bebe"] = $_REQUEST["BEBE"];
+    $ayuda["empresa"] = $_REQUEST["EMPRESA"];
+    $ayuda["salarioaproximado"] = $_REQUEST["SALARIOAPROXIMADO"];
+    $ayuda["prioridad"] = $_REQUEST["PRIORIDAD"];
+    $ayuda["oid_a"] = $_REQUEST["oid_a"];
+    $_SESSION["ayuda"] = $ayuda;
 } else {
     Header("Location:../../vista/listas/lista_ayuda.php");
 }
 
-if (isset($_SESSION["errores"])) {
-    $errores = $_SESSION["errores"];
-    unset($_SESSION["errores"]);
-}
 $conexion = crearConexionBD();
 ?>
 
@@ -215,69 +224,6 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
-    <!-- <script type="text/javascript">
-        var frmvalidator = new Validator("altaUsuario");
-        var solicitante = document.forms["altaUsuario"]["solicitante"].value;
-        var poblacion = document.forms["altaUsuario"]["poblacion"].value;
-
-        frmvalidator.EnableMsgsTogether();
-
-        frmvalidator.addValidation("nombre", "req", "Introduzca el nombre");
-        frmvalidator.addValidation("nombre", "alphabetic_space", "El nombre debe de constar de letras y espacios");
-
-        frmvalidator.addValidation("apellidos", "req", "Introduzca los apellidos");
-        frmvalidator.addValidation("apellidos", "alphabetic_space", "Los apellidos deben de constar de letras y espacios");
-
-        frmvalidator.addValidation("dni", "req", "Introduzca el dni");
-        frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un dni de la forma 12345678A");
-
-        frmvalidator.addValidation("fechaNac", "req", "Introduzca la fecha de nacimiento");
-
-        frmvalidator.addValidation("genero", "selone_radio", "Introduzca el género");
-
-        frmvalidator.addValidation("telefono", "req", "Introduzca el teléfono");
-        frmvalidator.addValidation("telefono", "regexp=^[0-9]{9}$", "Introduzca un número de teléfono válido");
-
-        frmvalidator.addValidation("estudios", "dontselect=000", "Introduzca el nivel de estudios");
-
-        frmvalidator.addValidation("sitlaboral", "dontselect=000", "Introduzca la situación laboral del usuario");
-
-        frmvalidator.addValidation("ingresos", "req", "Introduzca los ingresos");
-        frmvalidator.addValidation("ingresos", "num", "Introduzca un valor numérico en los ingresos");
-        frmvalidator.addValidation("ingresos", "lt=1000", "Los ingresos no deben de superar los 1000 euros");
-        frmvalidator.addValidation("ingresos", "lt=672", "Los ingresos son mayores de lo estimado por estar desempleado",
-            "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'En paro')");
-        frmvalidator.addValidation("ingresos", "lt=1", "Los ingresos son mayores de lo estimado",
-            "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'No es relevante')");
-        frmvalidator.addValidation("ingresos", "gt=0", "Los ingresos son mayores de lo estimado por tener alguna discapacidad",
-            "VWZ_IsChecked(document.forms['altaUsuario'].elements['minusvalia'],'Sí')");
-
-        frmvalidator.addValidation("minusvalia", "selone_radio", "Introduzca si posee alguna minusvalia");
-
-        frmvalidator.addValidation("solicitante", "selone_radio", "Introduzca si el usuario es solicitante");
-
-        if (solicitante == "Sí") {
-            frmvalidator.addValidation("gastosfamilia", "req", "Introduzca los gastos de la familia");
-            frmvalidator.addValidation("gastosfamilia", "num", "Introduzca un valor numérico en los gastos familiares");
-
-            frmvalidator.addValidation("poblacion", "req", "Introduzca la población");
-            frmvalidator.addValidation("poblacion", "alphabetic_space", "La población debe de constar de letras y espacios");
-
-            frmvalidator.addValidation("domicilio", "req", "Introduzca el domicilio");
-
-            frmvalidator.addValidation("codigopostal", "req", "Introduzca el código postal");
-            frmvalidator.addValidation("codigopostal", "regexp=^[0-9]{5}$", "Introduzca un código postal válido");
-
-            frmvalidator.addValidation("proteccionDatos", "shouldselchk=on", "El solicitante debe de aceptar la Ley de Protección de Datos");
-
-        } else if (solicitante == "No") {
-            frmvalidator.addValidation("dniSol", "req", "Introduzca el dni del solicitante");
-            frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un dni de la forma 12345678A");
-
-            frmvalidator.addValidation("parentesco", "req", "Introduzca el aprentesco co el solicitante");
-            frmvalidator.addValidation("parentesco", "alpha", "El nombre debe de constar de letras");
-        }
-    </script> -->
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);

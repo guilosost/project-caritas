@@ -49,3 +49,14 @@ function aux_IdentificaCita( $conexion, $cita ){
 		return  $e->GetMessage();
 	}
 }
+function borrar_cita($conexion,$oid_c) {
+   try{
+    $consulta = "DELETE FROM CITAS WHERE OID_C=:oid_c";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_c',$oid_c);
+   $stmt->execute();
+   return "";
+    }  catch ( PDOException $e ) {
+    return  $e->GetMessage();
+}
+}

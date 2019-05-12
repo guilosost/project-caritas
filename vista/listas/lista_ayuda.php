@@ -132,7 +132,7 @@ cerrarConexionBD($conexion);
             
             <article class="ayuda">
 
-                <form method="post" action="../../controlador/cargas/carga_ayuda.php">
+                <form method="post" action="../../vista/mostrar/mostrar_ayuda.php">
 
                     <div class="fila_ayuda">
 
@@ -156,67 +156,9 @@ cerrarConexionBD($conexion);
                             <input id="SALARIOAPROXIMADO" name="SALARIOAPROXIMADO" value="<?php echo $trabajo["SALARIOAPROXIMADO"]; ?>" type="hidden"/>
 
                             <input type="submit" value="mostrar">
-                            <?php
-
-                            # Todo este bloque está comentado porque no le he encontrado utilidad xd
-                            # Si veis que sirve para algo comentadlo
-
-                            ?>
-
-                            <!-- Editando nombre -->
-
-                            <!--    <h3><input id="NOMBRE" name="NOMBRE" type="text" value="<?php echo $fila["NOMBRE"]; ?>" /> </h3>-->
-
-                            <!--  <h4><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></h4>-->
-
-                            <?php
-
-                            ?>
-
-                            <!-- Mostrando nombre -->
-
-                            <!--  <input id="nombre" name="nombre" type="hidden" value="<?php echo $fila["nombre"]; ?>" />-->
-
-                            <!--<div class="nombre"><b><?php echo $fila["NOMBRE"]; ?></b></div>-->
-
-                            <!-- <div class="usuario">By <em><?php echo $fila["NOMBRE"] . " " . $fila["APELLIDOS"]; ?></em></div> -->
-
-                            <?php
-
-                            ?>
+                           
 
                         </div>
-
-
-                        <!-- Los botones están comentados por estética hasta que los arregle Yanes y no deformen la tabla -->
-                        <!-- <div id="botones_fila">
-
-                    <?php if (isset($libro) and ($usuario["dni"] == $fila["dni"])) { ?>
-
-                                            <button id="grabar" name="grabar" type="submit" class="editar_fila">
-
-                                                <img src="images/bag_menuito.bmp" class="editar_fila" alt="Guardar modificación">
-
-                                            </button>
-
-                    <?php
-                } else { ?>
-
-                                            <button id="editar" name="editar" type="submit" class="editar_fila">
-
-                                                <img src="images/pencil_menuito.bmp" class="editar_fila" alt="Editar usuario">
-
-                                            </button>
-
-                    <?php
-                } ?>
-
-                    <button id="borrar" name="borrar" type="submit" class="editar_fila">
-
-                        <img src="images/remove_menuito.bmp" class="editar_fila" alt="Borrar usuario">
-
-                    </button>
-                </div> -->
                     </div>
                 </form>
             </article>

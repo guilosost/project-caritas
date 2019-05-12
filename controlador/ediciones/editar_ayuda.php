@@ -215,7 +215,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("tipoayuda", "req", "Introduzca el tipo de ayuda");
 
         frmvalidator.addValidation("suministradapor", "req", "Introduzca el proveedor de la ayuda");
-        frmvalidator.addValidation("suministradapor", "alphabetic_space", "el proveedor de la ayuda debe de constar de letras y espacios");
+        //frmvalidator.addValidation("suministradapor", "alphabetic_space", "el proveedor de la ayuda debe de constar de letras y espacios");
 
         frmvalidator.addValidation("concedida", "selone_radio", "Introduzca si la ayuda está concedida");
 
