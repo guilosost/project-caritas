@@ -14,7 +14,15 @@ if (isset($_SESSION["formulario_cita"])) {
 	$cita['observaciones'] = $_REQUEST["observaciones"];
 	$cita['dni'] = $_REQUEST["dni"];
     $_SESSION["formulario_cita"] = $cita;
-
+}else if (isset($_SESSION["cita"])) {
+	$cita['fechacita'] = $_REQUEST["fechacita"];
+	$cita['objetivo'] = $_REQUEST["objetivo"];
+	$cita['nombrev'] = $_REQUEST["nombrev"];
+	$cita['observaciones'] = $_REQUEST["observaciones"];
+	$cita['dni'] = $_REQUEST["dni"];
+	$cita_aux = $_SESSION["cita"];
+	$cita["oid_c"] = $cita_aux["oid_c"]; 
+    $_SESSION["cita"] = $cita;
 } else {
 	Header("Location: ../../controlador/altas/alta_cita.php");
 }
@@ -26,7 +34,11 @@ cerrarConexionBD($conexion);
 if (count($errores)>0) {
 	// Guardo en la sesión los mensajes de error y volvemos al formulario
 	$_SESSION["errores"] = $errores;
+ if (isset($_SESSION["cita"])) {
+	Header('Location:../../controlador/ediciones/editar_cita.php');
+ }else{
 	Header('Location:../../controlador/altas/alta_cita.php');
+ }
 } else
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
 	Header('Location:../../controlador/resultados/resultado_alta_cita.php');
@@ -44,9 +56,9 @@ function validarDatosCita($conexion, $cita)
 		$errores[] = "<p>El objetivo no puede estar vacio.</p>";
 	}
 
-	if ($cita["dni"] == "" || !preg_match("/^[0-9]{8}[A-Z]$/", $cita["dni"])) {
-		$errores[] = "<p>El dni no puede estar vacio y tiene que ser del formato 12345678A.</p>";
-	}
+//	if ($cita["dni"] == "" || !preg_match("/^[0-9]{8}[A-Z]$/", $cita["dni"])) {
+//		$errores[] = "<p>El dni no puede estar vacio y tiene que ser del formato 12345678A.</p>";
+//	}
 
 	if ($cita["nombrev"] == "") {
 		$errores[] = "<p>El nombre del voluntario responsable de la cita no puede estar vacío.</p>";

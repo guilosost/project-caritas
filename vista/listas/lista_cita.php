@@ -138,6 +138,8 @@ cerrarConexionBD($conexion);
 
                             <input id="FECHACITA" name="FECHACITA" value="<?php echo $fila["FECHACITA"]; ?>" />
 
+                            <input id="OBJETIVO" name="OBJETIVO" value="<?php echo $fila["OBJETIVO"]; ?>" />
+
                             <input id="oid_c" name="oid_c" value="<?php echo $fila["OID_C"]; ?>" type="hidden" />
 
                             <input type="submit" value="mostrar">

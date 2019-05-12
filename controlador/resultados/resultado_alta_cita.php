@@ -7,9 +7,12 @@ require_once(GESTIONAR."gestionar_citas.php");
 
 if (isset($_SESSION["formulario_cita"])) {
 	$cita = $_SESSION["formulario_cita"];
-	unset($_SESSION["formulario_cita"]);
+  
+}else if (isset($_SESSION["cita"])) {
+    $cita = $_SESSION["cita"];
+    
 } else {
-	Header("Location: ../../controlador/altas/alta_usuario.php");
+	Header("Location: ../../vista/listas/lista_cita.php");
 }
 
 $conexion  = crearConexionBD();
@@ -36,20 +39,28 @@ $conexion  = crearConexionBD();
 <body>
     <?php include("../../vista/header.php");
     include("../../vista/navbar.php");
-   
+    if(isset($_SESSION["formulario_cita"])){
+      unset($_SESSION["formulario_cita"]);
 		if (nueva_cita($conexion, $cita)) {
     $_SESSION['citaId'] = aux_IdentificaCita( $conexion, $cita );
     ?> 
   <p>Todo ha ido bien </p> 
    <?php 
 	} else {
-
 		echo "La cita ya existe.";
-	}
+  }
+} else if (isset($_SESSION["cita"])){
+  unset($_SESSION["cita"]);
+  if (editar_cita($conexion, $cita)) {
+    ?> 
+    <p>Todo ha ido bien </p> 
+    <?php 
+  }else{
+    echo "error";
+  }
+}
 	?>
-
-
-    </main>
+    
     <?php cerrarConexionBD($conexion); ?>
     <?php include("../../vista/footer.php");  ?>
 </body>

@@ -60,3 +60,18 @@ function borrar_cita($conexion,$oid_c) {
     return  $e->GetMessage();
 }
 }
+function editar_cita($conexion,$cita) {
+    try{
+    $consulta = "UPDATE CITAS SET DNI=:dni, NOMBREV=:nombrev, OBJETIVO=:objetivo, FECHACITA=:fechacita WHERE OID_C=:oid_c";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_c',$cita["oid_c"]);
+   $stmt->bindParam(':dni',$cita["dni"]);
+   $stmt->bindParam(':objetivo',$cita["objetivo"]);
+   $stmt->bindParam(':nombrev',$cita["nombrev"]);
+   $stmt->bindParam(':fechacita',$cita["fechacita"]);
+   $stmt->execute();
+   return "true";
+    } catch ( PDOException $e ) {
+        return  $e->GetMessage();
+    }
+}

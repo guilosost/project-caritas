@@ -13,6 +13,7 @@ if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/
     $cita["dni"] = $_REQUEST["DNI"];
     $cita["nombrev"] = $_REQUEST["NOMBREV"];
     $cita["fechacita"] = $_REQUEST["FECHACITA"];
+    $cita["objetivo"] = $_REQUEST["OBJETIVO"];
     $cita["oid_c"] = $_REQUEST["oid_c"];
     $_SESSION["cita"] = $cita;
 } else {
@@ -54,7 +55,7 @@ $conexion = crearConexionBD();
             <div class="form-alta">
                 <form action="../../controlador/eliminaciones/elimina_cita.php" method="POST" >
                         <label for="dni">DNI del solicitante: </label>
-                        <input class="celda" name="tipoayuda" type="text" maxlength="10" value="<?php echo $cita["dni"]?>"
+                        <input class="celda" name="dni" type="text" maxlength="10" value="<?php echo $cita["dni"]?>"
                            readonly/><br>
                         </select>
                         <br>
@@ -62,6 +63,9 @@ $conexion = crearConexionBD();
                         <label for="nombrev" required>Nombre del voluntario:</label>
                         <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $cita['nombrev']; ?>" readonly/><br>
                         
+                        <label for="objetivo" required>Objetivo de la cita:</label>
+                        <input class="celda" name="objetivo" type="text" maxlength="40" value="<?php echo $cita['objetivo']; ?>" readonly/><br>
+
                         <br>
                         <label for="fechacita" required>Fecha de la cita:</label>
                         <input class="celda" name="fechacita" type="text" value="<?php echo $cita['fechacita']; ?>" readonly/><br>
