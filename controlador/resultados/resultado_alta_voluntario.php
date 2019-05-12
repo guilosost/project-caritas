@@ -8,7 +8,9 @@ include("../../modelo/GestionBD.php");
 if (isset($_SESSION["formulario_voluntario"])) {
     $voluntario = $_SESSION["formulario_voluntario"];
     unset($_SESSION["formulario_voluntario"]);
-} else {
+}else if (isset($_SESSION["voluntario"])) { 
+    $voluntario = $_SESSION["voluntario"];
+}else {
     Header("Location: ../../controlador/altas/alta_voluntario.php");
 }
 
@@ -39,13 +41,22 @@ $conexion  = crearConexionBD();
 <body>
     <?php include("../../vista/header.php");
     include("../../vista/navbar.php");
-
-
-    if (nuevo_voluntario($conexion, $voluntario)) {
-        echo "Todo ha ido bien.";
-    } else {
-        echo "El voluntario ya existe.";
+    if (isset($_SESSION["formulario_voluntario"])) {
+        unset($_SESSION["formulario_voluntario"]);
+        if (nuevo_voluntario($conexion, $voluntario)) {
+            echo "Todo ha ido bien.";
+        } else {
+            echo "El voluntario ya existe.";
+        }
+    }else if (isset($_SESSION["voluntario"])) { 
+        unset($_SESSION["voluntario"]);
+        if (editar_voluntario($conexion, $voluntario)) {
+            echo "Todo ha ido bien.";
+        } else {
+            echo "error";
+        }
     }
+   
     ?>
 
 

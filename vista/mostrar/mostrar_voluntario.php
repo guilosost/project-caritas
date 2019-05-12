@@ -53,16 +53,13 @@ $conexion = crearConexionBD();
             <div class="form-alta">
                 <form action="../../controlador/eliminaciones/elimina_voluntario.php" method="POST" >
                         <label for="nombrev">Nombre del voluntario: </label>
-                        <input class="celda" name="nombrev" type="text" maxlength="30" value="<?php echo $voluntario["nombrev"]?>"
+                        <input class="celda" name="nombrev" type="text" maxlength="30" value="<?php echo $voluntario["nombrev"]?> "
                            readonly/><br>
                         </select>
                         <br>
 
                         <label for="permiso" required>Permiso del voluntario:</label>
                         <input class="celda" name="permiso" type="text" maxlength="40" value="<?php echo $voluntario['permiso']; ?>" readonly/><br>
-                        
-                        
-
                         <br>
 
                     <input style="float:left" type="submit" value="Eliminar" >

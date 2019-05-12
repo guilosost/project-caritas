@@ -6,6 +6,7 @@ require_once(MODELO . "/GestionBD.php");
 require_once(GESTIONAR . "gestionar_ayudas.php");
 require_once(VISTA . "/paginacion_consulta.php");
 
+unset($_SESSION["formulario_voluntario"]);
 $conexion = crearConexionBD();
 
 

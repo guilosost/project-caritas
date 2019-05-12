@@ -34,3 +34,18 @@ function borrar_voluntario($conexion,$nombrev) {
    $stmt->execute();
    return "";
 }
+function editar_voluntario($conexion,$voluntario) {
+    try {
+    $consulta = "UPDATE  VOLUNTARIOS  SET PERMISO=:permiso, CONTRASEÑA=:contrasena WHERE NOMBREV =:nombrev";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':nombrev',$voluntario["nombrev"]);
+   $stmt->bindParam(':permiso',$voluntario["permiso"]);
+   $stmt->bindParam(':contrasena',$voluntario["contrasena"]);
+   $stmt->execute();
+   return true;
+} catch(PDOException $e) {
+    echo $e->getMessage();
+    return false;
+    // Si queremos visualizar la excepción durante la depuración: $e->getMessage();
+}
+}

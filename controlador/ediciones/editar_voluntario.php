@@ -65,13 +65,14 @@ $conexion = crearConexionBD();
                         <legend>Información básica del voluntario</legend>
 
                         <label for="nombrev" >Nombre del voluntario:</label>
-                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $voluntario['nombrev']; ?>" /><br>
+                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $voluntario['nombrev']; ?>" readonly /><br>
 
                         <label for="contrasena" required>Contraseña del voluntario:</label>
                         <input class="celda" name="contrasena" type="password" maxlength="40" value="<?php echo $voluntario['contrasena']; ?>" /><br>
 
                         <label for="permiso" required>Permiso del voluntario:</label>
-                        <input class="celda" name="permiso" type="text" maxlength="40" value="<?php echo $voluntario['permiso']; ?>" /><br>
+                        <input type="radio" name="permiso" value="Sí"<?php if ($voluntario['permiso']=="Sí") echo "checked"?>> Administrador
+                        <input type="radio" name="permiso" value="No"<?php if ($voluntario['permiso']=="No ") echo "cheked"?>> Voluntario estándar<br>
 
                     </fieldset>
 
