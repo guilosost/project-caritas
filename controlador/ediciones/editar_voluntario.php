@@ -38,9 +38,22 @@ $conexion = crearConexionBD();
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
     <!-- <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script> -->
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
+    <script type = "text/javascript" src = "../../vista/js/validacion_voluntario.js" ></script>
 </head>
 
 <body background="../../vista/img/background.png">
+<script>
+        
+    		$(document).ready(function() {
+			$("#altaVoluntario").on("submit", function() {
+				return validateForm();
+            });
+            $("#pass").on("keyup", function() {
+				// Calculo el color
+				passwordColor();
+			});
+        });
+</script>
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
@@ -65,10 +78,13 @@ $conexion = crearConexionBD();
                         <legend>Información básica del voluntario</legend>
 
                         <label for="nombrev" >Nombre del voluntario:</label>
-                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $voluntario['nombrev']; ?>" readonly /><br>
+                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $voluntario['nombrev']; ?>"  readonly /><br>
 
                         <label for="contrasena" required>Contraseña del voluntario:</label>
-                        <input class="celda" name="contrasena" type="password" maxlength="40" value="<?php echo $voluntario['contrasena']; ?>" /><br>
+                        <input class="celda"  id="pass" name="contrasena" type="password" maxlength="40" value="<?php echo $voluntario['contrasena']; ?>" oninput="passwordValidation();"/><br>
+                        
+                        <label for="password2" required>Repita la contraseña:</label>
+                        <input id="confirmpass" name="password2" type="password" maxlength="50" value="<?php echo $voluntario['contrasena']; ?>" oninput="passwordConfirmation();" required /><br>
 
                         <label for="permiso" required>Permiso del voluntario:</label>
                         <input type="radio" name="permiso" value="Sí"<?php if ($voluntario['permiso']=="Sí") echo "checked"?>> Administrador

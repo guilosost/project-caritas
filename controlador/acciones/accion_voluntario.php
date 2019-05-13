@@ -40,23 +40,36 @@ if (isset($_SESSION["formulario_voluntario"])) {
 function validarDatosVoluntario($conexion, $voluntario)
 {
 	$errores=array();
-
+	if (isset($_SESSION["formulario_voluntario"])) {
 	if ($voluntario["nombrev"] == "") {
 		$errores[] = "<p>El nombre no puede estar vacío.</p>";
 	}
-	//else if(consultarVoluntarioRepetido($conexion,$voluntario["nombrev"])!=0){
-	//	$errores[] = "<p>Ese nombre de voluntario ya existe</p>";
-	//}
+	else if(consultarVoluntarioRepetido($conexion,$voluntario["nombrev"])!=0){
+		$errores[] = "<p>Ese nombre de voluntario ya existe</p>";
+	}
 
 	/*if ($voluntario["password"] == ""# || !preg_match("/^{6}$/", $voluntario["password"])
 	)  {
 		$errores[] = "<p>La contraseña no puede estar vacía o contener menos de 6 caracteres.</p>";
 	}
-
+*/
 	if ($voluntario["permisos"] == "" ) {
 		$errores[] = "<p>Debes tener al menos un permiso seleccionado</p>";
-	} */
-
+	} 
+	}else if (isset($_SESSION["voluntario"])) {
+		if ($voluntario["nombrev"] == "") {
+			$errores[] = "<p>El nombre no puede estar vacío.</p>";
+		}
+	
+		if ($voluntario["contrasena"] == ""# || !preg_match("/^{6}$/", $voluntario["password"])
+		)  {
+			$errores[] = "<p>La contraseña no puede estar vacía o contener menos de 6 caracteres.</p>";
+		}
+	
+		if ($voluntario["permiso"] == "" ) {
+			$errores[] = "<p>Debes tener al menos un permiso seleccionado</p>";
+		} 
+	}
 	return $errores;
 }
  
