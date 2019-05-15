@@ -96,7 +96,7 @@ BEGIN
         w_estadocivil,
         TO_DATE(TO_CHAR(w_fechanacimiento, 'DD/MM/YYYY'), 'DD/MM/YYYY'),
         w_protecciondatos,
-        'SÃ­',
+        'Sí',
         NULL,
         w_problematica,
         w_tratamiento,
@@ -168,7 +168,7 @@ BEGIN
         w_sexo,
         w_telefono,
         w_estadocivil,
-       TO_DATE(TO_CHAR(w_fechanacimiento, 'DD/MM/YYYY'), 'DD/MM/YYYY'),
+        TO_DATE(TO_CHAR(w_fechanacimiento, 'DD/MM/YYYY'), 'DD/MM/YYYY'),
         'No',
         'No',
         w_parentesco,
@@ -217,7 +217,7 @@ CREATE OR REPLACE PROCEDURE nueva_ayuda_de_comida (
     w_suministradapor   IN                  ayudas.suministradapor%TYPE,
     w_concedida         IN                  ayudas.concedida%TYPE,
     w_bebe              IN                  comidas.bebe%TYPE,
-    w_niÃ±o              IN                  comidas.niÃ±o%TYPE,
+    w_niño              IN                  comidas.niño%TYPE,
     w_oid_c             IN                  citas.oid_c%type
 ) IS
 BEGIN
@@ -235,12 +235,12 @@ BEGIN
     INSERT INTO comidas (
         oid_co,
         bebe,
-        niÃ±o,
+        niño,
         oid_a
     ) VALUES (
         0,
         w_bebe,
-        w_niÃ±o,
+        w_niño,
         SEC_A.currval
     );
 
@@ -388,7 +388,7 @@ BEGIN
         dni
     ) VALUES (
         0,
-       TO_DATE(w_fechacita, 'DD/MM/YYYY'),
+        TO_DATE(TO_CHAR(w_fechacita, 'DD/MM/YYYY'), 'DD/MM/YYYY'),
         w_objetivo,
         w_observaciones,
         w_nombrev,
@@ -401,17 +401,17 @@ END nueva_cita;
 
 CREATE OR REPLACE PROCEDURE nuevo_voluntario (
     w_nombrev      IN             voluntarios.nombrev%TYPE,
-    w_contraseÃ±a   IN             voluntarios.contraseÃ±a%TYPE,
+    w_contraseña   IN             voluntarios.contraseña%TYPE,
     w_permiso      IN             voluntarios.permiso%TYPE
 ) IS
 BEGIN
     INSERT INTO voluntarios (
         nombrev,
-        contraseÃ±a,
+        contraseña,
         permiso
     ) VALUES (
         w_nombrev,
-        w_contraseÃ±a,
+        w_contraseña,
         w_permiso
     );
 
@@ -491,27 +491,27 @@ BEGIN
 
 END interesado_en_curso;
 /
-CREATE OR REPLACE FUNCTION contraseÃ±as (
-    w_contraseÃ±a   IN      voluntarios.contraseÃ±a%TYPE,
+CREATE OR REPLACE FUNCTION contraseñas (
+    w_contraseña   IN      voluntarios.contraseña%TYPE,
     w_nombrev IN      voluntarios.nombrev%TYPE
 ) RETURN BOOLEAN AS
     res   BOOLEAN:=true;
     
-     aux voluntarios.contraseÃ±a%TYPE; 
+     aux voluntarios.contraseña%TYPE; 
 BEGIN
     SELECT
-        contraseÃ±a
+        contraseña
     INTO aux
     FROM
         voluntarios
     WHERE
         nombrev = w_nombrev;
-IF(aux <> w_contraseÃ±a )THEN
+IF(aux <> w_contraseña )THEN
 res:=false;
 END IF;
 
     RETURN res;
-END contraseÃ±as;
+END contraseñas;
 /
 CREATE OR REPLACE PROCEDURE editar_solicitante (
     w_dni                    IN                       usuarios.dni%TYPE,
@@ -573,7 +573,7 @@ END editar_familiar;
 CREATE OR REPLACE PROCEDURE editar_ayuda (
     w_oid_a                    IN                     ayudas.oid_a%TYPE,
     w_bebe                 IN                       comidas.bebe%TYPE,
-    w_niÃ±o              IN                       comidas.niÃ±o%TYPE,
+    w_niño              IN                       comidas.niño%TYPE,
     w_cantidad              IN                       ayudaseconomicas.cantidad%TYPE,
     w_motivo       IN                       ayudaseconomicas.motivo%TYPE,
     w_prioridad               IN                       ayudaseconomicas.prioridad%TYPE,
@@ -585,7 +585,7 @@ CREATE OR REPLACE PROCEDURE editar_ayuda (
    
 ) IS
 BEGIN
-    UPDATE  COMIDAS SET bebe=w_bebe, niÃ±o=w_niÃ±o WHERE OID_A=w_oid_a;
+    UPDATE  COMIDAS SET bebe=w_bebe, niño=w_niño WHERE OID_A=w_oid_a;
     UPDATE AYUDASECONOMICAS SET cantidad=w_cantidad, motivo=w_motivo, prioridad=w_prioridad WHERE OID_A=w_oid_a;
     UPDATE TRABAJOS SET descripcion=w_descripcion, salarioaproximado=w_salarioaproximado, empresa=w_empresa WHERE OID_A=w_oid_a;
     UPDATE  AYUDAS SET concedida=w_concedida, suministradapor=w_suministradapor WHERE OID_A=w_oid_a;

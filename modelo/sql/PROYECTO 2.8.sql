@@ -1,4 +1,5 @@
 --Empezamos con los borrados de las tablas
+
 DROP TABLE trabajos;
 
 DROP TABLE cursos;
@@ -21,10 +22,10 @@ DROP TABLE voluntarios;
 
 CREATE TABLE voluntarios (
     nombrev      VARCHAR2(50) NOT NULL,
-    contraseÃ±a   VARCHAR2(20),
+    contraseña   VARCHAR2(20),
     permiso      CHAR(3)
         CONSTRAINT "BOOLEAN_CHK1" CHECK ( permiso IN (
-            'SÃ­',
+            'Sí',
             'No'
         ) ),
     PRIMARY KEY ( nombrev )
@@ -62,30 +63,30 @@ CREATE TABLE usuarios (
     fechanacimiento        DATE NOT NULL,
     protecciondatos        CHAR(3)
         CONSTRAINT "BOOLEAN_CHK2" CHECK ( protecciondatos IN (
-            'SÃ­',
+            'Sí',
             'No',
             NULL
         ) ),
     solicitante            CHAR(3)
         CONSTRAINT "BOOLEAN_CHK3" CHECK ( solicitante IN (
-            'SÃ­',
+            'Sí',
             'No'
         ) ),
     parentesco             VARCHAR(20),
     problematica           VARCHAR2(100),
     tratamiento            CHAR(3)
         CONSTRAINT "BOOLEAN_CHK4" CHECK ( tratamiento IN (
-            'SÃ­',
+            'Sí',
             'No'
         ) ),
     minusvalia             CHAR(3)
         CONSTRAINT "BOOLEAN_CHK5" CHECK ( minusvalia IN (
-            'SÃ­',
+            'Sí',
             'No'
         ) ),
     valoracionminusvalia   CHAR(20)
         CONSTRAINT "VALORACION_MINUSVALIA" CHECK ( valoracionminusvalia IN (
-            'SÃ­',
+            'Sí',
             'No',
             'En proceso'
         ) ),
@@ -111,7 +112,7 @@ CREATE TABLE citas (
         REFERENCES voluntarios,
     FOREIGN KEY ( oid_pc )
         REFERENCES citas,
-    FOREIGN KEY ( dni )
+        FOREIGN KEY ( dni )
         REFERENCES usuarios
 );
 
@@ -120,7 +121,7 @@ CREATE TABLE ayudas (
     suministradapor   VARCHAR2(50),
     concedida         CHAR(3)
         CONSTRAINT "BOOLEAN_CHK7" CHECK ( concedida IN (
-            'SÃ­',
+            'Sí',
             'No'
         ) ),
     oid_c             INTEGER,
@@ -133,12 +134,12 @@ CREATE TABLE comidas (
     oid_co   INTEGER NOT NULL,
     bebe     CHAR(3)
         CONSTRAINT "BOOLEAN_CHK8" CHECK ( bebe IN (
-            'SÃ­',
+            'Sí',
             'No'
         ) ),
-    niÃ±o     CHAR(3)
-        CONSTRAINT "BOOLEAN_CHK9" CHECK ( niÃ±o IN (
-            'SÃ­',
+    niño     CHAR(3)
+        CONSTRAINT "BOOLEAN_CHK9" CHECK ( niño IN (
+            'Sí',
             'No'
         ) ),
     oid_a    INTEGER,
@@ -153,7 +154,7 @@ CREATE TABLE ayudaseconomicas (
     motivo      VARCHAR2(100),
     prioridad   CHAR(3)
         CONSTRAINT "BOOLEAN_CHK10" CHECK ( prioridad IN (
-            'SÃ­',
+            'Sí',
             'No'
         ) ),
     oid_a       INTEGER,
@@ -190,6 +191,7 @@ CREATE TABLE trabajos (
         REFERENCES ayudas
 );
 
+
 DROP SEQUENCE sec_uf;
 
 CREATE SEQUENCE sec_uf INCREMENT BY 1 START WITH 1;
@@ -217,6 +219,7 @@ CREATE SEQUENCE sec_cu INCREMENT BY 1 START WITH 1;
 DROP SEQUENCE sec_t;
 
 CREATE SEQUENCE sec_t INCREMENT BY 1 START WITH 1;
+
 
 CREATE OR REPLACE TRIGGER secuencia_uf BEFORE
     INSERT ON unidadesfamiliares
@@ -308,3 +311,5 @@ BEGIN
 
 END;
 /
+
+execute nuevo_voluntario ('admin', 'admin1','Sí');
