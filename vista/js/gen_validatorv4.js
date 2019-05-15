@@ -1109,7 +1109,7 @@ function validateInput(strValidateStr, objValue, strError)
     case "alnum_s":
     case "alphanumeric_space":
         {
-            ret = TestInputType(objValue, "[^A-Za-z0-9\\s]", strError, objValue.name + ": Only alpha-numeric characters and space allowed ");
+            ret = TestInputType(objValue, "[^A-Za-z0-9 áéí\\s]", strError, objValue.name + ": Only alpha-numeric characters and space allowed ");
             break;
         }
     case "num":

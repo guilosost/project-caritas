@@ -16,13 +16,6 @@ if (!isset($_SESSION["formulario_ayuda"])) {
     $formulario['cantidad'] = "";
     $formulario['motivo'] = "";
     $formulario['prioridad'] = "";
-    $formulario['profesor'] = "";
-    $formulario['materia'] = "";
-    $formulario['fechacomienzo'] = "";
-    $formulario['fechafin'] = "";
-    $formulario['numerosesiones'] = "";
-    $formulario['numeroalumnosactuales'] = "";
-    $formulario['numeroalumnosmaximo'] = "";
     $formulario['descripcion'] = "";
     $formulario['empresa'] = "";
     $formulario['salarioaproximado'] = "";
@@ -60,7 +53,6 @@ $conexion = crearConexionBD();
         function showHide(elm) {
             var comida = document.getElementById("comida");
             var economica = document.getElementById("economica");
-            var curso = document.getElementById("curso");
             var trabajo = document.getElementById("trabajo");
 
             if (elm.value == 'bolsacomida') {
@@ -72,11 +64,6 @@ $conexion = crearConexionBD();
                 comida.classList.add('hide');
                 economica.classList.remove('hide');
                 curso.classList.add('hide');
-                trabajo.classList.add('hide');
-            } else if (elm.value == 'curso') {
-                comida.classList.add('hide');
-                economica.classList.add('hide');
-                curso.classList.remove('hide');
                 trabajo.classList.add('hide');
             } else if (elm.value == 'trabajo') {
                 comida.classList.add('hide');
@@ -174,31 +161,6 @@ $conexion = crearConexionBD();
                         </fieldset>
                     </div>
 
-                    <div id="curso" class="hide">
-                        <br>
-                        <fieldset>
-                            <legend>Información del curso</legend>
-                            <label for="profesor">Profesor: </label>
-                            <input class="celda" name="profesor" type="text" maxlength="50" /><br>
-
-                            <label for="materia">Materia del curso: </label>
-                            <input class="celda" name="materia" type="text" maxlength="50" /><br>
-                            </select>
-
-                            <label for="fechacomienzo">Fecha comienzo:</label>
-                            <input name="fechacomienzo" type="date" value="<?php $formulario['fechacomienzo'] ?>" /><br>
-
-                            <label for="fechafin">Fecha final:</label>
-                            <input name="fechafin" type="date" value="<?php $formulario['fechafin'] ?>" /><br>
-
-                            <label for="numerosesiones">Número de sesiones: </label>
-                            <input name="numerosesiones" type="number" value="<?php $formulario['numerosesiones'] ?>" /><br>
-
-                            <label for="numeroalumnosmaximo">Número de alumnos: </label>
-                            <input name="numeroalumnosmaximo" type="number" value="<?php $formulario['numeroalumnosmaximo'] ?>" /><br>
-                        </fieldset>
-                    </div>
-
                     <div id="trabajo" class="hide">
                         <br>
                         <fieldset>
@@ -234,7 +196,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("tipoayuda", "req", "Introduzca el tipo de ayuda");
 
         frmvalidator.addValidation("suministradapor", "req", "Introduzca el proveedor de la ayuda");
-        //frmvalidator.addValidation("suministradapor", "alphabetic_space", "el proveedor de la ayuda debe de constar de letras y espacios");
+        frmvalidator.addValidation("suministradapor","regexp=^[a-zA-Z Ññáéíóú\\s]","El nombre del proveedor de la ayuda debe contener letras y espacios");
 
         frmvalidator.addValidation("concedida", "selone_radio", "Introduzca si la ayuda está concedida");
 

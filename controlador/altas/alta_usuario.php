@@ -72,15 +72,6 @@ $conexion = crearConexionBD();
             }
         }
         </script>
-        <script>
-//    	$(document).ready(function() {
-//		$("#altaUsuario").on("submit", function() {
-//            validarCalle();
-//        });
-//    });
-    
-        //-->
-    </script>
      <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 
@@ -109,7 +100,7 @@ $conexion = crearConexionBD();
                         <legend>Información básica del usuario</legend>
 
                         <label for="nombre" required>Nombre:</label>
-                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $formulario['nombre']; ?>"  />
+                        <input class="celda" name="nombre" type="text" maxlength="50"  onchange="return letrasYEspacio();" value="<?php echo $formulario['nombre']; ?>"  />
 
                         <label for="apellidos" required>Apellidos:</label>
                         <input name="apellidos" type="text" maxlength="50" value="<?php echo $formulario['apellidos']; ?>" required /><br>
@@ -210,11 +201,12 @@ $conexion = crearConexionBD();
     var frmvalidator = new Validator("altaUsuario");
     var solicitante = document.forms["altaUsuario"]["solicitante"].value;
     var poblacion = document.forms["altaUsuario"]["poblacion"].value;
-    
+    var sitlaboral = document.forms["altaUsuario"]["sitlaboral"].value;
+
     frmvalidator.EnableMsgsTogether();
 
     frmvalidator.addValidation("nombre","req","Introduzca el nombre");
-    frmvalidator.addValidation("nombre","alphabetic_space","El nombre debe contener letras y espacios");
+    frmvalidator.addValidation("nombre","regexp=^[a-zA-Z Ññáéíóú\\s]","El nombre debe contener letras y espacios");
 
     frmvalidator.addValidation("apellidos","req","Introduzca los apellidos");
     frmvalidator.addValidation("apellidos","alphabetic_space","Los apellidos deben contener letras y espacios");
@@ -241,9 +233,7 @@ $conexion = crearConexionBD();
     frmvalidator.addValidation("ingresos","lt=1000","Los ingresos no deben de superar los 1000 euros");
     frmvalidator.addValidation("ingresos","lt=672","Los ingresos son mayores de lo estimado por estar desempleado",
         "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'En paro')");
-    frmvalidator.addValidation("ingresos","lt=1","Los ingresos son mayores de lo estimado",
-        "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'No es relevante')");
-    frmvalidator.addValidation("ingresos","gt=0","Los ingresos son mayores de lo estimado por tener alguna discapacidad",
+    frmvalidator.addValidation("ingresos","gt=0","Los ingresos son menores de lo estimado por tener alguna discapacidad",
         "VWZ_IsChecked(document.forms['altaUsuario'].elements['minusvalia'],'Sí')");
 
     frmvalidator.addValidation("minusvalia","selone_radio","Introduzca si tiene alguna discapacidad");
@@ -255,7 +245,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("gastosfamilia","num","Introduzca un valor numérico en los gastos familiares");
 
         frmvalidator.addValidation("poblacion","req","Introduzca la población");
-        frmvalidator.addValidation("poblacion","alphabetic_space","La población debe contener letras y espacios");
+        frmvalidator.addValidation("nombre","regexp=^[a-zA-Z Ññáéíóú\\s]","El nombre debe contener letras y espacios");
 
         frmvalidator.addValidation("domicilio","req","Introduzca el domicilio");
 
@@ -269,7 +259,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("dniSol","regexp=^[0-9]{8}[A-Z]$","Introduzca el DNI en el siguiente formato: 12345678A");
 
         frmvalidator.addValidation("parentesco","req","Introduzca el parentesco con el solicitante");
-        frmvalidator.addValidation("parentesco","alpha","El nombre debe contener letras");
+        frmvalidator.addValidation("nombre","regexp=^[a-zA-Z Ññáéíóú\\s]","El nombre debe contener letras y espacios");
     }
     </script>
     <?php
