@@ -31,16 +31,29 @@ unset($_SESSION["paginacion"]);
 $conexion = crearConexionBD();
 
 // La consulta que ha de paginarse
-// , COMIDAS.BEBE, COMIDAS.NIÑO, AYUDASECONOMICAS.CANTIDAD, AYUDASECONOMICAS.PRIORIDAD, CURSOS.MATERIA, TRABAJOS.EMPRESA, TRABAJOS.SALARIOAPROXIMADO
-// , COMIDAS, AYUDASECONOMICAS, CURSOS, TRABAJOS
-// , PRIORIDAD, MATERIA, SALARIOAPROXIMADO
-$query = 'SELECT * '
-    . 'FROM AYUDAS '
+
+$queryAyudas = 'SELECT * '
+    . 'FROM CITAS c INNER JOIN (SELECT * FROM AYUDAS a INNER JOIN COMIDAS co ON a.oid_a = co.oid_a) d ON c.oid_c = a.oid_c ';
+
+$queryComida = 'SELECT * '
+    . 'FROM AYUDAS JOIN COMIDAS ON ayudas.oid_a = comidas.oid_a ';
+
+$queryEconomica = 'SELECT * '
+    . 'FROM AYUDASECONOMICAS '
+    . 'ORDER BY CONCEDIDA ASC';
+$queryCursos = 'SELECT * '
+    . 'FROM CURSOS '
+    . 'ORDER BY CONCEDIDA ASC';
+
+$queryTrabajo = 'SELECT * '
+    . 'FROM TRABAJOS '
     . 'ORDER BY CONCEDIDA ASC';
 
 // Se comprueba que el tamaño de página, página seleccionada y total de registros son conformes.
 // En caso de que no, se asume el tamaño de página propuesto, pero desde la página 1
-$total_registros = total_consulta($conexion, $query);
+$total_registros_ayudas = total_consulta($conexion, $queryAyudas);
+$total_registros_comidas = total_consulta($conexion, $queryComida);
+$total_registros = (int)($total_registros_ayudas + $total_registros_comidas);
 $total_paginas = (int)($total_registros / $pag_tam);
 
 if ($total_registros % $pag_tam > 0)        $total_paginas++;
@@ -52,7 +65,11 @@ $paginacion["PAG_NUM"] = $pagina_seleccionada;
 $paginacion["PAG_TAM"] = $pag_tam;
 $_SESSION["paginacion"] = $paginacion;
 
-$filas = consulta_paginada($conexion, $query, $pagina_seleccionada, $pag_tam);
+$filasAyudas = consulta_paginada($conexion, $queryAyudas, $pagina_seleccionada, $pag_tam);
+$filasComida = consulta_paginada($conexion, $queryComida, $pagina_seleccionada, $pag_tam);
+$filasEconomica = consulta_paginada($conexion, $queryEconomica, $pagina_seleccionada, $pag_tam);
+$filasCursos = consulta_paginada($conexion, $queryCursos, $pagina_seleccionada, $pag_tam);
+$filasTrabajo = consulta_paginada($conexion, $queryTrabajo, $pagina_seleccionada, $pag_tam);
 
 cerrarConexionBD($conexion);
 
@@ -120,16 +137,16 @@ cerrarConexionBD($conexion);
 
         <?php
 
-        foreach ($filas as $fila) {
-            
-            
+        foreach ($filasAyudas as $fila) {
+
+
             $comida = getComida($conexion, $fila["OID_A"]);
-            $ayuda_economica = getAyudaEconomica($conexion, $fila["OID_A"]); 
+            $ayuda_economica = getAyudaEconomica($conexion, $fila["OID_A"]);
             $trabajo = getTrabajo($conexion, $fila["OID_A"]);
 
             ?>
 
-            
+
             <article class="ayuda">
 
                 <form method="post" action="../../vista/mostrar/mostrar_ayuda.php">
@@ -138,25 +155,27 @@ cerrarConexionBD($conexion);
 
                         <div class="datos_ayuda">
 
-                            <input id="oid_a" name="oid_a" value="<?php echo $fila["OID_A"]; ?>" type="hidden"/> 
+                            <input id="oid_a" name="oid_a" value="<?php echo $fila["OID_A"]; ?>" type="hidden" />
+                            <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" />
+
 
                             <input id="CONCEDIDA" name="CONCEDIDA" value="<?php echo $fila["CONCEDIDA"]; ?>" />
 
                             <input id="SUMINISTRADAPOR" name="SUMINISTRADAPOR" value="<?php echo $fila["SUMINISTRADAPOR"]; ?>" />
 
-                            <input id="BEBE" name="BEBE" value="<?php echo $comida["BEBE"];?>" type="hidden" />
-                            <input id="NIÑO" name="NIÑO" value="<?php echo $comida["NIÑO"]; ?>" type="hidden" />
+                            <input id="BEBE" name="BEBE" value="<?php echo $comida["BEBE"]; ?>" />
+                            <input id="NIÑO" name="NIÑO" value="<?php echo $comida["NIÑO"]; ?>" />
 
-                            <input id="CANTIDAD" name="CANTIDAD" value="<?php echo $ayuda_economica["CANTIDAD"]; ?>" type="hidden"/>
-                            <input id="PRIORIDAD" name="MOTIVO" value="<?php echo $ayuda_economica["MOTIVO"]; ?>" type="hidden"/>
-                            <input id="MOTIVO" name="PRIORIDAD" value="<?php echo $ayuda_economica["PRIORIDAD"]; ?>" type="hidden"/>
+                            <input id="CANTIDAD" name="CANTIDAD" value="<?php echo $ayuda_economica["CANTIDAD"]; ?>" type="hidden" />
+                            <input id="PRIORIDAD" name="MOTIVO" value="<?php echo $ayuda_economica["MOTIVO"]; ?>" type="hidden" />
+                            <input id="MOTIVO" name="PRIORIDAD" value="<?php echo $ayuda_economica["PRIORIDAD"]; ?>" type="hidden" />
 
-                            <input id="DESCRIPCION" name="DESCRIPCION" value="<?php echo $trabajo["DESCRIPCION"]; ?>" type="hidden"/>
-                            <input id="EMPRESA" name="EMPRESA" value="<?php echo $trabajo["EMPRESA"]; ?>" type="hidden"/>
-                            <input id="SALARIOAPROXIMADO" name="SALARIOAPROXIMADO" value="<?php echo $trabajo["SALARIOAPROXIMADO"]; ?>" type="hidden"/>
+                            <input id="DESCRIPCION" name="DESCRIPCION" value="<?php echo $trabajo["DESCRIPCION"]; ?>" type="hidden" />
+                            <input id="EMPRESA" name="EMPRESA" value="<?php echo $trabajo["EMPRESA"]; ?>" type="hidden" />
+                            <input id="SALARIOAPROXIMADO" name="SALARIOAPROXIMADO" value="<?php echo $trabajo["SALARIOAPROXIMADO"]; ?>" type="hidden" />
 
                             <input type="submit" value="mostrar">
-                           
+
 
                         </div>
                     </div>
