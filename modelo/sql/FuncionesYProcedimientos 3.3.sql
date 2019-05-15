@@ -168,7 +168,7 @@ BEGIN
         w_sexo,
         w_telefono,
         w_estadocivil,
-        TO_DATE(w_fechanacimiento, 'DD/MM/YYYY'),
+       TO_DATE(TO_CHAR(w_fechanacimiento, 'DD/MM/YYYY'), 'DD/MM/YYYY'),
         'No',
         'No',
         w_parentesco,

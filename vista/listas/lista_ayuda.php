@@ -7,7 +7,7 @@ require_once(GESTIONAR . "gestionar_ayudas.php");
 require_once(VISTA . "/paginacion_consulta.php");
 
 $conexion = crearConexionBD();
-
+unset($_SESSION["formulario_ayuda"]);
 
 if (isset($_SESSION["usuario"])) {
     $usuario = $_SESSION["usuario"];

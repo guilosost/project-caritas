@@ -162,7 +162,7 @@ function validarDatosUsuario($conexion, $usuario)
 			
 		}
 
-		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))>18){
+		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))<18){
 			$errores[] = "<p>El solicitante debe de ser mayor de 18 años</p>";
 		}
 
