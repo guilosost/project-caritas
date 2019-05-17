@@ -130,7 +130,7 @@ if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/
                             <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $usuario['codigopostal']; ?>" readonly/><br>
                             
                             <label for="proteccionDatos">
-                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario['protecciondatos'] == 'Sí') echo ' checked '; ?>readonly>De acuerdo con la Ley de Protección de Datos
+                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($usuario['solicitante'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;" readonly>De acuerdo con la Ley de Protección de Datos
                             </label>
                         </fieldset>
                     </div>

@@ -26,8 +26,6 @@ if (isset($_SESSION["usuario"])) {
 if (isset($_SESSION["paginacion"]))
     $paginacion = $_SESSION["paginacion"];
 
-
-
 $pagina_seleccionada = isset($_GET["PAG_NUM"]) ? (int)$_GET["PAG_NUM"] : (isset($paginacion) ? (int)$paginacion["PAG_NUM"] : 1);
 $pag_tam = isset($_GET["PAG_TAM"]) ? (int)$_GET["PAG_TAM"] : (isset($paginacion) ? (int)$paginacion["PAG_TAM"] : 5);
 $tipo_ayuda = isset($_GET["tipoayuda"]) ? (string)$_GET["tipoayuda"] : (isset($paginacion) ? (string)$paginacion["tipoayuda"] : "todo");

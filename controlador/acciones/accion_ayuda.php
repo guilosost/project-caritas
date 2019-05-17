@@ -17,13 +17,6 @@ if(isset($_SESSION["formulario_ayuda"])){
     if(isset($_REQUEST["prioridad"])){
     $ayuda['prioridad'] = $_REQUEST["prioridad"];
     }
-    // Cursos
-    $ayuda['profesor'] = $_REQUEST["profesor"];
-    $ayuda['materia'] = $_REQUEST["materia"];
-    $ayuda['fechacomienzo'] = $_REQUEST["fechacomienzo"];
-    $ayuda['fechafin'] = $_REQUEST["fechafin"];
-    $ayuda['numerosesiones'] = $_REQUEST["numerosesiones"];
-    $ayuda['numeroalumnosmaximo'] = $_REQUEST["numeroalumnosmaximo"];
     $ayuda['descripcion'] = $_REQUEST["descripcion"];
     $ayuda['empresa'] = $_REQUEST["empresa"];
     $ayuda['salarioaproximado'] = $_REQUEST["salarioaproximado"];
@@ -39,13 +32,6 @@ if(isset($_SESSION["formulario_ayuda"])){
     $ayuda['cantidad'] = $_REQUEST["cantidad"];
     $ayuda['motivo'] = $_REQUEST["motivo"];
     $ayuda['prioridad'] = $_REQUEST["prioridad"];
-    // Cursos
-    $ayuda['profesor'] = $_REQUEST["profesor"];
-    $ayuda['materia'] = $_REQUEST["materia"];
-    $ayuda['fechacomienzo'] = $_REQUEST["fechacomienzo"];
-    $ayuda['fechafin'] = $_REQUEST["fechafin"];
-    $ayuda['numerosesiones'] = $_REQUEST["numerosesiones"];
-    $ayuda['numeroalumnosmaximo'] = $_REQUEST["numeroalumnosmaximo"];
     $ayuda['descripcion'] = $_REQUEST["descripcion"];
     $ayuda['empresa'] = $_REQUEST["empresa"];
     $ayuda['salarioaproximado'] = $_REQUEST["salarioaproximado"];
