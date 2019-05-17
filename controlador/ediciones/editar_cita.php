@@ -48,7 +48,6 @@ $conexion = crearConexionBD();
     list($dia, $mes, $anyo) = split("/", $cita['fechacita']);
     $fechaDef = "$anyo-$mes-$dia";
 
-    //Mostramos los errores del formulario enviado previamente
     if (isset($errores) && count($errores) > 0) {
         //    echo "<div id=\"div_errores\" class=\"error\">";
         echo "<h4> Errores en el formulario:</h4>";

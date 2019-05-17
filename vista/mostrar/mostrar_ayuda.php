@@ -12,14 +12,18 @@ $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
 if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/listas/lista_ayuda.php") {
     $ayuda["concedida"] = $_REQUEST["CONCEDIDA"];
     $ayuda["suministradapor"] = $_REQUEST["SUMINISTRADAPOR"];
+    if (isset($_REQUEST["BEBE"])) {
     $ayuda["niño"] = $_REQUEST["NIÑO"];
+    $ayuda["bebe"] = $_REQUEST["BEBE"];
+    }else if (isset($_REQUEST["PRIORIDAD"])){
     $ayuda["cantidad"] = $_REQUEST["CANTIDAD"];
     $ayuda["motivo"] = $_REQUEST["MOTIVO"];
+    $ayuda["prioridad"] = $_REQUEST["PRIORIDAD"];
+    }else{
     $ayuda["descripcion"] = $_REQUEST["DESCRIPCION"];
-    $ayuda["bebe"] = $_REQUEST["BEBE"];
     $ayuda["empresa"] = $_REQUEST["EMPRESA"];
     $ayuda["salarioaproximado"] = $_REQUEST["SALARIOAPROXIMADO"];
-    $ayuda["prioridad"] = $_REQUEST["PRIORIDAD"];
+    }
     $ayuda["oid_a"] = $_REQUEST["oid_a"];
     $_SESSION["ayuda"] = $ayuda;
 } else {
@@ -113,17 +117,14 @@ $conexion = crearConexionBD();
                         <input class="celda" name="tipoayuda" type="text" maxlength="40" value="<?php
                         if (isset($ayuda["bebe"])) {
                             echo 'Bolsa de comida';
-                            $ayuda = $_SESSION["ayuda"];
                             $ayuda["tipoayuda"] = "bolsacomida";
                             $_SESSION["ayuda"] = $ayuda;
                         } else if (isset($ayuda["prioridad"])) {
                             echo 'Ayuda económica';
-                            $ayuda = $_SESSION["ayuda"];
                             $ayuda["tipoayuda"] = "ayudaeconomica";
                             $_SESSION["ayuda"] = $ayuda;
                         } else {
                             echo 'Trabajo';
-                            $ayuda = $_SESSION["ayuda"];
                             $ayuda["tipoayuda"] = "trabajo";
                             $_SESSION["ayuda"] = $ayuda;
                         }

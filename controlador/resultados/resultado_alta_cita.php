@@ -39,7 +39,6 @@ $conexion  = crearConexionBD();
 <body>
     <?php include("../../vista/header.php");
     include("../../vista/navbar.php");
-    echo nueva_cita($conexion, $cita);
     if(isset($_SESSION["formulario_cita"])){
       unset($_SESSION["formulario_cita"]);
 		if (nueva_cita($conexion, $cita) == true) {

@@ -20,7 +20,6 @@ function nueva_cita($conexion, $cita) {
 		return true;
 	} catch(PDOException $e) {
 		return $e->getMessage();
-        // Si queremos visualizar la excepción durante la depuración: $e->getMessage();
     }
 }
 function aux_IdentificaCita( $conexion, $cita ){

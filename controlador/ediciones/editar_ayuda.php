@@ -107,7 +107,6 @@ $conexion = crearConexionBD();
                             <option value="">Seleccionar...</option>
                             <option value="bolsacomida" <?php if ($ayuda['tipoayuda'] == 'bolsacomida') echo ' selected ';?>>Bolsa de comida </option>
                             <option value="ayudaeconomica" <?php if ($ayuda['tipoayuda'] == 'ayudaeconomica') echo ' selected ';?>>Ayuda económica  </option>
-                            <option value="curso" <?php if ($ayuda['tipoayuda'] == 'curso') echo ' selected ';?>>Curso formativo  </option>
                             <option value="trabajo"  <?php if ($ayuda['tipoayuda'] == 'trabajo') echo ' selected ';?>>Propuesta de trabajo </option>
                         </select>
                          <br>
@@ -154,31 +153,6 @@ $conexion = crearConexionBD();
                             <input type="radio" name="prioridad" value="No"  <?php if ($ayuda['prioridad'] == 'No ') echo ' checked '; ?>>No<br>
                         </fieldset>
                     </div>
-
-                    <!--<div id="curso" class="hide">
-                        <br>
-                        <fieldset>
-                            <legend>Información del curso</legend>
-                            <label for="profesor">Profesor: </label>
-                            <input class="celda" name="profesor" type="text" maxlength="50" value="<?php echo $ayuda['cantidad']; ?>"/><br>
-
-                            <label for="materia">Materia del curso: </label>
-                            <input class="celda" name="materia" type="text" maxlength="50" /><br>
-                            </select>
-
-                            <label for="fechacomienzo">Fecha comienzo:</label>
-                            <input name="fechacomienzo" type="date" value="<?php $formulario['fechacomienzo'] ?>" /><br>
-
-                            <label for="fechafin">Fecha final:</label>
-                            <input name="fechafin" type="date" value="<?php $formulario['fechafin'] ?>" /><br>
-
-                            <label for="numerosesiones">Número de sesiones: </label>
-                            <input name="numerosesiones" type="number" value="<?php $formulario['numerosesiones'] ?>" /><br>
-
-                            <label for="numeroalumnosmaximo">Número de alumnos: </label>
-                            <input name="numeroalumnosmaximo" type="number" value="<?php $formulario['numeroalumnosmaximo'] ?>" /><br>
-                        </fieldset>
-                    </div> -->
 
                     <div id="trabajo" >
                         <br>

@@ -6,7 +6,7 @@ require_once(MODELO."/GestionBD.php");
 if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {   
     Header("Location: ../../controlador/acceso/login.php");
 }
-
+unset($_SESSION["cita"]);
 if (!isset($_SESSION["formulario_cita"])) {
     $formulario['fechacita'] = "";
     $formulario['objetivo'] = "";

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-//YANES ARREGLA ESTA RUTA PORFA
 include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
 require_once(MODELO."/gestionBD.php");
 require_once(MODELO."/gestionar/gestionar_citas.php");
@@ -32,7 +31,6 @@ $errores = validarDatosCita($conexion, $cita);
 cerrarConexionBD($conexion);
 
 if (count($errores)>0) {
-	// Guardo en la sesión los mensajes de error y volvemos al formulario
 	$_SESSION["errores"] = $errores;
  if (isset($_SESSION["cita"])) {
 	Header('Location:../../controlador/ediciones/editar_cita.php');
@@ -40,7 +38,6 @@ if (count($errores)>0) {
 	Header('Location:../../controlador/altas/alta_cita.php');
  }
 } else
-	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
 	Header('Location:../../controlador/resultados/resultado_alta_cita.php');
 
 
