@@ -47,7 +47,6 @@ $conexion = crearConexionBD();
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
     <!-- <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script> -->
     <script>
-        
         function showHide(elm) {
             var comida = document.getElementById("comida");
             var economica = document.getElementById("economica");
@@ -82,8 +81,7 @@ $conexion = crearConexionBD();
             }
 
         }
-       
-    </script> 
+    </script>
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 
@@ -103,75 +101,91 @@ $conexion = crearConexionBD();
     }
     ?>
 
-<div class="flex">
+    <div class="flex">
         <div class="form">
             <h2 class="form-h2">Información de la ayuda</h2>
             <div class="form-alta">
-                <form action="../../controlador/eliminaciones/elimina_ayuda.php" method="POST" >
+                <form action="../../controlador/eliminaciones/elimina_ayuda.php" method="POST">
                     <fieldset>
                         <legend>Información básica de la ayuda</legend>
 
                         <label for="tipoayuda">Selección del tipo de ayuda: </label>
-                        <input class="celda" name="tipoayuda" type="text" maxlength="40" value="<?php if ($ayuda["bebe"]=="Sí" or  $ayuda["bebe"]=="No "){
-                            echo 'bolsacomida';
-                            $ayuda = $_SESSION["ayuda"]; 
+                        <input class="celda" name="tipoayuda" type="text" maxlength="40" value="<?php if ($ayuda["bebe"] == "Sí" or  $ayuda["bebe"] == "No ") {
+                            echo 'Bolsa de comida';
+                            $ayuda = $_SESSION["ayuda"];
                             $ayuda["tipoayuda"] = "bolsacomida";
-                            $_SESSION["ayuda"] = $ayuda; 
-                        }else if ($ayuda["prioridad"]=="Sí" or $ayuda["prioridad"]=="No "){
-                            echo 'ayudaeconomica';
-                            $ayuda = $_SESSION["ayuda"]; 
+                            $_SESSION["ayuda"] = $ayuda;
+                        } else if ($ayuda["prioridad"] == "Sí" or $ayuda["prioridad"] == "No ") {
+                            echo 'Ayuda económica';
+                            $ayuda = $_SESSION["ayuda"];
                             $ayuda["tipoayuda"] = "ayudaeconomica";
-                            $_SESSION["ayuda"] = $ayuda; 
+                            $_SESSION["ayuda"] = $ayuda;
                         } else {
-                            echo 'trabajo';
-                            $ayuda = $_SESSION["ayuda"]; 
+                            echo 'Trabajo';
+                            $ayuda = $_SESSION["ayuda"];
                             $ayuda["tipoayuda"] = "trabajo";
-                            $_SESSION["ayuda"] = $ayuda; 
+                            $_SESSION["ayuda"] = $ayuda;
                         }
-                          ?>" readonly/><br>
+                        ?>" readonly />
                         </select>
                         <br>
-
                         <label for="suministradapor" required>Suministrada por:</label>
-                        <input class="celda" name="suministradapor" type="text" maxlength="40" value="<?php echo $ayuda['suministradapor']; ?>" readonly/><br>
-                        
+                        <input class="celda" name="suministradapor" type="text" maxlength="50" value="<?php echo $ayuda['suministradapor']; ?>" readonly />
                         <br>
                         <label for="concedida" required>¿Está la ayuda concedida?:</label>
-                        <input type="radio" name="concedida" value="Sí"  <?php if ($ayuda['concedida'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;">Sí
-                        <input type="radio" name="concedida" value="No"  <?php if ($ayuda['concedida'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;">No<br>
+                        <input type="radio" name="concedida" value="Sí" <?php if ($ayuda['concedida'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;">Sí
+                        <input type="radio" name="concedida" value="No" <?php if ($ayuda['concedida'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;">No<br>
 
                     </fieldset>
+                    <br>
+                    <?php if ($ayuda["bebe"] == "Sí" or  $ayuda["bebe"] == "No ") { ?>
+                        <div id="comida">
+                            <fieldset>
+                                <legend>Información de la bolsa de comida</legend>
 
-                    <div id="comida" >
-                        <br>
-                        <fieldset>
-                            <legend>Información de la bolsa de comida</legend>
+                                <label for="bebe">¿Debe contener productos para bebé?:</label>
+                                <input type="radio" name="bebe" value="Sí" <?php if ($ayuda['bebe'] == 'Sí') echo ' checked '; ?>onclick="javascript: return false;">Sí
+                                <input type="radio" name="bebe" value="No" <?php if ($ayuda['bebe'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;">No <br>
 
-                            <label for="bebe">¿Debe contener productos para bebé?:</label>
-                            <input type="radio" name="bebe" value="Sí"  <?php if ($ayuda['bebe'] == 'Sí') echo ' checked '; ?>onclick="javascript: return false;" >Sí
-                            <input type="radio" name="bebe" value="No" <?php if ($ayuda['bebe'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" >No  <br>
+                                <label for="niño">¿Debe contener productos para niños?:</label>
+                                <input type="radio" name="niño" value="Sí" <?php if ($ayuda['niño'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;">Sí
+                                <input type="radio" name="niño" value="No" <?php if ($ayuda['niño'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;">No<br>
+                            </fieldset>
+                        </div>
+                    <?php } else if ($ayuda["prioridad"] == "Sí" or $ayuda["prioridad"] == "No ") { ?>
+                        <div id="economica">
+                            <fieldset>
+                                <legend>Información de la ayuda económica</legend>
+                                <label for="cantidad">Cantidad (€): </label>
+                                <input class="celda" name="cantidad" type="number" value="<?php echo $ayuda['cantidad']; ?>" /><br>
 
-                            <label for="niño">¿Debe contener productos para niños?:</label>
-                            <input type="radio" name="niño" value="Sí"  <?php if ($ayuda['niño'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;" >Sí 
-                            <input type="radio" name="niño" value="No" <?php if ($ayuda['niño'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" >No<br>
-                        </fieldset>
-                    </div>
+                                <label for="motivo">Motivo:</label>
+                                <input class="celda" name="motivo" type="text" value="<?php echo $ayuda['motivo']; ?>" /><br>
 
-                    <div id="economica" >
-                        <br>
-                        <fieldset>
-                            <legend>Información de la ayuda económica</legend>
-                            <label for="cantidad">Cantidad (€): </label>
-                            <input class="celda" name="cantidad" type="number" value="<?php echo $ayuda['cantidad']; ?>" /><br>
+                                <label for="prioridad">¿Esta ayuda tiene prioridad?:</label>
+                                <input type="radio" name="prioridad" value="Sí" <?php if ($ayuda['prioridad'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;">Sí
+                                <input type="radio" name="prioridad" value="No" <?php if ($ayuda['prioridad'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;">No<br>
+                            </fieldset>
+                        </div>
+                    <?php } else { ?>
+                        <div id="trabajo">
+                            <br>
+                            <fieldset>
+                                <legend>Información del trabajo</legend>
 
-                            <label for="motivo">Motivo:</label>
-                            <input class="celda" name="motivo" type="text" value="<?php echo $ayuda['motivo']; ?>"/><br>
+                                <label for="descripcion">Descripción: </label>
+                                <textarea class="fillable" name="descripcion" maxlength="50" value="<?php echo $ayuda['descripcion']; ?>"></textarea><br>
 
-                            <label for="prioridad">¿Esta ayuda tiene prioridad?:</label>
-                            <input type="radio" name="prioridad" value="Sí"  <?php if ($ayuda['prioridad'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;" >Sí
-                            <input type="radio" name="prioridad" value="No"  <?php if ($ayuda['prioridad'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" >No<br>
-                        </fieldset>
-                    </div>
+                                <label for="empresa">Empresa/persona que contrata:</label>
+                                <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $ayuda['empresa']; ?>" /><br>
+
+                                <label for="salarioaproximado">Salario aproximado:</label>
+                                <input class="celda" name="salarioaproximado" type="text" maxlength="50" value="<?php echo $ayuda['salarioaproximado']; ?>" /><br>
+
+                                </label>
+                            </fieldset>
+                        </div>
+                    <?php } ?>
 
                     <!--<div id="curso" class="hide">
                         <br>
@@ -198,24 +212,7 @@ $conexion = crearConexionBD();
                         </fieldset>
                     </div> -->
 
-                    <div id="trabajo" >
-                        <br>
-                        <fieldset>
-                            <legend>Información del trabajo</legend>
-
-                            <label for="descripcion">Descripción: </label>
-                            <textarea class="fillable" name="descripcion" maxlength="50" value="<?php echo $ayuda['descripcion']; ?>"></textarea><br>
-
-                            <label for="empresa">Empresa/persona que contrata:</label>
-                            <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $ayuda['empresa']; ?>"/><br>
-
-                            <label for="salarioaproximado">Salario aproximado:</label>
-                            <input class="celda" name="salarioaproximado" type="text" maxlength="50" value="<?php echo $ayuda['salarioaproximado']; ?>" /><br>
-
-                            </label>
-                        </fieldset>
-                    </div>
-                    <input style="float:left" type="submit" value="Eliminar" >
+                    <input style="float:left" type="submit" value="Eliminar">
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_ayuda.php'">Cancelar</a>
                         <input type="button" onclick="location.href='../../controlador/ediciones/editar_ayuda.php'" value="Editar" />

@@ -47,7 +47,7 @@ if(isset($_SESSION["formulario_ayuda"])){
     <?php 
     } else {
         
-        echo "La ayuda ya existe.";
+        echo "error";
     }
 } if (isset($_SESSION["ayuda"])){
     unset($_SESSION["ayuda"]);

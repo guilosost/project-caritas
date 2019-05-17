@@ -33,7 +33,7 @@ function alta_ayuda($conexion,$ayuda){
             } catch(PDOException $e) {
                 return $e->getMessage();
             }
-        }else if($ayuda['tipoayuda'] == "curso"){
+        /* }else if($ayuda['tipoayuda'] == "curso"){
             try {
                 $consulta=  "CALL nuevo_curso(:w_profesor, :w_materia, :w_fechacomienzo, :w_fechafin, :w_numerosesiones,"
                     . ":w_horasporsesion, :w_numeroalumnosactuales, :w_numeroalumnosmaximo, :w_lugar)";
@@ -52,8 +52,8 @@ function alta_ayuda($conexion,$ayuda){
                 return true;
             } catch(PDOException $e) {
                 return $e->getMessage();
-            }
-        }else if($ayuda['tipoayuda'] == "trabajo"){
+            } */
+        }else if($ayuda['tipoayuda'] == "trabajos"){
             try {
                 $consulta = "CALL nueva_ayuda_trabajo(:w_suministradapor, :w_concedida, :w_descripcion, :w_empresa, :w_salarioaproximado, :w_oid_c)";
                 $stmt=$conexion->prepare($consulta);
@@ -88,19 +88,27 @@ function getAyudaEconomica($conexion,$oid_a) {
    $stmt->execute();
    return $stmt->fetch();
 }
-
+/*
 function getCurso($conexion,$oid_a) {
     $consulta = "SELECT *  FROM CURSOS WHERE OID_a=:oid_a";
    $stmt = $conexion->prepare($consulta);
    $stmt->bindParam(':oid_a',$oid_a);
    $stmt->execute();
    return $stmt->fetch();
-}
+}*/
 
 function getTrabajo($conexion,$oid_a) {
     $consulta = "SELECT *  FROM TRABAJOS WHERE OID_a=:oid_a";
    $stmt = $conexion->prepare($consulta);
    $stmt->bindParam(':oid_a',$oid_a);
+   $stmt->execute();
+   return $stmt->fetch();
+}
+
+function getCita($conexion,$oid_c) {
+    $consulta = "SELECT *  FROM CITAS WHERE OID_c=:oid_c";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_c',$oid_c);
    $stmt->execute();
    return $stmt->fetch();
 }

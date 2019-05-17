@@ -70,7 +70,7 @@ cerrarConexionBD($conexion);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="./js/boton.js"></script>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
-    <title>Gestión de Cáritas: Lista de Usuarios</title>
+    <title>Lista de Citas</title>
 </head>
 
 <body>
@@ -80,8 +80,53 @@ cerrarConexionBD($conexion);
     include_once("../navbar.php");
     ?>
     <main>
+
+        <div style=" margin-left: -0.6%; margin-right: -0.6%;">
+            <table style="width:100%">
+                <caption>Lista de Citas</caption>
+                <tr>
+                    <th>DNI</th>
+                    <th>Voluntario</th>
+                    <th>Fecha</th>
+                    <th>Objetivo</th>
+                    <th>Opciones</th>
+                </tr>
+                <?php
+                foreach ($filas as $fila) {
+                    ?>
+                    <form method="post" action="../../vista/mostrar/mostrar_cita.php">
+                        <article class="cita">
+                            <div class="fila_cita">
+                                <div class="datos_cita">
+                                    <tr>
+                                        <td><?php echo $fila["DNI"]; ?></td>
+                                        <td><?php echo $fila["NOMBREV"]; ?></td>
+                                        <td><?php echo $fila["FECHACITA"]; ?></td>
+                                        <td><?php echo $fila["OBJETIVO"]; ?></td>
+                                        <td><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
+                                            <button id="editar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></button>
+                                        </td>
+                                    </tr>
+                                    <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" type="hidden" />
+
+                                    <input id="NOMBREV" name="NOMBREV" value="<?php echo $fila["NOMBREV"]; ?>" type="hidden" />
+
+                                    <input id="FECHACITA" name="FECHACITA" value="<?php echo $fila["FECHACITA"]; ?>" type="hidden" />
+
+                                    <input id="OBJETIVO" name="OBJETIVO" value="<?php echo $fila["OBJETIVO"]; ?>" type="hidden" />
+
+                                    <input id="oid_c" name="oid_c" value="<?php echo $fila["OID_C"]; ?>" type="hidden" />
+
+                                </div>
+                        </article>
+                    </form>
+                <?php
+            } ?>
+
+            </table>
+        </div>
         <nav>
-            <div id="enlaces">
+            <div class="enlaces">
                 <?php
                 for ($pagina = 1; $pagina <= $total_paginas; $pagina++)
 
@@ -95,60 +140,22 @@ cerrarConexionBD($conexion);
             } ?>
             </div>
 
+            <div class="mostrando">
+                <form method="get" action="lista_cita.php">
 
+                    <input id="PAG_NUM" name="PAG_NUM" type="hidden" value="<?php echo $pagina_seleccionada ?>" />
 
-            <form method="get" action="lista_cita.php">
+                    Mostrando
 
-                <input id="PAG_NUM" name="PAG_NUM" type="hidden" value="<?php echo $pagina_seleccionada ?>" />
+                    <input id="PAG_TAM" name="PAG_TAM" type="number" min="1" max="<?php echo $total_registros; ?>" value="<?php echo $pag_tam; ?>" autofocus="autofocus" />
 
-                Mostrando
+                    entradas de <?php echo $total_registros ?>
 
-                <input id="PAG_TAM" name="PAG_TAM" type="number" min="1" max="<?php echo $total_registros; ?>" value="<?php echo $pag_tam ?>" autofocus="autofocus" />
+                    <input type="submit" style="float: none" value="Cambiar">
 
-                entradas de <?php echo $total_registros ?>
-
-                <input type="submit" value="Cambiar">
-
-            </form>
-
-        </nav>
-
-
-
-        <?php
-
-        foreach ($filas as $fila) {
-
-            ?>
-
-
-
-            <article class="cita">
-
-                <form method="post" action="../../vista/mostrar/mostrar_cita.php">
-
-                    <div class="fila_cita">
-
-                        <div class="datos_cita">
-                            
-
-                            <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" />
-
-                            <input id="NOMBREV" name="NOMBREV" value="<?php echo $fila["NOMBREV"]; ?>" />
-
-                            <input id="FECHACITA" name="FECHACITA" value="<?php echo $fila["FECHACITA"]; ?>" />
-
-                            <input id="OBJETIVO" name="OBJETIVO" value="<?php echo $fila["OBJETIVO"]; ?>" />
-
-                            <input id="oid_c" name="oid_c" value="<?php echo $fila["OID_C"]; ?>" type="hidden" />
-
-                            <input type="submit" value="mostrar">
-                            
-                    </div>
                 </form>
-            </article>
-        <?php
-    } ?>
+            </div>
+        </nav>
     </main>
     <?php
     include_once("../footer.php");

@@ -113,9 +113,7 @@ cerrarConexionBD($conexion);
 
                     <form id="formulario" method="post" action="../../vista/mostrar/mostrar_usuario.php">
                         <article class="usuario">
-
                             <div class="fila_usuario">
-
                                 <div class="datos_usuario">
 
                                     <tr>
@@ -170,12 +168,12 @@ cerrarConexionBD($conexion);
                                     <input id="gastosfamilia" name="gastosfamilia" value="<?php echo $uf["GASTOSFAMILIA"]; ?>" type="hidden" />
 
                                 </div>
+                        </article>
                     </form>
-                    </article>
-        <?php
-    } ?>
+                <?php
+            } ?>
 
-        </table>
+            </table>
         </div>
         <nav>
             <div class="enlaces">

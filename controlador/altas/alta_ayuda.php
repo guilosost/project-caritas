@@ -53,27 +53,23 @@ $conexion = crearConexionBD();
         function showHide(elm) {
             var comida = document.getElementById("comida");
             var economica = document.getElementById("economica");
-            var trabajo = document.getElementById("trabajo");
+            var trabajo = document.getElementById("trabajos");
 
             if (elm.value == 'bolsacomida') {
                 comida.classList.remove('hide');
                 economica.classList.add('hide');
-                curso.classList.add('hide');
                 trabajo.classList.add('hide');
             } else if (elm.value == 'ayudaeconomica') {
                 comida.classList.add('hide');
                 economica.classList.remove('hide');
-                curso.classList.add('hide');
                 trabajo.classList.add('hide');
-            } else if (elm.value == 'trabajo') {
+            } else if (elm.value == 'trabajos') {
                 comida.classList.add('hide');
                 economica.classList.add('hide');
-                curso.classList.add('hide');
                 trabajo.classList.remove('hide');
             } else {
                 comida.classList.add('hide');
                 economica.classList.add('hide');
-                curso.classList.add('hide');
                 trabajo.classList.add('hide');
             }
 
@@ -112,8 +108,7 @@ $conexion = crearConexionBD();
                             <option value="">Seleccionar...</option>
                             <option value="bolsacomida">Bolsa de comida </option>
                             <option value="ayudaeconomica">Ayuda económica </option>
-                            <option value="curso">Curso formativo </option>
-                            <option value="trabajo">Propuesta de trabajo </option>
+                            <option value="trabajos">Propuesta de trabajo </option>
                         </select>
                         <br>
                         <label for="suministradapor" required>Suministrada por:</label>
@@ -161,13 +156,13 @@ $conexion = crearConexionBD();
                         </fieldset>
                     </div>
 
-                    <div id="trabajo" class="hide">
+                    <div id="trabajos" class="hide">
                         <br>
                         <fieldset>
                             <legend>Información del trabajo</legend>
 
                             <label for="descripcion">Descripción: </label>
-                            <textarea class="fillable" name="descripcion" maxlength="50"></textarea><br>
+                            <textarea class="fillable" name="descripcion" maxlength="290"></textarea><br>
 
                             <label for="empresa">Empresa/persona que contrata:</label>
                             <input class="celda" name="empresa" type="text" maxlength="30" /><br>
