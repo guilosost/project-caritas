@@ -77,6 +77,7 @@ tr:nth-child(even) {
 
 caption {
     background-color: #cc2118;
+    border-top: 1.5px solid white;
     color: #fff;
     font-size: x-large;
     font-weight: bold;

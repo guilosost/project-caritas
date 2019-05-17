@@ -7,7 +7,7 @@ include("../../modelo/GestionBD.php");
 
 if (isset($_SESSION["formulario_voluntario"])) {
     $voluntario = $_SESSION["formulario_voluntario"];
-    unset($_SESSION["formulario_voluntario"]);
+    
 }else if (isset($_SESSION["voluntario"])) { 
     $voluntario = $_SESSION["voluntario"];
 }else {
