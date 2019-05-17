@@ -84,26 +84,6 @@ CREATE OR REPLACE TRIGGER rest_pide BEFORE
    END IF;
 END;
 /
-CREATE OR REPLACE TRIGGER rest_suma_ingresos_uf BEFORE
-    INSERT  ON usuarios
-    FOR EACH ROW
-   DECLARE
-   
-BEGIN
-    obtener_ingresosfamilia(:NEW.oid_uf,:NEW.ingresos);
-   
-END;
-/
-CREATE OR REPLACE TRIGGER rest_suma_ingresos_uf2 BEFORE
-    UPDATE  ON usuarios
-    FOR EACH ROW
-   DECLARE
-   PRAGMA AUTONOMOUS_TRANSACTION;
-BEGIN
-    obtener_ingresosfamilia(:NEW.oid_uf,:NEW.ingresos);
-   COMMIT;
-END;
-/
 
 CREATE OR REPLACE TRIGGER usuarios_en_curso BEFORE
  UPDATE ON cursos 
