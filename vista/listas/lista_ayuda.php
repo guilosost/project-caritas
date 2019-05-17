@@ -9,10 +9,6 @@ require_once(VISTA . "/paginacion_consulta.php");
 $conexion = crearConexionBD();
 unset($_SESSION["formulario_ayuda"]);
 
-if (isset($_SESSION["usuario"])) {
-    $usuario = $_SESSION["usuario"];
-    unset($_SESSION["usuario"]);
-}
 
 // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
 // ¿Hay una sesión activa?
