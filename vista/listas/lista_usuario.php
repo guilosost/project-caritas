@@ -12,11 +12,6 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
-if (isset($_SESSION["usuario"])) {
-    $usuario = $_SESSION["usuario"];
-    unset($_SESSION["usuario"]);
-}
-
 // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
 // ¿Hay una sesión activa?
 if (isset($_SESSION["paginacion"]))

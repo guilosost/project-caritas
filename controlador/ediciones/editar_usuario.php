@@ -250,7 +250,7 @@ $conexion = crearConexionBD();
             frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un dni de la forma 12345678A");
 
             frmvalidator.addValidation("parentesco", "req", "Introduzca el aprentesco co el solicitante");
-            frmvalidator.addValidation("parentesco", "alpha", "El nombre debe de constar de letras");
+            frmvalidator.addValidation("parentesco", "alphabetic_space", "El nombre debe de constar de letras");
         }
     </script>
     <?php
