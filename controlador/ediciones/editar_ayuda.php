@@ -33,7 +33,7 @@ $conexion = crearConexionBD();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Editar Usuario</title>
+    <title>Editar Ayuda</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
     <!-- <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script> -->
@@ -96,11 +96,11 @@ $conexion = crearConexionBD();
 
 <div class="flex">
         <div class="form">
-            <h2 class="form-h2">Información de la ayuda</h2>
+            <h2 class="form-h2">Editando ayuda</h2>
             <div class="form-alta">
                 <form action="../../controlador/acciones/accion_ayuda.php" method="POST" id=altaAyuda name=altaAyuda>
                     <fieldset>
-                        <legend>Información básica de la ayuda</legend>
+                        <legend>Información de la ayuda</legend>
 
                         <label for="tipoayuda">Selección del tipo de ayuda: </label>
                         <select class="celda" id="tipoayuda" onchange="showHide(this)" name="tipoayuda" size=1 required>

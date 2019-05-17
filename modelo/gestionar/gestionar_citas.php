@@ -19,7 +19,7 @@ function nueva_cita($conexion, $cita) {
 		
 		return true;
 	} catch(PDOException $e) {
-		return false;
+		return $e->getMessage();
         // Si queremos visualizar la excepción durante la depuración: $e->getMessage();
     }
 }
@@ -61,14 +61,20 @@ function borrar_cita($conexion,$oid_c) {
 }
 }
 function editar_cita($conexion,$cita) {
+    date_default_timezone_set('UTC');
+    $fecha = $cita["fechacita"];
+
+    list($año, $mes, $dia) = split('[/.-]', $fecha);
+    $fechaCita = "$dia/$mes/$año";
     try{
-    $consulta = "UPDATE CITAS SET DNI=:dni, NOMBREV=:nombrev, OBJETIVO=:objetivo, FECHACITA=:fechacita WHERE OID_C=:oid_c";
+    $consulta = "UPDATE CITAS SET DNI=:dni, NOMBREV=:nombrev, OBJETIVO=:objetivo, OBSERVACIONES=:observaciones, FECHACITA=:fechacita WHERE OID_C=:oid_c";
    $stmt = $conexion->prepare($consulta);
    $stmt->bindParam(':oid_c',$cita["oid_c"]);
    $stmt->bindParam(':dni',$cita["dni"]);
    $stmt->bindParam(':objetivo',$cita["objetivo"]);
+   $stmt->bindParam(':observaciones',$cita["observaciones"]);
    $stmt->bindParam(':nombrev',$cita["nombrev"]);
-   $stmt->bindParam(':fechacita',$cita["fechacita"]);
+   $stmt->bindParam(':fechacita',$fechaCita);
    $stmt->execute();
    return "true";
     } catch ( PDOException $e ) {

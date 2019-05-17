@@ -11,7 +11,7 @@ $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
 
 if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/listas/lista_voluntario.php") {
     $voluntario["nombrev"] = $_REQUEST["NOMBREV"];
-    $voluntario["contrasena"] = $_REQUEST["CONTRASENA"];
+    $voluntario["contraseña"] = $_REQUEST["CONTRASEÑA"];
     $voluntario["permiso"] = $_REQUEST["PERMISO"];
     $_SESSION["voluntario"] = $voluntario;
 } else {
@@ -34,7 +34,7 @@ $conexion = crearConexionBD();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Información del voluntario</title>
+    <title>Información del Voluntario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
     <!-- <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script> -->
@@ -49,18 +49,17 @@ $conexion = crearConexionBD();
 
 <div class="flex">
         <div class="form">
-            <h2 class="form-h2">Información de la cita</h2>
+            <h2 class="form-h2">Información del voluntario</h2>
             <div class="form-alta">
                 <form action="../../controlador/eliminaciones/elimina_voluntario.php" method="POST" >
                         <label for="nombrev">Nombre del voluntario: </label>
-                        <input class="celda" name="nombrev" type="text" maxlength="30" value="<?php echo $voluntario["nombrev"]?> "
-                           readonly/><br>
-                        </select>
+                        <input class="celda" name="nombrev" type="text" maxlength="30" value="<?php echo $voluntario["nombrev"]?> " readonly/>
                         <br>
-
-                        <label for="permiso" required>Permiso del voluntario:</label>
-                        <input class="celda" name="permiso" type="text" maxlength="40" value="<?php echo $voluntario['permiso']; ?>" readonly/><br>
+                        <label for="contraseña">Contraseña: </label>
+                        <input class="celda" name="contraseña" type="text" maxlength="30" value="<?php echo $voluntario["contraseña"]?> " readonly/>
                         <br>
+                        <label for="permiso" required>Permisos del voluntario:</label>
+                        <input class="celda" name="permiso" type="text" maxlength="40" value="<?php if($voluntario['permiso'] == "Sí") echo "Administrador"; else echo "Voluntario estandar" ?>" readonly/><br>
 
                     <input style="float:left" type="submit" value="Eliminar" >
                     <div class="botones">

@@ -93,6 +93,9 @@ cerrarConexionBD($conexion);
                 </tr>
                 <?php
                 foreach ($filas as $fila) {
+                    $f = fechasCita($conexion, $fila["OID_C"]);
+                    $f2 = implode("|", $f);
+                    $arrayFecha = explode("|", $f2);
                     ?>
                     <form method="post" action="../../vista/mostrar/mostrar_cita.php">
                         <article class="cita">
@@ -111,9 +114,11 @@ cerrarConexionBD($conexion);
 
                                     <input id="NOMBREV" name="NOMBREV" value="<?php echo $fila["NOMBREV"]; ?>" type="hidden" />
 
-                                    <input id="FECHACITA" name="FECHACITA" value="<?php echo $fila["FECHACITA"]; ?>" type="hidden" />
+                                    <input id="FECHACITA" name="FECHACITA" value="<?php echo $arrayFecha[0]; ?>" type="hidden" />
 
                                     <input id="OBJETIVO" name="OBJETIVO" value="<?php echo $fila["OBJETIVO"]; ?>" type="hidden" />
+
+                                    <input id="OBSERVACIONES" name="OBSERVACIONES" value="<?php echo $fila["OBSERVACIONES"]; ?>" type="hidden" />
 
                                     <input id="oid_c" name="oid_c" value="<?php echo $fila["OID_C"]; ?>" type="hidden" />
 

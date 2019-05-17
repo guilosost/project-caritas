@@ -77,7 +77,7 @@ $conexion = crearConexionBD();
 
     <div class="flex">
         <div class="form">
-            <h2 class="form-h2">Alta de usuario</h2>
+            <h2 class="form-h2">Editando usuario</h2>
             <div class="form-alta">
                 <form action="../../controlador/acciones/accion_usuario.php" id="altaUsuario" method="POST" name="altaUsuario">
                     <fieldset>
@@ -90,7 +90,7 @@ $conexion = crearConexionBD();
                         <input name="apellidos" type="text" maxlength="50" value="<?php echo $usuario['apellidos']; ?>" /><br>
 
                         <label for="dni">DNI:</label>
-                        <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $usuario['dni']; ?>" required /><br>
+                        <input class="celda" name="dni" placeholder="12345678X" type="text" value="<?php echo $usuario['dni']; ?>" readonly /><br>
 
                         <label for="fechaNac">Fecha de nacimiento:</label>
                         <input name="fechaNac" type="date" value="<?php echo $fechaDef; ?>" required /><br>

@@ -39,15 +39,16 @@ $conexion  = crearConexionBD();
 <body>
     <?php include("../../vista/header.php");
     include("../../vista/navbar.php");
+    echo nueva_cita($conexion, $cita);
     if(isset($_SESSION["formulario_cita"])){
       unset($_SESSION["formulario_cita"]);
-		if (nueva_cita($conexion, $cita)) {
+		if (nueva_cita($conexion, $cita) == true) {
     $_SESSION['citaId'] = aux_IdentificaCita( $conexion, $cita );
     ?> 
   <p>Todo ha ido bien </p> 
    <?php 
 	} else {
-		echo "La cita ya existe.";
+		echo "error";
   }
 } else if (isset($_SESSION["cita"])){
   unset($_SESSION["cita"]);

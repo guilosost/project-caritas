@@ -71,7 +71,7 @@ $conexion = crearConexionBD();
 
 <div class="flex">
         <div class="form">
-            <h2 class="form-h2">Información de la ayuda</h2>
+            <h2 class="form-h2">Editando voluntario</h2>
             <div class="form-alta">
                 <form action="../../controlador/acciones/accion_voluntario.php" method="POST" id=altaVoluntario name=altaVoluntario>
                     <fieldset>
@@ -80,11 +80,11 @@ $conexion = crearConexionBD();
                         <label for="nombrev" >Nombre del voluntario:</label>
                         <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $voluntario['nombrev']; ?>"  readonly /><br>
 
-                        <label for="contrasena" required>Contraseña del voluntario:</label>
-                        <input class="celda"  id="pass" name="contrasena" type="password" maxlength="40" value="<?php echo $voluntario['contrasena']; ?>" oninput="passwordValidation();"/><br>
+                        <label for="contraseña" required>Contraseña del voluntario:</label>
+                        <input class="celda"  id="pass" name="contraseña" type="contraseña" maxlength="40" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordValidation();"/><br>
                         
                         <label for="password2" required>Repita la contraseña:</label>
-                        <input id="confirmpass" name="password2" type="password" maxlength="50" value="<?php echo $voluntario['contrasena']; ?>" oninput="passwordConfirmation();" required /><br>
+                        <input id="confirmpass" name="password2" type="password" maxlength="50" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordConfirmation();" required /><br>
 
                         <label for="permiso" required>Permiso del voluntario:</label>
                         <input type="radio" name="permiso" value="Sí"<?php if ($voluntario['permiso']=="Sí") echo "checked"?>> Administrador

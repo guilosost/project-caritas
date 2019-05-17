@@ -51,7 +51,7 @@ if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Consulta Usuario</title>
+    <title>Información del Usuario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
 <!--    <script type = "text/javascript" src = "../../vista/js/validacion_usuario.js" ></script> -->
@@ -69,7 +69,7 @@ if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/
             <div class="form-alta">
                <form action="../../controlador/eliminaciones/elimina_usuario.php" method="POST">
                     <fieldset>
-                        <legend>Información básica del usuario</legend>
+                        <legend>Información del usuario</legend>
                         
                         <label for="nombre" required>Nombre:</label>
                         <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $usuario['nombre']; ?>" required readonly />
@@ -92,11 +92,9 @@ if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/
 
                         <label for="estudios">Estudios: </label>
                         <input class="celda" name="estudios" type="text" maxlength="40" value="<?php echo $usuario['estudios']; ?>" readonly/><br>
-                        </select>
                       
                         <label for="sitlaboral">Situación laboral: </label>
                         <input class="celda" name="sitlaboral" type="text" maxlength="40" value="<?php echo $usuario['sitlaboral']; ?>" readonly/><br>
-                        </select>
                       
                         <label for="ingresos">Ingresos:</label>
                         <input name="ingresos" type="text" value="<?php echo $usuario['ingresos']; ?>" required readonly/><br>

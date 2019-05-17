@@ -42,7 +42,7 @@ $conexion = crearConexionBD();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Editar Usuario</title>
+    <title>Información de la Ayuda</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
     <!-- <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script> -->
@@ -107,15 +107,16 @@ $conexion = crearConexionBD();
             <div class="form-alta">
                 <form action="../../controlador/eliminaciones/elimina_ayuda.php" method="POST">
                     <fieldset>
-                        <legend>Información básica de la ayuda</legend>
+                        <legend>Información de la ayuda</legend>
 
                         <label for="tipoayuda">Selección del tipo de ayuda: </label>
-                        <input class="celda" name="tipoayuda" type="text" maxlength="40" value="<?php if ($ayuda["bebe"] == "Sí" or  $ayuda["bebe"] == "No ") {
+                        <input class="celda" name="tipoayuda" type="text" maxlength="40" value="<?php
+                        if (isset($ayuda["bebe"])) {
                             echo 'Bolsa de comida';
                             $ayuda = $_SESSION["ayuda"];
                             $ayuda["tipoayuda"] = "bolsacomida";
                             $_SESSION["ayuda"] = $ayuda;
-                        } else if ($ayuda["prioridad"] == "Sí" or $ayuda["prioridad"] == "No ") {
+                        } else if (isset($ayuda["prioridad"])) {
                             echo 'Ayuda económica';
                             $ayuda = $_SESSION["ayuda"];
                             $ayuda["tipoayuda"] = "ayudaeconomica";
@@ -127,7 +128,7 @@ $conexion = crearConexionBD();
                             $_SESSION["ayuda"] = $ayuda;
                         }
                         ?>" readonly />
-                        </select>
+
                         <br>
                         <label for="suministradapor" required>Suministrada por:</label>
                         <input class="celda" name="suministradapor" type="text" maxlength="50" value="<?php echo $ayuda['suministradapor']; ?>" readonly />
@@ -157,10 +158,10 @@ $conexion = crearConexionBD();
                             <fieldset>
                                 <legend>Información de la ayuda económica</legend>
                                 <label for="cantidad">Cantidad (€): </label>
-                                <input class="celda" name="cantidad" type="number" value="<?php echo $ayuda['cantidad']; ?>" /><br>
+                                <input class="celda" name="cantidad" type="number" value="<?php echo $ayuda['cantidad']; ?>" readonly /><br>
 
                                 <label for="motivo">Motivo:</label>
-                                <input class="celda" name="motivo" type="text" value="<?php echo $ayuda['motivo']; ?>" /><br>
+                                <input class="celda" name="motivo" type="text" value="<?php echo $ayuda['motivo']; ?>" readonly /><br>
 
                                 <label for="prioridad">¿Esta ayuda tiene prioridad?:</label>
                                 <input type="radio" name="prioridad" value="Sí" <?php if ($ayuda['prioridad'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;">Sí
@@ -169,18 +170,16 @@ $conexion = crearConexionBD();
                         </div>
                     <?php } else { ?>
                         <div id="trabajo">
-                            <br>
                             <fieldset>
                                 <legend>Información del trabajo</legend>
-
                                 <label for="descripcion">Descripción: </label>
-                                <textarea class="fillable" name="descripcion" maxlength="50" value="<?php echo $ayuda['descripcion']; ?>"></textarea><br>
+                                <textarea class="fillable" name="descripcion" maxlength="290" readonly><?php echo $ayuda['descripcion']; ?></textarea><br>
 
                                 <label for="empresa">Empresa/persona que contrata:</label>
-                                <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $ayuda['empresa']; ?>" /><br>
+                                <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $ayuda['empresa']; ?>" readonly /><br>
 
                                 <label for="salarioaproximado">Salario aproximado:</label>
-                                <input class="celda" name="salarioaproximado" type="text" maxlength="50" value="<?php echo $ayuda['salarioaproximado']; ?>" /><br>
+                                <input class="celda" name="salarioaproximado" type="text" maxlength="50" value="<?php echo $ayuda['salarioaproximado']; ?>" readonly /><br>
 
                                 </label>
                             </fieldset>

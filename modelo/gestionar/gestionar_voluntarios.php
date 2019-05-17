@@ -1,14 +1,14 @@
 <?php
 
-function nuevo_voluntario($conexion, $cita) {
+function nuevo_voluntario($conexion, $voluntario) {
     try {
         
         $consulta = "CALL nuevo_voluntario(:w_nombrev, :w_contraseña, :w_permiso)";
 
         $stmt=$conexion->prepare($consulta);
-		$stmt->bindParam(':w_nombrev',$cita["nombrev"]);
-		$stmt->bindParam(':w_contraseña',$cita["password"]);
-		$stmt->bindParam(':w_permiso',$cita["permisos"]);
+		$stmt->bindParam(':w_nombrev',$voluntario["nombrev"]);
+		$stmt->bindParam(':w_contraseña',$voluntario["password"]);
+		$stmt->bindParam(':w_permiso',$voluntario["permisos"]);
 
         $stmt->execute();
 		
@@ -36,11 +36,11 @@ function borrar_voluntario($conexion,$nombrev) {
 }
 function editar_voluntario($conexion,$voluntario) {
     try {
-    $consulta = "UPDATE  VOLUNTARIOS  SET PERMISO=:permiso, CONTRASEÑA=:contrasena WHERE NOMBREV =:nombrev";
+    $consulta = "UPDATE  VOLUNTARIOS  SET PERMISO=:permiso, CONTRASEÑA=:contraseña WHERE NOMBREV =:nombrev";
    $stmt = $conexion->prepare($consulta);
    $stmt->bindParam(':nombrev',$voluntario["nombrev"]);
    $stmt->bindParam(':permiso',$voluntario["permiso"]);
-   $stmt->bindParam(':contrasena',$voluntario["contrasena"]);
+   $stmt->bindParam(':contraseña',$voluntario["contraseña"]);
    $stmt->execute();
    return true;
 } catch(PDOException $e) {

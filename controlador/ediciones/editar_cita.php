@@ -33,7 +33,7 @@ $conexion = crearConexionBD();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Editar Usuario</title>
+    <title>Editar Cita</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
     <!-- <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script> -->
@@ -44,6 +44,9 @@ $conexion = crearConexionBD();
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
+
+    list($dia, $mes, $anyo) = split("/", $cita['fechacita']);
+    $fechaDef = "$anyo-$mes-$dia";
 
     //Mostramos los errores del formulario enviado previamente
     if (isset($errores) && count($errores) > 0) {
@@ -56,32 +59,32 @@ $conexion = crearConexionBD();
     }
     ?>
 
-<div class="flex">
+    <div class="flex">
         <div class="form">
-            <h2 class="form-h2">Información de la ayuda</h2>
+            <h2 class="form-h2">Editando cita</h2>
             <div class="form-alta">
                 <form action="../../controlador/acciones/accion_cita.php" method="POST" id=altaCita name=altaCita>
                     <fieldset>
                         <legend>Información básica de la ayuda</legend>
                         <label for="dni">DNI del solicitante: </label>
-                        <input class="celda" name="dni" type="text" maxlength="10" value="<?php echo $cita["dni"]?>"
-                           /><br>
-                        </select>
+                        <input class="celda" name="dni" type="text" maxlength="10" value="<?php echo $cita["dni"] ?>" />
                         <br>
-
                         <label for="nombrev" required>Nombre del voluntario:</label>
-                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $cita['nombrev']; ?>" /><br>
-
-                        <label for="objetivo" required>Objetivo de la cita:</label>
-                        <input class="celda" name="objetivo" type="text" maxlength="40" value="<?php echo $cita['objetivo']; ?>" /><br>
+                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $cita['nombrev']; ?>" />
                         <br>
                         <label for="fechacita" required>Fecha de la cita:</label>
-                        <input class="celda" name="fechacita" type="text" value="<?php echo $cita['fechacita']; ?>" /><br>
-
-                    <input style="float:left" type="submit" value="Eliminar" >
+                        <input name="fechacita" type="date" value="<?php echo $fechaDef; ?>" required /><br>
+                        <br>
+                        <label for="objetivo" required>Objetivo de la cita:</label>
+                        <input class="celda" name="objetivo" type="text" maxlength="40" value="<?php echo $cita['objetivo']; ?>" />
+                        <br>
+                        <label for="observaciones" required>Observaciones:</label><br>
+                        <textarea class="fillable" name="observaciones" maxlength="590"><?php echo $cita['observaciones'];?></textarea>
+                    </fieldset>
+                    <input style="float:left" type="submit" value="Eliminar">
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_cita.php'">Cancelar</a>
-                        <input  type="submit" value="Editar" >
+                        <input type="submit" value="Editar">
                     </div>
                 </form>
             </div>
