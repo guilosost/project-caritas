@@ -49,19 +49,15 @@ if(isset($_SESSION["formulario_ayuda"])){
         
         echo "error";
     }
-} if (isset($_SESSION["ayuda"])){
+} else if (isset($_SESSION["ayuda"])){
     unset($_SESSION["ayuda"]);
     if(editar_ayuda($conexion,$ayuda)){
-        $d=editar_ayuda($conexion,$ayuda);
-        echo $d;
         ?>
-        
         <p>Todo ha ido bien </p>
         <?php 
         } else {
             echo "error";
     }
-    
 }
 ?>
     </main>

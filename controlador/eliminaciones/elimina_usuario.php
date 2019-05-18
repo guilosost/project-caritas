@@ -10,15 +10,12 @@
 		
         $conexion = crearConexionBD();
         if($usuario["solicitante"] == "Sí"){
-            eliminar_solicitante($conexion,$usuario["dni"]);
+            echo eliminar_solicitante($conexion,$usuario["dni"]);
         }else{
             eliminar_familiar($conexion,$usuario["dni"]);
         }	
-		
 		cerrarConexionBD($conexion);
-			
-	
-		 Header("Location: ../../vista/listas/lista_usuario.php");
+		Header("Location: ../../vista/listas/lista_usuario.php"); 
 	}
 	else Header("Location: ../../vista/listas/lista_usuario.php"); 
 ?>

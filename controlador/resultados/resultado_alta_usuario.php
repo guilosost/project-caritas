@@ -47,23 +47,17 @@
 				if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
 					echo"El solicitante ya existe";
 				}
-				else if(alta_solicitante($conexion,$usuario)){
-					$d = alta_solicitante($conexion,$usuario);	
-					echo $d;
+				else if(alta_solicitante($conexion,$usuario)){	
         			echo"Todo ha ido bien";
 				} else{
 					echo "Error desconocido.";
 			}
 		}
-		
-		if ($usuario["solicitante"]=="No"){
-			$d = nuevo_familiar($conexion,$usuario);
+		else if ($usuario["solicitante"]=="No"){
 		if(consultarUsuarioRepetido($conexion, $usuario["dni"]) !=0 ){
 			echo"El usuario ya existe";
 		}
 		else if(nuevo_familiar($conexion,$usuario)){
-			
-			//	echo $d;
 				echo"Todo ha ido bien";
 			} else{
 				echo "Error desconocido.";

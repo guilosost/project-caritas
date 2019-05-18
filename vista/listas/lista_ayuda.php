@@ -243,8 +243,8 @@ cerrarConexionBD($conexion);
                                         <input id="NIÑO" name="NIÑO" value="<?php echo $comida["NIÑO"]; ?>" type="hidden" />
 
                                         <input id="CANTIDAD" name="CANTIDAD" value="<?php echo $ayuda_economica["CANTIDAD"]; ?>" type="hidden" />
-                                        <input id="PRIORIDAD" name="MOTIVO" value="<?php echo $ayuda_economica["MOTIVO"]; ?>" type="hidden" />
-                                        <input id="MOTIVO" name="PRIORIDAD" value="<?php echo $ayuda_economica["PRIORIDAD"]; ?>" type="hidden" />
+                                        <input id="MOTIVO" name="MOTIVO" value="<?php echo $ayuda_economica["MOTIVO"]; ?>" type="hidden" />
+                                        <input id="PRIORIDAD" name="PRIORIDAD" value="<?php echo $ayuda_economica["PRIORIDAD"]; ?>" type="hidden" />
 
                                         <input id="DESCRIPCION" name="DESCRIPCION" value="<?php echo $trabajo["DESCRIPCION"]; ?>" type="hidden" />
                                         <input id="EMPRESA" name="EMPRESA" value="<?php echo $trabajo["EMPRESA"]; ?>" type="hidden" />

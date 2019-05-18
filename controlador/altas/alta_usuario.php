@@ -209,7 +209,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El nombre debe contener letras y espacios");
 
         frmvalidator.addValidation("apellidos", "req", "Introduzca los apellidos");
-        frmvalidator.addValidation("apellidos", "alphabetic_space", "Los apellidos deben contener letras y espacios");
+        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Los apellidos deben contener letras y espacios");
 
         frmvalidator.addValidation("dni", "req", "Introduzca el DNI");
         frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI en el siguiente formato: 12345678A");

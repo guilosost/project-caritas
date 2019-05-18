@@ -12,18 +12,14 @@ $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
 if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/listas/lista_ayuda.php") {
     $ayuda["concedida"] = $_REQUEST["CONCEDIDA"];
     $ayuda["suministradapor"] = $_REQUEST["SUMINISTRADAPOR"];
-    if (isset($_REQUEST["BEBE"])) {
     $ayuda["niño"] = $_REQUEST["NIÑO"];
     $ayuda["bebe"] = $_REQUEST["BEBE"];
-    }else if (isset($_REQUEST["PRIORIDAD"])){
     $ayuda["cantidad"] = $_REQUEST["CANTIDAD"];
     $ayuda["motivo"] = $_REQUEST["MOTIVO"];
     $ayuda["prioridad"] = $_REQUEST["PRIORIDAD"];
-    }else{
     $ayuda["descripcion"] = $_REQUEST["DESCRIPCION"];
     $ayuda["empresa"] = $_REQUEST["EMPRESA"];
     $ayuda["salarioaproximado"] = $_REQUEST["SALARIOAPROXIMADO"];
-    }
     $ayuda["oid_a"] = $_REQUEST["oid_a"];
     $_SESSION["ayuda"] = $ayuda;
 } else {
@@ -115,11 +111,11 @@ $conexion = crearConexionBD();
 
                         <label for="tipoayuda">Selección del tipo de ayuda: </label>
                         <input class="celda" name="tipoayuda" type="text" maxlength="40" value="<?php
-                        if (isset($ayuda["bebe"])) {
+                        if ($ayuda["bebe"]=="Sí" or $ayuda["bebe"]== "No ") {
                             echo 'Bolsa de comida';
                             $ayuda["tipoayuda"] = "bolsacomida";
                             $_SESSION["ayuda"] = $ayuda;
-                        } else if (isset($ayuda["prioridad"])) {
+                        } else if ($ayuda["prioridad"]=="Sí" or $ayuda["prioridad"]== "No ") {
                             echo 'Ayuda económica';
                             $ayuda["tipoayuda"] = "ayudaeconomica";
                             $_SESSION["ayuda"] = $ayuda;

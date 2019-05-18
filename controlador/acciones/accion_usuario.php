@@ -78,11 +78,11 @@ function validarDatosUsuario($conexion, $usuario)
 		$errores[] = "<p>El DNI debe contener 8 números y una letra mayúscula: " . $usuario["dni"] . ".</p>";
 	}
 
-	if ($usuario["nombre"] == "" ||!ctype_alpha(str_replace(' ', '', $usuario["nombre"]))) {
+	if ($usuario["nombre"] == "" ||!preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$usuario["nombre"])) {
 		$errores[] = "<p>El nombre no puede estar vacío o contener caracteres numéricos.</p>";
 	}
 
-	if ($usuario["apellidos"] == "" ||!ctype_alpha(str_replace(' ', '', $usuario["apellidos"]))) {
+	if ($usuario["apellidos"] == "" ||!preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$usuario["apellidos"])) {
 		$errores[] = "<p>Los apellidos no pueden estar vacíos o contener caracteres numéricos.</p>";
 	}
 
