@@ -42,6 +42,7 @@ $conexion = crearConexionBD();
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
+    <script type = "text/javascript" src = "../../vista/js/validacion_cita.js" ></script>
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 
@@ -102,12 +103,13 @@ $conexion = crearConexionBD();
     frmvalidator.addValidation("dni","regexp=^[0-9]{8}[A-Z]$","Introduzca un dni de la forma 12345678A");
 
     frmvalidator.addValidation("nombrev","req","Introduzca el nombre");
-    frmvalidator.addValidation("nombrev","alpha","El nombre debe de constar de letras");
+    frmvalidator.addValidation("nombrev","regexp=^[a-zA-Z Ññáéíóú\\s]","El nombre debe de constar de letras");
 
-    frmvalidator.addValidation("observaciones","req","Introduzca el objetivo de la cita");
+    frmvalidator.addValidation("objetivo","req","Introduzca el objetivo de la cita");
+    frmvalidator.addValidation("objetivo","regexp=^[a-zA-Z Ññáéíóú\\s]","El objetivo debe de constar de letras y espacios");
 
     frmvalidator.addValidation("observaciones","req","Introduzca alguna observacion");
-
+    frmvalidator.addValidation("observaciones","regexp=^[a-zA-Z Ññáéíóú\\s]","Las observaciones deben de constar de letras y espacios");
     
     </script>
     <?php

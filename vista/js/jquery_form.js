@@ -6,5 +6,3 @@
      $(this).css("background-color", "#ffffff");
    });
  });
-
-//Esto no es una democracia

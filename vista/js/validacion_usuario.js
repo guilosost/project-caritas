@@ -1,6 +1,5 @@
 
 function validateDate(){
-  var form = document.getElementById("#AltaUsuario");
   var fechaNac = document.forms["altaUsuario"]["fechaNac"].value;
   var solicitante = document.forms["altaUsuario"]["solicitante"].value;
   var array = fechaNac.split("-");
@@ -15,7 +14,6 @@ function validateDate(){
   if ((currdate - mydate) < 0 && solicitante =="Sí" ){
     alert("El solicitante debe ser mayor de edad");
   }
-
 }
 
 function letrasYEspacio(){

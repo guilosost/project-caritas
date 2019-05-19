@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("../../modelo/GestionBD.php");
+require_once("../funciones.php");
 
 if (isset($_SESSION["formulario_usuario"])) {
 	$usuario['dni'] = $_REQUEST["dni"];
@@ -115,6 +116,15 @@ function validarDatosUsuario($conexion, $usuario)
 	else if(!preg_match("/^[0-9]+$/", $usuario["ingresos"])) {
 		$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
 	}
+	else if($usuario["ingresos"]>= 1000){
+		$errores[] = "<p>Los ingresos no pueden superar los 1000 €.</p>";
+	}
+	else if($usuario["ingresos"] < 672 and $usuario["sitlaboral"] == "En paro"){
+		$errores[] = "<p>Los ingresos no son lógicos si el usuario está en paro.</p>";
+	}
+	else if($usuario["ingresos"] == 0  and $usuario["minusvalia"] == "Sí"){
+		$errores[] = "<p>Los ingresos no son lógicos si el usuario posee alguna discapacidad.</p>";
+	}
 
 	if($usuario["minusvalia"]=="") {
 		$errores[] = "<p>El campo minusvalía no puede estar vacío.</p>";
@@ -134,11 +144,12 @@ function validarDatosUsuario($conexion, $usuario)
 	
 	if($usuario["solicitante"]=="Sí"){
 
-		if($usuario["poblacion"]=="") {
+		if($usuario["poblacion"]=="" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$usuario["poblacion"])) {
 			$errores[] = "<p>El campo población no puede estar vacío.</p>";
 		}else if ($usuario["poblacion"] !="San Juan de Aznalfarache"){
 			$errores[] = "<p>El solicitante debe de vivir en San Juan de Aznalfarache.</p>";
 		}
+
 		if($usuario["domicilio"]=="") {
 			$errores[] = "<p>El campo domicilio no puede estar vacío.</p>";
 		}else{
@@ -162,7 +173,7 @@ function validarDatosUsuario($conexion, $usuario)
 			
 		}
 
-		if(strtotime($usuario["fechaNac"])-strtotime(date("d/m/Y"))<18){
+		if(calculaedad($usuario["fechaNac"])<18){
 			$errores[] = "<p>El solicitante debe de ser mayor de 18 años</p>";
 		}
 
@@ -175,7 +186,7 @@ function validarDatosUsuario($conexion, $usuario)
 		if($usuario["codigopostal"]=="") {
 			$errores[] = "<p>El código postal no puede estar vacío.</p>";
 		}else if (!preg_match("/^[0-9]{5}$/", $usuario["codigopostal"])) {
-			$errores[] = "<p>El código postal debe de constar 5 dígitos.</p>";
+			$errores[] = "<p>El código postal debe de constar 5 dígitos y ser numérico.</p>";
 		} else if ($usuario["codigopostal"] != "41920"){
 			$errores[] = "<p>El código postal no es el de San Juan de Aznalfarache.</p>";
 		}

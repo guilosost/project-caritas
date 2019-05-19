@@ -60,8 +60,8 @@ if (count($errores)>0) {
 }
 function validarDatosAyuda($conexion, $ayuda){
 
-    if ($ayuda["suministradapor"] == "") {
-    $errores[] = "<p>El campo de suministro no puede estar vacío.</p>";
+    if ($ayuda["suministradapor"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["suministradapor"])) {
+    $errores[] = "<p>El campo de suministrador de la ayuda no puede estar vacío ni contener números.</p>";
     } 
 
     if ($ayuda["concedida"] == "") {
@@ -80,10 +80,10 @@ function validarDatosAyuda($conexion, $ayuda){
     }
     if($ayuda['tipoayuda'] == "ayudaeconomica"){
 
-    if ($ayuda["cantidad"] == "") {
+    if ($ayuda["cantidad"] == "" || !preg_match("/^[0-9]+$/",$ayuda["cantidad"])) {
         $errores[] = "<p>El campo cantidad no puede estar vacío.</p>";
     } 
-    if ($ayuda["motivo"] == "") {
+    if ($ayuda["motivo"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["suministradapor"])) {
         $errores[] = "<p>El campo motivo no puede estar vacío.</p>";
     } 
 
@@ -91,46 +91,17 @@ function validarDatosAyuda($conexion, $ayuda){
         $errores[] = "<p>Es necesario conocer la prioridad de la ayuda.</p>";
     } 
     }
-    if($ayuda['tipoayuda'] == "curso"){
 
-    if ($ayuda["profesor"] == "") {
-        $errores[] = "<p>El campo profesor no puede estar vacío.</p>";
-    } 
-
-    if ($ayuda["materia"] == "") {
-        $errores[] = "<p>El campo materia no puede estar vacío.</p>";
-    } 
-
-
-    if ($ayuda["fechacomienzo"] == "") {
-        $errores[] = "<p>El campo no puede estar vacío.</p>";
-        } 
-
-
-    if ($ayuda["fechafin"] == "") {
-        $errores[] = "<p>El campo no puede estar vacío.</p>";
-    } 
-
-
-    if ($ayuda["numerosesiones"] == "") {
-        $errores[] = "<p>El campo no puede estar vacío.</p>";
-    } 
-
-
-    if ($ayuda["numeroalumnosmaximo"] == "") {
-        $errores[] = "<p>El campo no puede estar vacío.</p>";
-    }   
-    }
     if($ayuda['tipoayuda'] == "trabajo"){
-    if ($ayuda["descripcion"] == "") {
+    if ($ayuda["descripcion"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["descripcion"])) {
         $errores[] = "<p>El campo lugar no puede estar vacío.</p>";
     } 
 
-    if ($ayuda["empresa"] == "") {
+    if ($ayuda["empresa"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["empresa"])) {
         $errores[] = "<p>El campo lugar no puede estar vacío.</p>";
     }    
 
-    if ($ayuda["salarioaproximado"] == "") {
+    if ($ayuda["salarioaproximado"] == "" || !preg_match("/^[0-9]+$/",$ayuda["suministradapor"])) {
         $errores[] = "<p>El campo lugar no puede estar vacío.</p>";
     }
 }

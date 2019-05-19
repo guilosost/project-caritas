@@ -1,6 +1,5 @@
 <?php
 session_start();
-//include(dirname(__DIR__).'/GestionBD.php');
 require_once("../../modelo/GestionBD.php");
 
 if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {   
@@ -50,17 +49,12 @@ $conexion = crearConexionBD();
 			$("#altaVoluntario").on("submit", function() {
 				return validateForm();
             });
-            $("#pass").on("keyup", function() {
-				// Calculo el color
-				passwordColor();
-			});
         });
     </script>
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
 
-    //Mostramos los errores del formulario enviado previamente
     if (isset($errores) && count($errores) > 0) {
         //    echo "<div id=\"div_errores\" class=\"error\">";
         echo "<h4> Errores en el formulario:</h4>";
@@ -82,7 +76,8 @@ $conexion = crearConexionBD();
                         <input class="celda" name="nombrev" type="text" maxlength="50" required />
                         
                         <label for="password" required>Contraseña:</label>
-                        <input id="pass" name="password" type="password" maxlength="50" oninput="passwordValidation();" required /><br>
+                        <input id="pass" name="password" type="password"  maxlength="50" oninput="passwordValidation();" required /><br>
+                        <progress max="100" value ="0" id="strength" style=""></progress>
 
                         <label for="password2" required>Repita la contraseña:</label>
                         <input id="confirmpass" name="password2" type="password" maxlength="50" oninput="passwordConfirmation();" required /><br>
@@ -99,10 +94,45 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
+   
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);
     ?>
 </body>
+<script type="text/javascript">
+        var pass = document.getElementById("pass")
+        pass.addEventListener('keyup', function(){
+            checkPassword(pass.value);
+        })
 
+        function checkPassword(password){
+            var strengthBar = document.getElementById("strength");
+            var strength = 0;
+            
+            if(password.match(/[0-9]/)){
+                strength +=1;
+            }
+            if(password.match(/^[A-Z Ñ]/)){
+                strength +=1;
+            }
+            if(password.length > 8){
+                strength +=1;
+            }
+            switch(strength){
+                case 0:
+                    strengthBar.value = 10;
+                    break;
+                case 1:
+                    strengthBar.value = 40;
+                    break;
+                case 2:
+                    strengthBar.value = 70;
+                    break;
+                case 3:
+                    strengthBar.value = 100;
+                    break;
+            }
+        }
+    </script>
 </html> 

@@ -53,9 +53,13 @@ function validarDatosCita($conexion, $cita)
 		$errores[] = "<p>El objetivo no puede estar vacio.</p>";
 	}
 
-//	if ($cita["dni"] == "" || !preg_match("/^[0-9]{8}[A-Z]$/", $cita["dni"])) {
-//		$errores[] = "<p>El dni no puede estar vacio y tiene que ser del formato 12345678A.</p>";
-//	}
+	if ($cita["fechacita"] == "") {
+		$errores[] = "<p>La fecha de la cita no puede estar vacía.</p>";
+	}
+	
+	if ($cita["dni"] == "" || !preg_match("/^[0-9]{8}[A-Z]$/", $cita["dni"])) {
+		$errores[] = "<p>El dni no puede estar vacio y tiene que ser del formato 12345678A.</p>";
+	}
 
 	if ($cita["nombrev"] == "") {
 		$errores[] = "<p>El nombre del voluntario responsable de la cita no puede estar vacío.</p>";

@@ -48,10 +48,6 @@ $conexion = crearConexionBD();
 			$("#altaVoluntario").on("submit", function() {
 				return validateForm();
             });
-            $("#pass").on("keyup", function() {
-				// Calculo el color
-				passwordColor();
-			});
         });
 </script>
     <?php
