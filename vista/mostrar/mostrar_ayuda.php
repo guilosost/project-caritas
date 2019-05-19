@@ -170,43 +170,18 @@ $conexion = crearConexionBD();
                             <fieldset>
                                 <legend>Información del trabajo</legend>
                                 <label for="descripcion">Descripción: </label>
-                                <textarea class="fillable" name="descripcion" maxlength="290" readonly><?php echo $ayuda['descripcion']; ?></textarea><br>
+                                <textarea class="fillable" name="descripcion" maxlength="500" readonly><?php echo $ayuda['descripcion']; ?></textarea><br>
 
                                 <label for="empresa">Empresa/persona que contrata:</label>
-                                <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $ayuda['empresa']; ?>" readonly /><br>
+                                <input class="celda" name="empresa" type="text" maxlength="50" value="<?php echo $ayuda['empresa']; ?>" readonly /><br>
 
-                                <label for="salarioaproximado">Salario aproximado:</label>
-                                <input class="celda" name="salarioaproximado" type="text" maxlength="50" value="<?php echo $ayuda['salarioaproximado']; ?>" readonly /><br>
-
+                                <label for="salarioaproximado">Salario aproximado (€):</label>
+                                <input class="celda" name="salarioaproximado" type="number"  value="<?php echo $ayuda['salarioaproximado']; ?>" readonly /><br>
+                
                                 </label>
                             </fieldset>
                         </div>
                     <?php } ?>
-
-                    <!--<div id="curso" class="hide">
-                        <br>
-                        <fieldset>
-                            <legend>Información del curso</legend>
-                            <label for="profesor">Profesor: </label>
-                            <input class="celda" name="profesor" type="text" maxlength="50" value="<?php echo $ayuda['cantidad']; ?>"/><br>
-
-                            <label for="materia">Materia del curso: </label>
-                            <input class="celda" name="materia" type="text" maxlength="50" /><br>
-                            </select>
-
-                            <label for="fechacomienzo">Fecha comienzo:</label>
-                            <input name="fechacomienzo" type="date" value="<?php $formulario['fechacomienzo'] ?>" /><br>
-
-                            <label for="fechafin">Fecha final:</label>
-                            <input name="fechafin" type="date" value="<?php $formulario['fechafin'] ?>" /><br>
-
-                            <label for="numerosesiones">Número de sesiones: </label>
-                            <input name="numerosesiones" type="number" value="<?php $formulario['numerosesiones'] ?>" /><br>
-
-                            <label for="numeroalumnosmaximo">Número de alumnos: </label>
-                            <input name="numeroalumnosmaximo" type="number" value="<?php $formulario['numeroalumnosmaximo'] ?>" /><br>
-                        </fieldset>
-                    </div> -->
 
                     <input style="float:left" type="submit" value="Eliminar">
                     <div class="botones">

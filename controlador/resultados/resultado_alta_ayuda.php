@@ -52,7 +52,7 @@ if(isset($_SESSION["formulario_ayuda"])){
 } else if (isset($_SESSION["ayuda"])){
     unset($_SESSION["ayuda"]);
     if(editar_ayuda($conexion,$ayuda)){
-        ?>
+       echo editar_ayuda($conexion,$ayuda) ?>
         <p>Todo ha ido bien </p>
         <?php 
         } else {

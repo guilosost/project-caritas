@@ -168,7 +168,7 @@ $conexion = crearConexionBD();
                             <input class="celda" name="empresa" type="text" maxlength="30" /><br>
 
                             <label for="salarioaproximado">Salario aproximado:</label>
-                            <input class="celda" name="salarioaproximado" type="text" maxlength="50" /><br>
+                            <input class="celda" name="salarioaproximado" type="number" maxlength="50" /><br>
 
                             </label>
                         </fieldset>
@@ -207,17 +207,17 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("prioridad", "selone_radio", "Introduzca si posee prioridad");
 
         frmvalidator.addValidation("motivo", "req", "Introduzca el motivo de la ayuda");
-        frmvalidator.addValidation("motivo", "alphabetic_space", "Introduzca el motivo de la ayuda");
+        frmvalidator.addValidation("motivo", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Introduzca el motivo de la ayuda");
 
         }else if (tipo == "trabajo"){
         frmvalidator.addValidation("salarioaproximado", "req", "Introduzca un salario");
         frmvalidator.addValidation("salarioaproximado", "num", "Introduzca un número como salario");
 
         frmvalidator.addValidation("descripcion", "req", "Introduzca la descripción del trabajo");
-        frmvalidator.addValidation("descripcion", "alphabetic_space", "Introduzca la descripción del trabajo");
+        frmvalidator.addValidation("descripcion", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Introduzca la descripción del trabajo");
 
         frmvalidator.addValidation("empresa", "req", "Introduzca la empresa");
-        frmvalidator.addValidation("empresa", "alphabetic_space", "Introduzca la empresa");
+        frmvalidator.addValidation("empresa", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Introduzca la empresa");
 
         }
     </script> 

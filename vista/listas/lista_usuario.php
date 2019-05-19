@@ -7,7 +7,7 @@ require_once(GESTIONAR . "gestionar_usuarios.php");
 require_once(VISTA . "/paginacion_consulta.php");
 
 $conexion = crearConexionBD();
-
+unset($_SESSION["formulario_usuario"]);
 if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }

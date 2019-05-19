@@ -186,9 +186,11 @@ function validarDatosUsuario($conexion, $usuario)
 	}
 	if($usuario["solicitante"]=="No"){
 
-		#if ($usuario["parentesco"] == "" || !ctype_alpha($usuario["parentesco"])) {
-		#	$errores[] = "<p>El parentesco no puede estar vacío o contener caracteres numéricos.</p>";
-		#}
+		if ($usuario["parentesco"] == "") {
+			$errores[] = "<p>El campo de parentesco no puede estar vacío.</p>";
+		} else if (!preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$usuario["parentesco"])) {
+			$errores[] = "<p>El parentesco non puede contener números ni caracteres extraños.</p>";
+		}
 
 		if ($usuario["dniSol"] == "") {
 			$errores[] = "<p>El DNI del solicitante no puede estar vacío.</p>";

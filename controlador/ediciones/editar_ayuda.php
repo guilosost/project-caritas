@@ -122,7 +122,7 @@ $conexion = crearConexionBD();
                         <input type="radio" name="concedida" value="No"  <?php if ($ayuda['concedida'] == 'No ') echo ' checked '; ?>>No<br>
 
                     </fieldset>
-
+                    <?php if ($ayuda["bebe"] == "Sí" or  $ayuda["bebe"] == "No ") { ?>
                     <div id="comida" >
                         <br>
                         <fieldset>
@@ -137,7 +137,7 @@ $conexion = crearConexionBD();
                             <input type="radio" name="niño" value="No" <?php if ($ayuda['niño'] == 'No ') echo ' checked '; ?>>No<br>
                         </fieldset>
                     </div>
-
+                    <?php } else if ($ayuda["prioridad"] == "Sí" or $ayuda["prioridad"] == "No ") { ?>
                     <div id="economica" >
                         <br>
                         <fieldset>
@@ -153,24 +153,25 @@ $conexion = crearConexionBD();
                             <input type="radio" name="prioridad" value="No"  <?php if ($ayuda['prioridad'] == 'No ') echo ' checked '; ?>>No<br>
                         </fieldset>
                     </div>
-
+                    <?php } else { ?>
                     <div id="trabajo" >
                         <br>
                         <fieldset>
                             <legend>Información del trabajo</legend>
 
                             <label for="descripcion">Descripción: </label>
-                            <textarea class="fillable" name="descripcion" maxlength="50" value="<?php echo $ayuda['descripcion']; ?>"></textarea><br>
+                            <textarea class="fillable" name="descripcion" maxlength="500"> <?php echo $ayuda['descripcion']; ?></textarea><br>
 
                             <label for="empresa">Empresa/persona que contrata:</label>
-                            <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $ayuda['empresa']; ?>"/><br>
+                            <input class="celda" name="empresa" type="text" maxlength="50" value="<?php echo $ayuda['empresa']; ?>"/><br>
 
                             <label for="salarioaproximado">Salario aproximado:</label>
-                            <input class="celda" name="salarioaproximado" type="text" maxlength="50" value="<?php echo $ayuda['salarioaproximado']; ?>" /><br>
+                            <input class="celda" name="salarioaproximado" type="number" value="<?php echo $ayuda['salarioaproximado']; ?>" /><br>
 
                             </label>
                         </fieldset>
                     </div>
+                    <?php } ?>
 
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_ayuda.php'">Cancelar</a>

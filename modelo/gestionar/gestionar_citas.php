@@ -50,6 +50,22 @@ function aux_IdentificaCita( $conexion, $cita ){
 }
 function borrar_cita($conexion,$oid_c) {
    try{
+    $consulta = "DELETE FROM COMIDAS WHERE OID_A IN (select oid_a from ayudas where oid_c=:oid_c)";
+    $stmt = $conexion->prepare($consulta);
+    $stmt->bindParam(':oid_c',$oid_c);
+    $stmt->execute();
+    $consulta = "DELETE FROM AYUDASECONOMICAS WHERE OID_A IN (select oid_a from ayudas where oid_c=:oid_c)";
+    $stmt = $conexion->prepare($consulta);
+    $stmt->bindParam(':oid_c',$oid_c);
+    $stmt->execute();
+    $consulta = "DELETE FROM TRABAJOS WHERE OID_A IN (select oid_a from ayudas where oid_c=:oid_c)";
+    $stmt = $conexion->prepare($consulta);
+    $stmt->bindParam(':oid_c',$oid_c);
+    $stmt->execute(); 
+    $consulta = "DELETE FROM AYUDAS WHERE OID_C=:oid_c";
+    $stmt = $conexion->prepare($consulta);
+    $stmt->bindParam(':oid_c',$oid_c);
+    $stmt->execute();
     $consulta = "DELETE FROM CITAS WHERE OID_C=:oid_c";
    $stmt = $conexion->prepare($consulta);
    $stmt->bindParam(':oid_c',$oid_c);

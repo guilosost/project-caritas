@@ -6,7 +6,6 @@ function alta_solicitante($conexion,$usuario) {
 
     list($año, $mes, $dia) = split('[/.-]', $fecha);
     $fechaNacimiento = "$dia/$mes/$año";
-    echo $fechaNacimiento;
     $vacio = " ";
     $no = "No";
 	try {

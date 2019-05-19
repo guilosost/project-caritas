@@ -69,13 +69,13 @@
 			
 		if ($usuario["solicitante"]=="No"){
 			if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
-				echo editar_familiar($conexion,$usuario);
+				 editar_familiar($conexion,$usuario);
+				 echo "Todo bien";
 			} else{
 				echo "Error desconocido.";
 		}
 	}
 		else {
-			 
 			if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
 				echo editar_solicitante($conexion,$usuario);
 			} else{

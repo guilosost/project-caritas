@@ -13,8 +13,7 @@
         borrar_cita($conexion,$cita["oid_c"]);
                   
 		cerrarConexionBD($conexion);
-			
-		 Header("Location: ../../vista/listas/lista_cita.php");
+		Header("Location: ../../vista/listas/lista_cita.php"); 
 	}
 	else Header("Location: ../../vista/listas/lista_cita.php"); 
 ?>

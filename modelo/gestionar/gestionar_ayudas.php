@@ -146,8 +146,8 @@ function borrar_trabajo($conexion,$oid_a) {
 
 function editar_ayuda($conexion,$ayuda) {
     try {
-   $stmt=$conexion->prepare("CALL editar_ayuda(:oid_a,:bebe,:niño,:cantidad,:motivo,:prioridad,:descripcion,:salarioaproximado,
-   :empresa,:concedida,
+   $stmt=$conexion->prepare("CALL editar_ayuda(:oid_a,:bebe,:niño,:cantidad,:motivo,:prioridad,:descripcion,:empresa,:salarioaproximado,
+   :concedida,
    :suministradapor)");
    $stmt->bindParam(':oid_a',$ayuda["oid_a"]);
    $stmt->bindParam(':bebe',$ayuda["bebe"]);
@@ -155,7 +155,6 @@ function editar_ayuda($conexion,$ayuda) {
    $stmt->bindParam(':cantidad',$ayuda["cantidad"]);
    $stmt->bindParam(':motivo',$ayuda["motivo"]);
    $stmt->bindParam(':prioridad',$ayuda["prioridad"]);
-   $stmt->bindParam(':oid_a',$ayuda["oid_a"]);
    $stmt->bindParam(':descripcion',$ayuda["descripcion"]);
    $stmt->bindParam(':salarioaproximado',$ayuda["salarioaproximado"]);
    $stmt->bindParam(':empresa',$ayuda["empresa"]);
