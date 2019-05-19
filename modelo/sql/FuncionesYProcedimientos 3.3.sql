@@ -96,7 +96,7 @@ BEGIN
         w_estadocivil,
         TO_DATE(TO_CHAR(w_fechanacimiento, 'DD/MM/YYYY'), 'DD/MM/YYYY'),
         w_protecciondatos,
-        'Sí',
+        'SÃ­',
         NULL,
         w_problematica,
         w_tratamiento,
@@ -114,8 +114,14 @@ w_dni IN                       usuarios.dni%TYPE
 BEGIN
         
         SELECT * INTO usuario FROM usuarios  WHERE dni=w_dni;
+        DELETE FROM trabajos WHERE oid_a IN (select oid_a from ayudas where oid_c IN (select oid_c from citas where dni= usuario.dni));
+        DELETE FROM ayudaseconomicas WHERE oid_a IN (select oid_a from ayudas where oid_c IN (select oid_c from citas where dni= usuario.dni));
+        DELETE FROM comidas WHERE oid_a IN (select oid_a from ayudas where oid_c IN (select oid_c from citas where dni= usuario.dni));
+        DELETE FROM ayudas WHERE oid_c IN (select oid_c from citas where dni= usuario.dni);
+        DELETE FROM citas WHERE dni=usuario.dni;
         DELETE FROM usuarios WHERE oid_uf = usuario.oid_uf;
-       DELETE FROM unidadesfamiliares WHERE oid_uf = usuario.oid_uf;
+        DELETE FROM unidadesfamiliares WHERE oid_uf = usuario.oid_uf;
+       
 END borrar_solicitante;
 /
 
@@ -217,7 +223,7 @@ CREATE OR REPLACE PROCEDURE nueva_ayuda_de_comida (
     w_suministradapor   IN                  ayudas.suministradapor%TYPE,
     w_concedida         IN                  ayudas.concedida%TYPE,
     w_bebe              IN                  comidas.bebe%TYPE,
-    w_niño              IN                  comidas.niño%TYPE,
+    w_niÃ±o              IN                  comidas.niÃ±o%TYPE,
     w_oid_c             IN                  citas.oid_c%type
 ) IS
 BEGIN
@@ -235,12 +241,12 @@ BEGIN
     INSERT INTO comidas (
         oid_co,
         bebe,
-        niño,
+        niÃ±o,
         oid_a
     ) VALUES (
         0,
         w_bebe,
-        w_niño,
+        w_niÃ±o,
         SEC_A.currval
     );
 
@@ -388,7 +394,7 @@ BEGIN
         dni
     ) VALUES (
         0,
-        TO_DATE(TO_CHAR(w_fechacita, 'DD/MM/YYYY'), 'DD/MM/YYYY'),
+       TO_DATE(TO_CHAR(w_fechacita, 'DD/MM/YYYY'), 'DD/MM/YYYY'),
         w_objetivo,
         w_observaciones,
         w_nombrev,
@@ -401,17 +407,17 @@ END nueva_cita;
 
 CREATE OR REPLACE PROCEDURE nuevo_voluntario (
     w_nombrev      IN             voluntarios.nombrev%TYPE,
-    w_contraseña   IN             voluntarios.contraseña%TYPE,
+    w_contraseÃ±a   IN             voluntarios.contraseÃ±a%TYPE,
     w_permiso      IN             voluntarios.permiso%TYPE
 ) IS
 BEGIN
     INSERT INTO voluntarios (
         nombrev,
-        contraseña,
+        contraseÃ±a,
         permiso
     ) VALUES (
         w_nombrev,
-        w_contraseña,
+        w_contraseÃ±a,
         w_permiso
     );
 
@@ -491,27 +497,27 @@ BEGIN
 
 END interesado_en_curso;
 /
-CREATE OR REPLACE FUNCTION contraseñas (
-    w_contraseña   IN      voluntarios.contraseña%TYPE,
+CREATE OR REPLACE FUNCTION contraseÃ±as (
+    w_contraseÃ±a   IN      voluntarios.contraseÃ±a%TYPE,
     w_nombrev IN      voluntarios.nombrev%TYPE
 ) RETURN BOOLEAN AS
     res   BOOLEAN:=true;
     
-     aux voluntarios.contraseña%TYPE; 
+     aux voluntarios.contraseÃ±a%TYPE; 
 BEGIN
     SELECT
-        contraseña
+        contraseÃ±a
     INTO aux
     FROM
         voluntarios
     WHERE
         nombrev = w_nombrev;
-IF(aux <> w_contraseña )THEN
+IF(aux <> w_contraseÃ±a )THEN
 res:=false;
 END IF;
 
     RETURN res;
-END contraseñas;
+END contraseÃ±as;
 /
 CREATE OR REPLACE PROCEDURE editar_solicitante (
     w_dni                    IN                       usuarios.dni%TYPE,
@@ -573,7 +579,7 @@ END editar_familiar;
 CREATE OR REPLACE PROCEDURE editar_ayuda (
     w_oid_a                    IN                     ayudas.oid_a%TYPE,
     w_bebe                 IN                       comidas.bebe%TYPE,
-    w_niño              IN                       comidas.niño%TYPE,
+    w_niÃ±o              IN                       comidas.niÃ±o%TYPE,
     w_cantidad              IN                       ayudaseconomicas.cantidad%TYPE,
     w_motivo       IN                       ayudaseconomicas.motivo%TYPE,
     w_prioridad               IN                       ayudaseconomicas.prioridad%TYPE,
@@ -585,7 +591,7 @@ CREATE OR REPLACE PROCEDURE editar_ayuda (
    
 ) IS
 BEGIN
-    UPDATE  COMIDAS SET bebe=w_bebe, niño=w_niño WHERE OID_A=w_oid_a;
+    UPDATE  COMIDAS SET bebe=w_bebe, niÃ±o=w_niÃ±o WHERE OID_A=w_oid_a;
     UPDATE AYUDASECONOMICAS SET cantidad=w_cantidad, motivo=w_motivo, prioridad=w_prioridad WHERE OID_A=w_oid_a;
     UPDATE TRABAJOS SET descripcion=w_descripcion, salarioaproximado=w_salarioaproximado, empresa=w_empresa WHERE OID_A=w_oid_a;
     UPDATE  AYUDAS SET concedida=w_concedida, suministradapor=w_suministradapor WHERE OID_A=w_oid_a;
