@@ -116,7 +116,7 @@ $conexion = crearConexionBD();
                         <br>
                         <label for="sitlaboral">Situación laboral: </label>
                         <select class="celda" name="sitlaboral" size=1 required>
-                        <option value="No es relevante" <?php if ($usuario['sitlaboral'] == 'No es relevante') echo ' selected '; ?>>No es relevante </option>
+                            <option value="No es relevante" <?php if ($usuario['sitlaboral'] == 'No es relevante') echo ' selected '; ?>>No es relevante </option>
                             <option value="En paro" <?php if ($usuario['sitlaboral'] == 'En paro') echo ' selected '; ?>>Desempleado </option>
                             <option value="Trabajando" <?php if ($usuario['sitlaboral'] == 'Trabajando') echo ' selected '; ?>>Trabajando </option>
                         </select>
@@ -164,30 +164,30 @@ $conexion = crearConexionBD();
                     </fieldset>
             </div>
             <?php
-                    if ($usuario['solicitante'] == 'No ') {
-                        echo '<div id="esFamiliar">';
-                    } else {
-                        echo '<div id="esFamiliar" class="hide">';
-                    }
-                    ?>
-                <br>
-                <fieldset>
-                    <legend>Información básica del familiar</legend>
+            if ($usuario['solicitante'] == 'No ') {
+                echo '<div id="esFamiliar">';
+            } else {
+                echo '<div id="esFamiliar" class="hide">';
+            }
+            ?>
+            <br>
+            <fieldset>
+                <legend>Información básica del familiar</legend>
 
-                    <label for="dniSol">DNI del solicitante:</label>
-                    <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['dni_so']; ?>" /><br>
+                <label for="dniSol">DNI del solicitante:</label>
+                <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['dni_so']; ?>" /><br>
 
-                    <label for='parentesco'>Parentesco con el solicitante:</label>
-                    <input name='parentesco' type='text' value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['parentesco']; ?>" /><br>
-                </fieldset>
-            </div>
-
-            <div class="botones">
-                <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
-                <input type="submit" value="Editar">
-            </div>
-            </form>
+                <label for='parentesco'>Parentesco con el solicitante:</label>
+                <input name='parentesco' type='text' value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['parentesco']; ?>" /><br>
+            </fieldset>
         </div>
+
+        <div class="botones">
+            <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
+            <input type="submit" value="Editar">
+        </div>
+        </form>
+    </div>
     </div>
     </div>
     <script type="text/javascript">
@@ -198,19 +198,21 @@ $conexion = crearConexionBD();
         frmvalidator.EnableMsgsTogether();
 
         frmvalidator.addValidation("nombre", "req", "Introduzca el nombre");
-        frmvalidator.addValidation("nombre", "alphabetic_space", "El nombre debe de constar de letras y espacios");
+        frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El nombre debe contener letras y espacios");
 
         frmvalidator.addValidation("apellidos", "req", "Introduzca los apellidos");
-        frmvalidator.addValidation("apellidos", "alphabetic_space", "Los apellidos deben de constar de letras y espacios");
+        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "Los apellidos deben contener letras y espacios");
 
-        frmvalidator.addValidation("dni", "req", "Introduzca el dni");
-        frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un dni de la forma 12345678A");
+        frmvalidator.addValidation("dni", "req", "Introduzca el DNI");
+        frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI en el siguiente formato: 12345678A");
 
         frmvalidator.addValidation("fechaNac", "req", "Introduzca la fecha de nacimiento");
 
         frmvalidator.addValidation("genero", "selone_radio", "Introduzca el género");
 
-        frmvalidator.addValidation("telefono", "req", "Introduzca el teléfono");
+        frmvalidator.addValidation("email", "req", "Introduzca el email");
+        frmvalidator.addValidation("email", "email", "Introduca un email válido");
+
         frmvalidator.addValidation("telefono", "regexp=^[0-9]{9}$", "Introduzca un número de teléfono válido");
 
         frmvalidator.addValidation("estudios", "dontselect=000", "Introduzca el nivel de estudios");
@@ -220,14 +222,12 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("ingresos", "req", "Introduzca los ingresos");
         frmvalidator.addValidation("ingresos", "num", "Introduzca un valor numérico en los ingresos");
         frmvalidator.addValidation("ingresos", "lt=1000", "Los ingresos no deben de superar los 1000 euros");
-        frmvalidator.addValidation("ingresos", "lt=672", "Los ingresos son mayores de lo estimado por estar desempleado",
+        frmvalidator.addValidation("ingresos", "lt=673", "Los ingresos son mayores de lo estimado por estar desempleado",
             "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'En paro')");
-        frmvalidator.addValidation("ingresos", "lt=1", "Los ingresos son mayores de lo estimado",
-            "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'No es relevante')");
-        frmvalidator.addValidation("ingresos", "gt=0", "Los ingresos son mayores de lo estimado por tener alguna discapacidad",
+        frmvalidator.addValidation("ingresos", "gt=0", "Los ingresos son menores de lo estimado por tener alguna discapacidad",
             "VWZ_IsChecked(document.forms['altaUsuario'].elements['minusvalia'],'Sí')");
 
-        frmvalidator.addValidation("minusvalia", "selone_radio", "Introduzca si posee alguna minusvalia");
+        frmvalidator.addValidation("minusvalia", "selone_radio", "Introduzca si tiene alguna discapacidad");
 
         frmvalidator.addValidation("solicitante", "selone_radio", "Introduzca si el usuario es solicitante");
 
@@ -236,21 +236,21 @@ $conexion = crearConexionBD();
             frmvalidator.addValidation("gastosfamilia", "num", "Introduzca un valor numérico en los gastos familiares");
 
             frmvalidator.addValidation("poblacion", "req", "Introduzca la población");
-            frmvalidator.addValidation("poblacion", "alphabetic_space", "La población debe de constar de letras y espacios");
+            frmvalidator.addValidation("poblacion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "La población letras y espacios");
 
             frmvalidator.addValidation("domicilio", "req", "Introduzca el domicilio");
 
             frmvalidator.addValidation("codigopostal", "req", "Introduzca el código postal");
             frmvalidator.addValidation("codigopostal", "regexp=^[0-9]{5}$", "Introduzca un código postal válido");
 
-            frmvalidator.addValidation("proteccionDatos", "shouldselchk=on", "El solicitante debe de aceptar la Ley de Protección de Datos");
+            frmvalidator.addValidation("proteccionDatos", "shouldselchk=on", "El solicitante debe aceptar la Ley de Protección de Datos");
 
         } else if (solicitante == "No") {
-            frmvalidator.addValidation("dniSol", "req", "Introduzca el dni del solicitante");
-            frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un dni de la forma 12345678A");
+            frmvalidator.addValidation("dniSol", "req", "Introduzca el DNI del solicitante");
+            frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca el DNI en el siguiente formato: 12345678A");
 
-            frmvalidator.addValidation("parentesco", "req", "Introduzca el aprentesco co el solicitante");
-            frmvalidator.addValidation("parentesco", "alphabetic_space", "El nombre debe de constar de letras");
+            frmvalidator.addValidation("parentesco", "req", "Introduzca el parentesco con el solicitante");
+            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El parentesco debe contener letras y espacios");
         }
     </script>
     <?php

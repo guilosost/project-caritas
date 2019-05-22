@@ -206,10 +206,10 @@ $conexion = crearConexionBD();
         frmvalidator.EnableMsgsTogether();
 
         frmvalidator.addValidation("nombre", "req", "Introduzca el nombre");
-        frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El nombre debe contener letras y espacios");
+        frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El nombre debe contener letras y espacios");
 
         frmvalidator.addValidation("apellidos", "req", "Introduzca los apellidos");
-        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Los apellidos deben contener letras y espacios");
+        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "Los apellidos deben contener letras y espacios");
 
         frmvalidator.addValidation("dni", "req", "Introduzca el DNI");
         frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI en el siguiente formato: 12345678A");
@@ -221,7 +221,6 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("email", "req", "Introduzca el email");
         frmvalidator.addValidation("email", "email", "Introduca un email válido");
 
-        frmvalidator.addValidation("telefono", "req", "Introduzca el número de teléfono");
         frmvalidator.addValidation("telefono", "regexp=^[0-9]{9}$", "Introduzca un número de teléfono válido");
 
         frmvalidator.addValidation("estudios", "dontselect=000", "Introduzca el nivel de estudios");
@@ -231,7 +230,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("ingresos", "req", "Introduzca los ingresos");
         frmvalidator.addValidation("ingresos", "num", "Introduzca un valor numérico en los ingresos");
         frmvalidator.addValidation("ingresos", "lt=1000", "Los ingresos no deben de superar los 1000 euros");
-        frmvalidator.addValidation("ingresos", "lt=672", "Los ingresos son mayores de lo estimado por estar desempleado",
+        frmvalidator.addValidation("ingresos", "lt=673", "Los ingresos son mayores de lo estimado por estar desempleado",
             "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'En paro')");
         frmvalidator.addValidation("ingresos", "gt=0", "Los ingresos son menores de lo estimado por tener alguna discapacidad",
             "VWZ_IsChecked(document.forms['altaUsuario'].elements['minusvalia'],'Sí')");
@@ -245,7 +244,7 @@ $conexion = crearConexionBD();
             frmvalidator.addValidation("gastosfamilia", "num", "Introduzca un valor numérico en los gastos familiares");
 
             frmvalidator.addValidation("poblacion", "req", "Introduzca la población");
-            frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El nombre debe contener letras y espacios");
+            frmvalidator.addValidation("poblacion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "La población letras y espacios");
 
             frmvalidator.addValidation("domicilio", "req", "Introduzca el domicilio");
 
@@ -259,7 +258,7 @@ $conexion = crearConexionBD();
             frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca el DNI en el siguiente formato: 12345678A");
 
             frmvalidator.addValidation("parentesco", "req", "Introduzca el parentesco con el solicitante");
-            frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El nombre debe contener letras y espacios");
+            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El parentesco debe contener letras y espacios");
         }
     </script>
     <?php
