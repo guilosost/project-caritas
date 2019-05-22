@@ -36,7 +36,6 @@ $conexion = crearConexionBD();
     <title>Editar Voluntario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
-    <!-- <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script> -->
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
     <script type = "text/javascript" src = "../../vista/js/validacion_voluntario.js" ></script>
 </head>
@@ -77,14 +76,15 @@ $conexion = crearConexionBD();
                         <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $voluntario['nombrev']; ?>"  readonly /><br>
 
                         <label for="contraseña" required>Contraseña del voluntario:</label>
-                        <input class="celda"  id="pass" name="contraseña" type="contraseña" maxlength="40" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordValidation();"/><br>
+                        <input class="celda"  id="pass" name="password" type="password" maxlength="40" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordValidation();"/><br>
+                        <progress max="100" value ="0" id="strength" style=""></progress>
                         
                         <label for="password2" required>Repita la contraseña:</label>
                         <input id="confirmpass" name="password2" type="password" maxlength="50" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordConfirmation();" required /><br>
 
                         <label for="permiso" required>Permiso del voluntario:</label>
-                        <input type="radio" name="permiso" value="Sí"<?php if ($voluntario['permiso']=="Sí") echo "checked"?>> Administrador
-                        <input type="radio" name="permiso" value="No"<?php if ($voluntario['permiso']=="No ") echo "cheked"?>> Voluntario estándar<br>
+                        <input type="radio" name="permiso" value="Sí"<?php if ($voluntario['permiso'] == "Sí") echo "checked"?>> Administrador
+                        <input type="radio" name="permiso" value="No"<?php if ($voluntario['permiso'] == "No ") echo "checked"?>> Voluntario estándar<br>
 
                     </fieldset>
 
@@ -100,6 +100,41 @@ $conexion = crearConexionBD();
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);
     ?>
+    <script type="text/javascript">
+        var pass = document.getElementById("pass")
+        pass.addEventListener('keyup', function(){
+            checkPassword(pass.value);
+        })
+
+        function checkPassword(password){
+            var strengthBar = document.getElementById("strength");
+            var strength = 0;
+            
+            if(password.match(/[0-9]/)){
+                strength +=1;
+            }
+            if(password.match(/^[A-Z Ñ]/)){
+                strength +=1;
+            }
+            if(password.length > 8){
+                strength +=1;
+            }
+            switch(strength){
+                case 0:
+                    strengthBar.value = 10;
+                    break;
+                case 1:
+                    strengthBar.value = 40;
+                    break;
+                case 2:
+                    strengthBar.value = 70;
+                    break;
+                case 3:
+                    strengthBar.value = 100;
+                    break;
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -12,7 +12,7 @@ if (isset($_SESSION["formulario_voluntario"])) {
 }else if (isset($_SESSION["voluntario"])) {
 	$_SESSION["voluntario"] = $voluntario;
 	$voluntario['nombrev'] = $_REQUEST["nombrev"];
-	$voluntario['contrasena'] = $_REQUEST["contrasena"];
+	$voluntario['password'] = $_REQUEST["password"];
 	$voluntario['permiso'] = $_REQUEST["permiso"];
 	
 	$_SESSION["voluntario"] = $voluntario;
@@ -61,8 +61,8 @@ function validarDatosVoluntario($conexion, $voluntario)
 			$errores[] = "<p>El nombre no puede estar vacío.</p>";
 		}
 	
-		if ($voluntario["contrasena"] == ""# || !preg_match("/^{6}$/", $voluntario["password"])
-		)  {
+		if ($voluntario["password"] == "" or !preg_match("/[A-Z Ñ]/", $voluntario["password"]) or !preg_match("/[0-9]/", $voluntario["password"]))
+		{
 			$errores[] = "<p>La contraseña no puede estar vacía o contener menos de 6 caracteres.</p>";
 		}
 	

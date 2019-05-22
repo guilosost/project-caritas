@@ -96,3 +96,13 @@ function editar_cita($conexion,$cita) {
         return  $e->GetMessage();
     }
 }
+
+function consultarUsuarioSolicitante($conexion,$dni) {
+    $consulta = "SELECT COUNT(*) AS TOTAL FROM USUARIOS WHERE DNI=:dni AND SOLICITANTE=:si";
+  $si="Sí";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':si',$si);
+   $stmt->bindParam(':dni',$dni);
+   $stmt->execute();
+   return $stmt->fetchColumn();
+}

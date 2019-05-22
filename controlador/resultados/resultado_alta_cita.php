@@ -42,6 +42,7 @@ $conexion  = crearConexionBD();
     if(isset($_SESSION["formulario_cita"])){
       unset($_SESSION["formulario_cita"]);
 		if (nueva_cita($conexion, $cita) == true) {
+     echo consultarUsuarioSolicitante($conexion,$cita["dni"]);
     $_SESSION['citaId'] = aux_IdentificaCita( $conexion, $cita );
     ?> 
   <p>Todo ha ido bien </p> 

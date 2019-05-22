@@ -16,7 +16,6 @@ function nuevo_voluntario($conexion, $voluntario) {
 	} catch(PDOException $e) {
         echo $e->getMessage();
 		return false;
-        // Si queremos visualizar la excepción durante la depuración: $e->getMessage();
     }
 }
 function consultarVoluntarioRepetido($conexion,$nombrev) {
@@ -40,12 +39,11 @@ function editar_voluntario($conexion,$voluntario) {
    $stmt = $conexion->prepare($consulta);
    $stmt->bindParam(':nombrev',$voluntario["nombrev"]);
    $stmt->bindParam(':permiso',$voluntario["permiso"]);
-   $stmt->bindParam(':contraseña',$voluntario["contraseña"]);
+   $stmt->bindParam(':contraseña',$voluntario["password"]);
    $stmt->execute();
    return true;
 } catch(PDOException $e) {
     echo $e->getMessage();
     return false;
-    // Si queremos visualizar la excepción durante la depuración: $e->getMessage();
 }
 }

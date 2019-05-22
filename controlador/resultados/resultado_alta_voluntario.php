@@ -50,6 +50,7 @@ $conexion  = crearConexionBD();
     }else if (isset($_SESSION["voluntario"])) { 
         unset($_SESSION["voluntario"]);
         if (editar_voluntario($conexion, $voluntario)) {
+            echo$voluntario["password"];
             echo "Todo ha ido bien.";
         } else {
             echo "error";

@@ -56,7 +56,7 @@ $conexion = crearConexionBD();
                         <input class="celda" name="nombrev" type="text" maxlength="30" value="<?php echo $voluntario["nombrev"]?> " readonly/>
                         <br>
                         <label for="contraseña">Contraseña: </label>
-                        <input class="celda" name="contraseña" type="text" maxlength="30" value="<?php echo $voluntario["contraseña"]?> " readonly/>
+                        <input class="celda" name="contraseña" type="password" maxlength="30" value="<?php echo $voluntario["contraseña"]?> " readonly/>
                         <br>
                         <label for="permiso" required>Permisos del voluntario:</label>
                         <input class="celda" name="permiso" type="text" maxlength="40" value="<?php if($voluntario['permiso'] == "Sí") echo "Administrador"; else echo "Voluntario estandar" ?>" readonly/><br>
