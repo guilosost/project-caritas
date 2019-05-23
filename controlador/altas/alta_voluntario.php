@@ -69,7 +69,7 @@ $conexion = crearConexionBD();
         }
         ?>
         <div class="form">
-            <h2 class="form-h2">Alta de Voluntario</h2>
+            <h2 class="form-h2">Alta de voluntario</h2>
             <div class="form-alta">
                 <form id="AltaVoluntario" action="../../controlador/acciones/accion_voluntario.php" method="POST">
                     <fieldset>
@@ -80,10 +80,10 @@ $conexion = crearConexionBD();
                         <progress max="100" value="0" id="strength" onchange="progressValue(this)"></progress>
                         <br>
                         <label for="password" required>Contraseña:</label>
-                        <input id="pass" name="password" type="password" style="width: 25%;" maxlength="50" oninput="passwordValidation();" required />
+                        <input id="pass" name="password" type="password" style="width: 25%;" maxlength="40" oninput="passwordValidation();" required />
 
                         <label for="password2" required>Repita la contraseña:</label>
-                        <input id="confirmpass" name="password2" type="password" style="width: 25%;" maxlength="50" oninput="passwordConfirmation();" required />
+                        <input id="confirmpass" name="password2" type="password" style="width: 25%;" maxlength="40" oninput="passwordConfirmation();" required />
                         <br>
                         <label for="permisos">Permisos:</label>
                         <input type="radio" name="permisos" value="Sí"> Administrador

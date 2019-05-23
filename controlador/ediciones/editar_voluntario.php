@@ -74,17 +74,16 @@ $conexion = crearConexionBD();
                     <fieldset>
                         <legend>Información básica del voluntario</legend>
 
-                        <label for="nombrev" >Nombre del voluntario:</label>
-                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $voluntario['nombrev']; ?>"  readonly /><br>
-
-                        <label for="contraseña" required>Contraseña del voluntario:</label>
-                        <input class="celda"  id="pass" name="password" type="password" maxlength="40" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordValidation();"/><br>
-                        <progress max="100" value ="0" id="strength" style=""></progress>
-                        
+                        <label for="nombrev" >Nombre:</label>
+                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $voluntario['nombrev']; ?>" readonly style="margin-right: 4%;" />
+                        <progress max="100" value="0" id="strength" onchange="progressValue(this)"></progress>
+                        <br>
+                        <label for="contraseña" required>Contraseña:</label>
+                        <input class="celda"  id="pass" name="password" type="password" style="width: 25%;" maxlength="40" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordValidation();"/>                        
                         <label for="password2" required>Repita la contraseña:</label>
-                        <input id="confirmpass" name="password2" type="password" maxlength="50" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordConfirmation();" required /><br>
+                        <input id="confirmpass" name="password2" type="password" style="width: 25%;" maxlength="40" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordConfirmation();" required /><br>
 
-                        <label for="permiso" required>Permiso del voluntario:</label>
+                        <label for="permiso" required>Permisos:</label>
                         <input type="radio" name="permiso" value="Sí"<?php if ($voluntario['permiso'] == "Sí") echo "checked"?>> Administrador
                         <input type="radio" name="permiso" value="No"<?php if ($voluntario['permiso'] == "No ") echo "checked"?>> Voluntario estándar<br>
 
@@ -108,34 +107,55 @@ $conexion = crearConexionBD();
             checkPassword(pass.value);
         })
 
-        function checkPassword(password){
-            var strengthBar = document.getElementById("strength");
-            var strength = 0;
-            
-            if(password.match(/[0-9]/)){
-                strength +=1;
-            }
-            if(password.match(/^[A-Z Ñ]/)){
-                strength +=1;
-            }
-            if(password.length > 8){
-                strength +=1;
-            }
-            switch(strength){
-                case 0:
-                    strengthBar.value = 10;
-                    break;
-                case 1:
-                    strengthBar.value = 40;
-                    break;
-                case 2:
-                    strengthBar.value = 70;
-                    break;
-                case 3:
-                    strengthBar.value = 100;
-                    break;
-            }
+        function barColor(color) {
+        // Create our stylesheet
+        var style = document.createElement('style');
+        style.innerHTML =
+            'progress::-webkit-progress-value {' +
+            'border-radius: 12px;' +
+            'background: ' + color + ';' +
+            'box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), 0 2px 5px 0px rgba(0,0,0,0.3);' +
+            '}';
+
+        // Get the first script tag
+        var ref = document.querySelector('script');
+
+        // Insert our new styles before the first script tag
+        ref.parentNode.insertBefore(style, ref);
+    }
+
+    function checkPassword(password) {
+        var strengthBar = document.getElementById("strength");
+        var strength = 0;
+
+        if (password.match(/[0-9]/)) {
+            strength += 1;
         }
+        if (password.match(/^[A-Z Ñ]/)) {
+            strength += 1;
+        }
+        if (password.length > 8) {
+            strength += 1;
+        }
+        switch (strength) {
+            case 0:
+                strengthBar.value = 10;
+                barColor('red');
+                break;
+            case 1:
+                strengthBar.value = 40;
+                barColor('orange');
+                break;
+            case 2:
+                strengthBar.value = 70;
+                barColor('yellow');
+                break;
+            case 3:
+                strengthBar.value = 100;
+                barColor('green');
+                break;
+        }
+    }
     </script>
 </body>
 
