@@ -69,7 +69,7 @@ $conexion = crearConexionBD();
                     <fieldset>
                         <legend>Información básica de la cita</legend>
                         <label for="dni">DNI del solicitante: </label>
-                        <input class="celda" name="dni" type="text" maxlength="10" value="<?php echo $cita["dni"] ?>" />
+                        <input class="celda" name="dni" placeholder="12345678X" type="text" maxlength="10" value="<?php echo $cita["dni"] ?>" />
                         <br>
                         <label for="nombrev" required>Nombre del voluntario:</label>
                         <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $cita['nombrev']; ?>" />
@@ -92,45 +92,25 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
-    <!--<script type="text/javascript">
-        var frmvalidator = new Validator("altaAyuda");
+    <script type="text/javascript">
+        var frmvalidator = new Validator("altaCita");
+        var solicitante = document.forms["altaUsuario"]["solicitante"].value;
+        var poblacion = document.forms["altaUsuario"]["poblacion"].value;
 
         frmvalidator.EnableMsgsTogether();
-        var tipo = document.forms["altaAyuda"]["tipoayuda"].value;
-        
-        frmvalidator.addValidation("tipoayuda", "req", "Introduzca el tipo de ayuda");
 
-        frmvalidator.addValidation("suministradapor", "req", "Introduzca el proveedor de la ayuda");
-        //frmvalidator.addValidation("suministradapor", "alphabetic_space", "el proveedor de la ayuda debe de constar de letras y espacios");
+        frmvalidator.addValidation("dni", "req", "Introduzca el DNI.");
+        frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI de la forma 12345678A.");
 
-        frmvalidator.addValidation("concedida", "selone_radio", "Introduzca si la ayuda está concedida");
+        frmvalidator.addValidation("nombrev", "req", "Introduzca el nombre");
+        frmvalidator.addValidation("nombrev", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El nombre debe de constar de letras");
 
-        if (tipo == "bolsacomida") {
-        frmvalidator.addValidation("bebe", "selone_radio", "Introduzca si el solicitante tiene a un bebé");
+        frmvalidator.addValidation("objetivo", "req", "Introduzca el objetivo de la cita");
+        frmvalidator.addValidation("objetivo", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El objetivo debe de constar de letras y espacios");
 
-        frmvalidator.addValidation("nino", "selone_radio", "Introduzca si el solicitante tiene niños");
-
-        }else if (tipo == "ayudaeconomica"){
-        frmvalidator.addValidation("cantidad", "req", "Introduzca la cantidad");
-        frmvalidator.addValidation("cantidad", "num", "La cantidad debe de ser numérica");
-
-        frmvalidator.addValidation("prioridad", "selone_radio", "Introduzca si posee prioridad");
-
-        frmvalidator.addValidation("motivo", "req", "Introduzca el motivo de la ayuda");
-        frmvalidator.addValidation("motivo", "alphabetic_space", "Introduzca el motivo de la ayuda");
-
-        }else if (tipo == "trabajo"){
-        frmvalidator.addValidation("salarioaproximado", "req", "Introduzca un salario");
-        frmvalidator.addValidation("salarioaproximado", "num", "Introduzca un número como salario");
-
-        frmvalidator.addValidation("descripcion", "req", "Introduzca la descripción del trabajo");
-        frmvalidator.addValidation("descripcion", "alphabetic_space", "Introduzca la descripción del trabajo");
-
-        frmvalidator.addValidation("empresa", "req", "Introduzca la empresa");
-        frmvalidator.addValidation("empresa", "alphabetic_space", "Introduzca la empresa");
-
-        }
-    </script> -->
+        frmvalidator.addValidation("observaciones", "req", "Introduzca alguna observacion");
+        frmvalidator.addValidation("observaciones", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Las observaciones deben de constar de letras y espacios");
+    </script> 
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);

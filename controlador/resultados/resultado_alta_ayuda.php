@@ -31,7 +31,7 @@ $conexion  = crearConexionBD();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Alta de ayuda</title>
+  <title>Alta de Ayuda: Resultado</title>
   <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
  
 </head>
@@ -43,21 +43,39 @@ if(isset($_SESSION["formulario_ayuda"])){
     unset($_SESSION["formulario_ayuda"]);
     if (alta_ayuda($conexion, $ayuda)) {
         ?>
-    <p>Todo ha ido bienn </p>
-    <?php 
-    } else {
-        
-        echo "error";
-    }
+        <div class="flex">
+          <div class="resultado">
+            <p>La ayuda ha sido creada correctamente, redirigiendo al listado... </p>
+          </div>
+        </div>
+        <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
+      <?php
+    } else {?>
+      <div class="flex">
+          <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+            <p>La ayuda no ha sido creada, ha ocurrido un error inesperado.</p>
+          </div>
+        </div>
+    <?php }
 } else if (isset($_SESSION["ayuda"])){
     unset($_SESSION["ayuda"]);
     if(editar_ayuda($conexion,$ayuda)){
-       echo editar_ayuda($conexion,$ayuda) ?>
-        <p>Todo ha ido bien </p>
-        <?php 
-        } else {
-            echo "error";
-    }
+       echo editar_ayuda($conexion,$ayuda) 
+       ?>
+        <div class="flex">
+          <div class="resultado">
+            <p>La ayuda ha sido editada correctamente, redirigiendo al listado... </p>
+          </div>
+        </div>
+        <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
+      <?php
+    } else {?>
+      <div class="flex">
+          <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+            <p>La ayuda no ha sido editada, ha ocurrido un error inesperado.</p>
+          </div>
+        </div>
+    <?php }
 }
 ?>
     </main>

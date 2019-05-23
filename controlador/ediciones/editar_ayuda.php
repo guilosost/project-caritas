@@ -82,19 +82,21 @@ $conexion = crearConexionBD();
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
-
-    //Mostramos los errores del formulario enviado previamente
-    if (isset($errores) && count($errores) > 0) {
-        //    echo "<div id=\"div_errores\" class=\"error\">";
-        echo "<h4> Errores en el formulario:</h4>";
-        foreach ($errores as $error) {
-            echo $error;
-        }
-        //    echo "</div>";
-    }
     ?>
 
 <div class="flex">
+<?php
+        //Mostramos los errores del formulario enviado previamente
+        if (isset($errores) && count($errores) > 0) {
+           // echo "<script> error(); </script>";
+            echo "<div class='error'>";
+            echo "<h4> Errores en el formulario:</h4>";
+            foreach ($errores as $error) {
+                echo $error;
+            }
+            echo "</div>";
+        }
+        ?>
         <div class="form">
             <h2 class="form-h2">Editando ayuda</h2>
             <div class="form-alta">
@@ -103,19 +105,29 @@ $conexion = crearConexionBD();
                         <legend>Información de la ayuda</legend>
 
                         <label for="tipoayuda">Selección del tipo de ayuda: </label>
-                        <select class="celda" id="tipoayuda" onchange="showHide(this)" name="tipoayuda" size=1 required>
-                            <option value="">Seleccionar...</option>
-                            <option value="bolsacomida" <?php if ($ayuda['tipoayuda'] == 'bolsacomida') echo ' selected ';?>>Bolsa de comida </option>
-                            <option value="ayudaeconomica" <?php if ($ayuda['tipoayuda'] == 'ayudaeconomica') echo ' selected ';?>>Ayuda económica  </option>
-                            <option value="trabajo"  <?php if ($ayuda['tipoayuda'] == 'trabajo') echo ' selected ';?>>Propuesta de trabajo </option>
-                        </select>
-                         <br>
-                        </select>
+                        <input class="celda" name="tipoayuda" type="text" maxlength="40" value="<?php
+                        if ($ayuda["bebe"]=="Sí" or $ayuda["bebe"]== "No ") {
+                            echo 'Bolsa de comida';
+                            $ayuda["tipoayuda"] = "bolsacomida";
+                            $_SESSION["ayuda"] = $ayuda;
+                        } else if ($ayuda["prioridad"]=="Sí" or $ayuda["prioridad"]== "No ") {
+                            echo 'Ayuda económica';
+                            $ayuda["tipoayuda"] = "ayudaeconomica";
+                            $_SESSION["ayuda"] = $ayuda;
+                        } else {
+                            echo 'Trabajo';
+                            $ayuda["tipoayuda"] = "trabajo";
+                            $_SESSION["ayuda"] = $ayuda;
+                        }
+                        ?>" readonly />
                         <br>
-
                         <label for="suministradapor" required>Suministrada por:</label>
-                        <input class="celda" name="suministradapor" type="text" maxlength="40" value="<?php echo $ayuda['suministradapor']; ?>" /><br>
-                        
+                        <select class="celda" name="suministradapor" size=1 required>
+                            <option value="">Seleccionar...</option>
+                            <option value="Cáritas San Juan de Aznalfarache"  <?php if($ayuda['suministradapor'] == 'Cáritas San Juan de Aznalfarache') echo "selected";?>>Cáritas San Juan de Aznalfarache</option>
+                            <option value="Diocesana Sevilla" <?php if($ayuda['suministradapor'] == 'Diocesana Sevilla') echo "selected";?>>Diocesana Sevilla </option>
+                            <option value="Otro" <?php if($ayuda['suministradapor'] == 'Otro') echo "selected";?>>Otro </option>
+                        </select>
                         <br>
                         <label for="concedida" required>¿Está la ayuda concedida?:</label>
                         <input type="radio" name="concedida" value="Sí"  <?php if ($ayuda['concedida'] == 'Sí') echo ' checked '; ?>>Sí

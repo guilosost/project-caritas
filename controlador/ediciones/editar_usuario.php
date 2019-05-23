@@ -178,7 +178,7 @@ $conexion = crearConexionBD();
                 <legend>Información básica del familiar</legend>
 
                 <label for="dniSol">DNI del solicitante:</label>
-                <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['dni_so']; ?>" /><br>
+                <input class="celda" placeholder="12345678X" name="dniSol" type="text" maxlength="9" value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['dni_so']; ?>" /><br>
 
                 <label for='parentesco'>Parentesco con el solicitante:</label>
                 <input name='parentesco' type='text' value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['parentesco']; ?>" /><br>

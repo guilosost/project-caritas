@@ -108,17 +108,17 @@ $conexion = crearConexionBD();
                         <label for="tipoayuda">Selección del tipo de ayuda: </label>
                         <select class="celda" id="tipoayuda" onchange="showHide(this)" name="tipoayuda" size=1 required>
                             <option value="">Seleccionar...</option>
-                            <option value="bolsacomida">Bolsa de comida </option>
-                            <option value="ayudaeconomica">Ayuda económica </option>
-                            <option value="trabajos">Propuesta de trabajo </option>
+                            <option value="bolsacomida" <?php if($formulario['tipoayuda'] == 'bolsacomida') echo "selected";?>>Bolsa de comida </option>
+                            <option value="ayudaeconomica" <?php if($formulario['tipoayuda'] == 'ayudaeconomica') echo "selected";?>>Ayuda económica </option>
+                            <option value="trabajos" <?php if($formulario['tipoayuda'] == 'trabajos') echo "selected";?>>Propuesta de trabajo </option>
                         </select>
                         <br>
                         <label for="suministradapor" required>Suministrada por:</label>
                         <select class="celda" name="suministradapor" size=1 required>
                             <option value="">Seleccionar...</option>
-                            <option value="Cáritas San Juan de Aznalfarache">Cáritas San Juan de Aznalfarache </option>
-                            <option value="Diocesana Sevilla">Diocesana Sevilla </option>
-                            <option value="Otro">Otro </option>
+                            <option value="Cáritas San Juan de Aznalfarache" <?php if($formulario['suministradapor'] == 'Cáritas San Juan de Aznalfarache') echo "selected";?>>Cáritas San Juan de Aznalfarache </option>
+                            <option value="Diocesana Sevilla" <?php if($formulario['suministradapor'] == 'Diocesana Sevilla') echo "selected";?>>Diocesana Sevilla </option>
+                            <option value="Otro" <?php if($formulario['suministradapor'] == 'Otro') echo "selected";?>>Otro </option>
                         </select>
                         <br>
                         <label for="concedida" required>¿Está la ayuda concedida?:</label>
@@ -126,8 +126,11 @@ $conexion = crearConexionBD();
                         <input type="radio" name="concedida" value="No">No<br>
 
                     </fieldset>
-
+                    <?php if ($formulario["tipoayuda"] == "bolsacomida") { ?>
+                    <div id="comida">
+                    <?php } else { ?>
                     <div id="comida" class="hide">
+                    <?php } ?>
                         <br>
                         <fieldset>
                             <legend>Información de la bolsa de comida</legend>
@@ -142,7 +145,11 @@ $conexion = crearConexionBD();
                         </fieldset>
                     </div>
 
+                    <?php if ($formulario["tipoayuda"] == "ayudaeconomica") { ?>
+                    <div id="economica">
+                    <?php } else { ?>
                     <div id="economica" class="hide">
+                    <?php } ?>
                         <br>
                         <fieldset>
                             <legend>Información de la ayuda económica</legend>
@@ -158,7 +165,11 @@ $conexion = crearConexionBD();
                         </fieldset>
                     </div>
 
+                    <?php if ($formulario["tipoayuda"] == "trabajos") { ?>
+                    <div id="trabajos">
+                    <?php } else { ?>
                     <div id="trabajos" class="hide">
+                    <?php } ?>
                         <br>
                         <fieldset>
                             <legend>Información del trabajo</legend>
@@ -184,7 +195,7 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var frmvalidator = new Validator("altaAyuda");
 
         frmvalidator.EnableMsgsTogether();
@@ -222,7 +233,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("empresa", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Introduzca la empresa");
 
         }
-    </script> 
+    </script>  -->
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);

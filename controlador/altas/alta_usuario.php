@@ -72,8 +72,8 @@ $conexion = crearConexionBD();
         }
 
         //function error() {
-          //  document.getElementById('flex').classList.remove('flex');
-           // document.getElementById('flex').classList.add('flex-error');
+        //  document.getElementById('flex').classList.remove('flex');
+        // document.getElementById('flex').classList.add('flex-error');
         //}
     </script>
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
@@ -91,7 +91,7 @@ $conexion = crearConexionBD();
         <?php
         //Mostramos los errores del formulario enviado previamente
         if (isset($errores) && count($errores) > 0) {
-           // echo "<script> error(); </script>";
+            // echo "<script> error(); </script>";
             echo "<div class='error'>";
             echo "<h4> Errores en el formulario:</h4>";
             foreach ($errores as $error) {
@@ -161,51 +161,63 @@ $conexion = crearConexionBD();
                         <input type="radio" id="familiar" name="solicitante" onclick="showHide(this)" value="No" <?php if ($formulario['solicitante'] == 'No') echo ' checked '; ?>> No<br>
 
                     </fieldset>
-                    <div id="esSolicitante" class="hide">
-                        <br>
-                        <fieldset>
-                            <legend>Información básica del solicitante</legend>
+                    <?php
+                    if ($formulario['solicitante'] == 'Sí') {
+                        echo '<div id="esSolicitante">';
+                    } else {
+                        echo '<div id="esSolicitante" class="hide">';
+                    }
+                    ?>
+                    <br>
+                    <fieldset>
+                        <legend>Información básica del solicitante</legend>
 
-                            <label for="gastosfamilia">Gastos de la familia:</label>
-                            <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php echo $formulario['gastosfamilia']; ?>" /><br>
+                        <label for="gastosfamilia">Gastos de la familia:</label>
+                        <input class="celda" name="gastosfamilia" type="text" maxlength="13" value="<?php echo $formulario['gastosfamilia']; ?>" /><br>
 
-                            <label for="poblacion">Población:</label>
-                            <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php echo $formulario['poblacion']; ?>" /><br>
+                        <label for="poblacion">Población:</label>
+                        <input class="celda" name="poblacion" type="text" maxlength="30" value="<?php echo $formulario['poblacion']; ?>" /><br>
 
-                            <label for="domicilio">Dirección del domicilio:</label>
-                            <input class="celda" name="domicilio" id="direccion" type="text" maxlength="50" value="<?php echo $formulario['domicilio']; ?>" /><br>
+                        <label for="domicilio">Dirección del domicilio:</label>
+                        <input class="celda" name="domicilio" id="direccion" type="text" maxlength="50" value="<?php echo $formulario['domicilio']; ?>" /><br>
 
-                            <label for="codigopostal">Código postal:</label>
-                            <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $formulario['codigopostal']; ?>" /><br>
+                        <label for="codigopostal">Código postal:</label>
+                        <input class="celda" name="codigopostal" type="text" minlength="5" maxlength="5" value="<?php echo $formulario['codigopostal']; ?>" /><br>
 
-                            <label for="proteccionDatos">
-                                <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($formulario['proteccionDatos'] == 'Sí') echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
-                            </label>
-                        </fieldset>
-                    </div>
-
-                    <div id="esFamiliar" class="hide">
-                        <br>
-                        <fieldset>
-                            <legend>Información básica del familiar</legend>
-
-                            <label for="dniSol">DNI del solicitante:</label>
-                            <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php echo $formulario['dniSol']; ?>" /><br>
-
-                            <label for='parentesco'>Parentesco con el solicitante:</label>
-                            <input name='parentesco' type='text' value="<?php echo $formulario['parentesco']; ?>" /><br>
-                        </fieldset>
-                    </div>
-
-                    <div class="botones">
-                        <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_usuario.php'">Cancelar</a>
-                        <input type="submit" value="Dar de alta">
-                    </div>
-                </form>
+                        <label for="proteccionDatos">
+                            <input type="checkbox" name="proteccionDatos" value="Sí" style="align:center" <?php if ($formulario['proteccionDatos'] == 'Sí') echo ' checked '; ?>>De acuerdo con la Ley de Protección de Datos
+                        </label>
+                    </fieldset>
             </div>
+
+            <?php
+            if ($formulario['solicitante'] == 'No ') {
+                echo '<div id="esFamiliar">';
+            } else {
+                echo '<div id="esFamiliar" class="hide">';
+            }
+            ?>
+            <br>
+            <fieldset>
+                <legend>Información básica del familiar</legend>
+
+                <label for="dniSol">DNI del solicitante:</label>
+                <input class="celda" name="dniSol" placeholder="12345678X" type="text" maxlength="9" value="<?php echo $formulario['dniSol']; ?>" /><br>
+
+                <label for='parentesco'>Parentesco con el solicitante:</label>
+                <input name='parentesco' type='text' value="<?php echo $formulario['parentesco']; ?>" /><br>
+            </fieldset>
         </div>
+
+        <div class="botones">
+            <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_usuario.php'">Cancelar</a>
+            <input type="submit" value="Dar de alta">
+        </div>
+        </form>
     </div>
-     <script type="text/javascript">
+    </div>
+    </div>
+    <script type="text/javascript">
         var frmvalidator = new Validator("altaUsuario");
         var solicitante = document.forms["altaUsuario"]["solicitante"].value;
         var poblacion = document.forms["altaUsuario"]["poblacion"].value;
@@ -268,7 +280,7 @@ $conexion = crearConexionBD();
             frmvalidator.addValidation("parentesco", "req", "Introduzca el parentesco con el solicitante");
             frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El parentesco debe contener letras y espacios");
         }
-    </script> 
+    </script>
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);

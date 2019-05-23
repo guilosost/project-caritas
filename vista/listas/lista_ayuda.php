@@ -144,11 +144,6 @@ cerrarConexionBD($conexion);
                 <caption>Lista de Ayudas</caption>
                 <tr>
                     <?php 
-                    
-                    if($paginacion["tipoayuda"] == null) {
-                        $paginacion["tipoayuda"] = "todo";
-                    }
-
                     if ($paginacion["tipoayuda"] == "todo") { ?>
                         <th>Tipo</th>
                         <th>DNI</th>

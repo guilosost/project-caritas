@@ -75,7 +75,7 @@ $conexion = crearConexionBD();
                     <fieldset>
                         <legend>Información básica de la cita</legend>
                         <label for="dni" required>DNI del solicitante:</label>
-                        <input class="celda" name="dni" type="text" required /><br>
+                        <input class="celda" placeholder="12345678X" name="dni" type="text" required /><br>
 
                         <label for="nombrev">Nombre del voluntario: </label>
                         <input class="celda" name="nombrev" type="text" value="<?php echo $_SESSION['nombreusuario'] ?>" required /><br>
@@ -97,7 +97,7 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
-    < <script type="text/javascript">
+     <script type="text/javascript">
         var frmvalidator = new Validator("altaCita");
         var solicitante = document.forms["altaUsuario"]["solicitante"].value;
         var poblacion = document.forms["altaUsuario"]["poblacion"].value;

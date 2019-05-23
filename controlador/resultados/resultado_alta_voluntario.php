@@ -27,7 +27,7 @@ $conexion  = crearConexionBD();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Alta de Usuario</title>
+    <title>Alta de Voluntario: Resultado</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
 
 </head>
@@ -43,18 +43,39 @@ $conexion  = crearConexionBD();
     if (isset($_SESSION["formulario_voluntario"])) {
         unset($_SESSION["formulario_voluntario"]);
         if (nuevo_voluntario($conexion, $voluntario)) {
-            echo "Todo ha ido bien.";
-        } else {
-            echo "El voluntario ya existe.";
-        }
+            ?>
+      <div class="flex">
+        <div class="resultado">
+          <p>El voluntario ha sido creado correctamente, redirigiendo al listado... </p>
+        </div>
+      </div>
+      <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_voluntario.php" />
+    <?php
+  } else {?>
+    <div class="flex">
+        <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+          <p>El voluntario no ha sido creado, ha ocurrido un error inesperado.</p>
+        </div>
+      </div>
+  <?php }
     }else if (isset($_SESSION["voluntario"])) { 
         unset($_SESSION["voluntario"]);
         if (editar_voluntario($conexion, $voluntario)) {
-            echo$voluntario["password"];
-            echo "Todo ha ido bien.";
-        } else {
-            echo "error";
-        }
+            ?>
+            <div class="flex">
+              <div class="resultado">
+                <p>El voluntario ha sido editado correctamente, redirigiendo al listado... </p>
+              </div>
+            </div>
+            <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_voluntario.php" />
+          <?php
+        } else {?>
+          <div class="flex">
+              <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+                <p>El voluntario no ha sido editado, ha ocurrido un error inesperado.</p>
+              </div>
+            </div>
+        <?php }
     }
    
     ?>

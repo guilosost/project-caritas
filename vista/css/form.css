@@ -6,7 +6,7 @@ body {
 }
 
 .form {
-    background-color: #f1f1f1;
+    background-image: linear-gradient(#f1f1f1, #bdbdbd, #949090);
     width: 34.8%;
     border-radius: 10px;
     font-weight: bold;
@@ -72,6 +72,17 @@ input {
     margin-left: 37%;
     margin-bottom: -3%;
     text-align: center;
+}
+
+.resultado {
+    background: rgba(54, 210, 102, 0.9);
+    width: 28%;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5px;
 }
 
 table, th, td {
