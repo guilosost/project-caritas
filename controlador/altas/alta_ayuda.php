@@ -83,19 +83,21 @@ $conexion = crearConexionBD();
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
-
-    //Mostramos los errores del formulario enviado previamente
-    if (isset($errores) && count($errores) > 0) {
-        //    echo "<div id=\"div_errores\" class=\"error\">";
-        echo "<h4> Errores en el formulario:</h4>";
-        foreach ($errores as $error) {
-            echo $error;
-        }
-        //    echo "</div>";
-    }
     ?>
 
     <div class="flex">
+    <?php
+        //Mostramos los errores del formulario enviado previamente
+        if (isset($errores) && count($errores) > 0) {
+           // echo "<script> error(); </script>";
+            echo "<div class='error'>";
+            echo "<h4> Errores en el formulario:</h4>";
+            foreach ($errores as $error) {
+                echo $error;
+            }
+            echo "</div>";
+        }
+        ?>
         <div class="form">
             <h2 class="form-h2">Alta de ayuda</h2>
             <div class="form-alta">

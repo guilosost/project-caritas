@@ -9,16 +9,15 @@ body {
     background-color: #f1f1f1;
     width: 34.8%;
     border-radius: 10px;
-    text-align: center;
     font-weight: bold;
     padding: 0.01em 16px;
-    margin: 59px 32%;
+    margin-left: 3%;
     box-shadow: 0px 2px 4px 0 black!important;
 }
 
 .form-text {
     text-align: left;
-    margin-left: 190px;
+    margin-left: 33%;
     margin-top: -10px;
     margin-bottom: -15px;
     font-family: perpetua;
@@ -30,6 +29,11 @@ body {
     font-family: perpetua;
 }
 
+input {
+    border-radius: 3px;
+    padding: 2px;
+}
+
 .celda {
     margin-bottom: 5px;
     max-inline-size: 168px;
@@ -37,6 +41,7 @@ body {
 
 .fillable {
     height: 75px;
+    border-radius: 5px;
     width: 100%;
 }
 
@@ -53,6 +58,20 @@ body {
     font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
     border-radius: 0px 15px 15px 0px;
     margin-bottom: 20px;
+}
+
+.error {
+    background: rgba(224, 10, 10, 0.9);
+    width: 28%;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+
+.error2 {
+    margin-left: 37%;
+    margin-bottom: -3%;
+    text-align: center;
 }
 
 table, th, td {
@@ -107,8 +126,43 @@ caption {
 
 .flex {
     display: flex;
+    justify-content: center;
+    margin-top: 59px;
+    margin-bottom: 5%;
+}
+
+.flex-error {
+    display: flex;
+    margin-top: 59px;
 }
 
 .hide {
     display: none;
 }
+
+progress {
+    padding: 2px;
+    border: 0 none;
+    background: white;
+    border-radius: 14px;
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+  }
+  progress::-moz-progress-bar {
+    border-radius: 12px;
+    background: red;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), 0 2px 5px 0px rgba(0,0,0,0.3);
+    
+  }
+  /* webkit */
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    progress {
+    }
+  }
+  progress::-webkit-progress-bar {
+      background: transparent;
+  }  
+  progress::-webkit-progress-value {  
+    border-radius: 12px;
+    background: red;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), 0 2px 5px 0px rgba(0,0,0,0.3); 
+  } 

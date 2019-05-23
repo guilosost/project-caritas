@@ -51,6 +51,7 @@ $conexion = crearConexionBD();
                 familiar.classList.remove('hide');
             }
         }
+
     </script>
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
@@ -62,20 +63,22 @@ $conexion = crearConexionBD();
 
     list($dia, $mes, $anyo) = split("/", $usuario['fechaNac']);
     $fechaDef = "$anyo-$mes-$dia";
-
-    //Mostramos los errores del formulario enviado previamente
-    if (isset($errores) && count($errores) > 0) {
-        //    echo "<div id=\"div_errores\" class=\"error\">";
-        echo "<h4> Errores en el formulario:</h4>";
-        foreach ($errores as $error) {
-            echo $error;
-        }
-        //    echo "</div>";
-    }
     ?>
 
 
     <div class="flex">
+    <?php
+        //Mostramos los errores del formulario enviado previamente
+        if (isset($errores) && count($errores) > 0) {
+           // echo "<script> error(); </script>";
+            echo "<div class='error'>";
+            echo "<h4> Errores en el formulario:</h4>";
+            foreach ($errores as $error) {
+                echo $error;
+            }
+            echo "</div>";
+        }
+        ?>
         <div class="form">
             <h2 class="form-h2">Editando usuario</h2>
             <div class="form-alta">
@@ -98,7 +101,7 @@ $conexion = crearConexionBD();
                         <label for="genero">Género: </label>
                         <input type="radio" name="genero" value="Masculino" <?php if ($usuario['genero'] == 'Masculino') echo ' checked '; ?>> Hombre
                         <input type="radio" name="genero" value="Femenino" <?php if ($usuario['genero'] == 'Femenino') echo ' checked '; ?>> Mujer<br>
-
+                        
                         <label for="telefono">Teléfono:</label>
                         <input class="celda" name="telefono" type="text" maxlength="10" value="<?php echo $usuario['telefono']; ?>" required /><br>
 
@@ -130,8 +133,8 @@ $conexion = crearConexionBD();
                         <input type="radio" name="minusvalia" value="No" <?php if ($usuario['minusvalia'] == 'No ') echo ' checked '; ?>>No<br>
 
                         <label for="solicitante">¿El usuario es solicitante? </label>
-                        <input type="radio" id="solicitar" name="solicitante" onclick="showHide(this)" onchange="return validateDate();" value="Sí" <?php if ($usuario['solicitante'] == 'Sí') echo ' checked '; ?>> Sí
-                        <input type="radio" id="familiar" name="solicitante" onclick="showHide(this)" value="No" <?php if ($usuario['solicitante'] == 'No ') echo ' checked '; ?>> No<br>
+                        <input type="radio" id="solicitar" name="solicitante" value="Sí" <?php if ($usuario['solicitante'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;" readonly> Sí
+                        <input type="radio" id="familiar" name="solicitante" value="No" <?php if ($usuario['solicitante'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" readonly> No<br>
 
                     </fieldset>
 
@@ -209,9 +212,6 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("fechaNac", "req", "Introduzca la fecha de nacimiento");
 
         frmvalidator.addValidation("genero", "selone_radio", "Introduzca el género");
-
-        frmvalidator.addValidation("email", "req", "Introduzca el email");
-        frmvalidator.addValidation("email", "email", "Introduca un email válido");
 
         frmvalidator.addValidation("telefono", "regexp=^[0-9]{9}$", "Introduzca un número de teléfono válido");
 

@@ -55,6 +55,8 @@ $conexion = crearConexionBD();
             <h2 class="form-h2">Información de la cita</h2>
             <div class="form-alta">
                 <form action="../../controlador/eliminaciones/elimina_cita.php" method="POST">
+                <fieldset>
+                        <legend>Información básica de la cita</legend>
                     <label for="dni">DNI del solicitante: </label>
                     <input class="celda" name="dni" type="text" maxlength="10" value="<?php echo $cita["dni"] ?>" readonly />
                     <br>
@@ -69,7 +71,7 @@ $conexion = crearConexionBD();
                     <br>
                     <label for="observaciones">Observaciones:</label><br>
                     <textarea class="fillable" name="observaciones" maxlength="590" readonly><?php echo $cita['observaciones'];?></textarea>
-
+                    </fieldset>
                     <input style="float:left" type="submit" value="Eliminar">
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_cita.php'">Cancelar</a>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION["nombreusuario"])){
+if (isset($_SESSION["nombreusuario"])) {
     unset($_SESSION["nombreusuario"]);
 }
 if (!isset($_SESSION["formulario_login"])) {
@@ -38,10 +38,10 @@ if (isset($_SESSION["errores"])) {
 
     <?php
     include("../../vista/header.php");
-    
-    
 
-if (isset($errores) && count($errores) > 0) {
+
+
+    if (isset($errores) && count($errores) > 0) {
         //    echo "<div id=\"div_errores\" class=\"error\">";
         echo "<h4> Errores en el formulario:</h4>";
         foreach ($errores as $error) {
@@ -50,25 +50,32 @@ if (isset($errores) && count($errores) > 0) {
         //    echo "</div>";
     }
     ?>
-    <div class="form" style="margin: 10% 32%;">
-        <h2 class="form-h2">Iniciar sesión</h2>
+    <div class="flex">
+        <div class="form" style="text-align:center; margin-top: 5%">
+            <h2 class="form-h2">Iniciar sesión</h2>
 
-        <form action="../../controlador/acciones/accion_login.php" method="POST">
-            <div>
-                <p class="form-text">Usuario:<p>
-                        <input type="text" name="nombrelogin" >
-            </div>
+            <form action="../../controlador/acciones/accion_login.php" method="POST">
+            <fieldset>
+                <div style="margin-top: 2%;">
+                    <p class="form-text">Usuario:<p>
+                            <input type="text" name="nombrelogin">
+                </div>
 
-            <div>
-                <p class="form-text">Contraseña:<p>
-                        <input type="password" name="contrasena" minlength="6">
-            </div>
-            <input type="submit" class="login" value="Iniciar sesión">
+                <div style="margin-bottom: -2%;">
+                    <p class="form-text">Contraseña:<p>
+                            <input type="password" name="contrasena" minlength="6">
+                </div>
+            </fieldset>
             <br>
-        </form>
+                <input type="submit" class="login" value="Iniciar sesión">
+                <br>
+            </form>
+        </div>
     </div>
 
 
     <?php include("../../vista/footer.php") ?>
 
-    </body> </html> 
+</body>
+
+</html>

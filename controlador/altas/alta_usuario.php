@@ -58,7 +58,6 @@ $conexion = crearConexionBD();
     <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script>
 
     <script>
-        <!--
         function showHide(elm) {
             var solicitante = document.getElementById("esSolicitante");
             var familiar = document.getElementById("esFamiliar");
@@ -71,6 +70,11 @@ $conexion = crearConexionBD();
                 familiar.classList.remove('hide');
             }
         }
+
+        //function error() {
+          //  document.getElementById('flex').classList.remove('flex');
+           // document.getElementById('flex').classList.add('flex-error');
+        //}
     </script>
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
@@ -79,19 +83,23 @@ $conexion = crearConexionBD();
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
-
-    //Mostramos los errores del formulario enviado previamente
-    if (isset($errores) && count($errores) > 0) {
-        //    echo "<div id=\"div_errores\" class=\"error\">";
-        echo "<h4> Errores en el formulario:</h4>";
-        foreach ($errores as $error) {
-            echo $error;
-        }
-        //    echo "</div>";
-    }
     ?>
 
-    <div class="flex">
+
+
+    <div id="flex" class="flex">
+        <?php
+        //Mostramos los errores del formulario enviado previamente
+        if (isset($errores) && count($errores) > 0) {
+           // echo "<script> error(); </script>";
+            echo "<div class='error'>";
+            echo "<h4> Errores en el formulario:</h4>";
+            foreach ($errores as $error) {
+                echo $error;
+            }
+            echo "</div>";
+        }
+        ?>
         <div class="form">
             <h2 class="form-h2">Alta de usuario</h2>
             <div class="form-alta">
@@ -197,7 +205,7 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
-    <script type="text/javascript">
+     <script type="text/javascript">
         var frmvalidator = new Validator("altaUsuario");
         var solicitante = document.forms["altaUsuario"]["solicitante"].value;
         var poblacion = document.forms["altaUsuario"]["poblacion"].value;
@@ -260,7 +268,7 @@ $conexion = crearConexionBD();
             frmvalidator.addValidation("parentesco", "req", "Introduzca el parentesco con el solicitante");
             frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El parentesco debe contener letras y espacios");
         }
-    </script>
+    </script> 
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);

@@ -2,7 +2,7 @@
 session_start();
 require_once("../../modelo/GestionBD.php");
 
-if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {   
+if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
@@ -38,50 +38,53 @@ $conexion = crearConexionBD();
     <title>Alta de Voluntario</title>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
-    <script type = "text/javascript" src = "../../vista/js/validacion_voluntario.js" ></script>
+    <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
+    <script type="text/javascript" src="../../vista/js/validacion_voluntario.js"></script>
 </head>
 
 <body background="../../vista/img/background.png">
     <script>
-        
-    		$(document).ready(function() {
-			$("#altaVoluntario").on("submit", function() {
-				return validateForm();
+        $(document).ready(function() {
+            $("#altaVoluntario").on("submit", function() {
+                return validateForm();
             });
         });
     </script>
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
-
-    if (isset($errores) && count($errores) > 0) {
-        //    echo "<div id=\"div_errores\" class=\"error\">";
-        echo "<h4> Errores en el formulario:</h4>";
-        foreach ($errores as $error) {
-            echo $error;
-        }
-        //    echo "</div>";
-    }
     ?>
+
     <div class="flex">
+        <?php
+        //Mostramos los errores del formulario enviado previamente
+        if (isset($errores) && count($errores) > 0) {
+            // echo "<script> error(); </script>";
+            echo "<div class='error'>";
+            echo "<h4> Errores en el formulario:</h4>";
+            foreach ($errores as $error) {
+                echo $error;
+            }
+            echo "</div>";
+        }
+        ?>
         <div class="form">
             <h2 class="form-h2">Alta de Voluntario</h2>
             <div class="form-alta">
-                <form id="AltaVoluntario"action="../../controlador/acciones/accion_voluntario.php" method="POST">
+                <form id="AltaVoluntario" action="../../controlador/acciones/accion_voluntario.php" method="POST">
                     <fieldset>
                         <legend>Información básica del Voluntario</legend>
 
                         <label for="nombrev" required>Nombre:</label>
-                        <input class="celda" name="nombrev" type="text" maxlength="50" required />
-                        
+                        <input class="celda" name="nombrev" type="text" maxlength="50" style="margin-right: 4%;" required />
+                        <progress max="100" value="0" id="strength" onchange="progressValue(this)"></progress>
+                        <br>
                         <label for="password" required>Contraseña:</label>
-                        <input id="pass" name="password" type="password"  maxlength="50" oninput="passwordValidation();" required /><br>
-                        <progress max="100" value ="0" id="strength" style=""></progress>
+                        <input id="pass" name="password" type="password" style="width: 25%;" maxlength="50" oninput="passwordValidation();" required />
 
                         <label for="password2" required>Repita la contraseña:</label>
-                        <input id="confirmpass" name="password2" type="password" maxlength="50" oninput="passwordConfirmation();" required /><br>
-
+                        <input id="confirmpass" name="password2" type="password" style="width: 25%;" maxlength="50" oninput="passwordConfirmation();" required />
+                        <br>
                         <label for="permisos">Permisos:</label>
                         <input type="radio" name="permisos" value="Sí"> Administrador
                         <input type="radio" name="permisos" value="No"> Voluntario estándar<br>
@@ -94,45 +97,67 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
-   
+
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);
     ?>
 </body>
 <script type="text/javascript">
-        var pass = document.getElementById("pass")
-        pass.addEventListener('keyup', function(){
-            checkPassword(pass.value);
-        })
+    var pass = document.getElementById("pass")
+    pass.addEventListener('keyup', function() {
+        checkPassword(pass.value);
+    })
 
-        function checkPassword(password){
-            var strengthBar = document.getElementById("strength");
-            var strength = 0;
-            
-            if(password.match(/[0-9]/)){
-                strength +=1;
-            }
-            if(password.match(/^[A-Z Ñ]/)){
-                strength +=1;
-            }
-            if(password.length > 8){
-                strength +=1;
-            }
-            switch(strength){
-                case 0:
-                    strengthBar.value = 10;
-                    break;
-                case 1:
-                    strengthBar.value = 40;
-                    break;
-                case 2:
-                    strengthBar.value = 70;
-                    break;
-                case 3:
-                    strengthBar.value = 100;
-                    break;
-            }
+    function barColor(color) {
+        // Create our stylesheet
+        var style = document.createElement('style');
+        style.innerHTML =
+            'progress::-webkit-progress-value {' +
+            'border-radius: 12px;' +
+            'background: ' + color + ';' +
+            'box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), 0 2px 5px 0px rgba(0,0,0,0.3);' +
+            '}';
+
+        // Get the first script tag
+        var ref = document.querySelector('script');
+
+        // Insert our new styles before the first script tag
+        ref.parentNode.insertBefore(style, ref);
+    }
+
+    function checkPassword(password) {
+        var strengthBar = document.getElementById("strength");
+        var strength = 0;
+
+        if (password.match(/[0-9]/)) {
+            strength += 1;
         }
-    </script>
-</html> 
+        if (password.match(/^[A-Z Ñ]/)) {
+            strength += 1;
+        }
+        if (password.length > 8) {
+            strength += 1;
+        }
+        switch (strength) {
+            case 0:
+                strengthBar.value = 10;
+                barColor('red');
+                break;
+            case 1:
+                strengthBar.value = 40;
+                barColor('orange');
+                break;
+            case 2:
+                strengthBar.value = 70;
+                barColor('yellow');
+                break;
+            case 3:
+                strengthBar.value = 100;
+                barColor('green');
+                break;
+        }
+    }
+</script>
+
+</html>

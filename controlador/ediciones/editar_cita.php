@@ -47,24 +47,27 @@ $conexion = crearConexionBD();
 
     list($dia, $mes, $anyo) = split("/", $cita['fechacita']);
     $fechaDef = "$anyo-$mes-$dia";
-
-    if (isset($errores) && count($errores) > 0) {
-        //    echo "<div id=\"div_errores\" class=\"error\">";
-        echo "<h4> Errores en el formulario:</h4>";
-        foreach ($errores as $error) {
-            echo $error;
-        }
-        //    echo "</div>";
-    }
     ?>
 
     <div class="flex">
+    <?php
+        //Mostramos los errores del formulario enviado previamente
+        if (isset($errores) && count($errores) > 0) {
+           // echo "<script> error(); </script>";
+            echo "<div class='error'>";
+            echo "<h4> Errores en el formulario:</h4>";
+            foreach ($errores as $error) {
+                echo $error;
+            }
+            echo "</div>";
+        }
+        ?>
         <div class="form">
             <h2 class="form-h2">Editando cita</h2>
             <div class="form-alta">
                 <form action="../../controlador/acciones/accion_cita.php" method="POST" id=altaCita name=altaCita>
                     <fieldset>
-                        <legend>Información básica de la ayuda</legend>
+                        <legend>Información básica de la cita</legend>
                         <label for="dni">DNI del solicitante: </label>
                         <input class="celda" name="dni" type="text" maxlength="10" value="<?php echo $cita["dni"] ?>" />
                         <br>
@@ -72,10 +75,10 @@ $conexion = crearConexionBD();
                         <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $cita['nombrev']; ?>" />
                         <br>
                         <label for="fechacita" required>Fecha de la cita:</label>
-                        <input name="fechacita" type="date" value="<?php echo $fechaDef; ?>" required /><br>
+                        <input name="fechacita" type="date" value="<?php echo $fechaDef; ?>" required />
                         <br>
                         <label for="objetivo" required>Objetivo de la cita:</label>
-                        <input class="celda" name="objetivo" type="text" maxlength="40" value="<?php echo $cita['objetivo']; ?>" />
+                        <input class="celda" name="objetivo" type="text" style="margin-top: 1%;" maxlength="40" value="<?php echo $cita['objetivo']; ?>" />
                         <br>
                         <label for="observaciones" required>Observaciones:</label><br>
                         <textarea class="fillable" name="observaciones" maxlength="590"><?php echo $cita['observaciones'];?></textarea>
