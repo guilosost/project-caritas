@@ -92,17 +92,17 @@ function validarDatosAyuda($conexion, $ayuda){
     } 
     }
 
-    if($ayuda['tipoayuda'] == "trabajo"){
+    if($ayuda['tipoayuda'] == "trabajos"){
     if ($ayuda["descripcion"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["descripcion"])) {
-        $errores[] = "<p>El campo lugar no puede estar vacío.</p>";
+        $errores[] = "<p>El campo de descripción del trabajo no puede estar vacío.</p>";
     } 
 
     if ($ayuda["empresa"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["empresa"])) {
-        $errores[] = "<p>El campo lugar no puede estar vacío.</p>";
+        $errores[] = "<p>El campo de la empresa no puede estar vacío.</p>";
     }    
 
     if ($ayuda["salarioaproximado"] == "" || !preg_match("/^[0-9]+$/",$ayuda["suministradapor"])) {
-        $errores[] = "<p>El campo lugar no puede estar vacío.</p>";
+        $errores[] = "<p>El salario aproximado no puede estar vacío.</p>";
     }
 }
     return $errores;

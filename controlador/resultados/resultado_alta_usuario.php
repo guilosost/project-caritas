@@ -99,6 +99,7 @@
 			
 		if ($usuario["solicitante"]=="No"){
 			if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
+				editar_familiar($conexion,$usuario);
 				?>
 				<div class="flex">
 				  <div class="resultado">
@@ -117,6 +118,7 @@
 		}
 		else {
 			if(consultarUsuarioRepetido($conexion, $usuario["dni"]) >0 ){
+				editar_solicitante($conexion,$usuario);
 				?>
 					<div class="flex">
 					  <div class="resultado">

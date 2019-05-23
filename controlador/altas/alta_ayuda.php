@@ -195,7 +195,7 @@ $conexion = crearConexionBD();
             </div>
         </div>
     </div>
-    <!-- <script type="text/javascript">
+     <script type="text/javascript">
         var frmvalidator = new Validator("altaAyuda");
 
         frmvalidator.EnableMsgsTogether();
@@ -211,7 +211,7 @@ $conexion = crearConexionBD();
         if (tipo == "bolsacomida") {
         frmvalidator.addValidation("bebe", "selone_radio", "Introduzca si el solicitante tiene a un bebé");
 
-        frmvalidator.addValidation("nino", "selone_radio", "Introduzca si el solicitante tiene niños");
+        frmvalidator.addValidation("niño", "selone_radio", "Introduzca si el solicitante tiene niños");
 
         }else if (tipo == "ayudaeconomica"){
         frmvalidator.addValidation("cantidad", "req", "Introduzca la cantidad");
@@ -222,7 +222,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("motivo", "req", "Introduzca el motivo de la ayuda");
         frmvalidator.addValidation("motivo", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Introduzca el motivo de la ayuda");
 
-        }else if (tipo == "trabajo"){
+        }else if (tipo == "trabajos"){
         frmvalidator.addValidation("salarioaproximado", "req", "Introduzca un salario");
         frmvalidator.addValidation("salarioaproximado", "num", "Introduzca un número como salario");
 
@@ -233,7 +233,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("empresa", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Introduzca la empresa");
 
         }
-    </script>  -->
+    </script>  
     <?php
     include("../../vista/footer.php");
     cerrarConexionBD($conexion);
