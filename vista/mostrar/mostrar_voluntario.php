@@ -52,6 +52,8 @@ $conexion = crearConexionBD();
             <h2 class="form-h2">Información del voluntario</h2>
             <div class="form-alta">
                 <form action="../../controlador/eliminaciones/elimina_voluntario.php" method="POST" >
+                <fieldset>
+                        <legend>Información básica del voluntario</legend>
                         <label for="nombrev">Nombre del voluntario: </label>
                         <input class="celda" name="nombrev" type="text" maxlength="30" value="<?php echo $voluntario["nombrev"]?> " readonly/>
                         <br>
@@ -60,7 +62,7 @@ $conexion = crearConexionBD();
                         <br>
                         <label for="permiso" required>Permisos del voluntario:</label>
                         <input class="celda" name="permiso" type="text" maxlength="40" value="<?php if($voluntario['permiso'] == "Sí") echo "Administrador"; else echo "Voluntario estandar" ?>" readonly/><br>
-
+                </fieldset>
                     <input style="float:left" type="submit" value="Eliminar" >
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_voluntario.php'">Cancelar</a>

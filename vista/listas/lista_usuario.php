@@ -12,6 +12,10 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
+$usuario["dni"] = "";
+$usuario["solicitante"] = "";
+$_SESSION["usuario"] = $usuario;
+
 // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
 // ¿Hay una sesión activa?
 if (isset($_SESSION["paginacion"]))
@@ -67,17 +71,37 @@ cerrarConexionBD($conexion);
     <!-- <script type="text/javascript" src="./js/boton.js"></script> -->
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <title>Lista de Usuarios</title>
-    <script>
-        function mandar(elm) {
-
-            if (elm.id == 'mostrar') {
-                document.getElementById["formulario"].submit();
-            } else if (elm.id == 'editar') {
-                document.getElementById["formulario"].submit();
-            }
-    </script>
 </head>
+<script>
+        function editar(dni) {
+            console.log("Dentro");
+            console.log(dni + "-DNI");
+            
 
+    /*     <input id="APELLIDOS" name="APELLIDOS" value=" echo $fila["APELLIDOS"]; ?>" type="text" />
+     <input id="NOMBRE" name="NOMBRE" value="echo $fila["NOMBRE"]; ?>" type="text" />
+    <input id="TELEFONO" name="TELEFONO" value=" echo $fila["TELEFONO"]; ?>" type="text" />
+    <input id="INGRESOS" name="INGRESOS" value=" echo $fila["INGRESOS"]; ?>" type="text" />
+<input id="SITUACIONLABORAL" name="SITUACIONLABORAL" value=" echo $fila["SITUACIONLABORAL"]; ?>" type="text" /> */
+
+            document.getElementById(dni + "-apellidos").innerHTML = "";
+            document.getElementById(dni + "-nombre").innerHTML = "";
+            document.getElementById(dni + "-telefono").innerHTML = "";
+            document.getElementById(dni + "-ingresos").innerHTML = "";
+            document.getElementById(dni + "-sitlaboral").innerHTML = "";
+            document.getElementById(dni + "-fechanac").innerHTML = "";
+            document.getElementById(dni + "-solicitante").innerHTML = "";
+        }
+
+        function eliminar(dni, sol) {
+            console.log("Borrado: " + dni + ", sol: " + sol);
+            document.getElementById("DNI-eliminar").value = dni;
+            document.getElementById("SOLICITANTE-eliminar").value = sol;
+            console.log(document.getElementById("DNI-eliminar").value);
+            console.log(document.getElementById("SOLICITANTE-eliminar").value);
+            document.getElementById("eliminar_usuario").submit();
+        }
+    </script>
 <body>
     <?php
     include_once("../header.php");
@@ -115,18 +139,19 @@ cerrarConexionBD($conexion);
                         <article class="usuario">
                             <div class="fila_usuario">
                                 <div class="datos_usuario">
-
                                     <tr>
-                                        <td><?php echo $fila["DNI"]; ?></td>
-                                        <td><?php echo $fila["APELLIDOS"]; ?></td>
-                                        <td><?php echo $fila["NOMBRE"]; ?></td>
-                                        <td><?php echo $fila["TELEFONO"]; ?></td>
-                                        <td><?php echo $fila["INGRESOS"]; ?></td>
-                                        <td><?php echo $fila["SITUACIONLABORAL"]; ?></td>
-                                        <td><?php echo $arrayFecha[0]; ?></td>
-                                        <td><?php echo $fila["SOLICITANTE"]; ?></td>
-                                        <td><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
-                                            <button id="editar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></button>
+                                        <td id="<?php echo $fila["DNI"]; ?>-DNI"><?php echo $fila["DNI"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-apellidos"><?php echo $fila["APELLIDOS"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-nombre"><?php echo $fila["NOMBRE"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-telefono"><?php echo $fila["TELEFONO"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-ingresos"><?php echo $fila["INGRESOS"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-sitlaboral"><?php echo $fila["SITUACIONLABORAL"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-fechanac"><?php echo $arrayFecha[0]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-solicitante"><?php echo $fila["SOLICITANTE"]; ?></td>
+                                        <td>
+                                            <button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
+                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['DNI']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de mostrar"></a>
+                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['DNI']; ?>', '<?php echo $fila['SOLICITANTE']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de mostrar"></a>
                                         </td>
                                     </tr>
 
@@ -175,6 +200,11 @@ cerrarConexionBD($conexion);
 
             </table>
         </div>
+        <form id="eliminar_usuario" action="../../controlador/eliminaciones/elimina_usuario.php" method="POST">
+        <input id="DNI-eliminar" name="dni" type="hidden" />
+        <input id="SOLICITANTE-eliminar" name="solicitante" type="hidden" />
+        </form>
+
         <nav>
             <div class="enlaces">
                 <?php
@@ -210,7 +240,6 @@ cerrarConexionBD($conexion);
     <?php
     include_once("../footer.php");
     ?>
-
 </body>
 
 </html>

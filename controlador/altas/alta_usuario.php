@@ -191,7 +191,7 @@ $conexion = crearConexionBD();
             </div>
 
             <?php
-            if ($formulario['solicitante'] == 'No ') {
+            if ($formulario['solicitante'] == 'No') {
                 echo '<div id="esFamiliar">';
             } else {
                 echo '<div id="esFamiliar" class="hide">';

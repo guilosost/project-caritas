@@ -19,12 +19,12 @@ function alta_ayuda($conexion,$ayuda){
         }
         }else if($ayuda['tipoayuda'] == "ayudaeconomica"){
             try {
-                $consulta = "CALL nueva_ayuda_economica(:w_suministradapor, :w_concedida, :w_cantidad, :w_niño, :w_prioridad, :w_oid_c)";
+                $consulta = "CALL nueva_ayuda_economica(:w_suministradapor, :w_concedida, :w_cantidad, :w_motivo, :w_prioridad, :w_oid_c)";
                 $stmt=$conexion->prepare($consulta);
                 $stmt->bindParam(':w_suministradapor',$ayuda["suministradapor"]);
                 $stmt->bindParam(':w_concedida',$ayuda["concedida"]);
                 $stmt->bindParam(':w_cantidad',$ayuda["cantidad"]);
-                $stmt->bindParam(':w_niño',$ayuda["motivo"]);
+                $stmt->bindParam(':w_motivo',$ayuda["motivo"]);
                 $stmt->bindParam(':w_prioridad', $ayuda["prioridad"]);
                 $stmt->bindParam(':w_oid_c',$_SESSION["citaId"]);
                 $stmt->execute();

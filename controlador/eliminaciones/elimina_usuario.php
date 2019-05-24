@@ -15,7 +15,7 @@
             eliminar_familiar($conexion,$usuario["dni"]);
         }	
 		cerrarConexionBD($conexion);
-		Header("Location: ../../vista/listas/lista_usuario.php"); 
+		Header("Location: ../../vista/listas/lista_usuario.php"); // por aquí es por donde está volviendo (borrado JavaScript)
 	}
 	else Header("Location: ../../vista/listas/lista_usuario.php"); 
 ?>

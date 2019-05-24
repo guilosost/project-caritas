@@ -122,8 +122,8 @@ $conexion = crearConexionBD();
                         </select>
                         <br>
                         <label for="concedida" required>¿Está la ayuda concedida?:</label>
-                        <input type="radio" name="concedida" value="Sí">Sí
-                        <input type="radio" name="concedida" value="No">No<br>
+                        <input type="radio" name="concedida" value="Sí" <?php if($formulario['concedida'] == 'Sí') echo "checked";?>>Sí
+                        <input type="radio" name="concedida" value="No" <?php if($formulario['concedida'] == 'No') echo "checked";?>>No<br>
 
                     </fieldset>
                     <?php if ($formulario["tipoayuda"] == "bolsacomida") { ?>
@@ -136,12 +136,12 @@ $conexion = crearConexionBD();
                             <legend>Información de la bolsa de comida</legend>
 
                             <label for="bebe">¿Debe contener productos para bebé?:</label>
-                            <input type="radio" name="bebe" value="Sí">Sí
-                            <input type="radio" name="bebe" value="No">No<br>
+                            <input type="radio" name="bebe" value="Sí" <?php if($formulario['bebe'] == 'Sí') echo "checked";?>>Sí
+                            <input type="radio" name="bebe" value="No" <?php if($formulario['bebe'] == 'No') echo "checked";?>>No<br>
 
                             <label for="niño">¿Debe contener productos para niños?:</label>
-                            <input type="radio" name="niño" value="Sí">Sí
-                            <input type="radio" name="niño" value="No">No<br>
+                            <input type="radio" name="niño" value="Sí" <?php if($formulario['niño'] == 'Sí') echo "checked";?>>Sí
+                            <input type="radio" name="niño" value="No" <?php if($formulario['niño'] == 'No') echo "checked";?>>No<br>
                         </fieldset>
                     </div>
 
@@ -154,14 +154,14 @@ $conexion = crearConexionBD();
                         <fieldset>
                             <legend>Información de la ayuda económica</legend>
                             <label for="cantidad">Cantidad (€): </label>
-                            <input class="celda" name="cantidad" type="text" /><br>
+                            <input class="celda" name="cantidad" type="text" value="<?php echo $formulario['cantidad']; ?>" /><br>
 
                             <label for="motivo">Motivo:</label>
-                            <input class="celda" name="motivo" type="text" /><br>
+                            <input class="celda" name="motivo" type="text" value="<?php echo $formulario['motivo']; ?>" /><br>
 
                             <label for="prioridad">¿Esta ayuda tiene prioridad?:</label>
-                            <input type="radio" name="prioridad" value="Sí">Sí
-                            <input type="radio" name="prioridad" value="No">No<br>
+                            <input type="radio" name="prioridad" value="Sí" <?php if($formulario['prioridad'] == 'Sí') echo "checked";?>>Sí
+                            <input type="radio" name="prioridad" value="No" <?php if($formulario['prioridad'] == 'No') echo "checked";?>>No<br>
                         </fieldset>
                     </div>
 
@@ -175,13 +175,13 @@ $conexion = crearConexionBD();
                             <legend>Información del trabajo</legend>
 
                             <label for="descripcion">Descripción: </label>
-                            <textarea class="fillable" name="descripcion" maxlength="290"></textarea><br>
+                            <textarea class="fillable" name="descripcion" maxlength="290"><?php echo $formulario['descripcion']; ?></textarea><br>
 
                             <label for="empresa">Empresa/persona que contrata:</label>
-                            <input class="celda" name="empresa" type="text" maxlength="30" /><br>
+                            <input class="celda" name="empresa" type="text" maxlength="30" value="<?php echo $formulario['empresa']; ?>" /><br>
 
                             <label for="salarioaproximado">Salario aproximado:</label>
-                            <input class="celda" name="salarioaproximado" type="number" maxlength="50" /><br>
+                            <input class="celda" name="salarioaproximado" type="number" maxlength="50" value="<?php echo $formulario['salarioaproximado']; ?>" /><br>
 
                             </label>
                         </fieldset>

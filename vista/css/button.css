@@ -4,7 +4,7 @@
     justify-content: flex-end;
 }
 
-button, [type=button], [type=reset], [type=submit], [type=cancel] {
+button, [type=button], [type=reset], [type=submit], [type=cancel], [type=edit] {
     border-radius: 10px;
     color: black;
     font-size: 16px;
@@ -24,7 +24,7 @@ button, [type=button], [type=reset], [type=submit], [type=cancel] {
     text-decoration: none;
 }
 
-[type=button], [type=submit] {
+[type=button], [type=submit], [type=edit] {
     border: none;
     float: right;
     margin-top: 10px;

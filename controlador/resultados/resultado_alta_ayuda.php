@@ -42,13 +42,14 @@ $conexion  = crearConexionBD();
 if(isset($_SESSION["formulario_ayuda"])){
     unset($_SESSION["formulario_ayuda"]);
     if (alta_ayuda($conexion, $ayuda)) {
+      echo alta_ayuda($conexion, $ayuda);
         ?>
         <div class="flex">
           <div class="resultado">
             <p>La ayuda ha sido creada correctamente, redirigiendo al listado... </p>
           </div>
         </div>
-        <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
+        <!-- <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" /> -->
       <?php
     } else {?>
       <div class="flex">

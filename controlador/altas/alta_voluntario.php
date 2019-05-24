@@ -76,7 +76,7 @@ $conexion = crearConexionBD();
                         <legend>Información básica del Voluntario</legend>
 
                         <label for="nombrev" required>Nombre:</label>
-                        <input class="celda" name="nombrev" type="text" maxlength="50" style="margin-right: 4%;" required />
+                        <input class="celda" name="nombrev" type="text" maxlength="50" style="margin-right: 4%;" value="<?php echo $formulario['nombrev']; ?>" required />
                         <progress max="100" value="0" id="strength" onchange="progressValue(this)"></progress>
                         <br>
                         <label for="password" required>Contraseña:</label>
@@ -86,8 +86,8 @@ $conexion = crearConexionBD();
                         <input id="confirmpass" name="password2" type="password" style="width: 25%;" maxlength="40" oninput="passwordConfirmation();" required />
                         <br>
                         <label for="permisos">Permisos:</label>
-                        <input type="radio" name="permisos" value="Sí"> Administrador
-                        <input type="radio" name="permisos" value="No"> Voluntario estándar<br>
+                        <input type="radio" name="permisos" value="Sí" <?php if($formulario['permisos'] == 'Sí') echo "checked";?>> Administrador
+                        <input type="radio" name="permisos" value="No" <?php if($formulario['permisos'] == 'No') echo "checked";?>> Voluntario estándar<br>
                     </fieldset>
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_voluntario.php'">Cancelar</a>

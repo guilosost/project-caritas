@@ -83,7 +83,7 @@ function validarDatosAyuda($conexion, $ayuda){
     if ($ayuda["cantidad"] == "" || !preg_match("/^[0-9]+$/",$ayuda["cantidad"])) {
         $errores[] = "<p>El campo cantidad no puede estar vacío.</p>";
     } 
-    if ($ayuda["motivo"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["suministradapor"])) {
+    if ($ayuda["motivo"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["motivo"])) {
         $errores[] = "<p>El campo motivo no puede estar vacío.</p>";
     } 
 
@@ -101,7 +101,7 @@ function validarDatosAyuda($conexion, $ayuda){
         $errores[] = "<p>El campo de la empresa no puede estar vacío.</p>";
     }    
 
-    if ($ayuda["salarioaproximado"] == "" || !preg_match("/^[0-9]+$/",$ayuda["suministradapor"])) {
+    if ($ayuda["salarioaproximado"] == "" || !preg_match("/^[0-9]+$/",$ayuda["salarioaproximado"])) {
         $errores[] = "<p>El salario aproximado no puede estar vacío.</p>";
     }
 }
