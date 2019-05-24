@@ -14,7 +14,7 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
 
 $usuario["dni"] = "";
 $usuario["solicitante"] = "";
-$_SESSION["usuario"] = $usuario;
+$_SESSION["usuario-eliminar"] = $usuario;
 
 // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
 // ¿Hay una sesión activa?
@@ -73,35 +73,91 @@ cerrarConexionBD($conexion);
     <title>Lista de Usuarios</title>
 </head>
 <script>
-        function editar(dni) {
-            console.log("Dentro");
-            console.log(dni + "-DNI");
-            
+    function editar(dni) {
+        console.log("Dentro");
+        console.log(dni + "-PERMISO");
+        document.getElementById(dni + "-EDITAROFF").classList.add("hide");
+        document.getElementById(dni + "-EDITARON").classList.remove("hide");
+        var apellidos = document.getElementById(dni + "-apellidos").innerHTML;
+        var nombre = document.getElementById(dni + "-nombre").innerHTML;
+        var telefono = document.getElementById(dni + "-telefono").innerHTML;
+        var ingresos = document.getElementById(dni + "-ingresos").innerHTML;
 
-    /*     <input id="APELLIDOS" name="APELLIDOS" value=" echo $fila["APELLIDOS"]; ?>" type="text" />
-     <input id="NOMBRE" name="NOMBRE" value="echo $fila["NOMBRE"]; ?>" type="text" />
-    <input id="TELEFONO" name="TELEFONO" value=" echo $fila["TELEFONO"]; ?>" type="text" />
-    <input id="INGRESOS" name="INGRESOS" value=" echo $fila["INGRESOS"]; ?>" type="text" />
-<input id="SITUACIONLABORAL" name="SITUACIONLABORAL" value=" echo $fila["SITUACIONLABORAL"]; ?>" type="text" /> */
+        var s = document.getElementById(dni + "-solicitante").innerHTML;
+        var sitlaboral = '<select class="celda" id="SOLICITANTEPREV" size=1>' +
+            '<option value="Sí"';
+        if (s == "Sí") {sitlaboral = sitlaboral + " selected";}
+        sitlaboral = sitlaboral + '>Sí</option><option value="No"';
+        if (s == "No ") {sitlaboral = sitlaboral + " selected";}
 
-            document.getElementById(dni + "-apellidos").innerHTML = "";
-            document.getElementById(dni + "-nombre").innerHTML = "";
-            document.getElementById(dni + "-telefono").innerHTML = "";
-            document.getElementById(dni + "-ingresos").innerHTML = "";
-            document.getElementById(dni + "-sitlaboral").innerHTML = "";
-            document.getElementById(dni + "-fechanac").innerHTML = "";
-            document.getElementById(dni + "-solicitante").innerHTML = "";
-        }
+        sitlaboral = sitlaboral + '>No</option>';
+        document.getElementById(dni + "-apellidos").innerHTML = '<input class="editcelda" id="APELLIDOSPREV" type="text" maxlength="13" value="' + apellidos + '" />';
+        document.getElementById(dni + "-nombre").innerHTML = '<input class="editcelda" id="NOMBREPREV" type="text" maxlength="13" value="' + nombre + '" />';
+        document.getElementById(dni + "-telefono").innerHTML = '<input class="editcelda" id="TELEFONOPREV" type="text" maxlength="13" value="' + telefono + '" />';
+        document.getElementById(dni + "-ingresos").innerHTML = '<input class="editcelda" id="INGRESOSPREV" type="text" maxlength="13" value="' + ingresos + '" />';
+        document.getElementById(dni + "-solicitante").innerHTML = sitlaboral;
+    }
 
-        function eliminar(dni, sol) {
-            console.log("Borrado: " + dni + ", sol: " + sol);
-            document.getElementById("DNI-eliminar").value = dni;
-            document.getElementById("SOLICITANTE-eliminar").value = sol;
-            console.log(document.getElementById("DNI-eliminar").value);
-            console.log(document.getElementById("SOLICITANTE-eliminar").value);
-            document.getElementById("eliminar_usuario").submit();
-        }
-    </script>
+    function mandar(dni) {
+        var f = document.createElement("form");
+        f.setAttribute('method', "post");
+        f.setAttribute('id', "edicion_dinamica");
+        f.setAttribute('class', "hide");
+        f.setAttribute('action', "../../controlador/acciones/accion_voluntario.php");
+
+        var i = document.createElement("input"); //input element, text
+        i.setAttribute('type', "text");
+        i.setAttribute('name', "permiso");
+        i.setAttribute('id', "permiso_din");
+        var valorPermiso = document.getElementById("PERMISOPREV").value;
+        f.appendChild(i);
+
+        var j = document.createElement("input");
+        j.setAttribute('type', "text");
+        j.setAttribute('name', "nombrev");
+        j.setAttribute('id', "nombrev_din");
+        f.appendChild(j);
+
+        document.getElementsByTagName('body')[0].appendChild(f);
+        document.getElementById("nombrev_din").value = nombrev;
+        document.getElementById("permiso_din").value = valorPermiso;
+
+        console.log(document.getElementById("nombrev_din").value)
+        console.log(document.getElementById("permiso_din").value)
+        //document.getElementById("edicion_dinamica").submit();
+    }
+
+    function cancelar(dni) {
+        console.log("Cancelando");
+        console.log(dni);
+        document.getElementById(dni + "-EDITARON").classList.add("hide");
+        document.getElementById(dni + "-EDITAROFF").classList.remove("hide");
+        var apellidos = document.getElementById(dni + "-OLDAPELLIDOS").value;
+        var nombre = document.getElementById(dni + "-OLDNOMBRE").value;
+        var telefono = document.getElementById(dni + "-OLDTELEFONO").value;
+        var ingresos = document.getElementById(dni + "-OLDINGRESOS").value;
+        var sitlaboral = document.getElementById(dni + "-OLDSITUACIONLABORAL").value;
+        var fechanac = document.getElementById(dni + "-OLDFECHANAC").value;
+        var solicitante = document.getElementById(dni + "-OLDSOLICITANTE").value;
+        document.getElementById(dni + "-apellidos").innerHTML = apellidos;
+        document.getElementById(dni + "-nombre").innerHTML = nombre;
+        document.getElementById(dni + "-telefono").innerHTML = telefono;
+        document.getElementById(dni + "-ingresos").innerHTML = ingresos;
+        document.getElementById(dni + "-sitlaboral").innerHTML = sitlaboral;
+        document.getElementById(dni + "-fechanac").innerHTML = fechanac;
+        document.getElementById(dni + "-solicitante").innerHTML = solicitante;
+    }
+
+    function eliminar(dni, sol) {
+        console.log("Borrado: " + dni + ", sol: " + sol);
+        document.getElementById("DNI-eliminar").value = dni;
+        document.getElementById("SOLICITANTE-eliminar").value = sol;
+        console.log(document.getElementById("DNI-eliminar").value);
+        console.log(document.getElementById("SOLICITANTE-eliminar").value);
+        document.getElementById("eliminar_usuario").submit();
+    }
+</script>
+
 <body>
     <?php
     include_once("../header.php");
@@ -140,7 +196,7 @@ cerrarConexionBD($conexion);
                             <div class="fila_usuario">
                                 <div class="datos_usuario">
                                     <tr>
-                                        <td id="<?php echo $fila["DNI"]; ?>-DNI"><?php echo $fila["DNI"]; ?></td>
+                                        <td><?php echo $fila["DNI"]; ?></td>
                                         <td id="<?php echo $fila["DNI"]; ?>-apellidos"><?php echo $fila["APELLIDOS"]; ?></td>
                                         <td id="<?php echo $fila["DNI"]; ?>-nombre"><?php echo $fila["NOMBRE"]; ?></td>
                                         <td id="<?php echo $fila["DNI"]; ?>-telefono"><?php echo $fila["TELEFONO"]; ?></td>
@@ -148,34 +204,38 @@ cerrarConexionBD($conexion);
                                         <td id="<?php echo $fila["DNI"]; ?>-sitlaboral"><?php echo $fila["SITUACIONLABORAL"]; ?></td>
                                         <td id="<?php echo $fila["DNI"]; ?>-fechanac"><?php echo $arrayFecha[0]; ?></td>
                                         <td id="<?php echo $fila["DNI"]; ?>-solicitante"><?php echo $fila["SOLICITANTE"]; ?></td>
-                                        <td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-EDITAROFF">
                                             <button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
                                             <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['DNI']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de mostrar"></a>
                                             <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['DNI']; ?>', '<?php echo $fila['SOLICITANTE']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de mostrar"></a>
+                                        </td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-EDITARON" class="hide">
+                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['DNI']; ?>')">SÍ</a>
+                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['DNI']; ?>')">NO</a>
                                         </td>
                                     </tr>
 
                                     <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" type="hidden" />
 
-                                    <input id="APELLIDOS" name="APELLIDOS" value="<?php echo $fila["APELLIDOS"]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila['DNI']; ?>-OLDAPELLIDOS" name="APELLIDOS" value="<?php echo $fila["APELLIDOS"]; ?>" type="hidden" />
 
-                                    <input id="NOMBRE" name="NOMBRE" value="<?php echo $fila["NOMBRE"]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila['DNI']; ?>-OLDNOMBRE" name="NOMBRE" value="<?php echo $fila["NOMBRE"]; ?>" type="hidden" />
 
-                                    <input id="TELEFONO" name="TELEFONO" value="<?php echo $fila["TELEFONO"]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila['DNI']; ?>-OLDTELEFONO" name="TELEFONO" value="<?php echo $fila["TELEFONO"]; ?>" type="hidden" />
 
-                                    <input id="INGRESOS" name="INGRESOS" value="<?php echo $fila["INGRESOS"]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila['DNI']; ?>-OLDINGRESOS" name="INGRESOS" value="<?php echo $fila["INGRESOS"]; ?>" type="hidden" />
 
-                                    <input id="SITUACIONLABORAL" name="SITUACIONLABORAL" value="<?php echo $fila["SITUACIONLABORAL"]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila['DNI']; ?>-OLDSITUACIONLABORAL" name="SITUACIONLABORAL" value="<?php echo $fila["SITUACIONLABORAL"]; ?>" type="hidden" />
 
                                     <input id="ESTUDIOS" name="ESTUDIOS" value="<?php echo $fila["ESTUDIOS"]; ?>" type="hidden" />
 
                                     <input id="GENERO" name="GENERO" value="<?php echo $fila["SEXO"]; ?>" type="hidden" />
 
-                                    <input id="FECHANAC" name="FECHANAC" value="<?php echo $arrayFecha[0]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila['DNI']; ?>-OLDFECHANAC" name="FECHANAC" value="<?php echo $arrayFecha[0]; ?>" type="hidden" />
 
                                     <input id="PROTECCIONDATOS" name="PROTECCIONDATOS" value="<?php echo $fila["PROTECCIONDATOS"]; ?>" type="hidden" />
 
-                                    <input id="SOLICITANTE" name="SOLICITANTE" value="<?php echo $fila["SOLICITANTE"]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila['DNI']; ?>-OLDSOLICITANTE" name="SOLICITANTE" value="<?php echo $fila["SOLICITANTE"]; ?>" type="hidden" />
 
                                     <input id="PARENTESCO" name="PARENTESCO" value="<?php echo $fila["PARENTESCO"]; ?>" type="hidden" />
 
@@ -200,9 +260,10 @@ cerrarConexionBD($conexion);
 
             </table>
         </div>
+
         <form id="eliminar_usuario" action="../../controlador/eliminaciones/elimina_usuario.php" method="POST">
-        <input id="DNI-eliminar" name="dni" type="hidden" />
-        <input id="SOLICITANTE-eliminar" name="solicitante" type="hidden" />
+            <input id="DNI-eliminar" name="dni" type="hidden" />
+            <input id="SOLICITANTE-eliminar" name="solicitante" type="hidden" />
         </form>
 
         <nav>

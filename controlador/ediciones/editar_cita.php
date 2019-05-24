@@ -81,7 +81,7 @@ $conexion = crearConexionBD();
                         <input class="celda" name="objetivo" type="text" style="margin-top: 1%;" maxlength="40" value="<?php echo $cita['objetivo']; ?>" />
                         <br>
                         <label for="observaciones" required>Observaciones:</label><br>
-                        <textarea class="fillable" name="observaciones" maxlength="590"><?php echo $cita['observaciones'];?></textarea>
+                        <textarea class="fillable" name="observaciones" maxlength="590" required ><?php echo $cita['observaciones'];?></textarea>
                     </fieldset>
                     <input style="float:left" type="submit" value="Eliminar">
                     <div class="botones">
@@ -108,8 +108,8 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("objetivo", "req", "Introduzca el objetivo de la cita");
         frmvalidator.addValidation("objetivo", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El objetivo debe de constar de letras y espacios");
 
-        frmvalidator.addValidation("observaciones", "req", "Introduzca alguna observacion");
-        frmvalidator.addValidation("observaciones", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Las observaciones deben de constar de letras y espacios");
+        /* frmvalidator.addValidation("observaciones", "req", "Introduzca alguna observacion");
+        frmvalidator.addValidation("observaciones", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Las observaciones deben de constar de letras y espacios"); */
     </script> 
     <?php
     include("../../vista/footer.php");

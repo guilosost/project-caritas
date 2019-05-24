@@ -22,6 +22,11 @@ if (isset($_SESSION["usuario"])) {
     unset($_SESSION["usuario"]);
 }
 
+$voluntario["nombrev"] = "";
+$voluntario["permiso"] = "";
+$_SESSION["voluntario-eliminar"] = $voluntario;
+$_SESSION["voluntario-editar"] = $voluntario;
+
 // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
 // ¿Hay una sesión activa?
 if (isset($_SESSION["paginacion"]))
@@ -79,9 +84,77 @@ cerrarConexionBD($conexion);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" src="./js/boton.js"></script>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <title>Lista de Voluntarios</title>
+    <script>
+        function editar(nombrev) {
+            console.log("Dentro");
+            console.log(nombrev + "-PERMISO");
+            document.getElementById(nombrev + "-EDITAROFF").classList.add("hide");
+            document.getElementById(nombrev + "-EDITARON").classList.remove("hide");
+            var permiso = document.getElementById(nombrev + "-PERMISO").innerHTML;
+            var string = '<select class="celda" id="PERMISOPREV" size=1>' +
+                '<option value="Sí"';
+
+                if (permiso == "Sí") {
+                string = string + " selected";
+            }
+
+            string = string + '>Sí</option><option value="No"';
+
+            if (permiso == "No ") {
+                string = string + " selected";
+            }
+
+            string = string + '>No</option>';
+            document.getElementById(nombrev + "-PERMISO").innerHTML = string;
+        }
+
+        function mandar(nombrev) {
+            var f = document.createElement("form");
+            f.setAttribute('method', "post");
+            f.setAttribute('id', "edicion_dinamica");
+            f.setAttribute('class', "hide");
+            f.setAttribute('action', "../../controlador/acciones/accion_voluntario.php");
+
+            var i = document.createElement("input"); //input element, text
+            i.setAttribute('type', "text");
+            i.setAttribute('name', "permiso");
+            i.setAttribute('id', "permiso_din");
+            var valorPermiso = document.getElementById("PERMISOPREV").value;
+            f.appendChild(i);
+
+            var j = document.createElement("input");
+            j.setAttribute('type', "text");
+            j.setAttribute('name', "nombrev");
+            j.setAttribute('id', "nombrev_din");
+            f.appendChild(j);
+
+            document.getElementsByTagName('body')[0].appendChild(f);
+            document.getElementById("nombrev_din").value = nombrev;
+            document.getElementById("permiso_din").value = valorPermiso;
+
+            console.log(document.getElementById("nombrev_din").value)
+            console.log(document.getElementById("permiso_din").value)
+            document.getElementById("edicion_dinamica").submit();
+        }
+
+        function cancelar(nombrev) {
+            console.log("Cancelando");
+            console.log(nombrev + "-PERMISO");
+            document.getElementById(nombrev + "-EDITARON").classList.add("hide");
+            document.getElementById(nombrev + "-EDITAROFF").classList.remove("hide");
+            var permiso = document.getElementById(nombrev + "-OLDPERMISO").value;
+            document.getElementById(nombrev + "-PERMISO").innerHTML = permiso;
+        }
+
+        function eliminar(nombrev) {
+            console.log("Borrado: " + nombrev);
+            document.getElementById("NOMBREV-eliminar").value = nombrev;
+            console.log(document.getElementById("NOMBREV-eliminar").value);
+            document.getElementById("eliminar_voluntario").submit();
+        }
+    </script>
 </head>
 
 <body>
@@ -111,27 +184,35 @@ cerrarConexionBD($conexion);
                                     <tr>
                                         <td><?php echo $fila["NOMBREV"]; ?></td>
                                         <td><?php echo $fila["CONTRASEÑA"]; ?></td>
-                                        <td><?php echo $fila["PERMISO"]; ?></td>
-                                        <td><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
-                                            <button id="editar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></button>
+                                        <td id="<?php echo $fila["NOMBREV"]; ?>-PERMISO"><?php echo $fila["PERMISO"]; ?></td>
+                                        <td id="<?php echo $fila["NOMBREV"]; ?>-EDITAROFF"><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
+                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['NOMBREV']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de mostrar"></a>
+                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['NOMBREV']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de mostrar"></a>
+                                        </td>
+                                        <td id="<?php echo $fila["NOMBREV"]; ?>-EDITARON" class="hide">
+                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['NOMBREV']; ?>')">SÍ</a>
+                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['NOMBREV']; ?>')">NO</a>
                                         </td>
                                     </tr>
 
-                            <input id="NOMBREV" name="NOMBREV" value="<?php echo $fila["NOMBREV"]; ?>"  type="hidden"/>
+                                    <input id="NOMBREV" name="NOMBREV" value="<?php echo $fila["NOMBREV"]; ?>" type="hidden" />
 
-                            <input id="CONTRASEÑA" name="CONTRASEÑA" value="<?php echo $fila["CONTRASEÑA"]; ?>"  type="hidden"/>
+                                    <input id="CONTRASEÑA" name="CONTRASEÑA" value="<?php echo $fila["CONTRASEÑA"]; ?>" type="hidden" />
 
-                            <input id="PERMISO" name="PERMISO" value="<?php echo $fila["PERMISO"]; ?>"  type="hidden"/>
+                                    <input id="<?php echo $fila['NOMBREV']; ?>-OLDPERMISO" name="PERMISO" value="<?php echo $fila["PERMISO"]; ?>" type="hidden" />
 
                                 </div>
                     </form>
                     </article>
                 <?php
             } ?>
-
             </table>
-
         </div>
+
+        <form id="eliminar_voluntario" action="../../controlador/eliminaciones/elimina_voluntario.php" method="POST">
+            <input id="NOMBREV-eliminar" name="nombrev" type="hidden" />
+        </form>
+
         <nav>
             <div class="enlaces">
                 <?php

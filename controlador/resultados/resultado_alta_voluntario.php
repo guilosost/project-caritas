@@ -9,6 +9,8 @@ if (isset($_SESSION["formulario_voluntario"])) {
     $voluntario = $_SESSION["formulario_voluntario"];
 }else if (isset($_SESSION["voluntario"])) { 
     $voluntario = $_SESSION["voluntario"];
+}else if (isset($_SESSION["voluntario-editar"])) { 
+  $voluntario = $_SESSION["voluntario-editar"];
 }else {
     Header("Location: ../../controlador/altas/alta_voluntario.php");
 }
@@ -76,7 +78,20 @@ $conexion  = crearConexionBD();
               </div>
             </div>
         <?php }
-    }
+    }else if (isset($_SESSION["voluntario-editar"])) { 
+      unset($_SESSION["voluntario-editar"]);
+      if (editar_voluntario2($conexion, $voluntario)) {
+          ?>
+          <meta http-equiv="refresh" content="0;url=http://localhost:81/project-caritas/vista/listas/lista_voluntario.php" />
+        <?php
+      } else {?>
+        <div class="flex">
+            <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+              <p>El voluntario no ha sido editado vía JavaScript, ha ocurrido un error inesperado.</p>
+            </div>
+          </div>
+      <?php }
+  }
    
     ?>
 

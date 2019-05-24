@@ -6,6 +6,10 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
+if (($_SESSION["permiso"] == "No ")) {
+    Header("Location: ../../vista/home.php");
+}
+
 if (!isset($_SESSION["formulario_voluntario"])) {
     $formulario['nombrev'] = "";
     $formulario['password'] = "";

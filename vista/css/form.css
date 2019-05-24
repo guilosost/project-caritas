@@ -39,6 +39,10 @@ input {
     max-inline-size: 168px;
 }
 
+/* .editcelda {
+    max-inline-size: 70%;
+} */
+
 .fillable {
     height: 75px;
     border-radius: 5px;

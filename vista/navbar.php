@@ -18,14 +18,9 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/project-caritas/rutas.php');
         echo '<a href="http://localhost:81/project-caritas/controlador/altas/alta_voluntario.php">Añadir voluntario</a>';
     }
     ?>
-        <?php if (isset($_SESSION["nombreusuario"])) {
-            echo '<a href="" style="float: right; font-weight: bold; border: 1.5px solid white; border-right: none; margin-bottom: -3px;">
-            <img class="icono" src="http://localhost:81/project-caritas/vista/img/user_icon (16x16).png" alt="icono de usuario">'.$_SESSION["nombreusuario"].'</a>';
-        } else {
-            echo '<a href="" style="float: right; font-weight: bold; border: 1.5px solid white; border-right: none; margin-bottom: -3px;">
-            <img class="icono" src="http://localhost:81/project-caritas/vista/img/user_icon (16x16).png" alt="icono de usuario">Entre con su usuario</a>';
-        }
-
+        <?php
+        echo '<a href="http://localhost:81/project-caritas/controlador/acceso/logout.php" style="float: right; font-weight: bold; border: 1.5px solid white; border-right: none; margin-bottom: -3px;">
+        <img class="icono" src="http://localhost:81/project-caritas/vista/img/user_icon (16x16).png" alt="icono de usuario">'.$_SESSION["nombreusuario"].'</a>';
         ?>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>

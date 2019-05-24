@@ -91,7 +91,7 @@ $conexion = crearConexionBD();
 
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_voluntario.php'">Cancelar</a>
-                        <input  type="submit" value="Editar" >
+                        <input type="submit" value="Editar" >
                     </div>
                 </form>
             </div>

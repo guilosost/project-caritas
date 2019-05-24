@@ -47,3 +47,18 @@ function editar_voluntario($conexion,$voluntario) {
     return false;
 }
 }
+
+function editar_voluntario2($conexion,$voluntario) {
+    try {
+    $consulta = "UPDATE  VOLUNTARIOS  SET PERMISO=:permiso WHERE NOMBREV =:nombrev";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':nombrev',$voluntario["nombrev"]);
+   $stmt->bindParam(':permiso',$voluntario["permiso"]);
+   $stmt->bindParam(':contraseña',$voluntario["password"]);
+   $stmt->execute();
+   return true;
+} catch(PDOException $e) {
+    echo $e->getMessage();
+    return false;
+}
+}

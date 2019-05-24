@@ -10,12 +10,16 @@ if (isset($_SESSION["formulario_voluntario"])) {
 	
 	$_SESSION["formulario_voluntario"] = $voluntario;
 }else if (isset($_SESSION["voluntario"])) {
-	$_SESSION["voluntario"] = $voluntario;
 	$voluntario['nombrev'] = $_REQUEST["nombrev"];
 	$voluntario['password'] = $_REQUEST["password"];
 	$voluntario['permiso'] = $_REQUEST["permiso"];
 	
 	$_SESSION["voluntario"] = $voluntario;
+} else if (isset($_SESSION["voluntario-editar"])) {
+	$voluntario['nombrev'] = $_REQUEST["nombrev"];
+	$voluntario['permiso'] = $_REQUEST["permiso"];
+	
+	$_SESSION["voluntario-editar"] = $voluntario;
 } else {
 	Header("Location: ../../vista/listas/lista_voluntario.php");
 }
@@ -29,8 +33,10 @@ if (count($errores)>0) {
 	$_SESSION["errores"] = $errores;
 if (isset($_SESSION["formulario_voluntario"])) {
 	Header('Location: ../../controlador/altas/alta_voluntario.php');
-}else if (isset($_SESSION["voluntario"])) {
+} else if (isset($_SESSION["voluntario"])) {
 	Header("Location: ../../controlador/ediciones/editar_voluntario.php");
+} else if (isset($_SESSION["voluntario-editar"])) {
+	Header("Location: ../../controlador/resultados/resultado_alta_voluntario.php");
 }
 } else {
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
@@ -53,11 +59,8 @@ function validarDatosVoluntario($conexion, $voluntario)
 			$errores[] = "<p>La contraseña no puede estar vacía o contener menos de 6 caracteres.</p>";
 		}
 
-	if ($voluntario["permiso"] == "" ) {
-		$errores[] = "<p>Debes tener al menos un permiso seleccionado</p>";
-	} 
 	if ($voluntario["permisos"] == "" ) {
-		$errores[] = "<p>Debes tener al menos un permiso seleccionado</p>";
+		$errores[] = "<p>Debes tener al menos un permiso seleccionado.</p>";
 	} 
 	}else if (isset($_SESSION["voluntario"])) {
 		if ($voluntario["nombrev"] == "") {
@@ -70,7 +73,15 @@ function validarDatosVoluntario($conexion, $voluntario)
 		}
 	
 		if ($voluntario["permiso"] == "" ) {
-			$errores[] = "<p>Debes tener al menos un permiso seleccionado</p>";
+			$errores[] = "<p>Debes tener al menos un permiso seleccionado.</p>";
+		} 
+	} else if (isset($_SESSION["voluntario-editar"])) {
+		if ($voluntario["nombrev"] == "") {
+			$errores[] = "<p>El nombre no puede estar vacío.</p>";
+		}
+
+		if ($voluntario["permiso"] == "" ) {
+			$errores[] = "<p>Debes tener al menos un permiso seleccionado.</p>";
 		} 
 	}
 	return $errores;

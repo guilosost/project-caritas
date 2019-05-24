@@ -50,7 +50,11 @@ function validarDatosCita($conexion, $cita)
 	} 
 
 	if ($cita["objetivo"] == "") {
-		$errores[] = "<p>El objetivo no puede estar vacio.</p>";
+		$errores[] = "<p>El objetivo no puede estar vacío.</p>";
+	}
+
+	if ($cita["observaciones"] == "") {
+		$errores[] = "<p>Las observaciones no pueden estar vacías.</p>";
 	}
 
 	if ($cita["fechacita"] == "") {
