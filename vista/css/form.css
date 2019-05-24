@@ -6,7 +6,7 @@ body {
 }
 
 .form {
-    background-image: linear-gradient(#f1f1f1, #bdbdbd, #949090);
+    background-image: linear-gradient(#f1f1f1, #d4d4d4, #e6e6e6);
     width: 34.8%;
     border-radius: 10px;
     font-weight: bold;
@@ -133,6 +133,7 @@ caption {
     padding: 2px 10px 2px 15px;
     margin-left: -1%;
     margin-top: 10px;
+    margin-bottom: 5%;
 }
 
 .flex {
