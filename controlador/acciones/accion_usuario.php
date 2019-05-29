@@ -108,15 +108,15 @@ if(!isset($_SESSION["usuario-editar"])) {
 		}
 	}
 	if ($usuario["telefono"] == "") {
-		$errores[] = "<p>El telefono no puede estar vacío.</p>";
+		$errores[] = "<p>El teléfono no puede estar vacío.</p>";
 	} else if (!preg_match("/^[0-9]{9}$/", $usuario["telefono"])) {
-		$errores[] = "<p>El teléfono debe contener 9 dígitos y ser numérico: " . $usuario["telefono"] . ".</p>";
+		$errores[] = "<p>El teléfono debe contener 9 dígitos y contener exclusivamente caracteres numéricos: " . $usuario["telefono"] . ".</p>";
 	}
 
 	if($usuario["genero"]=="") {
 		$errores[] = "<p>El campo género no puede estar vacío.</p>";
 	}else if($usuario["genero"]!="Masculino" and $usuario["genero"]!="Femenino" ){
-		$errores[] = "<p>El campo género debe tomar los valores del formuario.</p>";
+		$errores[] = "<p>El campo género debe tomar los valores del formulario.</p>";
 	}
 
 	if($usuario["fechaNac"]=="") {
@@ -124,19 +124,19 @@ if(!isset($_SESSION["usuario-editar"])) {
 	}
 
 	if($usuario["ingresos"]=="") {
-		$errores[] = "<p>El campo de ingresos no puede quedar vacío.</p>";
+		$errores[] = "<p>El campo de ingresos no puede estar vacío.</p>";
 	}
 	else if(!preg_match("/^[0-9]+$/", $usuario["ingresos"])) {
-		$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
+		$errores[] = "<p>El campo ingresos solo puede contener caracteres numéricos.</p>";
 	}
 	else if($usuario["ingresos"]>= 1000){
-		$errores[] = "<p>Los ingresos no pueden superar los 1000 €.</p>";
+		$errores[] = "<p>Los ingresos no pueden superar los 1000€.</p>";
 	}
 	else if($usuario["ingresos"] < 672 and $usuario["sitlaboral"] == "En paro"){
-		$errores[] = "<p>Los ingresos no son lógicos si el usuario está en paro.</p>";
+		$errores[] = "<p>Los ingresos no se corresponden con la situación laboral.</p>";
 	}
 	else if($usuario["ingresos"] == 0  and $usuario["minusvalia"] == "Sí"){
-		$errores[] = "<p>Los ingresos no son lógicos si el usuario posee alguna discapacidad.</p>";
+		$errores[] = "<p>Los ingresos no se corresponden con la situación de minusvalía marcada.</p>";
 	}
 
 	if($usuario["minusvalia"]=="") {
@@ -181,7 +181,7 @@ if(!isset($_SESSION["usuario-editar"])) {
 		}
 			fclose($calles);
 			if($res == false){
-				$errores[] = "<p>La calle no se encuentra en San Juan de Aznalfarache.</p>";
+				$errores[] = "<p>La dirección del domicilio no se encuentra en San Juan de Aznalfarache.</p>";
 			}
 			
 		}
@@ -193,15 +193,15 @@ if(!isset($_SESSION["usuario-editar"])) {
 		if($usuario["gastosfamilia"]=="") {
 			$errores[] = "<p>El campo de gastos familiares no puede estar vacío.</p>";
 		}	else if(!preg_match("/^[0-9]+$/", $usuario["gastosfamilia"])) {
-			$errores[] = "<p>En gastos familia se espera un valor numérico.</p>";
+			$errores[] = "<p>El campo gastos familiares solo puede contener caracteres numéricos.</p>";
 		}
 
 		if($usuario["codigopostal"]=="") {
 			$errores[] = "<p>El código postal no puede estar vacío.</p>";
 		}else if (!preg_match("/^[0-9]{5}$/", $usuario["codigopostal"])) {
-			$errores[] = "<p>El código postal debe de constar 5 dígitos y ser numérico.</p>";
+			$errores[] = "<p>El código postal debe contener 5 dígitos y caracteres exclusivamente numéricos.</p>";
 		} else if ($usuario["codigopostal"] != "41920"){
-			$errores[] = "<p>El código postal no es el de San Juan de Aznalfarache.</p>";
+			$errores[] = "<p>El código postal se corresponde con San Juan de Aznalfarache.</p>";
 		}
 
 		if($usuario["proteccionDatos"]=="") {
@@ -213,7 +213,7 @@ if(!isset($_SESSION["usuario-editar"])) {
 		if ($usuario["parentesco"] == "") {
 			$errores[] = "<p>El campo de parentesco no puede estar vacío.</p>";
 		} else if (!preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$usuario["parentesco"])) {
-			$errores[] = "<p>El parentesco non puede contener números ni caracteres extraños.</p>";
+			$errores[] = "<p>El parentesco no puede contener caracteres especiales ni numéricos.</p>";
 		}
 
 		if ($usuario["dniSol"] == "") {
@@ -232,7 +232,7 @@ if(!isset($_SESSION["usuario-editar"])) {
 		}
 
 		if ($usuario["telefono"] == "") {
-			$errores[] = "<p>El telefono no puede estar vacío</p>";
+			$errores[] = "<p>El teléfono no puede estar vacío</p>";
 		} else if (!preg_match("/^[0-9]{9}$/", $usuario["telefono"])) {
 			$errores[] = "<p>El teléfono debe contener 9 dígitos y ser numérico: " . $usuario["telefono"] . ".</p>";
 		}

@@ -202,57 +202,57 @@ $conexion = crearConexionBD();
 
         frmvalidator.EnableMsgsTogether();
 
-        frmvalidator.addValidation("nombre", "req", "Introduzca el nombre");
-        frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El nombre debe contener letras y espacios");
+        frmvalidator.addValidation("nombre", "req", "Introduzca el nombre.");
+        frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El nombre solo puede contener caracteres alfabéticos.");
 
-        frmvalidator.addValidation("apellidos", "req", "Introduzca los apellidos");
-        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "Los apellidos deben contener letras y espacios");
+        frmvalidator.addValidation("apellidos", "req", "Introduzca los apellidos.");
+        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "Los apellidos solo pueden contener caracteres alfabéticos.");
 
         frmvalidator.addValidation("dni", "req", "Introduzca el DNI");
         frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI en el siguiente formato: 12345678A");
 
-        frmvalidator.addValidation("fechaNac", "req", "Introduzca la fecha de nacimiento");
+        frmvalidator.addValidation("fechaNac", "req", "Introduzca la fecha de nacimiento.");
 
-        frmvalidator.addValidation("genero", "selone_radio", "Introduzca el género");
+        frmvalidator.addValidation("genero", "selone_radio", "Introduzca el género.");
 
-        frmvalidator.addValidation("telefono", "regexp=^[0-9]{9}$", "Introduzca un número de teléfono válido");
+        frmvalidator.addValidation("telefono", "regexp=^[0-9]{9}$", "Introduzca un número de teléfono válido.");
 
-        frmvalidator.addValidation("estudios", "dontselect=000", "Introduzca el nivel de estudios");
+        frmvalidator.addValidation("estudios", "dontselect=000", "Introduzca el nivel de estudios.");
 
-        frmvalidator.addValidation("sitlaboral", "dontselect=000", "Introduzca la situación laboral del usuario");
+        frmvalidator.addValidation("sitlaboral", "dontselect=000", "Introduzca la situación laboral del usuario.");
 
-        frmvalidator.addValidation("ingresos", "req", "Introduzca los ingresos");
-        frmvalidator.addValidation("ingresos", "num", "Introduzca un valor numérico en los ingresos");
-        frmvalidator.addValidation("ingresos", "lt=1000", "Los ingresos no deben de superar los 1000 euros");
-        frmvalidator.addValidation("ingresos", "lt=673", "Los ingresos son mayores de lo estimado por estar desempleado",
+        frmvalidator.addValidation("ingresos", "req", "Introduzca los ingresos.");
+        frmvalidator.addValidation("ingresos", "num", "Introduzca los ingresos con caracteres numéricos");
+        frmvalidator.addValidation("ingresos", "lt=1000", "Los ingresos no deben de superar los 1000€.");
+        frmvalidator.addValidation("ingresos", "lt=673", "Los ingresos son mayores de lo estimado por estar desempleado.",
             "VWZ_IsListItemSelected(document.forms['altaUsuario'].elements['sitlaboral'],'En paro')");
-        frmvalidator.addValidation("ingresos", "gt=0", "Los ingresos son menores de lo estimado por tener alguna discapacidad",
+        frmvalidator.addValidation("ingresos", "gt=0", "Los ingresos son menores de lo estimado por tener alguna discapacidad.",
             "VWZ_IsChecked(document.forms['altaUsuario'].elements['minusvalia'],'Sí')");
 
-        frmvalidator.addValidation("minusvalia", "selone_radio", "Introduzca si tiene alguna discapacidad");
+        frmvalidator.addValidation("minusvalia", "selone_radio", "Introduzca si tiene alguna discapacidad.");
 
-        frmvalidator.addValidation("solicitante", "selone_radio", "Introduzca si el usuario es solicitante");
+        frmvalidator.addValidation("solicitante", "selone_radio", "Introduzca si el usuario es solicitante.");
 
         if (solicitante == "Sí") {
-            frmvalidator.addValidation("gastosfamilia", "req", "Introduzca los gastos de la familia");
-            frmvalidator.addValidation("gastosfamilia", "num", "Introduzca un valor numérico en los gastos familiares");
+            frmvalidator.addValidation("gastosfamilia", "req", "Introduzca los gastos de la familia.");
+            frmvalidator.addValidation("gastosfamilia", "num", "Introduzca los gastos familiares con caracteres numéricos.");
 
             frmvalidator.addValidation("poblacion", "req", "Introduzca la población");
             frmvalidator.addValidation("poblacion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "La población letras y espacios");
 
-            frmvalidator.addValidation("domicilio", "req", "Introduzca el domicilio");
+            frmvalidator.addValidation("domicilio", "req", "Introduzca el domicilio.");
 
             frmvalidator.addValidation("codigopostal", "req", "Introduzca el código postal");
-            frmvalidator.addValidation("codigopostal", "regexp=^[0-9]{5}$", "Introduzca un código postal válido");
+            frmvalidator.addValidation("codigopostal", "regexp=^[0-9]{5}$", "Introduzca un código postal válido.");
 
-            frmvalidator.addValidation("proteccionDatos", "shouldselchk=on", "El solicitante debe aceptar la Ley de Protección de Datos");
+            frmvalidator.addValidation("proteccionDatos", "shouldselchk=on", "El solicitante debe aceptar la Ley de Protección de Datos.");
 
         } else if (solicitante == "No") {
-            frmvalidator.addValidation("dniSol", "req", "Introduzca el DNI del solicitante");
+            frmvalidator.addValidation("dniSol", "req", "Introduzca el DNI del solicitante.");
             frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca el DNI en el siguiente formato: 12345678A");
 
-            frmvalidator.addValidation("parentesco", "req", "Introduzca el parentesco con el solicitante");
-            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El parentesco debe contener letras y espacios");
+            frmvalidator.addValidation("parentesco", "req", "Introduzca el parentesco con el solicitante.");
+            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El parentesco debe contener letras y espacios.");
         }
     </script>
     <?php

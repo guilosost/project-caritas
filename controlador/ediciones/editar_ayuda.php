@@ -199,36 +199,36 @@ $conexion = crearConexionBD();
         frmvalidator.EnableMsgsTogether();
         var tipo = document.forms["altaAyuda"]["tipoayuda"].value;
         
-        frmvalidator.addValidation("tipoayuda", "req", "Introduzca el tipo de ayuda");
+        frmvalidator.addValidation("tipoayuda", "req", "Introduzca el tipo de ayuda.");
 
-        frmvalidator.addValidation("suministradapor", "req", "Introduzca el proveedor de la ayuda");
+        frmvalidator.addValidation("suministradapor", "req", "Introduzca el proveedor de la ayuda.");
         //frmvalidator.addValidation("suministradapor", "alphabetic_space", "el proveedor de la ayuda debe de constar de letras y espacios");
 
-        frmvalidator.addValidation("concedida", "selone_radio", "Introduzca si la ayuda está concedida");
+        frmvalidator.addValidation("concedida", "selone_radio", "Introduzca si la ayuda está concedida.");
 
         if (tipo == "bolsacomida") {
-        frmvalidator.addValidation("bebe", "selone_radio", "Introduzca si el solicitante tiene a un bebé");
+        frmvalidator.addValidation("bebe", "selone_radio", "Seleccione bebé si tiene un hijo de entre 0-3 años.");
 
-        frmvalidator.addValidation("nino", "selone_radio", "Introduzca si el solicitante tiene niños");
+        frmvalidator.addValidation("nino", "selone_radio", "Seleccione niño si tiene un hijo de entre 4-9 años.");
 
         }else if (tipo == "ayudaeconomica"){
-        frmvalidator.addValidation("cantidad", "req", "Introduzca la cantidad");
-        frmvalidator.addValidation("cantidad", "num", "La cantidad debe de ser numérica");
+        frmvalidator.addValidation("cantidad", "req", "Introduzca la cantidad.");
+        frmvalidator.addValidation("cantidad", "num", "La cantidad debe contener caracteres numéricos.");
 
-        frmvalidator.addValidation("prioridad", "selone_radio", "Introduzca si posee prioridad");
+        frmvalidator.addValidation("prioridad", "selone_radio", "Introduzca si la ayuda tiene prioridad.");
 
-        frmvalidator.addValidation("motivo", "req", "Introduzca el motivo de la ayuda");
-        frmvalidator.addValidation("motivo", "alphabetic_space", "Introduzca el motivo de la ayuda");
+        frmvalidator.addValidation("motivo", "req", "Introduzca el motivo de la ayuda.");
+        frmvalidator.addValidation("motivo", "alphabetic_space", "Introduzca el motivo de la ayuda.");
 
         }else if (tipo == "trabajo"){
-        frmvalidator.addValidation("salarioaproximado", "req", "Introduzca un salario");
-        frmvalidator.addValidation("salarioaproximado", "num", "Introduzca un número como salario");
+        frmvalidator.addValidation("salarioaproximado", "req", "Introduzca un salario.");
+        frmvalidator.addValidation("salarioaproximado", "num", "Introduzca un salario en formato numérico.");
 
-        frmvalidator.addValidation("descripcion", "req", "Introduzca la descripción del trabajo");
-        frmvalidator.addValidation("descripcion", "alphabetic_space", "Introduzca la descripción del trabajo");
+        frmvalidator.addValidation("descripcion", "req", "Introduzca la descripción del trabajo.");
+        frmvalidator.addValidation("descripcion", "alphabetic_space", "Introduzca la descripción del trabajo.");
 
-        frmvalidator.addValidation("empresa", "req", "Introduzca la empresa");
-        frmvalidator.addValidation("empresa", "alphabetic_space", "Introduzca la empresa");
+        frmvalidator.addValidation("empresa", "req", "Introduzca la empresa.");
+        frmvalidator.addValidation("empresa", "alphabetic_space", "Introduzca la empresa.");
 
         }
     </script> 

@@ -51,7 +51,7 @@ function validarDatosVoluntario($conexion, $voluntario)
 		$errores[] = "<p>El nombre no puede estar vacío.</p>";
 	}
 	else if(consultarVoluntarioRepetido($conexion,$voluntario["nombrev"])!=0){
-		$errores[] = "<p>Ese nombre de voluntario ya existe</p>";
+		$errores[] = "<p>El nombre especificado ya está en uso.</p>";
 	}
 
 	if ($voluntario["password"] == "" or !preg_match("/[A-Z Ñ]/", $voluntario["password"]) or !preg_match("/[0-9]/", $voluntario["password"]))
@@ -60,7 +60,7 @@ function validarDatosVoluntario($conexion, $voluntario)
 		}
 
 	if ($voluntario["permisos"] == "" ) {
-		$errores[] = "<p>Debes tener al menos un permiso seleccionado.</p>";
+		$errores[] = "<p>Al menos un permiso debe estar seleccionado.</p>";
 	} 
 	}else if (isset($_SESSION["voluntario"])) {
 		if ($voluntario["nombrev"] == "") {
@@ -73,7 +73,7 @@ function validarDatosVoluntario($conexion, $voluntario)
 		}
 	
 		if ($voluntario["permiso"] == "" ) {
-			$errores[] = "<p>Debes tener al menos un permiso seleccionado.</p>";
+			$errores[] = "<p>Al menos un permiso debe estar seleccionado.</p>";
 		} 
 	} else if (isset($_SESSION["voluntario-editar"])) {
 		if ($voluntario["nombrev"] == "") {
@@ -81,7 +81,7 @@ function validarDatosVoluntario($conexion, $voluntario)
 		}
 
 		if ($voluntario["permiso"] == "" ) {
-			$errores[] = "<p>Debes tener al menos un permiso seleccionado.</p>";
+			$errores[] = "<p>Al menos un permiso debe estar seleccionado.</p>";
 		} 
 	}
 	return $errores;

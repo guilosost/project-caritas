@@ -61,11 +61,11 @@ if (count($errores)>0) {
 function validarDatosAyuda($conexion, $ayuda){
 
     if ($ayuda["suministradapor"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["suministradapor"])) {
-    $errores[] = "<p>El campo de suministrador de la ayuda no puede estar vacío ni contener números.</p>";
+    $errores[] = "<p>El campo de suministrador de la ayuda no puede estar vacío ni contener caracteres numéricos.</p>";
     } 
 
     if ($ayuda["concedida"] == "") {
-        $errores[] = "<p>Es necesario conocer el estado de la ayuda.</p>";
+        $errores[] = "<p>El estado de la ayuda debe ser especificado.</p>";
     } 
 
     if($ayuda['tipoayuda'] == "bolsacomida"){
@@ -88,7 +88,7 @@ function validarDatosAyuda($conexion, $ayuda){
     } 
 
     if ($ayuda["prioridad"] == "") {
-        $errores[] = "<p>Es necesario conocer la prioridad de la ayuda.</p>";
+        $errores[] = "<p>La prioridad de la ayuda debe ser especificada.</p>";
     } 
     }
 

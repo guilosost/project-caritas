@@ -104,14 +104,14 @@ $conexion = crearConexionBD();
 
         frmvalidator.EnableMsgsTogether();
 
-        frmvalidator.addValidation("dni", "req", "Introduzca el dni");
-        frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un dni de la forma 12345678A");
+        frmvalidator.addValidation("dni", "req", "Introduzca el DNI.");
+        frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI en el siguiente formato: 12345678A");
 
         frmvalidator.addValidation("nombrev", "req", "Introduzca el nombre");
-        frmvalidator.addValidation("nombrev", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El nombre debe de constar de letras");
+        frmvalidator.addValidation("nombrev", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El nombre solo puede contener caracteres alfabéticos.");
 
         frmvalidator.addValidation("objetivo", "req", "Introduzca el objetivo de la cita");
-        frmvalidator.addValidation("objetivo", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El objetivo debe de constar de letras y espacios");
+        frmvalidator.addValidation("objetivo", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El objetivo solo puede contener caracteres alfabéticos.");
 
         /* frmvalidator.addValidation("observaciones", "req", "Introduzca alguna observación.");
         frmvalidator.addValidation("observaciones", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Las observaciones deben de constar de letras y espacios"); */

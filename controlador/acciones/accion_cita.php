@@ -64,13 +64,13 @@ function validarDatosCita($conexion, $cita)
 		$errores[] = "<p>El usuario debe de ser solicitante.</p>";
 	}
 	if ($cita["dni"] == "" || !preg_match("/^[0-9]{8}[A-Z]$/", $cita["dni"])) {
-		$errores[] = "<p>El dni no puede estar vacio y tiene que ser del formato 12345678A.</p>";
+		$errores[] = "<p>El DNI no puede estar vacio y tiene que ser del formato 12345678A.</p>";
 	}
 
 	if ($cita["nombrev"] == "") {
 		$errores[] = "<p>El nombre del voluntario responsable de la cita no puede estar vacío.</p>";
 	}else if(consultarVoluntarioRepetido($conexion,$cita["nombrev"])==0){
-		$errores[] = "<p>Ese voluntario no existe</p>";
+		$errores[] = "<p>El voluntario especificado no existe.</p>";
 	}
 	return $errores;
 }
