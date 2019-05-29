@@ -134,8 +134,8 @@ cerrarConexionBD($conexion);
             document.getElementById("nombrev_din").value = nombrev;
             document.getElementById("permiso_din").value = valorPermiso;
 
-            console.log(document.getElementById("nombrev_din").value)
-            console.log(document.getElementById("permiso_din").value)
+            console.log(document.getElementById("nombrev_din").value);
+            console.log(document.getElementById("permiso_din").value);
             document.getElementById("edicion_dinamica").submit();
         }
 
@@ -186,12 +186,12 @@ cerrarConexionBD($conexion);
                                         <td><?php echo $fila["CONTRASEÑA"]; ?></td>
                                         <td id="<?php echo $fila["NOMBREV"]; ?>-PERMISO"><?php echo $fila["PERMISO"]; ?></td>
                                         <td id="<?php echo $fila["NOMBREV"]; ?>-EDITAROFF"><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
-                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['NOMBREV']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de mostrar"></a>
-                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['NOMBREV']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de mostrar"></a>
+                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['NOMBREV']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['NOMBREV']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de borrar"></a>
                                         </td>
                                         <td id="<?php echo $fila["NOMBREV"]; ?>-EDITARON" class="hide">
-                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['NOMBREV']; ?>')">SÍ</a>
-                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['NOMBREV']; ?>')">NO</a>
+                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['NOMBREV']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['NOMBREV']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_cancel(40x36).png" alt="icono de cancelar"></a>
                                         </td>
                                     </tr>
 
