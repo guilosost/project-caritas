@@ -48,18 +48,7 @@ if (isset($_SESSION["formulario_usuario"])) {
 	$usuario_aux = $_SESSION["usuario"];
 	$usuario["oid_uf"] = $usuario_aux["oid_uf"]; 
 	$_SESSION["usuario"] = $usuario;
- } else if (isset($_SESSION["usuario-editar"])) {
-	$usuario['dni'] = $_REQUEST["dni"];
-	$usuario['solicitante'] = $_REQUEST["solicitante"];
-	$usuario['nombre'] = $_REQUEST["nombre"];
-	$usuario['apellidos'] = $_REQUEST["apellidos"];
-	$usuario['telefono'] = $_REQUEST["telefono"];
-	$usuario['ingresos'] = $_REQUEST["ingresos"];
-	$usuario['sitlaboral'] = $_REQUEST["sitlaboral"];
-	$usuario_aux = $_SESSION["usuario"];
-	$usuario["oid_uf"] = $usuario_aux["oid_uf"]; 
-	$_SESSION["usuario"] = $usuario;
- } else{
+ }else{
 	Header("Location: ../../vista/listas/lista_usuario.php");
 }
 
@@ -72,10 +61,8 @@ if (count($errores)>0) {
 	$_SESSION["errores"] = $errores;
 	if(isset($_SESSION["usuario"])){
 		Header('Location: ../../controlador/ediciones/editar_usuario.php');
-	}else if(isset($_SESSION["formulario_usuario"])){
+	}else{
 		Header('Location: ../../controlador/altas/alta_usuario.php');
-	} else if(isset($_SESSION["usuario-editar"])) {
-		Header('Location: ../../vista/listas/lista_usuario.php');
 	}
 } else {
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
@@ -85,7 +72,7 @@ if (count($errores)>0) {
 function validarDatosUsuario($conexion, $usuario)
 {
 	$errores=array();
-if(!isset($_SESSION["usuario-editar"])) {
+
 	if ($usuario["dni"] == "") {
 		$errores[] = "<p>El DNI no puede estar vacío.</p>";
 	} else if (!preg_match("/^[0-9]{8}[A-Z]$/", $usuario["dni"])) {
@@ -102,13 +89,13 @@ if(!isset($_SESSION["usuario-editar"])) {
 
 	if(!isset($_SESSION["usuario"])){
 		if ($usuario["email"] == "") {
-			$errores[] = "<p>El email no puede estar vacío.</p>";
+			$errores[] = "<p>El email no puede estar vacío</p>";
 		} else if (!filter_var($usuario["email"], FILTER_VALIDATE_EMAIL)) {
 			$errores[] = "<p>El email es incorrecto: " . $usuario["email"] . ".</p>";
 		}
 	}
 	if ($usuario["telefono"] == "") {
-		$errores[] = "<p>El telefono no puede estar vacío.</p>";
+		$errores[] = "<p>El telefono no puede estar vacío</p>";
 	} else if (!preg_match("/^[0-9]{9}$/", $usuario["telefono"])) {
 		$errores[] = "<p>El teléfono debe contener 9 dígitos y ser numérico: " . $usuario["telefono"] . ".</p>";
 	}
@@ -220,34 +207,6 @@ if(!isset($_SESSION["usuario-editar"])) {
 			$errores[] = "<p>El DNI del solicitante no puede estar vacío.</p>";
 		} else if (!preg_match("/^[0-9]{8}[A-Z]$/", $usuario["dniSol"])) {
 			$errores[] = "<p>El DNI del solicitante debe contener 8 números y una letra mayúscula: " . $usuario["dniSol"] . ".</p>";
-		}
-	}
-	} else {
-		if ($usuario["nombre"] == "" ||!preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$usuario["nombre"])) {
-			$errores[] = "<p>El nombre no puede estar vacío o contener caracteres numéricos.</p>";
-		}
-	
-		if ($usuario["apellidos"] == "" ||!preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$usuario["apellidos"])) {
-			$errores[] = "<p>Los apellidos no pueden estar vacíos o contener caracteres numéricos.</p>";
-		}
-
-		if ($usuario["telefono"] == "") {
-			$errores[] = "<p>El telefono no puede estar vacío</p>";
-		} else if (!preg_match("/^[0-9]{9}$/", $usuario["telefono"])) {
-			$errores[] = "<p>El teléfono debe contener 9 dígitos y ser numérico: " . $usuario["telefono"] . ".</p>";
-		}
-
-		if($usuario["ingresos"]=="") {
-			$errores[] = "<p>El campo ingresos no puede quedar vacío.</p>";
-		}
-		else if(!preg_match("/^[0-9]+$/", $usuario["ingresos"])) {
-			$errores[] = "<p>El campo ingresos no puede contener letras.</p>";
-		}
-		else if($usuario["ingresos"]>= 1000){
-			$errores[] = "<p>Los ingresos no pueden superar los 1000 €.</p>";
-		}
-		else if($usuario["ingresos"] < 672 and $usuario["sitlaboral"] == "En paro"){
-			$errores[] = "<p>Los ingresos no son lógicos si el usuario está en paro.</p>";
 		}
 	}
 	return $errores;

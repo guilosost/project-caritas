@@ -13,8 +13,6 @@ if (isset($_SESSION["usuario"])) {
     Header("Location:../../vista/listas/lista_usuario.php");
 }
 
-unset($_SESSION["usuario-editar"]);
-
 if (isset($_SESSION["errores"])) {
     $errores = $_SESSION["errores"];
     unset($_SESSION["errores"]);

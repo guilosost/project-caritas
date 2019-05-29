@@ -207,7 +207,7 @@ function editar_solicitante($conexion,$usuario) {
     $stmt->bindParam(':gastosfamilia', $usuario["gastosfamilia"]);
     $stmt->bindParam(':oid_uf', $usuario["oid_uf"]);
    $stmt->execute();
-    
+
 } catch(PDOException $e) {
     return $e->getMessage();
 }
@@ -248,27 +248,6 @@ function editar_familiar($conexion,$usuario) {
 
    $stmt->execute();
 
-} catch(PDOException $e) {
-    return $e->getMessage();
-}
-}
-
-function editar_usuario($conexion,$usuario) {
-    try {
-        $consulta = "UPDATE USUARIOS SET NOMBRE=:nombre, APELLIDOS=:apellidos, INGRESOS=:ingresos, SITUACIONLABORAL=:situacionlaboral, TELEFONO=:telefono WHERE DNI=:dni";
-   $stmt = $conexion->prepare($consulta);
-    $stmt->bindParam(':dni',$usuario["dni"]);
-	$stmt->bindParam(':nombre',$usuario["nombre"]);
-	$stmt->bindParam(':apellidos',$usuario["apellidos"]);
-	$stmt->bindParam(':ingresos',$usuario["ingresos"]);
-    if($usuario["sitlaboral"]=="NULL"){
-        $stmt->bindValue(':situacionlaboral',null, PDO::PARAM_INT);
-    }else{
-        $stmt->bindParam(':situacionlaboral',$usuario["sitlaboral"]);
-    }
-	$stmt->bindParam(':telefono',$usuario["telefono"]);
-   $stmt->execute();
-        return true;
 } catch(PDOException $e) {
     return $e->getMessage();
 }

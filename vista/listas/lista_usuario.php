@@ -13,13 +13,7 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
 }
 
 $usuario["dni"] = "";
-$usuario["nombre"] = "";
-$usuario["apellidos"] = "";
-$usuario["telefono"] = "";
-$usuario["ingresos"] = "";
-$usuario["sitlaboral"] = "";
 $usuario["solicitante"] = "";
-$_SESSION["usuario-editar"] = $usuario;
 $_SESSION["usuario-eliminar"] = $usuario;
 
 // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
@@ -74,23 +68,12 @@ cerrarConexionBD($conexion);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <script type="text/javascript" src="./js/boton.js"></script> -->
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <title>Lista de Usuarios</title>
-    <script type="text/javascript" src="../../vista/js/gen_validatorv4.js"></script>
-    <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script>
 </head>
 <script>
     function editar(dni) {
-        document.getElementsByName("editares").forEach(function(x) {
-            x.classList.add("hide");
-        });
-        document.getElementsByName("ths").forEach(function(y) {
-            y.classList.add("less_padding");
-        });
-        document.getElementsByName("tds").forEach(function(z) {
-            z.classList.add("less_padding");
-        });
-    
         console.log("Dentro");
         console.log(dni + "-PERMISO");
         document.getElementById(dni + "-EDITAROFF").classList.add("hide");
@@ -100,27 +83,19 @@ cerrarConexionBD($conexion);
         var telefono = document.getElementById(dni + "-telefono").innerHTML;
         var ingresos = document.getElementById(dni + "-ingresos").innerHTML;
 
-        var s = document.getElementById(dni + "-sitlaboral").innerHTML;
-        var sitlaboral = '<select class="celda" id="SITLABORALPREV" size=1>' +
-            '<option value="No es relevante"';
-        if (s == "No es relevante") {
-            sitlaboral = sitlaboral + " selected";
-        }
-        sitlaboral = sitlaboral + '>No es relevante</option><option value="En paro"';
-        if (s == "En paro") {
-            sitlaboral = sitlaboral + " selected";
-        }
-        sitlaboral = sitlaboral + '>En paro</option><option value="Trabajando"';
-        if (s == "Trabajando") {
-            sitlaboral = sitlaboral + " selected";
-        }
+        var s = document.getElementById(dni + "-solicitante").innerHTML;
+        var sitlaboral = '<select class="celda" id="SOLICITANTEPREV" size=1>' +
+            '<option value="Sí"';
+        if (s == "Sí") {sitlaboral = sitlaboral + " selected";}
+        sitlaboral = sitlaboral + '>Sí</option><option value="No"';
+        if (s == "No ") {sitlaboral = sitlaboral + " selected";}
 
-        sitlaboral = sitlaboral + '>Trabajando</option>';
-        document.getElementById(dni + "-apellidos").innerHTML = '<input class="editcelda" id="APELLIDOSPREV" type="text" maxlength="20" value="' + apellidos + '" />';
+        sitlaboral = sitlaboral + '>No</option>';
+        document.getElementById(dni + "-apellidos").innerHTML = '<input class="editcelda" id="APELLIDOSPREV" type="text" maxlength="13" value="' + apellidos + '" />';
         document.getElementById(dni + "-nombre").innerHTML = '<input class="editcelda" id="NOMBREPREV" type="text" maxlength="13" value="' + nombre + '" />';
-        document.getElementById(dni + "-telefono").innerHTML = '<input class="editcelda" id="TELEFONOPREV" type="text" maxlength="9" value="' + telefono + '" />';
-        document.getElementById(dni + "-ingresos").innerHTML = '<input class="editcelda" id="INGRESOSPREV" type="text" maxlength="3" value="' + ingresos + '" />';
-        document.getElementById(dni + "-sitlaboral").innerHTML = sitlaboral;
+        document.getElementById(dni + "-telefono").innerHTML = '<input class="editcelda" id="TELEFONOPREV" type="text" maxlength="13" value="' + telefono + '" />';
+        document.getElementById(dni + "-ingresos").innerHTML = '<input class="editcelda" id="INGRESOSPREV" type="text" maxlength="13" value="' + ingresos + '" />';
+        document.getElementById(dni + "-solicitante").innerHTML = sitlaboral;
     }
 
     function mandar(dni) {
@@ -128,117 +103,31 @@ cerrarConexionBD($conexion);
         f.setAttribute('method', "post");
         f.setAttribute('id', "edicion_dinamica");
         f.setAttribute('class', "hide");
-        f.setAttribute('action', "../../controlador/acciones/accion_usuario.php");
+        f.setAttribute('action', "../../controlador/acciones/accion_voluntario.php");
 
         var i = document.createElement("input"); //input element, text
         i.setAttribute('type', "text");
-        i.setAttribute('name', "apellidos");
-        i.setAttribute('id', "apellidos_din");
-        var valorApellidos = document.getElementById("APELLIDOSPREV").value;
+        i.setAttribute('name', "permiso");
+        i.setAttribute('id', "permiso_din");
+        var valorPermiso = document.getElementById("PERMISOPREV").value;
         f.appendChild(i);
 
         var j = document.createElement("input");
         j.setAttribute('type', "text");
-        j.setAttribute('name', "nombre");
-        j.setAttribute('id', "nombre_din");
-        var valorNombre = document.getElementById("NOMBREPREV").value;
+        j.setAttribute('name', "nombrev");
+        j.setAttribute('id', "nombrev_din");
         f.appendChild(j);
 
-        var k = document.createElement("input");
-        k.setAttribute('type', "text");
-        k.setAttribute('name', "telefono");
-        k.setAttribute('id', "telefono_din");
-        var valorTelefono = document.getElementById("TELEFONOPREV").value;
-        f.appendChild(k);
-
-        var l = document.createElement("input");
-        l.setAttribute('type', "text");
-        l.setAttribute('name', "ingresos");
-        l.setAttribute('id', "ingresos_din");
-        var valorIngresos = document.getElementById("INGRESOSPREV").value;
-        f.appendChild(l);
-
-        var m = document.createElement("input");
-        m.setAttribute('type', "text");
-        m.setAttribute('name', "sitlaboral");
-        m.setAttribute('id', "sitlaboral_din");
-        var valorSitlaboral = document.getElementById("SITLABORALPREV").value;
-        f.appendChild(m);
-
-        var d = document.createElement("input");
-        d.setAttribute('type', "text");
-        d.setAttribute('name', "dni");
-        d.setAttribute('id', "dni_din");
-        f.appendChild(d);
-
-        var s = document.createElement("input");
-        s.setAttribute('type', "text");
-        s.setAttribute('name', "solicitante");
-        s.setAttribute('id', "solicitante_din");
-        solicitante = document.getElementById(dni + "-SOLICITANTE").value;
-        f.appendChild(s);
-
         document.getElementsByTagName('body')[0].appendChild(f);
-        document.getElementById("apellidos_din").value = valorApellidos;
-        document.getElementById("nombre_din").value = valorNombre;
-        document.getElementById("telefono_din").value = valorTelefono;
-        document.getElementById("ingresos_din").value = valorIngresos;
-        document.getElementById("sitlaboral_din").value = valorSitlaboral;
-        document.getElementById("dni_din").value = dni;
-        document.getElementById("solicitante_din").value = solicitante;
-        minusvalia = document.getElementById(dni + "-MINUSVALIA").value;
+        document.getElementById("nombrev_din").value = nombrev;
+        document.getElementById("permiso_din").value = valorPermiso;
 
-        console.log(document.getElementById("apellidos_din").value);
-        console.log(document.getElementById("nombre_din").value);
-        console.log(document.getElementById("telefono_din").value);
-        console.log(document.getElementById("ingresos_din").value);
-        console.log(document.getElementById("sitlaboral_din").value);
-        console.log(document.getElementById("dni_din").value);
-        console.log(document.getElementById("solicitante_din").value);
-
-        let regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
-        let regex2 = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
-        
-        if (valorApellidos.length == 0) {
-            alert("Introduzca los apellidos");
-        } else if (!regex.exec(valorApellidos)) {
-            alert('Los apellidos deben contener letras y espacios');
-        
-        } else if (valorNombre.length == 0) {
-            alert('Introduzca el nombre');
-        } else if (!regex2.exec(valorNombre)) {
-            alert('El nombre debe contener letras y espacios');
-        
-        } else if (valorTelefono.length == 0 || !(valorTelefono.length == 9)) {
-            alert('Introduzca un número de teléfono');
-        } else if (isNaN(valorTelefono) || valorTelefono[0] === '-' || valorTelefono[0] === '+') {
-            alert('El teléfono debe contener solo números');
-        
-        } else if (valorIngresos.length == 0) {
-            alert('Introduzca los ingresos');
-        } else if (isNaN(valorIngresos) || valorIngresos[0] === '-' || valorIngresos[0] === '+') {
-            alert('Los ingresos deben contener solo números');
-        } else if (valorSitlaboral === "En paro" && !(valorIngresos === "672")) {
-            alert("Los ingresos no son los esperados estando en paro");
-        } else if (minusvalia === 'Sí' && !(valorIngresos > 0)) {
-            alert("Los ingresos no son los esperados ya que el usuario presenta una minusvalía")
-        
-        } else {
-            document.getElementById("edicion_dinamica").submit();
-        }
+        console.log(document.getElementById("nombrev_din").value)
+        console.log(document.getElementById("permiso_din").value)
+        //document.getElementById("edicion_dinamica").submit();
     }
 
     function cancelar(dni) {
-        document.getElementsByName("editares").forEach(function(x) {
-            x.classList.remove("hide");
-        });
-        document.getElementsByName("ths").forEach(function(y) {
-            y.classList.remove("less_padding");
-        });
-        document.getElementsByName("tds").forEach(function(z) {
-            z.classList.remove("less_padding");
-        });
-
         console.log("Cancelando");
         console.log(dni);
         document.getElementById(dni + "-EDITARON").classList.add("hide");
@@ -248,11 +137,15 @@ cerrarConexionBD($conexion);
         var telefono = document.getElementById(dni + "-OLDTELEFONO").value;
         var ingresos = document.getElementById(dni + "-OLDINGRESOS").value;
         var sitlaboral = document.getElementById(dni + "-OLDSITUACIONLABORAL").value;
+        var fechanac = document.getElementById(dni + "-OLDFECHANAC").value;
+        var solicitante = document.getElementById(dni + "-OLDSOLICITANTE").value;
         document.getElementById(dni + "-apellidos").innerHTML = apellidos;
         document.getElementById(dni + "-nombre").innerHTML = nombre;
         document.getElementById(dni + "-telefono").innerHTML = telefono;
         document.getElementById(dni + "-ingresos").innerHTML = ingresos;
         document.getElementById(dni + "-sitlaboral").innerHTML = sitlaboral;
+        document.getElementById(dni + "-fechanac").innerHTML = fechanac;
+        document.getElementById(dni + "-solicitante").innerHTML = solicitante;
     }
 
     function eliminar(dni, sol) {
@@ -276,15 +169,15 @@ cerrarConexionBD($conexion);
             <table style="width:100%">
                 <caption>Lista de Usuarios</caption>
                 <tr>
-                    <th name="ths">DNI</th>
-                    <th name="ths">Apellidos</th>
-                    <th name="ths">Nombre</th>
-                    <th name="ths">Teléfono</th>
-                    <th name="ths">Ingresos</th>
-                    <th name="ths">Situación laboral</th>
-                    <th name="ths">Fecha de nacimiento</th>
-                    <th name="ths">Solicitante</th>
-                    <th name="ths">Opciones</th>
+                    <th>DNI</th>
+                    <th>Apellidos</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Ingresos</th>
+                    <th>Situación laboral</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Solicitante</th>
+                    <th>Opciones</th>
                 </tr>
 
                 <?php
@@ -303,22 +196,22 @@ cerrarConexionBD($conexion);
                             <div class="fila_usuario">
                                 <div class="datos_usuario">
                                     <tr>
-                                        <td name="tds"><?php echo $fila["DNI"]; ?></td>
-                                        <td name="tds" id="<?php echo $fila["DNI"]; ?>-apellidos"><?php echo $fila["APELLIDOS"]; ?></td>
-                                        <td name="tds" id="<?php echo $fila["DNI"]; ?>-nombre"><?php echo $fila["NOMBRE"]; ?></td>
-                                        <td name="tds" id="<?php echo $fila["DNI"]; ?>-telefono"><?php echo $fila["TELEFONO"]; ?></td>
-                                        <td name="tds" id="<?php echo $fila["DNI"]; ?>-ingresos"><?php echo $fila["INGRESOS"]; ?></td>
-                                        <td name="tds" id="<?php echo $fila["DNI"]; ?>-sitlaboral"><?php echo $fila["SITUACIONLABORAL"]; ?></td>
-                                        <td name="tds" id="<?php echo $fila["DNI"]; ?>-fechanac"><?php echo $arrayFecha[0]; ?></td>
-                                        <td name="tds" id="<?php echo $fila["DNI"]; ?>-solicitante"><?php echo $fila["SOLICITANTE"]; ?></td>
-                                        <td name="tds" id="<?php echo $fila["DNI"]; ?>-EDITAROFF">
+                                        <td><?php echo $fila["DNI"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-apellidos"><?php echo $fila["APELLIDOS"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-nombre"><?php echo $fila["NOMBRE"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-telefono"><?php echo $fila["TELEFONO"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-ingresos"><?php echo $fila["INGRESOS"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-sitlaboral"><?php echo $fila["SITUACIONLABORAL"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-fechanac"><?php echo $arrayFecha[0]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-solicitante"><?php echo $fila["SOLICITANTE"]; ?></td>
+                                        <td id="<?php echo $fila["DNI"]; ?>-EDITAROFF">
                                             <button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
-                                            <a name="editares" class="botonTabla" type=edit onclick="editar('<?php echo $fila['DNI']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
-                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['DNI']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de borrar"></a>
+                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['DNI']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de mostrar"></a>
+                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['DNI']; ?>', '<?php echo $fila['SOLICITANTE']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de mostrar"></a>
                                         </td>
-                                        <td name="tds" id="<?php echo $fila["DNI"]; ?>-EDITARON" class="hide">
-                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['DNI']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
-                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['DNI']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_cancel(40x36).png" alt="icono de cancelar"></a>
+                                        <td id="<?php echo $fila["DNI"]; ?>-EDITARON" class="hide">
+                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['DNI']; ?>')">SÍ</a>
+                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['DNI']; ?>')">NO</a>
                                         </td>
                                     </tr>
 
@@ -342,11 +235,11 @@ cerrarConexionBD($conexion);
 
                                     <input id="PROTECCIONDATOS" name="PROTECCIONDATOS" value="<?php echo $fila["PROTECCIONDATOS"]; ?>" type="hidden" />
 
-                                    <input id="<?php echo $fila['DNI']; ?>-SOLICITANTE" name="SOLICITANTE" value="<?php echo $fila["SOLICITANTE"]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila['DNI']; ?>-OLDSOLICITANTE" name="SOLICITANTE" value="<?php echo $fila["SOLICITANTE"]; ?>" type="hidden" />
 
                                     <input id="PARENTESCO" name="PARENTESCO" value="<?php echo $fila["PARENTESCO"]; ?>" type="hidden" />
 
-                                    <input id="<?php echo $fila['DNI']; ?>-MINUSVALIA" name="MINUSVALIA" value="<?php echo $fila["MINUSVALIA"]; ?>" type="hidden" />
+                                    <input id="MINUSVALIA" name="MINUSVALIA" value="<?php echo $fila["MINUSVALIA"]; ?>" type="hidden" />
 
                                     <input id="DNI_SO" name="DNI_SO" value="<?php echo $fila["DNI_SO"]; ?>" type="hidden" />
 
