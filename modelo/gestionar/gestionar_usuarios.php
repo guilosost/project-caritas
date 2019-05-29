@@ -255,7 +255,7 @@ function editar_familiar($conexion,$usuario) {
 
 function editar_usuario($conexion,$usuario) {
     try {
-        $consulta = "UPDATE USUARIOS SET NOMBRE=:nombre, APELLIDOS=:apellidos, INGRESOS=:ingresos, SITUACIONLABORAL=:situacionlaboral, TELEFONO=:telefono WHERE DNI=:dni";
+        $consulta = "UPDATE  USUARIOS  SET NOMBRE=:nombre, APELLIDOS=:apellidos, INGRESOS=:ingresos, SITUACIONLABORAL=:situacionlaboral, TELEFONO=:telefono WHERE DNI=:dni";
    $stmt = $conexion->prepare($consulta);
     $stmt->bindParam(':dni',$usuario["dni"]);
 	$stmt->bindParam(':nombre',$usuario["nombre"]);

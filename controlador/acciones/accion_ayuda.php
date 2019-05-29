@@ -38,8 +38,14 @@ if(isset($_SESSION["formulario_ayuda"])){
     $ayuda_aux = $_SESSION["ayuda"];
 	$ayuda["oid_a"] = $ayuda_aux["oid_a"]; 
     $_SESSION["ayuda"] = $ayuda;
+} else if (isset($_SESSION["voluntario-editar"])) {
+	$ayuda_aux = $_SESSION["ayuda"];
+	$ayuda["oid_a"] = $ayuda_aux["oid_a"]; 
+    $ayuda['concedida'] = $_REQUEST["concedida"];
+
+	$_SESSION["ayuda-editar"] = $ayuda;
 } else {
-	Header("Location: ../../controlador/altas/alta_ayuda.php");
+	Header("Location: ../../vista/listas/lista_ayuda.php");
 }
 
 $conexion = crearConexionBD();

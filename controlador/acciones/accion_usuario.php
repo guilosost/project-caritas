@@ -56,9 +56,8 @@ if (isset($_SESSION["formulario_usuario"])) {
 	$usuario['telefono'] = $_REQUEST["telefono"];
 	$usuario['ingresos'] = $_REQUEST["ingresos"];
 	$usuario['sitlaboral'] = $_REQUEST["sitlaboral"];
-	$usuario_aux = $_SESSION["usuario"];
-	$usuario["oid_uf"] = $usuario_aux["oid_uf"]; 
-	$_SESSION["usuario"] = $usuario;
+
+	$_SESSION["usuario-editar"] = $usuario;
  } else{
 	Header("Location: ../../vista/listas/lista_usuario.php");
 }
@@ -79,6 +78,7 @@ if (count($errores)>0) {
 	}
 } else {
 	// Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
+
 	Header('Location: ../../controlador/resultados/resultado_alta_usuario.php');
 }
 

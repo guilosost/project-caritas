@@ -18,10 +18,17 @@ if (isset($_SESSION["usuario"])) {
     unset($_SESSION["usuario"]);
 }
 
+
+$ayuda["oid_a"] = "";
+$ayuda["concedida"] = "";
+$_SESSION["ayuda-eliminar"] = $ayuda;
+$_SESSION["ayuda-editar"] = $ayuda;
+
 // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
 // ¿Hay una sesión activa?
 
-
+if (!isset($tipo_ayuda))
+    $tipo_ayuda = "todo";
 
 if (isset($_SESSION["paginacion"]))
     $paginacion = $_SESSION["paginacion"];
@@ -121,12 +128,78 @@ cerrarConexionBD($conexion);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" src="./js/boton.js"></script>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <title>Lista de Ayudas</title>
     <script>
         function submit() {
             document.forms["filtro"].submit();
+        }
+        
+        function editar(oid_a) {
+            console.log("Dentro");
+            console.log(oid_a + "-CONCEDIDA");
+            document.getElementById(oid_a + "-EDITAROFF").classList.add("hide");
+            document.getElementById(oid_a + "-EDITARON").classList.remove("hide");
+            var concedida = document.getElementById(oid_a).innerHTML;
+            var string = '<select class="celda" id="CONCEDIDAPREV" size=1>' +
+                '<option value="Sí"';
+
+                if (concedida == "Sí") {
+                string = string + " selected";
+            }
+
+            string = string + '>Sí</option><option value="No"';
+
+            if (concedida == "No ") {
+                string = string + " selected";
+            }
+
+            string = string + '>No</option>';
+            document.getElementById(oid_a).innerHTML = string;
+        }
+
+        function mandar(oid_a) {
+            var f = document.createElement("form");
+            f.setAttribute('method', "post");
+            f.setAttribute('id', "edicion_dinamica");
+            f.setAttribute('class', "hide");
+            f.setAttribute('action', "../../controlador/acciones/accion_ayuda.php");
+
+            var i = document.createElement("input"); //input element, text
+            i.setAttribute('type', "text");
+            i.setAttribute('name', "concedida");
+            i.setAttribute('id', "concedida_din");
+            var valorConcedida = document.getElementById("CONCEDIDAPREV").value;
+            f.appendChild(i);
+
+            var j = document.createElement("input");
+            j.setAttribute('type', "text");
+            j.setAttribute('name', "oid_a");
+            j.setAttribute('id', "oid_a_din");
+            f.appendChild(j);
+
+            document.getElementsByTagName('body')[0].appendChild(f);
+            document.getElementById("oid_a_din").value = oid_a;
+            document.getElementById("concedida_din").value = valorConcedida;
+
+            console.log(document.getElementById("oid_a_din").value);
+            console.log(document.getElementById("concedida_din").value);
+            //document.getElementById("edicion_dinamica").submit();
+        }
+
+        function cancelar(oid_a) {
+            console.log("Cancelando");
+            console.log(oid_a + "-CONCEDIDA");
+            document.getElementById(oid_a + "-EDITARON").classList.add("hide");
+            document.getElementById(oid_a + "-EDITAROFF").classList.remove("hide");
+            var concedida = document.getElementById(oid_a + "-CONCEDIDA").value;
+            document.getElementById(oid_a).innerHTML = concedida;
+        }
+
+        function eliminar(oid_a) {
+            console.log("Borrado: " + oid_a);
+            document.getElementById("OID_A-eliminar").value = oid_a;
+            document.getElementById("eliminar_ayuda").submit();
         }
     </script>
 </head>
@@ -194,49 +267,69 @@ cerrarConexionBD($conexion);
                                         <?php if ($paginacion["tipoayuda"] == "bolsacomida") {
                                             echo "<td>Comida</td>";
                                             echo "<td> " . $cita['DNI']  . "</td>";
-                                            echo "<td>" . $fila['CONCEDIDA'] . "</td>";
+                                            echo "<td id=". $fila['OID_A'] .">" . $fila['CONCEDIDA'] . "</td>";
                                             echo "<td>" . $fila['SUMINISTRADAPOR'] . "</td>";
                                             echo "<td>" . $comida['BEBE'] . "</td>";
-                                            echo "<td>" . $comida['NIÑO'] . "</td>";
-                                            echo '<td><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
-                        <button id="editar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></button>
-                    </td>';
-                                        } else if ($paginacion["tipoayuda"] == "ayudaeconomica") {
+                                            echo "<td>" . $comida['NIÑO'] . "</td>"; ?>
+                                            <td id="<?php echo $fila["OID_A"]; ?>-EDITAROFF"><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
+                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de borrar"></a>
+                                        </td>
+                                        <td id="<?php echo $fila["OID_A"]; ?>-EDITARON" class="hide">
+                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_cancel(40x36).png" alt="icono de cancelar"></a>
+                                        </td>
+                                       <?php } else if ($paginacion["tipoayuda"] == "ayudaeconomica") {
                                             echo "<td>Económica</td>";
                                             echo "<td> " . $cita['DNI']  . "</td>";
-                                            echo "<td>" . $fila['CONCEDIDA'] . "</td>";
+                                            echo "<td id=". $fila['OID_A'] .">" . $fila['CONCEDIDA'] . "</td>";
                                             echo "<td>" . $fila['SUMINISTRADAPOR'] . "</td>";
                                             echo "<td>" . $ayuda_economica['CANTIDAD'] . "</td>";
                                             echo "<td>" . $ayuda_economica['MOTIVO'] . "</td>";
-                                            echo "<td>" . $ayuda_economica['PRIORIDAD'] . "</td>";
-                                            echo '<td><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
-                        <button id="editar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></button>
-                    </td>';
-                                        } else if ($paginacion["tipoayuda"] == "trabajo") {
+                                            echo "<td>" . $ayuda_economica['PRIORIDAD'] . "</td>"; ?>
+                                            <td id="<?php echo $fila["OID_A"]; ?>-EDITAROFF"><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
+                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de borrar"></a>
+                                        </td>
+                                        <td id="<?php echo $fila["OID_A"]; ?>-EDITARON" class="hide">
+                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_cancel(40x36).png" alt="icono de cancelar"></a>
+                                        </td>
+                                       <?php } else if ($paginacion["tipoayuda"] == "trabajo") {
                                             echo "<td>Trabajo</td>";
                                             echo "<td> " . $cita['DNI']  . "</td>";
-                                            echo "<td>" . $fila['CONCEDIDA'] . "</td>";
+                                            echo "<td id=". $fila['OID_A'] .">" . $fila['CONCEDIDA'] . "</td>";
                                             echo "<td>" . $fila['SUMINISTRADAPOR'] . "</td>";
                                             echo "<td>" . $trabajo['EMPRESA'] . "</td>";
-                                            echo "<td>" . $trabajo['SALARIOAPROXIMADO'] . "</td>";
-                                            echo '<td><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
-                        <button id="editar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></button>
-                    </td>';
-                                        } else {
+                                            echo "<td>" . $trabajo['SALARIOAPROXIMADO'] . "</td>"; ?>
+                                            <td id="<?php echo $fila["OID_A"]; ?>-EDITAROFF"><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
+                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de borrar"></a>
+                                        </td>
+                                        <td id="<?php echo $fila["OID_A"]; ?>-EDITARON" class="hide">
+                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_cancel(40x36).png" alt="icono de cancelar"></a>
+                                        </td>
+                                       <?php } else {
                                             if(isset($comida['BEBE'])) echo "<td>Comida</td>"; else if(isset($ayuda_economica['MOTIVO'])) echo "<td>Económica</td>"; else echo "<td>Trabajo</td>";
                                             echo "<td> " . $cita['DNI']  . "</td>";
-                                            echo "<td>" . $fila['CONCEDIDA'] . "</td>";
-                                            echo "<td>" . $fila['SUMINISTRADAPOR'] . "</td>";
-                                            echo '<td><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
-                        <button id="editar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></button>
-                    </td>';
-                                        }
+                                            echo "<td id=". $fila['OID_A'] .">" . $fila['CONCEDIDA'] . "</td>";
+                                            echo "<td>" . $fila['SUMINISTRADAPOR'] . "</td>"; ?>
+                                            <td id="<?php echo $fila["OID_A"]; ?>-EDITAROFF"><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
+                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de borrar"></a>
+                                        </td>
+                                        <td id="<?php echo $fila["OID_A"]; ?>-EDITARON" class="hide">
+                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['OID_A']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_cancel(40x36).png" alt="icono de cancelar"></a>
+                                        </td>
+                                       <?php }
 
                                         ?>
                                         <input id="oid_a" name="oid_a" value="<?php echo $fila["OID_A"]; ?>" type="hidden" />
                                         <input id="oid_c" name="oid_c" value="<?php echo $fila["OID_C"]; ?>" type="hidden" />
 
-                                        <input id="CONCEDIDA" name="CONCEDIDA" value="<?php echo $fila["CONCEDIDA"]; ?>" type="hidden" />
+                                        <input id="<?php echo $comida["OID_A"]; ?>-CONCEDIDA" name="CONCEDIDA" value="<?php echo $fila["CONCEDIDA"]; ?>" type="hidden" />
 
                                         <input id="SUMINISTRADAPOR" name="SUMINISTRADAPOR" value="<?php echo $fila["SUMINISTRADAPOR"]; ?>" type="hidden" />
 
@@ -261,6 +354,11 @@ cerrarConexionBD($conexion);
             </table>
         </div>
         <nav>
+
+        <form id="eliminar_ayuda" action="../../controlador/eliminaciones/elimina_ayuda.php" method="POST">
+            <input id="OID_A-eliminar" name="oid_a" type="hidden" />
+        </form>
+
             <div class="enlaces">
                 <?php
                 for (

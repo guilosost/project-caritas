@@ -19,8 +19,8 @@ $usuario["telefono"] = "";
 $usuario["ingresos"] = "";
 $usuario["sitlaboral"] = "";
 $usuario["solicitante"] = "";
-$_SESSION["usuario-editar"] = $usuario;
 $_SESSION["usuario-eliminar"] = $usuario;
+$_SESSION["usuario-editar"] = $usuario;
 
 // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
 // ¿Hay una sesión activa?
@@ -76,8 +76,6 @@ cerrarConexionBD($conexion);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <title>Lista de Usuarios</title>
-    <script type="text/javascript" src="../../vista/js/gen_validatorv4.js"></script>
-    <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script>
 </head>
 <script>
     function editar(dni) {

@@ -75,7 +75,21 @@ if(isset($_SESSION["formulario_ayuda"])){
           </div>
         </div>
     <?php }
+}else if (isset($_SESSION["ayuda-editar"])) { 
+  unset($_SESSION["ayuda-editar"]);
+  if (editar_ayuda2($conexion, $ayuda)) {
+      ?>
+      <meta http-equiv="refresh" content="0;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
+    <?php
+  } else {?>
+    <div class="flex">
+        <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+          <p>El ayuda no ha sido editado vía JavaScript, ha ocurrido un error inesperado.</p>
+        </div>
+      </div>
+  <?php }
 }
+
 ?>
     </main>
     <?php cerrarConexionBD($conexion); ?>

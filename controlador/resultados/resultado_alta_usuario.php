@@ -131,7 +131,6 @@ $conexion  = crearConexionBD();
 	}
 } else if (isset($_SESSION["usuario-editar"])) {
 	unset($_SESSION["usuario-editar"]);
-
 	if ($usuario["solicitante"] == "Sí") {
 		if (editar_usuario($conexion, $usuario)) {
 			?>
