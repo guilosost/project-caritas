@@ -213,7 +213,7 @@ cerrarConexionBD($conexion);
     <main>
 
         <div style=" margin-left: -0.6%; margin-right: -0.6%;">
-            <table style="width:100%">
+            <table>
                 <caption>Lista de Ayudas</caption>
                 <tr>
                     <?php 

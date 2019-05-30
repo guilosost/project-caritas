@@ -14,6 +14,11 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
 
 unset($_SESSION["formulario_cita"]);
 
+$cita["oid_c"] = "";
+$cita["fechacita"] = "";
+$_SESSION["cita-eliminar"] = $cita;
+$_SESSION["cita-editar"] = $cita;
+
 // ¿Venimos simplemente de cambiar página o de haber seleccionado un registro ?
 // ¿Hay una sesión activa?
 if (isset($_SESSION["paginacion"]))
@@ -54,8 +59,6 @@ $filas = consulta_paginada($conexion, $query, $pagina_seleccionada, $pag_tam);
 cerrarConexionBD($conexion);
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -68,13 +71,70 @@ cerrarConexionBD($conexion);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" src="./js/boton.js"></script>
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <title>Lista de Citas</title>
+
+    <script>
+        function editar(oid_c) {
+            console.log("Dentro");
+            console.log(oid_c + "-FECHACITA");
+            document.getElementById(oid_c + "-EDITAROFF").classList.add("hide");
+            document.getElementById(oid_c + "-EDITARON").classList.remove("hide");
+            var fech = document.getElementById(oid_c + "-FECHACITA2").value;
+            var array = fech.split("/");
+            var fechaCita = array[2] + "-" + array[1] + "-" + array[0];
+            console.log(fechaCita);
+            var string = '<input id="FECHACITAPREV" type="date" value="' + fechaCita + '"/>';
+            document.getElementById(oid_c + "-FECHACITA").innerHTML = string;
+        }
+
+        function mandar(oid_c) {
+            var f = document.createElement("form");
+            f.setAttribute('method', "post");
+            f.setAttribute('id', "edicion_dinamica");
+            f.setAttribute('class', "hide");
+            f.setAttribute('action', "../../controlador/acciones/accion_cita.php");
+
+            var i = document.createElement("input"); //input element, text
+            i.setAttribute('type', "text");
+            i.setAttribute('name', "fechacita");
+            i.setAttribute('id', "fechacita_din");
+            var valorFechaCita = document.getElementById("FECHACITAPREV").value;
+            f.appendChild(i);
+
+            var j = document.createElement("input");
+            j.setAttribute('type', "text");
+            j.setAttribute('name', "oid_c");
+            j.setAttribute('id', "oid_c_din");
+            f.appendChild(j);
+
+            document.getElementsByTagName('body')[0].appendChild(f);
+            document.getElementById("oid_c_din").value = oid_c;
+            document.getElementById("fechacita_din").value = valorFechaCita;
+
+            console.log(document.getElementById("oid_c_din").value);
+            console.log(document.getElementById("fechacita_din").value);
+            document.getElementById("edicion_dinamica").submit();
+        }
+
+        function cancelar(oid_c) {
+            console.log("Cancelando");
+            console.log(oid_c + "-FECHACITA");
+            document.getElementById(oid_c + "-EDITARON").classList.add("hide");
+            document.getElementById(oid_c + "-EDITAROFF").classList.remove("hide");
+            var fechaCita = document.getElementById(oid_c + "-OLDFECHACITA").value;
+            document.getElementById(oid_c + "-FECHACITA").innerHTML = fechaCita;
+        }
+
+        function eliminar(oid_c) {
+            console.log("Borrado: " + oid_c);
+            document.getElementById("OID_C-eliminar").value = oid_c;
+            console.log(document.getElementById("OID_C-eliminar").value);
+            document.getElementById("eliminar_cita").submit();
+        }
+    </script>
 </head>
-
 <body>
-
     <?php
     include_once("../header.php");
     include_once("../navbar.php");
@@ -82,7 +142,7 @@ cerrarConexionBD($conexion);
     <main>
 
         <div style=" margin-left: -0.6%; margin-right: -0.6%;">
-            <table style="width:100%">
+            <table>
                 <caption>Lista de Citas</caption>
                 <tr>
                     <th>DNI</th>
@@ -104,17 +164,23 @@ cerrarConexionBD($conexion);
                                     <tr>
                                         <td><?php echo $fila["DNI"]; ?></td>
                                         <td><?php echo $fila["NOMBREV"]; ?></td>
-                                        <td><?php echo $fila["FECHACITA"]; ?></td>
+                                        <td id="<?php echo $fila["OID_C"]; ?>-FECHACITA"><?php echo $fila["FECHACITA"]; ?></td>
                                         <td><?php echo $fila["OBJETIVO"]; ?></td>
-                                        <td><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
-                                            <button id="editar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></button>
+                                        <td id="<?php echo $fila["OID_C"]; ?>-EDITAROFF"><button id="mostrar" class="botonTabla" onclick="mandar(this)"><img src="http://localhost:81/project-caritas/vista/img/icono_lupa(40x36).png" alt="icono de mostrar"></button>
+                                            <a class="botonTabla" type=edit onclick="editar('<?php echo $fila['OID_C']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="eliminar('<?php echo $fila['OID_C']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_delete(40x36).png" alt="icono de borrar"></a>
+                                        </td>
+                                        <td id="<?php echo $fila["OID_C"]; ?>-EDITARON" class="hide">
+                                            <a class="botonTabla" type=edit onclick="mandar('<?php echo $fila['OID_C']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_lapiz(40x36).png" alt="icono de editar"></a>
+                                            <a class="botonTabla" type=edit onclick="cancelar('<?php echo $fila['OID_C']; ?>')"><img src="http://localhost:81/project-caritas/vista/img/icono_cancel(40x36).png" alt="icono de cancelar"></a>
                                         </td>
                                     </tr>
                                     <input id="DNI" name="DNI" value="<?php echo $fila["DNI"]; ?>" type="hidden" />
 
                                     <input id="NOMBREV" name="NOMBREV" value="<?php echo $fila["NOMBREV"]; ?>" type="hidden" />
 
-                                    <input id="FECHACITA" name="FECHACITA" value="<?php echo $arrayFecha[0]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila["OID_C"]; ?>-OLDFECHACITA" name="OLDFECHACITA" value="<?php echo $fila["FECHACITA"]; ?>" type="hidden" />
+                                    <input id="<?php echo $fila["OID_C"]; ?>-FECHACITA2" name="FECHACITA" value="<?php echo $arrayFecha[0]; ?>" type="hidden" />
 
                                     <input id="OBJETIVO" name="OBJETIVO" value="<?php echo $fila["OBJETIVO"]; ?>" type="hidden" />
 
@@ -131,6 +197,11 @@ cerrarConexionBD($conexion);
             </table>
         </div>
         <nav>
+
+        <form id="eliminar_cita" action="../../controlador/eliminaciones/elimina_cita.php" method="POST">
+            <input id="OID_C-eliminar" name="oid_c" type="hidden" />
+        </form>
+
             <div class="enlaces">
                 <?php
                 for ($pagina = 1; $pagina <= $total_paginas; $pagina++)

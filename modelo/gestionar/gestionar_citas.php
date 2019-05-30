@@ -97,6 +97,26 @@ function editar_cita($conexion,$cita) {
     }
 }
 
+function editar_cita2($conexion,$cita) {
+    date_default_timezone_set('UTC');
+    $fecha = $cita["fechacita"];
+
+    list($año, $mes, $dia) = split('[/.-]', $fecha);
+    $fechaCita = "$dia/$mes/$año";
+
+    try {
+    $consulta = "UPDATE  CITAS  SET FECHACITA=:fechacita WHERE oid_c =:oid_c";
+   $stmt = $conexion->prepare($consulta);
+   $stmt->bindParam(':oid_c',$cita["oid_c"]);
+   $stmt->bindParam(':fechacita',$fechaCita);
+   $stmt->execute();
+   return true;
+} catch(PDOException $e) {
+    echo $e->getMessage();
+    return false;
+}
+}
+
 function consultarUsuarioSolicitante($conexion,$dni) {
     $consulta = "SELECT COUNT(*) AS TOTAL FROM USUARIOS WHERE DNI=:dni AND SOLICITANTE=:si";
   $si="Sí";

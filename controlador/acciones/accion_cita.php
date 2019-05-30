@@ -22,8 +22,13 @@ if (isset($_SESSION["formulario_cita"])) {
 	$cita_aux = $_SESSION["cita"];
 	$cita["oid_c"] = $cita_aux["oid_c"]; 
     $_SESSION["cita"] = $cita;
+}  else if (isset($_SESSION["cita-editar"])) {
+	$cita['oid_c'] = $_REQUEST["oid_c"];
+	$cita['fechacita'] = $_REQUEST["fechacita"];
+	
+	$_SESSION["cita-editar"] = $cita;
 } else {
-	Header("Location: ../../controlador/altas/alta_cita.php");
+	Header("Location: ../../vista/listas/lista_cita.php");
 }
 
 $conexion = crearConexionBD();
@@ -34,7 +39,9 @@ if (count($errores)>0) {
 	$_SESSION["errores"] = $errores;
  if (isset($_SESSION["cita"])) {
 	Header('Location:../../controlador/ediciones/editar_cita.php');
- }else{
+}  else if (isset($_SESSION["cita-editar"])) {
+	Header('Location:../../controlador/ediciones/editar_cita.php');
+}else{
 	Header('Location:../../controlador/altas/alta_cita.php');
  }
 } else
@@ -44,7 +51,7 @@ if (count($errores)>0) {
 function validarDatosCita($conexion, $cita)
 {
 	$errores=array();
-	
+	if(!isset($_SESSION["cita-editar"])) {
 	if ($cita["fechacita"] == "") {
 		$errores[] = "<p>La fecha de la cita no puede estar vacía.</p>";
 	} 
@@ -71,6 +78,11 @@ function validarDatosCita($conexion, $cita)
 		$errores[] = "<p>El nombre del voluntario responsable de la cita no puede estar vacío.</p>";
 	}else if(consultarVoluntarioRepetido($conexion,$cita["nombrev"])==0){
 		$errores[] = "<p>El voluntario especificado no existe.</p>";
+	}
+	} else {
+		if ($cita["fechacita"] == "") {
+			$errores[] = "<p>La fecha de la cita no puede estar vacía.</p>";
+		} 
 	}
 	return $errores;
 }

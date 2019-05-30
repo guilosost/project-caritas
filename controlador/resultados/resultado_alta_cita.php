@@ -9,6 +9,8 @@ if (isset($_SESSION["formulario_cita"])) {
   $cita = $_SESSION["formulario_cita"];
 } else if (isset($_SESSION["cita"])) {
   $cita = $_SESSION["cita"];
+}else if (isset($_SESSION["cita-editar"])) { 
+  $cita = $_SESSION["cita-editar"];
 } else {
   Header("Location: ../../vista/listas/lista_cita.php");
 }
@@ -76,6 +78,19 @@ $conexion  = crearConexionBD();
       </div>
   <?php
   }
+}else if (isset($_SESSION["cita-editar"])) { 
+  unset($_SESSION["cita-editar"]);
+  if (editar_cita2($conexion, $cita)) {
+      ?>
+      <meta http-equiv="refresh" content="0;url=http://localhost:81/project-caritas/vista/listas/lista_cita.php" />
+    <?php
+  } else {?>
+    <div class="flex">
+        <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+          <p>La cita no ha sido editada vía JavaScript, ha ocurrido un error inesperado.</p>
+        </div>
+      </div>
+  <?php }
 }
 ?>
 

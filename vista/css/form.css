@@ -89,6 +89,10 @@ input {
     padding-bottom: 5px;
 }
 
+table {
+    width: 99.9%;
+}
+
 table, th, td {
     border-collapse: collapse;
 }
