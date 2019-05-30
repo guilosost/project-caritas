@@ -9,7 +9,7 @@ require_once(MODELO . "/gestionBD.php");
 <head>
 	<meta charset="utf-8">
 	<title>Sobre nosotros</title>
-    <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
+	<link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
 
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -63,6 +63,7 @@ require_once(MODELO . "/gestionBD.php");
 		.reveal .controls {
 			bottom: 11%;
 		}
+
 	</style>
 </head>
 
@@ -72,7 +73,8 @@ require_once(MODELO . "/gestionBD.php");
 	include(VISTA . "navbar.php");
 	?>
 	<div class="reveal">
-
+		<?php
+		?>
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>

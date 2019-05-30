@@ -38,9 +38,8 @@ if(isset($_SESSION["formulario_ayuda"])){
     $ayuda_aux = $_SESSION["ayuda"];
 	$ayuda["oid_a"] = $ayuda_aux["oid_a"]; 
     $_SESSION["ayuda"] = $ayuda;
-} else if (isset($_SESSION["voluntario-editar"])) {
-	$ayuda_aux = $_SESSION["ayuda"];
-	$ayuda["oid_a"] = $ayuda_aux["oid_a"]; 
+} else if (isset($_SESSION["ayuda-editar"])) {
+	$ayuda["oid_a"] = $_REQUEST["oid_a"]; 
     $ayuda['concedida'] = $_REQUEST["concedida"];
 
 	$_SESSION["ayuda-editar"] = $ayuda;
@@ -57,15 +56,16 @@ if (count($errores)>0) {
     $_SESSION["errores"] = $errores;
     if(isset($_SESSION["formulario_ayuda"])){
     Header('Location: ../../controlador/altas/alta_ayuda.php');
-    }else if (isset($_SESSION["usuario"])) {
+    }else if (isset($_SESSION["ayuda"])) {
         Header('Location: ../../controlador/ediciones/editar_ayuda.php');
     }
 } else {
-    // Si todo va bien, vamos a la página de éxito (inserción del usuario en la base de datos)
+    // Si todo va bien, vamos a la página de éxito (inserción del ayuda en la base de datos)
     Header('Location: ../../controlador/resultados/resultado_alta_ayuda.php');
 }
 function validarDatosAyuda($conexion, $ayuda){
 
+    if(!isset($_SESSION["ayuda-editar"])) {
     if ($ayuda["suministradapor"] == "" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$ayuda["suministradapor"])) {
     $errores[] = "<p>El campo de suministrador de la ayuda no puede estar vacío ni contener caracteres numéricos.</p>";
     } 
@@ -110,6 +110,7 @@ function validarDatosAyuda($conexion, $ayuda){
     if ($ayuda["salarioaproximado"] == "" || !preg_match("/^[0-9]+$/",$ayuda["salarioaproximado"])) {
         $errores[] = "<p>El salario aproximado no puede estar vacío.</p>";
     }
+}
 }
     return $errores;
 }

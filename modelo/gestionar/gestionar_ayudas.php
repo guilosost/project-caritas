@@ -166,3 +166,16 @@ function editar_ayuda($conexion,$ayuda) {
     return $e->getMessage();
 }
 }
+
+function editar_ayuda2($conexion,$ayuda) {
+    try {
+        $consulta = "UPDATE  AYUDAS  SET CONCEDIDA=:concedida WHERE OID_A =:oid_a";
+        $stmt = $conexion->prepare($consulta);
+        $stmt->bindParam(':oid_a',$ayuda["oid_a"]);
+        $stmt->bindParam(':concedida',$ayuda["concedida"]);
+        $stmt->execute();
+    return $ayuda["oid_a"];
+} catch(PDOException $e) {
+    return $e->getMessage();
+}
+}

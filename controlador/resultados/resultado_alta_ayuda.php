@@ -1,20 +1,19 @@
 <?php
 session_start();
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
-require_once(MODELO."/GestionBD.php");
-require_once(GESTIONAR."gestionar_ayudas.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . '/project-caritas/rutas.php');
+require_once(MODELO . "/GestionBD.php");
+require_once(GESTIONAR . "gestionar_ayudas.php");
 
 if (isset($_SESSION["formulario_ayuda"])) {
-    $ayuda = $_SESSION["formulario_ayuda"];
-    
-    }
-else if (isset($_SESSION["ayuda"])) {
-        $ayuda = $_SESSION["ayuda"];
-        
-}else{
-            Header("Location: ../../vista/listas/lista_ayuda.php"); 
-        }
+  $ayuda = $_SESSION["formulario_ayuda"];
+} else if (isset($_SESSION["ayuda"])) {
+  $ayuda = $_SESSION["ayuda"];
+} else if (isset($_SESSION["ayuda-editar"])) { 
+  $ayuda = $_SESSION["ayuda-editar"];
+}else {
+    Header("Location: ../../vista/listas/lista_ayuda.php");
+}
 
 
 $conexion  = crearConexionBD();
@@ -23,7 +22,7 @@ $conexion  = crearConexionBD();
 <html lang="es">
 
 <head>
-<link rel="stylesheet" type="text/css" href="../../vista/css/header-footer.css">
+  <link rel="stylesheet" type="text/css" href="../../vista/css/header-footer.css">
   <link rel="stylesheet" type="text/css" href="../../vista/css/button.css">
   <link rel="stylesheet" type="text/css" href="../../vista/css/form.css">
   <link rel="stylesheet" type="text/css" href="../../vista/css/navbar.css">
@@ -33,67 +32,67 @@ $conexion  = crearConexionBD();
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Alta de Ayuda: Resultado</title>
   <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
- 
+
 </head>
 
 <body>
-    <?php include("../../vista/header.php");
-    include("../../vista/navbar.php");
-if(isset($_SESSION["formulario_ayuda"])){
+  <?php include("../../vista/header.php");
+  include("../../vista/navbar.php");
+  if (isset($_SESSION["formulario_ayuda"])) {
     unset($_SESSION["formulario_ayuda"]);
     if (alta_ayuda($conexion, $ayuda)) {
-        ?>
-        <div class="flex">
-          <div class="resultado">
-            <p>La ayuda ha sido creada correctamente, redirigiendo al listado... </p>
-          </div>
-        </div>
-        <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
-      <?php
-    } else {?>
-      <div class="flex">
-          <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
-            <p>La ayuda no ha sido creada, ha ocurrido un error inesperado.</p>
-          </div>
-        </div>
-    <?php }
-} else if (isset($_SESSION["ayuda"])){
-    unset($_SESSION["ayuda"]);
-    if(editar_ayuda($conexion,$ayuda)){
-       ?>
-        <div class="flex">
-          <div class="resultado">
-            <p>La ayuda ha sido editada correctamente, redirigiendo al listado... </p>
-          </div>
-        </div>
-        <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
-      <?php
-    } else {?>
-      <div class="flex">
-          <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
-            <p>La ayuda no ha sido editada, ha ocurrido un error inesperado.</p>
-          </div>
-        </div>
-    <?php }
-}else if (isset($_SESSION["ayuda-editar"])) { 
-  unset($_SESSION["ayuda-editar"]);
-  if (editar_ayuda2($conexion, $ayuda)) {
       ?>
-      <meta http-equiv="refresh" content="0;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
-    <?php
-  } else {?>
-    <div class="flex">
-        <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
-          <p>El ayuda no ha sido editado vía JavaScript, ha ocurrido un error inesperado.</p>
+      <div class="flex">
+        <div class="resultado">
+          <p>La ayuda ha sido creada correctamente, redirigiendo al listado... </p>
         </div>
       </div>
-  <?php }
+      <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
+    <?php
+  } else { ?>
+      <div class="flex">
+        <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+          <p>La ayuda no ha sido creada, ha ocurrido un error inesperado.</p>
+        </div>
+      </div>
+    <?php }
+} else if (isset($_SESSION["ayuda"])) {
+  unset($_SESSION["ayuda"]);
+  if (editar_ayuda($conexion, $ayuda)) {
+    ?>
+      <div class="flex">
+        <div class="resultado">
+          <p>La ayuda ha sido editada correctamente, redirigiendo al listado... </p>
+        </div>
+      </div>
+      <meta http-equiv="refresh" content="3;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
+    <?php
+  } else { ?>
+      <div class="flex">
+        <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+          <p>La ayuda no ha sido editada, ha ocurrido un error inesperado.</p>
+        </div>
+      </div>
+    <?php }
+} else if (isset($_SESSION["ayuda-editar"])) {
+  unset($_SESSION["ayuda-editar"]);
+  if (editar_ayuda2($conexion, $ayuda)) {
+    ?>
+      <meta http-equiv="refresh" content="0;url=http://localhost:81/project-caritas/vista/listas/lista_ayuda.php" />
+    <?php
+  } else { ?>
+      <div class="flex">
+        <div class="resultado" style="background: rgba(224, 10, 10, 0.9);">
+          <p>La ayuda no ha sido editada vía JavaScript, ha ocurrido un error inesperado.</p>
+        </div>
+      </div>
+    <?php }
 }
 
 ?>
-    </main>
-    <?php cerrarConexionBD($conexion); ?>
-    <?php include("../../vista/footer.php");  ?>
+  </main>
+  <?php cerrarConexionBD($conexion); ?>
+  <?php include("../../vista/footer.php");  ?>
 </body>
 
-</html> 
+</html>

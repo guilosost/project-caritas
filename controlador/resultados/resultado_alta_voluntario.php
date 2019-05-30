@@ -12,7 +12,7 @@ if (isset($_SESSION["formulario_voluntario"])) {
 }else if (isset($_SESSION["voluntario-editar"])) { 
   $voluntario = $_SESSION["voluntario-editar"];
 }else {
-    Header("Location: ../../controlador/altas/alta_voluntario.php");
+    Header("Location: ../../vista/listas/lista_voluntario.php");
 }
 
 $conexion  = crearConexionBD();

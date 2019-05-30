@@ -184,7 +184,7 @@ cerrarConexionBD($conexion);
 
             console.log(document.getElementById("oid_a_din").value);
             console.log(document.getElementById("concedida_din").value);
-            //document.getElementById("edicion_dinamica").submit();
+            document.getElementById("edicion_dinamica").submit();
         }
 
         function cancelar(oid_a) {
