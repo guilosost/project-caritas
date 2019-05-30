@@ -39,18 +39,20 @@ if (isset($_SESSION["errores"])) {
     <?php
     include("../../vista/header.php");
 
-
-
-    if (isset($errores) && count($errores) > 0) {
-        //    echo "<div id=\"div_errores\" class=\"error\">";
-        echo "<h4> Errores en el formulario:</h4>";
-        foreach ($errores as $error) {
-            echo $error;
-        }
-        //    echo "</div>";
-    }
     ?>
     <div class="flex">
+    <?php
+        //Mostramos los errores del formulario enviado previamente
+        if (isset($errores) && count($errores) > 0) {
+           // echo "<script> error(); </script>";
+            echo "<div class='error' style='margin-top: 5%;'>";
+            echo "<h4> Errores en el formulario:</h4>";
+            foreach ($errores as $error) {
+                echo $error;
+            }
+            echo "</div>";
+        }
+        ?>
         <div class="form" style="text-align:center; margin-top: 5%">
             <h2 class="form-h2">Iniciar sesión</h2>
 

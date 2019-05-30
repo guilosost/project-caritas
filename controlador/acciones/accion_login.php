@@ -41,7 +41,7 @@ function validarDatosLogIn($usuariologin,$conexion){
 //	}
 
 	if(consultarVoluntarioRepetido($conexion, $usuariologin) == 0 ){
-		$errores[] = "<p>El usuario/contraseña es incorrecto</p>";
+		$errores[] = "<p>El usuario/contraseña es incorrecto.</p>";
 	}
 	return $errores;
 	}
