@@ -7,6 +7,10 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
+unset($_SESSION["ayuda"]);
+unset($_SESSION["ayuda-eliminar"]);
+unset($_SESSION["ayuda-editar"]);
+
 if (!isset($_SESSION["formulario_ayuda"])) {
     $formulario['tipoayuda'] = "";
     $formulario['suministradapor'] = "";
@@ -49,7 +53,6 @@ $conexion = crearConexionBD();
     <script type = "text/javascript" src = "../../vista/js/jquery_form.js" ></script>
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
     <script>
-        <!--
         function showHide(elm) {
             var comida = document.getElementById("comida");
             var economica = document.getElementById("economica");

@@ -11,6 +11,10 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
 $conexion = crearConexionBD();
 $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
 
+unset($_SESSION["formulario_usuario"]);
+unset($_SESSION["usuario-editar"]);
+unset($_SESSION["usuario-eliminar"]);
+
 if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/listas/lista_usuario.php") {
         $usuario["dni"] = $_REQUEST["DNI"];
 		$usuario["apellidos"] = $_REQUEST["APELLIDOS"];

@@ -6,12 +6,14 @@ require_once("../../modelo/gestionar/gestionar_voluntarios.php");
 if (isset($_SESSION["formulario_voluntario"])) {
 	$voluntario['nombrev'] = $_REQUEST["nombrev"];
 	$voluntario['password'] = $_REQUEST["password"];
+	$voluntario['password2'] = $_REQUEST["password2"];
 	$voluntario['permisos'] = $_REQUEST["permisos"];
 	
 	$_SESSION["formulario_voluntario"] = $voluntario;
 }else if (isset($_SESSION["voluntario"])) {
 	$voluntario['nombrev'] = $_REQUEST["nombrev"];
 	$voluntario['password'] = $_REQUEST["password"];
+	$voluntario['password2'] = $_REQUEST["password2"];
 	$voluntario['permiso'] = $_REQUEST["permiso"];
 	
 	$_SESSION["voluntario"] = $voluntario;

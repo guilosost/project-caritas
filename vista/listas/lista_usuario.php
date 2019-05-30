@@ -7,10 +7,12 @@ require_once(GESTIONAR . "gestionar_usuarios.php");
 require_once(VISTA . "/paginacion_consulta.php");
 
 $conexion = crearConexionBD();
-unset($_SESSION["formulario_usuario"]);
 if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
+
+unset($_SESSION["formulario_usuario"]);
+unset($_SESSION["usuario"]);
 
 $usuario["dni"] = "";
 $usuario["nombre"] = "";
@@ -198,28 +200,28 @@ cerrarConexionBD($conexion);
         let regex2 = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
         
         if (valorApellidos.length == 0) {
-            alert("Introduzca los apellidos");
+            alert("Introduzca los apellidos.");
         } else if (!regex.exec(valorApellidos)) {
-            alert('Los apellidos deben contener letras y espacios');
+            alert('Los apellidos deben contener letras y espacios.');
         
         } else if (valorNombre.length == 0) {
-            alert('Introduzca el nombre');
+            alert('Introduzca el nombre.');
         } else if (!regex2.exec(valorNombre)) {
-            alert('El nombre debe contener letras y espacios');
+            alert('El nombre debe contener letras y espacios.');
         
         } else if (valorTelefono.length == 0 || !(valorTelefono.length == 9)) {
-            alert('Introduzca un número de teléfono');
+            alert('Introduzca un número de teléfono.');
         } else if (isNaN(valorTelefono) || valorTelefono[0] === '-' || valorTelefono[0] === '+') {
-            alert('El teléfono debe contener solo números');
+            alert('El teléfono debe contener solo números.');
         
         } else if (valorIngresos.length == 0) {
             alert('Introduzca los ingresos');
         } else if (isNaN(valorIngresos) || valorIngresos[0] === '-' || valorIngresos[0] === '+') {
-            alert('Los ingresos deben contener solo números');
+            alert('Los ingresos deben contener solo números.');
         } else if (valorSitlaboral === "En paro" && !(valorIngresos === "672")) {
-            alert("Los ingresos no son los esperados estando en paro");
+            alert("Los ingresos no son los esperados estando en paro.");
         } else if (minusvalia === 'Sí' && !(valorIngresos > 0)) {
-            alert("Los ingresos no son los esperados ya que el usuario presenta una minusvalía")
+            alert("Los ingresos no son los esperados ya que el usuario presenta una minusvalía.")
         
         } else {
             document.getElementById("edicion_dinamica").submit();

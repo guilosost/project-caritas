@@ -19,7 +19,7 @@ function passwordConfirmation(){
     }else{
         var error = "";
     }
-    passconfirm.setCustomValidity(error);
+    confirmation.setCustomValidity(error);
     return error;
 }
 

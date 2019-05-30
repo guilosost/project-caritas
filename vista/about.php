@@ -80,9 +80,6 @@ require_once(MODELO . "/gestionBD.php");
 			<section>
 				<h1>Project-Cáritas</h1>
 				<h3>Sobre nosotros</h3>
-				<p>
-					<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> and <a href="https://github.com/hakimel/reveal.js/graphs/contributors">contributors</a></small>
-				</p>
 			</section>
 
 			<section>
@@ -95,7 +92,7 @@ require_once(MODELO . "/gestionBD.php");
 				</section>
 				<section>
 					<h2>¿Quiénes somos?</h2>
-					<p>Alumnos en pos de entender los entresijos de la informática e intentado aprobar IISSI con la mejor nota posible.</p>
+					<p>Un grupo de alumnos con ganas de entender los entresijos de la informática e intentado superar IISSI con la mejor nota posible.</p>
 				</section>
 			</section>
 
@@ -107,8 +104,8 @@ require_once(MODELO . "/gestionBD.php");
 				</section>
 				<section>
 					<h2>¿El objetivo?</h2>
-					<p>Crear una base de datos operativa en Oracle SQL Developer para finalmente hacer uso de ella a través
-						de distintas funciones y procedimientos tanto de PHP como de JavaScript.</p>
+					<p>Crear una base de datos operativa en Oracle para finalmente hacer uso de ella a través de
+						una interfaz web basada en funciones y procedimientos tanto de PHP como de JavaScript.</p>
 					<a href="#" class="navigate-down">¿Te interesa?<br>
 						<img width="17" height="23" data-src="http://localhost:81/project-caritas/vista/img/low_arrow.png" alt="Down arrow">
 					</a>
@@ -119,8 +116,8 @@ require_once(MODELO . "/gestionBD.php");
 			<section>
 				<section>
 					<h2>Desarrollo</h2>
-					<p>Este proyecto sentó sus bases gracias a los contactos de Enrique Merino con la parroquia de San Juan de Aznalfarache.
-						A través de varias reuniones con nuestro cliente en la parroquia pudimos modelar la base de datos en SQL, evaluada en
+					<p>Este proyecto sentó sus bases gracias a los contactos de Enrique con la parroquia de San Juan de Aznalfarache.
+						A través de varias reuniones con nuestro cliente pudimos modelar la base de datos en SQL, evaluada en
 						el 1<sup>er</sup> cuatrimestre de la asignatura.
 					</p>
 				</section>

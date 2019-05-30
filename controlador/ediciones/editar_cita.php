@@ -7,6 +7,10 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
+unset($_SESSION["formulario_cita"]);
+unset($_SESSION["cita-eliminar"]);
+unset($_SESSION["cita-editar"]);
+
 if (isset($_SESSION["cita"])) {
     $cita = $_SESSION["cita"];
 } else {
@@ -69,10 +73,10 @@ $conexion = crearConexionBD();
                     <fieldset>
                         <legend>Información básica de la cita</legend>
                         <label for="dni">DNI del solicitante: </label>
-                        <input class="celda" name="dni" placeholder="12345678X" type="text" maxlength="10" value="<?php echo $cita["dni"] ?>" />
+                        <input class="celda" name="dni" placeholder="12345678X" type="text" maxlength="10" value="<?php echo $cita["dni"] ?>" readonly />
                         <br>
                         <label for="nombrev" required>Nombre del voluntario:</label>
-                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $cita['nombrev']; ?>" />
+                        <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $cita['nombrev']; ?>" required />
                         <br>
                         <label for="fechacita" required>Fecha de la cita:</label>
                         <input name="fechacita" type="date" value="<?php echo $fechaDef; ?>" required />
@@ -83,7 +87,6 @@ $conexion = crearConexionBD();
                         <label for="observaciones" required>Observaciones:</label><br>
                         <textarea class="fillable" name="observaciones" maxlength="590" required ><?php echo $cita['observaciones'];?></textarea>
                     </fieldset>
-                    <input style="float:left" type="submit" value="Eliminar">
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_cita.php'">Cancelar</a>
                         <input type="submit" value="Editar">
@@ -94,22 +97,19 @@ $conexion = crearConexionBD();
     </div>
     <script type="text/javascript">
         var frmvalidator = new Validator("altaCita");
-        var solicitante = document.forms["altaUsuario"]["solicitante"].value;
-        var poblacion = document.forms["altaUsuario"]["poblacion"].value;
-
         frmvalidator.EnableMsgsTogether();
 
         frmvalidator.addValidation("dni", "req", "Introduzca el DNI.");
         frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI en el siguiente formato: 12345678A");
 
-        frmvalidator.addValidation("nombrev", "req", "Introduzca el nombre");
-        frmvalidator.addValidation("nombrev", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El nombre solo puede contener caracteres alfabéticos.");
+        frmvalidator.addValidation("nombrev", "req", "Introduzca el nombre.");
+        frmvalidator.addValidation("nombrev", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El nombre solo puede contener caracteres alfabéticos.");
 
-        frmvalidator.addValidation("objetivo", "req", "Introduzca el objetivo de la cita");
-        frmvalidator.addValidation("objetivo", "regexp=^[a-zA-Z Ññáéíóú\\s]", "El objetivo solo puede contener caracteres alfabéticos.");
+        frmvalidator.addValidation("objetivo", "req", "Introduzca el objetivo de la cita.");
+        frmvalidator.addValidation("objetivo", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El objetivo solo puede contener caracteres alfabéticos.");
 
-        /* frmvalidator.addValidation("observaciones", "req", "Introduzca alguna observacion");
-        frmvalidator.addValidation("observaciones", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Las observaciones deben de constar de letras y espacios"); */
+        frmvalidator.addValidation("observaciones", "req", "Introduzca alguna observacion.");
+        frmvalidator.addValidation("observaciones", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "Las observaciones solo pueden contener caracteres alfabéticos.");
     </script> 
     <?php
     include("../../vista/footer.php");

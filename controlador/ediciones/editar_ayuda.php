@@ -7,6 +7,10 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
+unset($_SESSION["formulario_ayuda"]);
+unset($_SESSION["ayuda-eliminar"]);
+unset($_SESSION["ayuda-editar"]);
+
 if (isset($_SESSION["ayuda"])) {
     $ayuda = $_SESSION["ayuda"];
 } else {

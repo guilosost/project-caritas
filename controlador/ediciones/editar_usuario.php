@@ -12,8 +12,9 @@ if (isset($_SESSION["usuario"])) {
 } else {
     Header("Location:../../vista/listas/lista_usuario.php");
 }
-
+unset($_SESSION["formulario_usuario"]);
 unset($_SESSION["usuario-editar"]);
+unset($_SESSION["usuario-eliminar"]);
 
 if (isset($_SESSION["errores"])) {
     $errores = $_SESSION["errores"];
@@ -188,7 +189,7 @@ $conexion = crearConexionBD();
         </div>
 
         <div class="botones">
-            <a class="cancel" type="cancel" onclick="javascript:window.location='www.google.es';">Cancelar</a>
+            <a class="cancel" type="cancel" href="../../vista/listas/lista_usuario.php">Cancelar</a>
             <input type="submit" value="Editar">
         </div>
         </form>
@@ -203,10 +204,10 @@ $conexion = crearConexionBD();
         frmvalidator.EnableMsgsTogether();
 
         frmvalidator.addValidation("nombre", "req", "Introduzca el nombre.");
-        frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El nombre solo puede contener caracteres alfabéticos.");
+        frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El nombre solo puede contener caracteres alfabéticos.");
 
         frmvalidator.addValidation("apellidos", "req", "Introduzca los apellidos.");
-        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "Los apellidos solo pueden contener caracteres alfabéticos.");
+        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "Los apellidos solo pueden contener caracteres alfabéticos.");
 
         frmvalidator.addValidation("dni", "req", "Introduzca el DNI");
         frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI en el siguiente formato: 12345678A");
@@ -238,7 +239,7 @@ $conexion = crearConexionBD();
             frmvalidator.addValidation("gastosfamilia", "num", "Introduzca los gastos familiares con caracteres numéricos.");
 
             frmvalidator.addValidation("poblacion", "req", "Introduzca la población");
-            frmvalidator.addValidation("poblacion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "La población letras y espacios");
+            frmvalidator.addValidation("poblacion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "Introduzca la población con letras y espacios.");
 
             frmvalidator.addValidation("domicilio", "req", "Introduzca el domicilio.");
 
@@ -247,12 +248,12 @@ $conexion = crearConexionBD();
 
             frmvalidator.addValidation("proteccionDatos", "shouldselchk=on", "El solicitante debe aceptar la Ley de Protección de Datos.");
 
-        } else if (solicitante == "No") {
+        } else {
             frmvalidator.addValidation("dniSol", "req", "Introduzca el DNI del solicitante.");
             frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca el DNI en el siguiente formato: 12345678A");
 
             frmvalidator.addValidation("parentesco", "req", "Introduzca el parentesco con el solicitante.");
-            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El parentesco debe contener letras y espacios.");
+            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El parentesco debe contener letras y espacios.");
         }
     </script>
     <?php

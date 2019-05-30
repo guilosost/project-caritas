@@ -7,6 +7,10 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
 
+unset($_SESSION["formulario_voluntario"]);
+unset($_SESSION["voluntario-editar"]);
+unset($_SESSION["voluntario-eliminar"]);
+
 if (isset($_SESSION["voluntario"])) {
     $voluntario = $_SESSION["voluntario"];
 } else {
@@ -37,28 +41,27 @@ $conexion = crearConexionBD();
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
-    <script type = "text/javascript" src = "../../vista/js/validacion_voluntario.js" ></script>
+    <script type="text/javascript" src="../../vista/js/validacion_voluntario.js"></script>
 </head>
 
 <body background="../../vista/img/background.png">
-<script>
-        
-    		$(document).ready(function() {
-			$("#altaVoluntario").on("submit", function() {
-				return validateForm();
+    <script>
+        $(document).ready(function() {
+            $("#altaVoluntario").on("submit", function() {
+                return validateForm();
             });
         });
-</script>
+    </script>
     <?php
     include("../../vista/header.php");
     include("../../vista/navbar.php");
     ?>
 
-<div class="flex">
-<?php
+    <div class="flex">
+        <?php
         //Mostramos los errores del formulario enviado previamente
         if (isset($errores) && count($errores) > 0) {
-           // echo "<script> error(); </script>";
+            // echo "<script> error(); </script>";
             echo "<div class='error'>";
             echo "<h4> Errores en el formulario:</h4>";
             foreach ($errores as $error) {
@@ -74,24 +77,24 @@ $conexion = crearConexionBD();
                     <fieldset>
                         <legend>Información básica del voluntario</legend>
 
-                        <label for="nombrev" >Nombre:</label>
+                        <label for="nombrev">Nombre:</label>
                         <input class="celda" name="nombrev" type="text" maxlength="40" value="<?php echo $voluntario['nombrev']; ?>" readonly style="margin-right: 4%;" />
                         <progress max="100" value="0" id="strength" onchange="progressValue(this)"></progress>
                         <br>
                         <label for="contraseña" required>Contraseña:</label>
-                        <input class="celda"  id="pass" name="password" type="password" style="width: 25%;" maxlength="40" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordValidation();"/>                        
+                        <input class="celda" id="pass" name="password" type="password" style="width: 25%;" maxlength="20" value="<?php echo $voluntario['contraseña']; ?>" required />
                         <label for="password2" required>Repita la contraseña:</label>
-                        <input id="confirmpass" name="password2" type="password" style="width: 25%;" maxlength="40" value="<?php echo $voluntario['contraseña']; ?>" oninput="passwordConfirmation();" required /><br>
+                        <input id="confirmpass" name="password2" type="password" style="width: 25%;" maxlength="20" value="<?php echo $voluntario['contraseña']; ?>" required /><br>
 
                         <label for="permiso" required>Permisos:</label>
-                        <input type="radio" name="permiso" value="Sí"<?php if ($voluntario['permiso'] == "Sí") echo "checked"?>> Administrador
-                        <input type="radio" name="permiso" value="No"<?php if ($voluntario['permiso'] == "No ") echo "checked"?>> Voluntario estándar<br>
+                        <input type="radio" id="checkSi" name="permiso" value="Sí" <?php if ($voluntario['permiso'] == "Sí") echo "checked" ?>> Administrador
+                        <input type="radio" id="checkNo" name="permiso" value="No" <?php if ($voluntario['permiso'] == "No ") echo "checked" ?>> Voluntario estándar<br>
 
                     </fieldset>
 
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_voluntario.php'">Cancelar</a>
-                        <input type="submit" value="Editar" >
+                        <a type=submit onclick="form_validation()">Editar</a>
                     </div>
                 </form>
             </div>
@@ -102,60 +105,84 @@ $conexion = crearConexionBD();
     cerrarConexionBD($conexion);
     ?>
     <script type="text/javascript">
+        function form_validation() {
+            var pass = document.getElementById("pass").value;
+            var pass2 = document.getElementById("confirmpass").value;
+            var checkSi = document.getElementById("checkSi").checked;
+            var checkNo = document.getElementById("checkNo").checked;
+
+            var valid = true;
+            valid = valid && (pass.length >= 5);
+            var hasNumber = /\d/;
+            var hasSpace = /\n/;
+            var hasUpperCases = /[A-Z]/;
+            valid = valid && (hasNumber.test(pass)) && (hasUpperCases.test(pass));
+
+            if (!valid) {
+                alert("La contraseña debe incluir al menos una mayúscula y una minúscula, un número y mínimo 5 caracteres.");
+            } else if (!(pass === pass2)) {
+                alert("Las contraseñas introducidas no coinciden.");
+            } else if (!(checkSi || checkNo)) {
+                alert("Al menos un permiso debe estar seleccionado.")
+            } else {
+                document.getElementById("altaVoluntario").submit();
+            }
+        }
+
         var pass = document.getElementById("pass")
-        pass.addEventListener('keyup', function(){
+        pass.addEventListener('keyup', function() {
             checkPassword(pass.value);
         })
 
         function barColor(color) {
-        // Create our stylesheet
-        var style = document.createElement('style');
-        style.innerHTML =
-            'progress::-webkit-progress-value {' +
-            'border-radius: 12px;' +
-            'background: ' + color + ';' +
-            'box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), 0 2px 5px 0px rgba(0,0,0,0.3);' +
-            '}';
+            // Create our stylesheet
+            var style = document.createElement('style');
+            style.innerHTML =
+                'progress::-webkit-progress-value {' +
+                'border-radius: 12px;' +
+                'background: ' + color + ';' +
+                'box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), 0 2px 5px 0px rgba(0,0,0,0.3);' +
+                '}';
 
-        // Get the first script tag
-        var ref = document.querySelector('script');
+            // Get the first script tag
+            var ref = document.querySelector('script');
 
-        // Insert our new styles before the first script tag
-        ref.parentNode.insertBefore(style, ref);
-    }
+            // Insert our new styles before the first script tag
+            ref.parentNode.insertBefore(style, ref);
+        }
 
-    function checkPassword(password) {
-        var strengthBar = document.getElementById("strength");
-        var strength = 0;
+        function checkPassword(password) {
+            var strengthBar = document.getElementById("strength");
+            var strength = 0;
 
-        if (password.match(/[0-9]/)) {
-            strength += 1;
+            if (password.match(/[0-9]/)) {
+                strength += 1;
+            }
+            if (password.match(/[A-Z Ñ]/)) {
+                strength += 1;
+            }
+            if (password.length > 5) {
+                strength += 1;
+            }
+            switch (strength) {
+                case 0:
+                    strengthBar.value = 10;
+                    barColor('red');
+                    break;
+                case 1:
+                    strengthBar.value = 40;
+                    barColor('orange');
+                    break;
+                case 2:
+                    strengthBar.value = 70;
+                    barColor('yellow');
+                    break;
+                case 3:
+                    strengthBar.value = 100;
+                    barColor('green');
+                    break;
+            }
         }
-        if (password.match(/^[A-Z Ñ]/)) {
-            strength += 1;
-        }
-        if (password.length > 8) {
-            strength += 1;
-        }
-        switch (strength) {
-            case 0:
-                strengthBar.value = 10;
-                barColor('red');
-                break;
-            case 1:
-                strengthBar.value = 40;
-                barColor('orange');
-                break;
-            case 2:
-                strengthBar.value = 70;
-                barColor('yellow');
-                break;
-            case 3:
-                strengthBar.value = 100;
-                barColor('green');
-                break;
-        }
-    }
     </script>
 </body>
 

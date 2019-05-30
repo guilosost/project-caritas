@@ -10,9 +10,14 @@ if (($_SESSION["permiso"] == "No ")) {
     Header("Location: ../../vista/home.php");
 }
 
+unset($_SESSION["voluntario"]);
+unset($_SESSION["voluntario-editar"]);
+unset($_SESSION["voluntario-eliminar"]);
+
 if (!isset($_SESSION["formulario_voluntario"])) {
     $formulario['nombrev'] = "";
     $formulario['password'] = "";
+    $formulario['password2'] = "";
     $formulario['permisos'] = "";
 
     $_SESSION["formulario_voluntario"] = $formulario;
@@ -43,7 +48,7 @@ $conexion = crearConexionBD();
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
-    <script type="text/javascript" src="../../vista/js/validacion_voluntario.js"></script>
+    <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 
 <body background="../../vista/img/background.png">
@@ -80,22 +85,22 @@ $conexion = crearConexionBD();
                         <legend>Información básica del Voluntario</legend>
 
                         <label for="nombrev" required>Nombre:</label>
-                        <input class="celda" name="nombrev" type="text" maxlength="50" style="margin-right: 4%;" value="<?php echo $formulario['nombrev']; ?>" required />
+                        <input class="celda" id="nombrev" name="nombrev" type="text" maxlength="50" style="margin-right: 4%;" value="<?php echo $formulario['nombrev']; ?>" required />
                         <progress max="100" value="0" id="strength" onchange="progressValue(this)"></progress>
                         <br>
                         <label for="password" required>Contraseña:</label>
-                        <input id="pass" name="password" type="password" style="width: 25%;" maxlength="40" oninput="passwordValidation();" required />
+                        <input id="pass" name="password" type="password" style="width: 25%;" maxlength="20" value="<?php echo $formulario['password']; ?>" required />
 
                         <label for="password2" required>Repita la contraseña:</label>
-                        <input id="confirmpass" name="password2" type="password" style="width: 25%;" maxlength="40" oninput="passwordConfirmation();" required />
+                        <input id="confirmpass" name="password2" type="password" style="width: 25%;" maxlength="20" value="<?php echo $formulario['password2']; ?>" required />
                         <br>
                         <label for="permisos">Permisos:</label>
-                        <input type="radio" name="permisos" value="Sí" <?php if($formulario['permisos'] == 'Sí') echo "checked";?>> Administrador
-                        <input type="radio" name="permisos" value="No" <?php if($formulario['permisos'] == 'No') echo "checked";?>> Voluntario estándar<br>
+                        <input type="radio" id="checkSi" name="permisos" value="Sí" <?php if ($formulario['permisos'] == 'Sí') echo "checked"; ?>> Administrador
+                        <input type="radio" id="checkNo" name="permisos" value="No" <?php if ($formulario['permisos'] == 'No') echo "checked"; ?>> Voluntario estándar<br>
                     </fieldset>
                     <div class="botones">
                         <a class="cancel" type="cancel" onclick="location.href='../../vista/listas/lista_voluntario.php'">Cancelar</a>
-                        <input type="submit" value="Dar de alta">
+                        <a type=submit onclick="form_validation()">Dar de alta</a>
                     </div>
                 </form>
             </div>
@@ -108,10 +113,41 @@ $conexion = crearConexionBD();
     ?>
 </body>
 <script type="text/javascript">
-    var pass = document.getElementById("pass")
+    function form_validation() {
+        var name = document.getElementById("nombrev").value;
+        var pass = document.getElementById("pass").value;
+        var pass2 = document.getElementById("confirmpass").value;
+        var checkSi = document.getElementById("checkSi").checked;
+        var checkNo = document.getElementById("checkNo").checked;
+
+        var valid = true;
+        valid = valid && (pass.length >= 5);
+        var hasNumber = /\d/;
+        var hasSpace = /\n/;
+        var hasUpperCases = /[A-Z]/;
+        valid = valid && (hasNumber.test(pass)) && (hasUpperCases.test(pass) && !(hasSpace.test(pass)));
+
+        let regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
+
+        if (name.length == 0) {
+            alert("Introduzca el nombre.");
+        } else if (!regex.exec(name)) {
+            alert('El nombre contener letras y espacios.');
+        } else if (!valid) {
+            alert("La contraseña debe incluir al menos una mayúscula y una minúscula, un número y mínimo 5 caracteres.");
+        } else if (!(pass === pass2)) {
+            alert("Las contraseñas introducidas no coinciden.");
+        } else if (!(checkSi || checkNo)) {
+            alert("Al menos un permiso debe estar seleccionado.")
+        } else {
+            document.getElementById("AltaVoluntario").submit();
+        }
+    }
+
+    var pass = document.getElementById("pass");
     pass.addEventListener('keyup', function() {
         checkPassword(pass.value);
-    })
+    });
 
     function barColor(color) {
         // Create our stylesheet
@@ -137,10 +173,10 @@ $conexion = crearConexionBD();
         if (password.match(/[0-9]/)) {
             strength += 1;
         }
-        if (password.match(/^[A-Z Ñ]/)) {
+        if (password.match(/[A-Z Ñ]/)) {
             strength += 1;
         }
-        if (password.length > 8) {
+        if (password.length > 5) {
             strength += 1;
         }
         switch (strength) {

@@ -13,6 +13,7 @@ if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
 }
 
 unset($_SESSION["formulario_cita"]);
+unset($_SESSION["cita"]);
 
 $cita["oid_c"] = "";
 $cita["fechacita"] = "";
@@ -114,7 +115,12 @@ cerrarConexionBD($conexion);
 
             console.log(document.getElementById("oid_c_din").value);
             console.log(document.getElementById("fechacita_din").value);
-            document.getElementById("edicion_dinamica").submit();
+
+            if (valorFechaCita.length == 0) {
+                alert("Introduzca una fecha.");
+            } else {
+                document.getElementById("edicion_dinamica").submit();
+            }
         }
 
         function cancelar(oid_c) {
@@ -134,6 +140,7 @@ cerrarConexionBD($conexion);
         }
     </script>
 </head>
+
 <body>
     <?php
     include_once("../header.php");
@@ -198,9 +205,9 @@ cerrarConexionBD($conexion);
         </div>
         <nav>
 
-        <form id="eliminar_cita" action="../../controlador/eliminaciones/elimina_cita.php" method="POST">
-            <input id="OID_C-eliminar" name="oid_c" type="hidden" />
-        </form>
+            <form id="eliminar_cita" action="../../controlador/eliminaciones/elimina_cita.php" method="POST">
+                <input id="OID_C-eliminar" name="oid_c" type="hidden" />
+            </form>
 
             <div class="enlaces">
                 <?php

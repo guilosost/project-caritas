@@ -22,6 +22,9 @@ if (isset($_SESSION["usuario"])) {
     unset($_SESSION["usuario"]);
 }
 
+unset($_SESSION["formulario_voluntario"]);
+unset($_SESSION["voluntario"]);
+
 $voluntario["nombrev"] = "";
 $voluntario["permiso"] = "";
 $_SESSION["voluntario-eliminar"] = $voluntario;

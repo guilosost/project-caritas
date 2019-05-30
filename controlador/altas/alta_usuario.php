@@ -6,6 +6,9 @@ require_once("../../modelo/GestionBD.php");
 if (is_null($_SESSION["nombreusuario"]) or empty($_SESSION["nombreusuario"])) {
     Header("Location: ../../controlador/acceso/login.php");
 }
+unset($_SESSION["usuario"]);
+unset($_SESSION["usuario-editar"]);
+unset($_SESSION["usuario-eliminar"]);
 
 if (!isset($_SESSION["formulario_usuario"])) {
     $formulario['nombre'] = "";
@@ -56,6 +59,7 @@ $conexion = crearConexionBD();
     <link rel="shortcut icon" type="image/png" href="../../vista/img/favicon.png" />
     <script type="text/javascript" src="../../vista/js/jquery_form.js"></script>
     <script type="text/javascript" src="../../vista/js/validacion_usuario.js"></script>
+    <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 
     <script>
         function showHide(elm) {
@@ -70,13 +74,7 @@ $conexion = crearConexionBD();
                 familiar.classList.remove('hide');
             }
         }
-
-        //function error() {
-        //  document.getElementById('flex').classList.remove('flex');
-        // document.getElementById('flex').classList.add('flex-error');
-        //}
     </script>
-    <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 
 <body background="../../vista/img/background.png">
@@ -108,7 +106,7 @@ $conexion = crearConexionBD();
                         <legend>Información básica del usuario</legend>
 
                         <label for="nombre" required>Nombre:</label>
-                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $formulario['nombre']; ?>" />
+                        <input class="celda" name="nombre" type="text" maxlength="50" value="<?php echo $formulario['nombre']; ?>" required />
 
                         <label for="apellidos" required>Apellidos:</label>
                         <input name="apellidos" type="text" maxlength="50" value="<?php echo $formulario['apellidos']; ?>" required /><br>
@@ -226,10 +224,10 @@ $conexion = crearConexionBD();
         frmvalidator.EnableMsgsTogether();
 
         frmvalidator.addValidation("nombre", "req", "Introduzca el nombre.");
-        frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El nombre solo puede contener caracteres alfabéticos.");
+        frmvalidator.addValidation("nombre", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El nombre solo puede contener caracteres alfabéticos.");
 
         frmvalidator.addValidation("apellidos", "req", "Introduzca los apellidos");
-        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "Los apellidos solo pueden contener caracteres alfabéticos");
+        frmvalidator.addValidation("apellidos", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "Los apellidos solo pueden contener caracteres alfabéticos");
 
         frmvalidator.addValidation("dni", "req", "Introduzca el DNI");
         frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI en el siguiente formato: 12345678A");
@@ -259,12 +257,13 @@ $conexion = crearConexionBD();
 
         frmvalidator.addValidation("solicitante", "selone_radio", "Introduzca si el usuario es solicitante.");
 
+        console.log("A ver: " + solicitante);
         if (solicitante == "Sí") {
             frmvalidator.addValidation("gastosfamilia", "req", "Introduzca los gastos de la familia.");
             frmvalidator.addValidation("gastosfamilia", "num", "Introduzca los gastos familiares con caracteres numéricos.");
 
             frmvalidator.addValidation("poblacion", "req", "Introduzca la población.");
-            frmvalidator.addValidation("poblacion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "La población letras y espacios.");
+            frmvalidator.addValidation("poblacion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "Introduzca la población con letras y espacios.");
 
             frmvalidator.addValidation("domicilio", "req", "Introduzca el domicilio.");
 
@@ -275,10 +274,10 @@ $conexion = crearConexionBD();
 
         } else if (solicitante == "No") {
             frmvalidator.addValidation("dniSol", "req", "Introduzca el DNI del solicitante.");
-            frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca el DNI en el siguiente formato: 12345678A");
+            frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca el DNI del solicitante en el siguiente formato: 12345678A");
 
             frmvalidator.addValidation("parentesco", "req", "Introduzca el parentesco con el solicitante.");
-            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]", "El parentesco debe contener letras y espacios.");
+            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El parentesco debe contener letras y espacios.");
         }
     </script>
     <?php

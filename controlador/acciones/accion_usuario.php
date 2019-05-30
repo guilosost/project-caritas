@@ -1,6 +1,8 @@
 <?php
 session_start();
-require_once("../../modelo/GestionBD.php");
+include_once($_SERVER['DOCUMENT_ROOT'].'/project-caritas/rutas.php');
+require_once(MODELO."/gestionBD.php");
+require_once(MODELO."/gestionar/gestionar_citas.php");
 require_once("../funciones.php");
 
 if (isset($_SESSION["formulario_usuario"])) {
@@ -155,7 +157,7 @@ if(!isset($_SESSION["usuario-editar"])) {
 		$errores[] = "<p>El campo de situación laboral no puede estar vacío.</p>";
 	}
 	
-	if($usuario["solicitante"]=="Sí"){
+	if($usuario["solicitante"]=="Sí") {
 
 		if($usuario["poblacion"]=="" || !preg_match("/^[a-zA-Z Ññáéíóú\\s]/",$usuario["poblacion"])) {
 			$errores[] = "<p>El campo población no puede estar vacío.</p>";
@@ -207,8 +209,7 @@ if(!isset($_SESSION["usuario-editar"])) {
 		if($usuario["proteccionDatos"]=="") {
 			$errores[] = "<p>El usuario tiene que aceptar la Ley de Protección de Datos.</p>";
 	}
-	}
-	if($usuario["solicitante"]=="No"){
+		} else {
 
 		if ($usuario["parentesco"] == "") {
 			$errores[] = "<p>El campo de parentesco no puede estar vacío.</p>";
@@ -220,6 +221,10 @@ if(!isset($_SESSION["usuario-editar"])) {
 			$errores[] = "<p>El DNI del solicitante no puede estar vacío.</p>";
 		} else if (!preg_match("/^[0-9]{8}[A-Z]$/", $usuario["dniSol"])) {
 			$errores[] = "<p>El DNI del solicitante debe contener 8 números y una letra mayúscula: " . $usuario["dniSol"] . ".</p>";
+		}
+
+		if(consultarUsuarioSolicitante($conexion,$usuario["dniSol"]) == 0){
+			$errores[] = "<p>El DNI del solicitante debe ser de uno de los solicitantes existente.</p>";
 		}
 	}
 	} else {
