@@ -21,6 +21,7 @@ if (isset($_SESSION["errores"])) {
     unset($_SESSION["errores"]);
 }
 $conexion = crearConexionBD();
+$referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL);
 ?>
 
 <!DOCTYPE html>
@@ -80,8 +81,12 @@ $conexion = crearConexionBD();
             }
             echo "</div>";
         }
+
+        $fechaDef = $usuario['fechaNac'];
+        if ($referer != "http://localhost:81/project-caritas/controlador/ediciones/editar_usuario.php") {
         list($dia, $mes, $anyo) = split("/", $usuario['fechaNac']);
         $fechaDef = "$anyo-$mes-$dia";
+        }
         ?>
         <div class="form">
             <h2 class="form-h2">Editando usuario</h2>
@@ -134,11 +139,11 @@ $conexion = crearConexionBD();
 
                         <label for="minusvalia">¿El usuario tiene alguna discapacidad? </label>
                         <input type="radio" name="minusvalia" value="Sí" <?php if ($usuario['minusvalia'] == 'Sí') echo ' checked '; ?>>Sí
-                        <input type="radio" name="minusvalia" value="No" <?php if ($usuario['minusvalia'] == 'No ') echo ' checked '; ?>>No<br>
+                        <input type="radio" name="minusvalia" value="No " <?php if ($usuario['minusvalia'] == 'No ') echo ' checked '; ?>>No<br>
 
                         <label for="solicitante">¿El usuario es solicitante? </label>
                         <input type="radio" id="solicitar" name="solicitante" value="Sí" <?php if ($usuario['solicitante'] == 'Sí') echo ' checked '; ?> onclick="javascript: return false;" readonly> Sí
-                        <input type="radio" id="familiar" name="solicitante" value="No" <?php if ($usuario['solicitante'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" readonly> No<br>
+                        <input type="radio" id="familiar" name="solicitante" value="No " <?php if ($usuario['solicitante'] == 'No ') echo ' checked '; ?> onclick="javascript: return false;" readonly> No<br>
 
                     </fieldset>
 
@@ -182,7 +187,7 @@ $conexion = crearConexionBD();
                 <legend>Información básica del familiar</legend>
 
                 <label for="dniSol">DNI del solicitante:</label>
-                <input class="celda" placeholder="12345678X" name="dniSol" type="text" maxlength="9" value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['dni_so']; ?>" /><br>
+                <input class="celda" placeholder="12345678X" name="dniSol" type="text" maxlength="9" value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['dniSol']; ?>" /><br>
 
                 <label for='parentesco'>Parentesco con el solicitante:</label>
                 <input name='parentesco' type='text' value="<?php if ($usuario["solicitante"] == "No ") echo $usuario['parentesco']; ?>" /><br>

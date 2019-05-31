@@ -29,7 +29,7 @@ if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/
 		$usuario["solicitante"] = $_REQUEST["SOLICITANTE"];
 		$usuario["parentesco"] = $_REQUEST["PARENTESCO"];
 		$usuario["minusvalia"] = $_REQUEST["MINUSVALIA"];
-		$usuario["dni_so"] = $_REQUEST["DNI_SO"];
+		$usuario["dniSol"] = $_REQUEST["DNI_SO"];
 		$usuario["poblacion"] = $_REQUEST["poblacion"];
 		$usuario["domicilio"] = $_REQUEST["domicilio"];
 		$usuario["codigopostal"] = $_REQUEST["codigopostal"];
@@ -143,7 +143,7 @@ if (!empty($referer) and $referer == "http://localhost:81/project-caritas/vista/
                             <legend>Información básica del familiar</legend>
 
                             <label for="dniSol">DNI del solicitante:</label>
-                            <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php echo $usuario['dni_so']; ?>"readonly /><br>
+                            <input class="celda" name="dniSol" type="text" maxlength="9" value="<?php echo $usuario['dniSol']; ?>"readonly /><br>
 
                             <label for='parentesco'>Parentesco con el solicitante:</label>
                             <input name='parentesco' type='text' value="<?php echo $usuario['parentesco']; ?>" readonly/><br>

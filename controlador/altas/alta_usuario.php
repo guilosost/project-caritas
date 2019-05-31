@@ -62,6 +62,8 @@ $conexion = crearConexionBD();
     <script src="../../vista/js/gen_validatorv4.js" type="text/javascript"></script>
 
     <script>
+        var solicitanteSiNo = "";
+
         function showHide(elm) {
             var solicitante = document.getElementById("esSolicitante");
             var familiar = document.getElementById("esFamiliar");
@@ -69,11 +71,17 @@ $conexion = crearConexionBD();
             if (elm.id == 'solicitar') {
                 solicitante.classList.remove('hide');
                 familiar.classList.add('hide');
+                solicitanteSiNo = "Sí";
             } else if (elm.id == 'familiar') {
                 solicitante.classList.add('hide');
                 familiar.classList.remove('hide');
+                solicitanteSiNo = "No";
             }
+            console.log(solicitanteSiNo);
         }
+
+        console.log("Sino: " + solicitanteSiNo);
+
     </script>
 </head>
 
@@ -258,7 +266,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("solicitante", "selone_radio", "Introduzca si el usuario es solicitante.");
 
         console.log("A ver: " + solicitante);
-        if (solicitante == "Sí") {
+        if (solicitante == "Sí" || solicitanteSiNo == "Sí") {
             frmvalidator.addValidation("gastosfamilia", "req", "Introduzca los gastos de la familia.");
             frmvalidator.addValidation("gastosfamilia", "num", "Introduzca los gastos familiares con caracteres numéricos.");
 
@@ -272,7 +280,7 @@ $conexion = crearConexionBD();
 
             frmvalidator.addValidation("proteccionDatos", "shouldselchk=on", "El solicitante debe aceptar la Ley de Protección de Datos.");
 
-        } else if (solicitante == "No") {
+        } else if (solicitante == "No" || solicitanteSiNo == "No") {
             frmvalidator.addValidation("dniSol", "req", "Introduzca el DNI del solicitante.");
             frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca el DNI del solicitante en el siguiente formato: 12345678A");
 
