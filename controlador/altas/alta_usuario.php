@@ -263,7 +263,7 @@ $conexion = crearConexionBD();
             frmvalidator.addValidation("gastosfamilia", "num", "Introduzca los gastos familiares con caracteres numéricos.");
 
             frmvalidator.addValidation("poblacion", "req", "Introduzca la población.");
-            frmvalidator.addValidation("poblacion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "Introduzca la población con letras y espacios.");
+            frmvalidator.addValidation("poblacion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "La población debe contener únicamente letras y espacios.");
 
             frmvalidator.addValidation("domicilio", "req", "Introduzca el domicilio.");
 
@@ -277,7 +277,7 @@ $conexion = crearConexionBD();
             frmvalidator.addValidation("dniSol", "regexp=^[0-9]{8}[A-Z]$", "Introduzca el DNI del solicitante en el siguiente formato: 12345678A");
 
             frmvalidator.addValidation("parentesco", "req", "Introduzca el parentesco con el solicitante.");
-            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El parentesco debe contener letras y espacios.");
+            frmvalidator.addValidation("parentesco", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El parentesco debe contener únicamente letras y espacios.");
         }
     </script>
     <?php

@@ -64,8 +64,7 @@ $conexion = crearConexionBD();
     include("../../vista/header.php");
     include("../../vista/navbar.php");
 
-    list($dia, $mes, $anyo) = split("/", $usuario['fechaNac']);
-    $fechaDef = "$anyo-$mes-$dia";
+  
     ?>
 
 
@@ -81,6 +80,8 @@ $conexion = crearConexionBD();
             }
             echo "</div>";
         }
+        list($dia, $mes, $anyo) = split("/", $usuario['fechaNac']);
+        $fechaDef = "$anyo-$mes-$dia";
         ?>
         <div class="form">
             <h2 class="form-h2">Editando usuario</h2>

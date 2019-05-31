@@ -132,7 +132,7 @@ $conexion = crearConexionBD();
         if (name.length == 0) {
             alert("Introduzca el nombre.");
         } else if (!regex.exec(name)) {
-            alert('El nombre contener letras y espacios.');
+            alert('El nombre de constar de letras y espacios.');
         } else if (!valid) {
             alert("La contraseña debe incluir al menos una mayúscula y una minúscula, un número y mínimo 5 caracteres.");
         } else if (!(pass === pass2)) {

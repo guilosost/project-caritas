@@ -207,7 +207,7 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("tipoayuda", "req", "Introduzca el tipo de ayuda.");
 
         frmvalidator.addValidation("suministradapor", "req", "Introduzca el proveedor de la ayuda.");
-        frmvalidator.addValidation("suministradapor","regexp=^[a-zA-Z Ññáéíóú\\s]","El nombre del proveedor de la ayuda debe contener letras y espacios.");
+        frmvalidator.addValidation("suministradapor","regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$","El nombre del proveedor de la ayuda debe contener solo letras y espacios.");
 
         frmvalidator.addValidation("concedida", "selone_radio", "Introduzca si la ayuda está concedida");
 
@@ -218,22 +218,21 @@ $conexion = crearConexionBD();
 
         }else if (tipo == "ayudaeconomica"){
         frmvalidator.addValidation("cantidad", "req", "Introduzca la cantidad.");
-        frmvalidator.addValidation("cantidad", "num", "La cantidad debe contener caracteres numéricos.");
+        frmvalidator.addValidation("cantidad", "num", "La cantidad debe contener únicamente caracteres numéricos.");
 
         frmvalidator.addValidation("prioridad", "selone_radio", "Introduzca si la ayuda tiene prioridad.");
 
         frmvalidator.addValidation("motivo", "req", "Introduzca el motivo de la ayuda.");
-        frmvalidator.addValidation("motivo", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Introduzca el motivo de la ayuda.");
+        frmvalidator.addValidation("motivo", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El motivo debe de contar solo de letras y espacios.");
 
         }else if (tipo == "trabajos"){
         frmvalidator.addValidation("salarioaproximado", "req", "Introduzca un salario.");
         frmvalidator.addValidation("salarioaproximado", "num", "Introduzca un salario en formato numérico.");
 
         frmvalidator.addValidation("descripcion", "req", "Introduzca la descripción del trabajo.");
-        frmvalidator.addValidation("descripcion", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Introduzca la descripción del trabajo.");
+        frmvalidator.addValidation("descripcion", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "La descripción del trabajo debe de contar solo de letras y espacios.");
 
         frmvalidator.addValidation("empresa", "req", "Introduzca la empresa.");
-        frmvalidator.addValidation("empresa", "regexp=^[a-zA-Z Ññáéíóú\\s]", "Introduzca la empresa.");
 
         }
     </script>  

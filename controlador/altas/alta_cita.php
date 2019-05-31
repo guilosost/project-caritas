@@ -108,13 +108,13 @@ $conexion = crearConexionBD();
         frmvalidator.addValidation("dni", "regexp=^[0-9]{8}[A-Z]$", "Introduzca un DNI en el siguiente formato: 12345678A");
         
         frmvalidator.addValidation("nombrev", "req", "Introduzca el nombre.");
-        frmvalidator.addValidation("nombrev", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El nombre solo puede contener caracteres alfabéticos.");
+        frmvalidator.addValidation("nombrev", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú]*$", "El nombre solo puede contener caracteres alfabéticos.");
 
         frmvalidator.addValidation("objetivo", "req", "Introduzca el objetivo de la cita.");
-        frmvalidator.addValidation("objetivo", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El objetivo solo puede contener caracteres alfabéticos.");
+        frmvalidator.addValidation("objetivo", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "El objetivo solo puede contener caracteres alfabéticos y espacios.");
 
         frmvalidator.addValidation("observaciones", "req", "Introduzca alguna observación.");
-        frmvalidator.addValidation("observaciones", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "Las observaciones solo pueden contener caracteres alfabéticos.");
+        frmvalidator.addValidation("observaciones", "regexp=^[a-zA-Z ÑñáÁÉÍÓÚéíóú\\s]*$", "Las observaciones solo pueden contener caracteres alfabéticos y espacios.");
      </script> 
     <?php
     include("../../vista/footer.php");
